@@ -1,6 +1,9 @@
 import './styles.scss';
-import '@picsa/enketo-webform/styles';
+import './enketo-webform.scss';
+import { EnketoWebform } from '@picsa/enketo-webform';
 import { MOCK_DATA } from './fixtures';
+
+export { EnketoWebform };
 
 type FormOption = {
   name: string;

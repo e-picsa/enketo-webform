@@ -5,6 +5,14 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { Form } from 'enketo-core';
 import Events from './libs/enketo/js/event';
 
+const DEBUG = import.meta.env?.DEV ?? false;
+
+function debug(...args: unknown[]) {
+  if (DEBUG) {
+    console.debug('[enketo-webform]', ...args);
+  }
+}
+
 /**
  * Interface representing a saved form entry
  */
@@ -63,6 +71,8 @@ export class EnketoWebform extends LitElement {
 
   @state() private enketoForm: Form | null = null;
   @state() private formHtml = '';
+  @state() private status: 'idle' | 'loading' | 'ready' | 'error' = 'idle';
+  @state() private errorMessage = '';
 
   private _formLoaded = false;
 
@@ -70,6 +80,28 @@ export class EnketoWebform extends LitElement {
     :host {
       display: block;
       position: relative;
+    }
+    .status-indicator {
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .status-idle {
+      background: #e0e0e0;
+      color: #666;
+    }
+    .status-loading {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .status-ready {
+      background: #d4edda;
+      color: #155724;
+    }
+    .status-error {
+      background: #f8d7da;
+      color: #721c24;
     }
     #form-unavailable {
       animation: appearDelayed 2s;
@@ -86,14 +118,37 @@ export class EnketoWebform extends LitElement {
   `;
 
   render() {
+    if (this.status === 'error') {
+      return html`
+        <div class="status-indicator status-error">
+          <strong>Error:</strong> ${this.errorMessage}
+        </div>
+      `;
+    }
+
     if (!this.form || !this.model) {
       return html`<p data-testid="form-na" id="form-unavailable">Form not available</p>`;
     }
 
     return html`
+      ${DEBUG ? this.renderDebugStatus() : nothing}
       ${this.renderEnketoLogo()}
       <div id="form-container"></div>
       ${this.showButtons ? this.renderFooter() : nothing}
+    `;
+  }
+
+  private renderDebugStatus() {
+    const statusText = {
+      idle: 'Waiting for form/model...',
+      loading: 'Loading form...',
+      ready: 'Form loaded',
+      error: 'Error',
+    }[this.status];
+    return html`
+      <div class="status-indicator status-${this.status}">
+        <strong>Status:</strong> ${statusText}
+      </div>
     `;
   }
 
@@ -178,32 +233,61 @@ export class EnketoWebform extends LitElement {
 
   private loadForm() {
     const { form, model } = this;
+    debug('loadForm called', { hasForm: !!form, hasModel: !!model, formLoaded: this._formLoaded });
+
+    if (!form || !model) {
+      debug('loadForm: missing form or model');
+      return;
+    }
+
     const formContainerEl = this.renderRoot.querySelector('#form-container');
-    if (form && model && formContainerEl && !this._formLoaded) {
-      formContainerEl.innerHTML = form;
-      const formEl = formContainerEl.querySelector('form');
-      if (formEl) {
-        try {
-          this.enketoForm = new Form(formEl, model, {});
-          const loadErrors = this.enketoForm.init();
-          if (loadErrors.length > 0) {
-            console.error(loadErrors);
-          }
-          this._formLoaded = true;
+    if (!formContainerEl) {
+      debug('loadForm: formContainerEl not found');
+      this.status = 'error';
+      this.errorMessage = 'Form container not found';
+      return;
+    }
 
-          this.enketoForm.model.events.addEventListener(
-            Events.DataUpdate().type,
-            this.handleEventDataUpdate.bind(this)
-          );
+    if (this._formLoaded) {
+      debug('loadForm: form already loaded, skipping');
+      return;
+    }
 
-          this.enketoForm.view.html.addEventListener(
-            Events.XFormsValueChanged().type,
-            this.handleEventXmlFormChange.bind(this)
-          );
-        } catch (err) {
-          console.error('Failed to initialize form:', err);
+    this.status = 'loading';
+    debug('loadForm: starting form initialization');
+
+    formContainerEl.innerHTML = form;
+    const formEl = formContainerEl.querySelector('form');
+    if (formEl) {
+      try {
+        this.enketoForm = new Form(formEl, model, {});
+        const loadErrors = this.enketoForm.init();
+        if (loadErrors.length > 0) {
+          console.error('Form load errors:', loadErrors);
         }
+        this._formLoaded = true;
+        this.status = 'ready';
+        debug('loadForm: form initialized successfully');
+
+        this.enketoForm.model.events.addEventListener(
+          Events.DataUpdate().type,
+          this.handleEventDataUpdate.bind(this)
+        );
+
+        this.enketoForm.view.html.addEventListener(
+          Events.XFormsValueChanged().type,
+          this.handleEventXmlFormChange.bind(this)
+        );
+      } catch (err) {
+        this.status = 'error';
+        this.errorMessage = err instanceof Error ? err.message : String(err);
+        console.error('Failed to initialize form:', err);
+        debug('loadForm: error', err);
       }
+    } else {
+      this.status = 'error';
+      this.errorMessage = 'No <form> element found in form HTML';
+      debug('loadForm: no form element found');
     }
   }
 }

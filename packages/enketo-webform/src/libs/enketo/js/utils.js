@@ -251,7 +251,13 @@ function getScript(url) {
     const scriptTag = document.createElement('script');
     const firstScriptTag = document.getElementsByTagName('script')[0];
     scriptTag.src = url;
-    firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
+    if (firstScriptTag) {
+        firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
+    } else if (document.head) {
+        document.head.appendChild(scriptTag);
+    } else {
+        document.body.appendChild(scriptTag);
+    }
 }
 
 function encodeHtmlEntities(text) {

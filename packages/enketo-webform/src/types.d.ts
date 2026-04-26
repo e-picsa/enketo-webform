@@ -14,3 +14,12 @@ declare module '*.js' {
   const content: any;
   export default content;
 }
+
+interface ImportMetaEnv {
+  readonly DEV: boolean;
+  readonly PROD: boolean;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
