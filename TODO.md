@@ -1,0 +1,4 @@
+- [ ] Preact-based demo
+- [ ] Publish
+- [ ] Prod test (angular integration)
+- [ ] NPM publish CI

@@ -1,24 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "ES2023",
-    "useDefineForClassFields": false,
-    "module": "ESNext",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "strict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@picsa/enketo-webform": ["./packages/enketo-webform/src/enketo-webform.ts"],
-      "@picsa/enketo-webform/styles": ["./packages/enketo-webform/src/enketo-webform.scss"]
-    },
-    "types": ["vite/client"]
-  },
-  "include": ["src"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "paths": {
+    "@picsa/enketo-webform": [
+      "./packages/enketo-webform/src/enketo-webform.ts"
+    ],
+    "@picsa/enketo-webform/styles": [
+      "./packages/enketo-webform/src/enketo-webform.scss"
+    ]
+  }
 }
