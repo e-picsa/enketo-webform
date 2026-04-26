@@ -8,17 +8,9 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    target: 'esnext',
-    minify: 'esbuild',
-    cssMinify: true,
-    rollupOptions: {
-      external: ['jquery', /jquery-touchswipe/],
-    },
-  },
   resolve: {
     alias: {
-      '@': '/src',
+      '@picsa/enketo-webform': '../packages/enketo-webform/src/enketo-webform.ts',
     },
   },
 });
