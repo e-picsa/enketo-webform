@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/enketo-webform.ts",
+    "src/utils.ts",
+    "src/kobo-service.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "name": "Enketo Webform",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "plugin": [],
+  "tsconfig": "./tsconfig.json",
+  "readme": "README.md",
+  "comments": true
+}

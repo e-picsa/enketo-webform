@@ -2,11 +2,9 @@ import { LitElement, html, nothing, css } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-// @ts-ignore
-import Events from './libs/enketo/js/event';
-// @ts-ignore
-import { Form } from './libs/enketo/js/form';
-
+/**
+ * Interface representing a saved form entry
+ */
 export interface IEnketoFormEntry {
   created: number;
   draft: boolean;
@@ -18,19 +16,44 @@ export interface IEnketoFormEntry {
   xml: string;
 }
 
+/**
+ * Event detail for formSaved event
+ */
 export interface IEventFormSaved {
   entry: IEnketoFormEntry;
 }
 
+/**
+ * Event detail for dataUpdated event
+ */
 export interface IEventDataUpdated {
   xml: string;
   nodes: string[];
 }
 
 @customElement('enketo-webform')
+/**
+ * Web component for rendering XForms using Enketo Core.
+ *
+ * @element enketo-webform
+ *
+ * @fires dataUpdated - Dispatched when form data changes
+ * @fires formSaved - Dispatched when user clicks Save Draft or Submit
+ */
 export class EnketoWebform extends LitElement {
+  /**
+   * XHTML form definition (required)
+   */
   @property({ type: String }) form!: string;
+
+  /**
+   * XML data model (required)
+   */
   @property({ type: String }) model!: string;
+
+  /**
+   * Whether to show Save Draft / Submit buttons
+   */
   @property({ type: Boolean }) showButtons = true;
 
   @query('#form-container') private formContainerEl!: HTMLDivElement;

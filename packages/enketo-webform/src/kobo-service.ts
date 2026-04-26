@@ -10,12 +10,21 @@ export interface IHttpResponse {
   data: unknown;
 }
 
+/**
+ * Service for submitting forms to KoBoToolbox.
+ */
 export class KoboService {
+  /**
+   * KoBoToolbox API endpoints
+   */
   public apiEndpoints = {
     v1: 'https://kc.kobotoolbox.org/api/v1',
     v2: 'https://kf.kobotoolbox.org/api/v2',
   };
 
+  /**
+   * HTTP request handler
+   */
   public httpHandlers = {
     req: (endpoint: string, options: RequestInit) =>
       fetch(endpoint, options).then(async (res) => {
@@ -27,6 +36,11 @@ export class KoboService {
 
   constructor(private config: IKoboServiceConfig) {}
 
+  /**
+   * Submits XML data to KoBoToolbox API v1.
+   * @param xmlSubmission - The XML submission string
+   * @returns Promise resolving to HTTP response
+   */
   public async submitXMLSubmission(xmlSubmission: string): Promise<IHttpResponse> {
     const formattedXML = this.formatXML(xmlSubmission);
     const { v1 } = this.apiEndpoints;

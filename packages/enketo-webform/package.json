@@ -11,14 +11,18 @@
       "require": "./dist/enketo-webform.umd.cjs",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/enketo-webform.css"
+    "./styles": "./src/enketo-webform.scss",
+    "./styles/grid": "./src/libs/enketo/sass/grid/grid.scss",
+    "./styles/plain": "./src/libs/enketo/sass/plain/plain.scss",
+    "./styles/formhub": "./src/libs/enketo/sass/formhub/formhub.scss"
   },
   "files": [
     "dist"
   ],
-  "scripts": {
+"scripts": {
     "build": "vite build",
-    "build:watch": "vite build --watch"
+    "build:watch": "vite build --watch",
+    "docs": "typedoc"
   },
   "dependencies": {
     "enketo-core": "^6.1.3",
@@ -34,6 +38,7 @@
     "@types/jquery": "^4.0.0",
     "typescript": "~6.0.2",
     "vite": "^8.0.10",
-    "vite-plugin-dts": "^4.0.0"
+    "vite-plugin-dts": "^4.0.0",
+    "typedoc": "^0.26.0"
   }
 }

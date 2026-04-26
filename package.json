@@ -17,7 +17,8 @@
     "packages:build": "cd packages/enketo-webform && bun run build",
     "demo:dev": "cd demo && bun run dev",
     "demo:build": "cd demo && bun run build",
-    "demo:preview": "cd demo && bun run preview"
+    "demo:preview": "cd demo && bun run preview",
+    "docs":"cd packages/enketo-webform && bun run docs"
   },
   "dependencies": {
     "bootstrap-datepicker": "^1.10.1",
