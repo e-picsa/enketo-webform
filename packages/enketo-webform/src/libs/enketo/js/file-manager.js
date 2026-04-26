@@ -66,7 +66,7 @@ fileManager.getFileUrl = (subject) =>
       } else {
         reject('no!');
       }
-    } else if (typeof subject === 'object') {
+        reject(new Error('Invalid subject URL'));
       if (fileManager.isTooLarge(subject)) {
         error = new Error(
           t('filepicker.toolargeerror', {

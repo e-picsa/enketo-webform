@@ -85,7 +85,7 @@ export class KoboService {
       throw new Error('ID required for update');
     }
     const payload = {
-      data: JSON.stringify(JSON.stringify(data)),
+      data: JSON.stringify(data),
       submission_ids: [id],
     };
   }
