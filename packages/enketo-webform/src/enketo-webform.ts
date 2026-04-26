@@ -67,6 +67,23 @@ export class EnketoWebform extends LitElement {
    */
   @property({ type: Boolean }) showButtons = true;
 
+  /**
+   * Unique identifier for the form definition (enketo ID)
+   * If not provided, will be extracted from the form or generated
+   */
+  @property({ type: String }) enketoId = '';
+
+  /**
+   * Name for the form entry
+   */
+  @property({ type: String }) formName = '';
+
+  /**
+   * Unique identifier for the form instance
+   * If not provided, will be generated on first save
+   */
+  @property({ type: String }) instanceId = '';
+
   @query('#form-container') private formContainerEl!: HTMLDivElement;
 
   @state() private enketoForm: Form | null = null;
@@ -190,16 +207,24 @@ export class EnketoWebform extends LitElement {
     }
   }
 
+  private generateId(prefix: string): string {
+    return `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+  }
+
   private save(opts = { draft: false }) {
     const { draft } = opts;
+    const now = new Date().getTime();
+    const enketoId = this.enketoId || this.generateId('enketo');
+    const instanceId = this.instanceId || this.generateId('instance');
+    const name = this.formName || this.generateId('autoSave');
     const entry: IEnketoFormEntry = {
-      created: 1683981755251,
+      created: now,
       draft,
-      enketoId: 'PGpldp9m',
+      enketoId,
       files: [],
-      instanceId: '__autoSave_PGpldp9m',
-      name: '__autoSave_1683981755249',
-      updated: new Date().getTime(),
+      instanceId,
+      name,
+      updated: now,
       xml: this.xmlFormValue,
     };
     console.log('save entry', entry);

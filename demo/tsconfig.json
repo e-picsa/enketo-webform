@@ -13,8 +13,12 @@
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@picsa/enketo-webform": ["./packages/enketo-webform/src/enketo-webform.ts"],
+      "@picsa/enketo-webform/styles": ["./packages/enketo-webform/src/enketo-webform.scss"]
+    },
+    "types": ["vite/client"]
   },
-  "include": ["src"],
-  "references": [{ "path": "../packages/enketo-webform" }]
+  "include": ["src"]
 }
