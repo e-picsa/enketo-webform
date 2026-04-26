@@ -1,0 +1,47 @@
+@import "@picsa/enketo-webform/styles/grid";
+
+.demo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+
+  h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  button {
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+
+    &:hover {
+      background: var(--social-bg);
+    }
+
+    &.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+  }
+}
+
+main {
+  padding: 24px;
+}

@@ -203,6 +203,12 @@ export class EnketoWebform extends LitElement {
 
   updated(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('form') || changedProperties.has('model')) {
+      this._formLoaded = false;
+      this.enketoForm = null;
+      const formContainerEl = this.renderRoot.querySelector('#form-container');
+      if (formContainerEl) {
+        formContainerEl.innerHTML = '';
+      }
       this.loadForm();
     }
   }

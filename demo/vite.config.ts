@@ -1,21 +1,22 @@
-import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import { defineConfig } from "vite";
+import preact from "@preact/preset-vite";
+import { resolve } from "path";
+import { fileURLToPath } from "url";
 
-export default defineConfig(() => {
-  const pkgSrc = resolve(__dirname, '../packages/enketo-webform/src');
-  
-  return {
-    resolve: {
-      alias: {
-        '@picsa/enketo-webform': resolve(pkgSrc, 'enketo-webform.ts'),
-      },
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
+export default defineConfig({
+  plugins: [preact()],
+  resolve: {
+    alias: {
+      "@picsa/enketo-webform/styles": resolve(
+        __dirname,
+        "../packages/enketo-webform/src/styles",
+      ),
+      "@picsa/enketo-webform": resolve(
+        __dirname,
+        "../packages/enketo-webform/src/enketo-webform.ts",
+      ),
     },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-        },
-      },
-    },
-  };
+  },
 });
