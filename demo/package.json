@@ -11,9 +11,5 @@
   "dependencies": {
     "@picsa/enketo-webform": "workspace:*"
   },
-  "devDependencies": {
-    "typescript": "~6.0.2",
-    "vite": "^8.0.10",
-    "sass": "^1.77.8"
-  }
+  "devDependencies": {}
 }

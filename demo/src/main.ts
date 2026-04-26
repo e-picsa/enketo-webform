@@ -1,6 +1,6 @@
 import './styles.scss';
 import '@picsa/enketo-webform/styles';
-import { basic, kitchenSink } from './fixtures';
+import { MOCK_DATA } from './fixtures';
 
 type FormOption = {
   name: string;
@@ -11,13 +11,13 @@ type FormOption = {
 const formOptions: FormOption[] = [
   {
     name: 'Basic Form',
-    form: basic.form,
-    model: basic.model,
+    form: MOCK_DATA.basic.form,
+    model: MOCK_DATA.basic.model,
   },
   {
     name: 'Kitchen Sink',
-    form: kitchenSink.form,
-    model: kitchenSink.model,
+    form: MOCK_DATA.kitchenSink.form,
+    model: MOCK_DATA.kitchenSink.model,
   },
 ];
 

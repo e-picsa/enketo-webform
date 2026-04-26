@@ -19,10 +19,10 @@
   "files": [
     "dist"
   ],
-"scripts": {
+  "scripts": {
     "build": "vite build",
     "build:watch": "vite build --watch",
-    "docs": "typedoc"
+    "docs:cem": "custom-elements-manifest analyze --litelement --globs \"src/enketo-webform.ts\" \"src/utils.ts\" \"src/kobo-service.ts\" --outdir ../../docs"
   },
   "dependencies": {
     "enketo-core": "^6.1.3",
@@ -34,11 +34,6 @@
     "lit": "^3.3.2",
     "mergexml": "^1.2.4"
   },
-  "devDependencies": {
-    "@types/jquery": "^4.0.0",
-    "typescript": "~6.0.2",
-    "vite": "^8.0.10",
-    "vite-plugin-dts": "^4.0.0",
-    "typedoc": "^0.26.0"
-  }
+  "devDependencies": {},
+  "customElements": "../../docs/custom-elements.json"
 }

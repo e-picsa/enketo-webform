@@ -2,6 +2,9 @@ import { LitElement, html, nothing, css } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
+import { Form } from 'enketo-core';
+import Events from './libs/enketo/js/event';
+
 /**
  * Interface representing a saved form entry
  */
