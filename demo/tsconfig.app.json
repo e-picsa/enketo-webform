@@ -7,8 +7,7 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
     "paths": {
-      "@picsa/enketo-webform": ["../../packages/enketo-webform/src/enketo-webform.ts"],
-      "@picsa/enketo-webform/styles": ["../../packages/enketo-webform/src/enketo-webform.scss"],
+      "@picsa/enketo-webform/*": ["../../packages/enketo-webform/src/*"],
       "react": ["./node_modules/preact/compat/"],
       "react-dom": ["./node_modules/preact/compat/"]
     },
