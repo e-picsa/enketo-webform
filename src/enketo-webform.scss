@@ -6,7 +6,7 @@
 
   @font-face {
     font-family: 'OpenSans';
-    src: url('./assets/fonts/OpenSans-Regular-webfont.woff') format('woff');
+    src: url('./assets/OpenSans-Regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
   }
@@ -17,7 +17,6 @@
   margin: 0;
 }
 #form-unavailable {
-  // give form a chance to load/render before showing unavailable message
   animation: appearDelayed 2s;
   -webkit-animation: appearDelayed 2s;
   -moz-animation: appearDelayed 2s;
@@ -35,11 +34,9 @@
 .enketo-logo {
   height: 25px;
 }
-// HACK - show all form sections (need to add buttons for page nave)
 .pages.or .or-group-data {
   display: block !important;
 }
-// HACK - using emojis instead of icons so recolor as required
 .icon {
   color: transparent;
   text-shadow: 0 0 0 white;
@@ -58,7 +55,6 @@
   margin: 0 10px;
 }
 
-// Animations
 @keyframes appearDelayed {
   0% {
     opacity: 0;
