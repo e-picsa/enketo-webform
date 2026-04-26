@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+#form-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.form-option-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  background: #e0e0e0;
+  transition: background 0.2s;
+}
+
+.form-option-btn:hover {
+  background: #d0d0d0;
+}
+
+.form-option-btn.active {
+  background: #007bff;
+  color: white;
+}
+
+enketo-webform {
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 400px;
+}
