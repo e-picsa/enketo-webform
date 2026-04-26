@@ -4,12 +4,9 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "paths": {
-    "@picsa/enketo-webform": [
-      "./packages/enketo-webform/src/enketo-webform.ts"
-    ],
-    "@picsa/enketo-webform/styles": [
-      "./packages/enketo-webform/src/enketo-webform.scss"
-    ]
+  "compilerOptions": {
+    "paths": {
+      "@picsa/enketo-webform": ["./packages/enketo-webform/src/enketo-webform.ts"]
+    }
   }
 }
