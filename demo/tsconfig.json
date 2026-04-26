@@ -6,7 +6,7 @@
   ],
   "compilerOptions": {
     "paths": {
-      "@picsa/enketo-webform": ["./packages/enketo-webform/src/enketo-webform.ts"]
+      "@picsa/enketo-webform": ["../../packages/enketo-webform/src/enketo-webform.ts"]
     }
   }
 }

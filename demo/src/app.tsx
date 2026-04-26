@@ -3,11 +3,14 @@ import "@picsa/enketo-webform";
 import basic from "./fixtures/basic.json";
 import kitchenSink from "./fixtures/kitchen-sink.json";
 
-type DemoType = "basic" | "kitchen-sink";
+type DemoType = "basic" | "kitchenSink";
 
-const DEMOS: Record<DemoType, { enketoId: string; form: string; model: string }> = {
+const DEMOS: Record<
+  DemoType,
+  { enketoId: string; form: string; model: string }
+> = {
   basic,
-  "kitchen-sink": kitchenSink,
+  kitchenSink,
 };
 
 export function App() {
@@ -29,8 +32,8 @@ export function App() {
           </button>
           <button
             type="button"
-            class={demo === "kitchen-sink" ? "active" : ""}
-            onClick={() => setDemo("kitchen-sink")}
+            class={demo === "kitchenSink" ? "active" : ""}
+            onClick={() => setDemo("kitchenSink")}
           >
             Kitchen Sink
           </button>
@@ -38,11 +41,7 @@ export function App() {
       </header>
 
       <main>
-        <enketo-webform
-          enketoId={enketoId}
-          form={form}
-          model={model}
-        />
+        <enketo-webform enketoId={enketoId} form={form} model={model} />
       </main>
     </>
   );

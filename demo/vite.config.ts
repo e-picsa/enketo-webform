@@ -1,7 +1,15 @@
 import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
+import { resolve } from 'path'
+import { fileURLToPath } from 'url'
 
-// https://vite.dev/config/
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
 export default defineConfig({
   plugins: [preact()],
+  resolve: {
+    alias: {
+      '@picsa/enketo-webform': resolve(__dirname, '../packages/enketo-webform/src/enketo-webform.ts'),
+    },
+  },
 })
