@@ -80,16 +80,17 @@
 
 ### Functions
 
-| Name                    | Description                                              | Parameters                                                                                                             | Return |
-| ----------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------ |
-| `xmlToJson`             | Converts an XML string to a JSON object.                 | `xmlString: string, options: X2jOptions`                                                                               |        |
-| `jsonToXML`             | Converts a JSON object to an XML string.                 | `json: Record<string, any>`                                                                                            |        |
-| `xmlStringToFile`       | Creates a File object from an XML string (browser only). | `xmlString: string`                                                                                                    |        |
-| `xmlNodeReplaceContent` | Replaces the content of a specific XML node.             | `options: {
-  xml: string;
-  tagname: string;
-  content: string;
-}, options.xml, options.tagname, options.content` |        |
+| Name                    | Description                                              | Parameters                               | Return |
+| ----------------------- | -------------------------------------------------------- | ---------------------------------------- | ------ |
+| `xmlToJson`             | Converts an XML string to a JSON object.                 | `xmlString: string, options: X2jOptions` |        |
+| `jsonToXML`             | Converts a JSON object to an XML string.                 | `json: Record<string, any>`              |        |
+| `xmlStringToFile`       | Creates a File object from an XML string (browser only). | `xmlString: string`                      |        |
+| `xmlNodeReplaceContent` | Replaces the content of a specific XML node.             | `options: {                              |
+
+xml: string;
+tagname: string;
+content: string;
+}, options.xml, options.tagname, options.content` | |
 
 <hr/>
 
