@@ -95,15 +95,6 @@ export class EnketoWebform extends LitElement {
 
   private _formLoaded = false;
 
-  /**
-   * Use Light DOM so external styles can apply to the form.
-   * This is the recommended approach for form libraries where
-   * users need to apply their own theming.
-   */
-  _createRenderRoot() {
-    return this;
-  }
-
   static styles = [
     unsafeCSS(enketoStyles),
     css`
