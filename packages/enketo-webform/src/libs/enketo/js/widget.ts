@@ -143,7 +143,7 @@ class Widget {
    */
   set value(_value: any) {
     //
-  }  
+  }
 
   /**
    * Obtains the value from the original form control the widget is instantiated on.

@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "bun run demo:dev",
     "start": "bun run demo:dev",
-    "lint": "bun run eslint && bun run prettier -- --check",
+    "lint": "bun run eslint && bun run prettier -- --check .",
     "prepare": "husky",
     "build": "bun run packages:build && bun run demo:build",
     "preview": "bun run demo:preview",
@@ -60,7 +60,7 @@
     "vitest": "^2.0.5"
   },
   "lint-staged": {
-    "*.{ts,js}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "eslint --fix"
     ]

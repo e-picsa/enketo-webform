@@ -91,7 +91,7 @@ Dropdown.prototype.keydown = function (e) {
     index++; // down
   }
   // This rule makes sense in general but this is vendor code
-   
+
   if (!~index) {
     index = 0;
   }
