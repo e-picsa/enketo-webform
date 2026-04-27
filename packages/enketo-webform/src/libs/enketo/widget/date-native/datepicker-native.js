@@ -1,6 +1,6 @@
-import Widget from '../../js/widget';
-import support from '../../js/support';
-import { elementDataStore as data } from '../../js/dom-utils';
+import Widget from "../../js/widget";
+import support from "../../js/support";
+import { elementDataStore as data } from "../../js/dom-utils";
 
 /**
  * The whole purpose of this widget is to hide the placeholder text on native date inputs
@@ -16,30 +16,30 @@ import { elementDataStore as data } from '../../js/dom-utils';
  * @augments Widget
  */
 class DatepickerNative extends Widget {
-    /**
-     * @type {string}
-     */
-    static get selector() {
-        return '.question input[type="date"],.question input[type="datetime-local"]';
-    }
+  /**
+   * @type {string}
+   */
+  static get selector() {
+    return '.question input[type="date"],.question input[type="datetime-local"]';
+  }
 
-    /**
-     * @param {Element} element - the element to instantiate the widget on
-     * @return {boolean} to instantiate or not to instantiate, that is the question
-     */
-    static condition(element) {
-        // Do not instantiate if DatepickerExtended was instantiated on element or if mobile device is used.
-        return (
-            !data.has(element, 'DatepickerExtended') &&
-            !data.has(element, 'DatetimepickerExtended') &&
-            !support.touch
-        );
-    }
+  /**
+   * @param {Element} element - the element to instantiate the widget on
+   * @return {boolean} to instantiate or not to instantiate, that is the question
+   */
+  static condition(element) {
+    // Do not instantiate if DatepickerExtended was instantiated on element or if mobile device is used.
+    return (
+      !data.has(element, "DatepickerExtended") &&
+      !data.has(element, "DatetimepickerExtended") &&
+      !support.touch
+    );
+  }
 
-    _init() {
-        this.element.type = 'text';
-        this.element.classList.add('mask-date');
-    }
+  _init() {
+    this.element.type = "text";
+    this.element.classList.add("mask-date");
+  }
 }
 
 export default DatepickerNative;

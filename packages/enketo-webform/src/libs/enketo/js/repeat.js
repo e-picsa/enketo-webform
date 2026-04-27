@@ -11,18 +11,18 @@
  * @module repeat
  */
 
-import $ from 'jquery';
-import { t } from './fake-translator';
-import dialog from './fake-dialog';
-import config from '../config';
-import events from './event';
+import $ from "jquery";
+import { t } from "./fake-translator";
+import dialog from "./fake-dialog";
+import config from "../config";
+import events from "./event";
 import {
   getSiblingElements,
   getSiblingElement,
   getChildren,
   getSiblingElementsAndSelf,
-} from './dom-utils';
-import { isStaticItemsetFromSecondaryInstance } from './itemset';
+} from "./dom-utils";
+import { isStaticItemsetFromSecondaryInstance } from "./itemset";
 
 const disableFirstRepeatRemoval = config.repeatOrdinals === true;
 
@@ -38,38 +38,38 @@ export default {
 
     if (!this.form) {
       throw new Error(
-        'Repeat module not correctly instantiated with form property.'
+        "Repeat module not correctly instantiated with form property.",
       );
     }
 
-    $repeatInfos = this.form.view.$.find('.or-repeat-info');
+    $repeatInfos = this.form.view.$.find(".or-repeat-info");
     this.templates = {};
     // Add repeat numbering elements
     $repeatInfos
-      .siblings('.or-repeat')
+      .siblings(".or-repeat")
       .prepend('<span class="repeat-number"></span>')
       // add empty class for calculation-only repeats
       .addBack()
       .filter(function () {
         // remove whitespace
         if (this.firstChild && this.firstChild.nodeType === 3) {
-          this.firstChild.textContent = '';
+          this.firstChild.textContent = "";
         }
 
-        return !this.querySelector('.question');
+        return !this.querySelector(".question");
       })
-      .addClass('empty');
+      .addClass("empty");
     // Add repeat buttons
     $repeatInfos
-      .filter('*:not([data-repeat-fixed]):not([data-repeat-count])')
+      .filter("*:not([data-repeat-fixed]):not([data-repeat-count])")
       .append(
-        '<button type="button" class="btn btn-default add-repeat-btn"><i class="icon icon-plus"> </i></button>'
+        '<button type="button" class="btn btn-default add-repeat-btn"><i class="icon icon-plus"> </i></button>',
       )
-      .siblings('.or-repeat')
+      .siblings(".or-repeat")
       .append(
         `<div class="repeat-buttons"><button type="button" ${
-          disableFirstRepeatRemoval ? ' disabled ' : ' '
-        }class="btn btn-default remove"><i class="icon icon-minus"> </i></button></div>`
+          disableFirstRepeatRemoval ? " disabled " : " "
+        }class="btn btn-default remove"><i class="icon icon-minus"> </i></button></div>`,
       );
     /**
      * The model also requires storing repeat templates for repeats that do not have a jr:template.
@@ -80,7 +80,7 @@ export default {
         .map(function () {
           return this.dataset.name;
         })
-        .get()
+        .get(),
     );
 
     /**
@@ -90,16 +90,16 @@ export default {
      * Widgets not yet initialized. Values not yet set.
      */
     $repeatInfos
-      .siblings('.or-repeat')
+      .siblings(".or-repeat")
       .reverse()
       .each(function () {
         const templateEl = this.cloneNode(true);
-        const xPath = templateEl.getAttribute('name');
+        const xPath = templateEl.getAttribute("name");
         this.remove();
         $(templateEl)
-          .removeClass('contains-current current')
-          .find('.current')
-          .removeClass('current');
+          .removeClass("contains-current current")
+          .find(".current")
+          .removeClass("current");
         // Clear all values (this is required for setvalue/odk-instance-first-load populated values)
         // The default values will be added anyway in the repeats.add function.
         that.form.input.clear(templateEl);
@@ -110,7 +110,7 @@ export default {
       .reverse()
       .each(function () {
         // don't do nested repeats here, they will be dealt with recursively
-        if (!$(this).closest('.or-repeat').length) {
+        if (!$(this).closest(".or-repeat").length) {
           that.updateDefaultFirstRepeatInstance(this);
         }
       })
@@ -120,15 +120,15 @@ export default {
       .forEach(that.updateViewInstancesFromModel.bind(this));
 
     // delegated handlers (strictly speaking not required, but checked for doubling of events -> OK)
-    this.form.view.$.on('click', 'button.add-repeat-btn:enabled', function () {
+    this.form.view.$.on("click", "button.add-repeat-btn:enabled", function () {
       // Create a clone
-      that.add($(this).closest('.or-repeat-info')[0]);
+      that.add($(this).closest(".or-repeat-info")[0]);
 
       // Prevent default
       return false;
     });
-    this.form.view.$.on('click', 'button.remove:enabled', function () {
-      that.confirmDelete(this.closest('.or-repeat'));
+    this.form.view.$.on("click", "button.remove:enabled", function () {
+      that.confirmDelete(this.closest(".or-repeat"));
 
       // prevent default
       return false;
@@ -143,8 +143,8 @@ export default {
     const that = this;
     dialog
       .confirm({
-        heading: t('confirm.repeatremove.heading'),
-        msg: t('confirm.repeatremove.msg'),
+        heading: t("confirm.repeatremove.heading"),
+        msg: t("confirm.repeatremove.msg"),
       })
       .then((confirmed) => {
         if (confirmed) {
@@ -171,26 +171,26 @@ export default {
       return 0;
     }
 
-    const isInfoElement = el.classList.contains('or-repeat-info');
+    const isInfoElement = el.classList.contains("or-repeat-info");
 
     const toCountSelector = isInfoElement
       ? `.or-repeat-info[data-name="${el.dataset.name}"]`
-      : `.or-repeat[name="${el.getAttribute('name')}"]`;
+      : `.or-repeat[name="${el.getAttribute("name")}"]`;
     let predecessorCount = isInfoElement
       ? 0
-      : Number(el.querySelector('.repeat-number').textContent) - 1;
+      : Number(el.querySelector(".repeat-number").textContent) - 1;
 
     let checkEl = el;
     while (checkEl) {
       while (
         checkEl.previousElementSibling &&
-        checkEl.previousElementSibling.matches('.or-repeat')
+        checkEl.previousElementSibling.matches(".or-repeat")
       ) {
         checkEl = checkEl.previousElementSibling;
         predecessorCount += checkEl.querySelectorAll(toCountSelector).length;
       }
       const parent = checkEl.parentElement;
-      checkEl = parent ? parent.closest('.or-repeat') : null;
+      checkEl = parent ? parent.closest(".or-repeat") : null;
     }
 
     return predecessorCount;
@@ -207,28 +207,28 @@ export default {
     const repeatSeriesIndex = this.getIndex(repeatInfo);
     const repInModelSeries = this.form.model.getRepeatSeries(
       repeatPath,
-      repeatSeriesIndex
+      repeatSeriesIndex,
     );
-    const repInViewSeries = getSiblingElements(repeatInfo, '.or-repeat');
+    const repInViewSeries = getSiblingElements(repeatInfo, ".or-repeat");
     // First rep is already included (by XSLT transformation)
     if (repInModelSeries.length > repInViewSeries.length) {
       this.add(
         repeatInfo,
         repInModelSeries.length - repInViewSeries.length,
-        'model'
+        "model",
       );
       // Now check the repeat counts of all the descendants of this repeat and its new siblings
       // Note: not tested with triple-nested repeats, but probably taking the better safe-than-sorry approach,
       // so should be okay except for performance.
-      getSiblingElements(repeatInfo, '.or-repeat')
+      getSiblingElements(repeatInfo, ".or-repeat")
         .reduce(
           (acc, current) =>
             acc.concat([
               ...current.querySelectorAll(
-                '.or-repeat-info:not([data-repeat-count])'
+                ".or-repeat-info:not([data-repeat-count])",
               ),
             ]),
-          []
+          [],
         )
         .forEach(this.updateViewInstancesFromModel.bind(this));
     }
@@ -244,26 +244,26 @@ export default {
     const repeatPath = repeatInfo.dataset.name;
     if (
       !this.form.model.data.instanceStr &&
-      !this.templates[repeatPath].classList.contains('or-appearance-minimal')
+      !this.templates[repeatPath].classList.contains("or-appearance-minimal")
     ) {
       const repeatSeriesIndex = this.getIndex(repeatInfo);
       const repeatSeriesInModel = this.form.model.getRepeatSeries(
         repeatPath,
-        repeatSeriesIndex
+        repeatSeriesIndex,
       );
       if (repeatSeriesInModel.length === 0) {
-        this.add(repeatInfo, 1, 'magic');
+        this.add(repeatInfo, 1, "magic");
       }
 
-      getSiblingElements(repeatInfo, '.or-repeat')
+      getSiblingElements(repeatInfo, ".or-repeat")
         .reduce(
           (acc, current) =>
             acc.concat([
               ...current.querySelectorAll(
-                '.or-repeat-info:not([data-repeat-count])'
+                ".or-repeat-info:not([data-repeat-count])",
               ),
             ]),
-          []
+          [],
         )
         .forEach(this.updateDefaultFirstRepeatInstance.bind(this));
     }
@@ -274,7 +274,7 @@ export default {
    * @param {Element} repeatInfo - repeatInfo element
    */
   updateRepeatInstancesFromCount(repeatInfo) {
-    const repCountPath = repeatInfo.dataset.repeatCount || '';
+    const repCountPath = repeatInfo.dataset.repeatCount || "";
 
     if (!repCountPath) {
       return;
@@ -288,44 +288,44 @@ export default {
     const repPath = repeatInfo.dataset.name;
     let numRepsInCount = this.form.model.evaluate(
       repCountPath,
-      'number',
+      "number",
       this.form.model.getRepeatCommentSelector(repPath),
       this.getIndex(repeatInfo),
-      true
+      true,
     );
     numRepsInCount = isNaN(numRepsInCount) ? 0 : numRepsInCount;
     const numRepsInView = getSiblingElements(
       repeatInfo,
-      `.or-repeat[name="${repPath}"]`
+      `.or-repeat[name="${repPath}"]`,
     ).length;
     let toCreate = numRepsInCount - numRepsInView;
 
     if (toCreate > 0) {
-      this.add(repeatInfo, toCreate, 'count');
+      this.add(repeatInfo, toCreate, "count");
     } else if (toCreate < 0) {
       toCreate =
         Math.abs(toCreate) >= numRepsInView
           ? -numRepsInView + (disableFirstRepeatRemoval ? 1 : 0)
           : toCreate;
       for (; toCreate < 0; toCreate++) {
-        const $last = $(repeatInfo).siblings('.or-repeat').last();
+        const $last = $(repeatInfo).siblings(".or-repeat").last();
         this.remove($last);
       }
     }
     // Now check the repeat counts of all the descendants of this repeat and its new siblings, level-by-level.
     // TODO: this does not find .or-repeat > .or-repeat (= unusual syntax)
-    getSiblingElementsAndSelf(repeatInfo, '.or-repeat')
+    getSiblingElementsAndSelf(repeatInfo, ".or-repeat")
       .reduce(
         (acc, current) =>
-          acc.concat(getChildren(current, '.or-group, .or-group-data')),
-        []
+          acc.concat(getChildren(current, ".or-group, .or-group-data")),
+        [],
       )
       .reduce(
         (acc, current) =>
           acc.concat(
-            getChildren(current, '.or-repeat-info[data-repeat-count]')
+            getChildren(current, ".or-repeat-info[data-repeat-count]"),
           ),
-        []
+        [],
       )
       .forEach(this.updateRepeatInstancesFromCount.bind(this));
   },
@@ -337,7 +337,7 @@ export default {
    */
   countUpdate(updated = {}) {
     const repeatInfos = this.form
-      .getRelatedNodes('data-repeat-count', '.or-repeat-info', updated)
+      .getRelatedNodes("data-repeat-count", ".or-repeat-info", updated)
       .get();
     repeatInfos.forEach(this.updateRepeatInstancesFromCount.bind(this));
   },
@@ -349,9 +349,9 @@ export default {
    * @param {string=} trigger - The trigger ('magic', 'user', 'count', 'model')
    * @return {boolean} Cloning success/failure outcome.
    */
-  add(repeatInfo, toCreate = 1, trigger = 'user') {
+  add(repeatInfo, toCreate = 1, trigger = "user") {
     if (!repeatInfo) {
-      console.error('Nothing to clone');
+      console.error("Nothing to clone");
 
       return false;
     }
@@ -359,27 +359,27 @@ export default {
     let repeatIndex;
     const repeatPath = repeatInfo.dataset.name;
 
-    const repeats = getSiblingElements(repeatInfo, '.or-repeat');
+    const repeats = getSiblingElements(repeatInfo, ".or-repeat");
     let clone = this.templates[repeatPath].cloneNode(true);
 
     // Determine the index of the repeat series.
     const repeatSeriesIndex = this.getIndex(repeatInfo);
     let modelRepeatSeriesLength = this.form.model.getRepeatSeries(
       repeatPath,
-      repeatSeriesIndex
+      repeatSeriesIndex,
     ).length;
     // Determine the index of the repeat inside its series
     const prevSibling = repeatInfo.previousElementSibling;
     let repeatIndexInSeries =
-      prevSibling && prevSibling.classList.contains('or-repeat')
-        ? Number(prevSibling.querySelector('.repeat-number').textContent)
+      prevSibling && prevSibling.classList.contains("or-repeat")
+        ? Number(prevSibling.querySelector(".repeat-number").textContent)
         : 0;
 
     // Add required number of repeats
     for (let i = 0; i < toCreate; i++) {
       // Fix names of radio button groups
-      clone.querySelectorAll('.option-wrapper').forEach(this.fixRadioName);
-      this.processDatalists(clone.querySelectorAll('datalist'), repeatInfo);
+      clone.querySelectorAll(".option-wrapper").forEach(this.fixRadioName);
+      this.processDatalists(clone.querySelectorAll("datalist"), repeatInfo);
 
       // Insert the clone
       repeatInfo.parentElement.insertBefore(clone, repeatInfo);
@@ -387,11 +387,11 @@ export default {
       if (repeatIndexInSeries > 0) {
         // Also add the clone class for all 2+ numbers as this is
         // used for performance optimization in several places.
-        clone.classList.add('clone');
+        clone.classList.add("clone");
       }
 
       // Update the repeat number
-      clone.querySelector('.repeat-number').textContent =
+      clone.querySelector(".repeat-number").textContent =
         repeatIndexInSeries + 1;
 
       // Update the variable containing the view repeats in the current series.
@@ -415,7 +415,7 @@ export default {
       };
 
       // The odk-new-repeat event (before the event that triggers re-calculations etc)
-      if (trigger === 'user' || trigger === 'count') {
+      if (trigger === "user" || trigger === "count") {
         clone.dispatchEvent(events.NewRepeat(updated));
       }
       // This will trigger setting default values, calculations, readonly, relevancy, language updates, and automatic page flips.
@@ -427,7 +427,7 @@ export default {
       }
       // now create the first instance of any nested repeats if necessary
       clone
-        .querySelectorAll('.or-repeat-info:not([data-repeat-count])')
+        .querySelectorAll(".or-repeat-info:not([data-repeat-count])")
         .forEach(this.updateDefaultFirstRepeatInstance.bind(this));
 
       clone = this.templates[repeatPath].cloneNode(true);
@@ -443,10 +443,10 @@ export default {
   },
   remove($repeat) {
     const that = this;
-    const $next = $repeat.next('.or-repeat, .or-repeat-info');
-    const repeatPath = $repeat.attr('name');
+    const $next = $repeat.next(".or-repeat, .or-repeat-info");
+    const repeatPath = $repeat.attr("name");
     const repeatIndex = this.getIndex($repeat[0]);
-    const repeatInfo = $repeat.siblings('.or-repeat-info')[0];
+    const repeatInfo = $repeat.siblings(".or-repeat-info")[0];
 
     $repeat.remove();
     that.numberRepeats(repeatInfo);
@@ -460,20 +460,20 @@ export default {
   fixRadioName(element) {
     const random = Math.floor(Math.random() * 10000000 + 1);
     element.querySelectorAll('input[type="radio"]').forEach((el) => {
-      el.setAttribute('name', random);
+      el.setAttribute("name", random);
     });
   },
   fixDatalistId(element) {
     const newId = element.id + Math.floor(Math.random() * 10000000 + 1);
     element.parentNode
       .querySelector(`input[list="${element.id}"]`)
-      .setAttribute('list', newId);
+      .setAttribute("list", newId);
     element.id = newId;
   },
   processDatalists(datalists, repeatInfo) {
     datalists.forEach((datalist) => {
       const template = datalist.querySelector(
-        '.itemset-template[data-items-path]'
+        ".itemset-template[data-items-path]",
       );
       const expr = template ? template.dataset.itemsPath : null;
 
@@ -481,7 +481,7 @@ export default {
         this.fixDatalistId(datalist);
       } else {
         const { id } = datalist;
-        const input = getSiblingElement(datalist, 'input[list]');
+        const input = getSiblingElement(datalist, "input[list]");
 
         if (input) {
           // For very long static datalists, a huge performance improvement can be achieved, by using the
@@ -495,21 +495,21 @@ export default {
             const parent = datalist.parentElement;
             const { name } = input;
 
-            const dl = parent.querySelector('datalist');
+            const dl = parent.querySelector("datalist");
             const detachedList = parent.removeChild(dl);
-            detachedList.setAttribute('data-name', name);
+            detachedList.setAttribute("data-name", name);
             repeatInfo.appendChild(detachedList);
 
             const translations = parent.querySelector(
-              '.or-option-translations'
+              ".or-option-translations",
             );
             const detachedTranslations = parent.removeChild(translations);
-            detachedTranslations.setAttribute('data-name', name);
+            detachedTranslations.setAttribute("data-name", name);
             repeatInfo.appendChild(detachedTranslations);
 
-            const labels = parent.querySelector('.itemset-labels');
+            const labels = parent.querySelector(".itemset-labels");
             const detachedLabels = parent.removeChild(labels);
-            detachedLabels.setAttribute('data-name', name);
+            detachedLabels.setAttribute("data-name", name);
             repeatInfo.appendChild(detachedLabels);
 
             this.staticLists.push(id);
@@ -521,19 +521,19 @@ export default {
   },
   toggleButtons(repeatInfo) {
     $(repeatInfo)
-      .siblings('.or-repeat')
-      .children('.repeat-buttons')
-      .find('button.remove')
-      .prop('disabled', false)
+      .siblings(".or-repeat")
+      .children(".repeat-buttons")
+      .find("button.remove")
+      .prop("disabled", false)
       .first()
-      .prop('disabled', disableFirstRepeatRemoval);
+      .prop("disabled", disableFirstRepeatRemoval);
   },
   numberRepeats(repeatInfo) {
     $(repeatInfo)
-      .siblings('.or-repeat')
+      .siblings(".or-repeat")
       .each((idx, repeat) => {
         $(repeat)
-          .children('.repeat-number')
+          .children(".repeat-number")
           .text(idx + 1);
       });
   },

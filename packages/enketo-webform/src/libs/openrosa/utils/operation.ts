@@ -1,4 +1,4 @@
-import { asBoolean, asNumber, asString } from './xpath-cast';
+import { asBoolean, asNumber, asString } from "./xpath-cast";
 
 export { handleOperation };
 
@@ -66,9 +66,9 @@ function oneOf(lhs, rhs, t) {
 
 function castFor(r) {
   switch (r.t) {
-    case 'num':
+    case "num":
       return asNumber;
-    case 'str':
+    case "str":
       return asString;
     default:
       throw new Error(`No cast for type: ${r.t}`);
@@ -77,7 +77,7 @@ function castFor(r) {
 
 function relationalCompare(lhs, rhs, compareFn) {
   var i, j;
-  if (bothOf(lhs, rhs, 'arr')) {
+  if (bothOf(lhs, rhs, "arr")) {
     for (i = lhs.v.length - 1; i >= 0; --i) {
       for (j = rhs.v.length - 1; j >= 0; --j) {
         if (compareFn(asNumber(lhs.v[i]), asNumber(rhs.v[j]))) return true;
@@ -85,11 +85,11 @@ function relationalCompare(lhs, rhs, compareFn) {
     }
     return false;
   }
-  if (lhs.t === 'arr') {
+  if (lhs.t === "arr") {
     rhs = asNumber(rhs);
     return lhs.v.map(asNumber).some((v) => compareFn(v, rhs));
   }
-  if (rhs.t === 'arr') {
+  if (rhs.t === "arr") {
     lhs = asNumber(lhs);
     return rhs.v.map(asNumber).some((v) => compareFn(lhs, v));
   }
@@ -98,7 +98,7 @@ function relationalCompare(lhs, rhs, compareFn) {
 
 function equalityCompare(lhs, rhs, compareFn) {
   var i, j;
-  if (bothOf(lhs, rhs, 'arr')) {
+  if (bothOf(lhs, rhs, "arr")) {
     for (i = lhs.v.length - 1; i >= 0; --i) {
       for (j = rhs.v.length - 1; j >= 0; --j) {
         if (compareFn(lhs.v[i].textContent, rhs.v[j].textContent)) return true;
@@ -106,18 +106,18 @@ function equalityCompare(lhs, rhs, compareFn) {
     }
     return false;
   }
-  if (oneOf(lhs, rhs, 'bool')) return compareFn(asBoolean(lhs), asBoolean(rhs));
-  if (lhs.t === 'arr') {
+  if (oneOf(lhs, rhs, "bool")) return compareFn(asBoolean(lhs), asBoolean(rhs));
+  if (lhs.t === "arr") {
     const cast = castFor(rhs);
     rhs = cast(rhs);
     return lhs.v.map(cast).some((v) => compareFn(v, rhs));
   }
-  if (rhs.t === 'arr') {
+  if (rhs.t === "arr") {
     const cast = castFor(lhs);
     lhs = cast(lhs);
     return rhs.v.map(cast).some((v) => compareFn(v, lhs));
   }
-  if (oneOf(lhs, rhs, 'num')) return compareFn(asNumber(lhs), asNumber(rhs));
-  if (oneOf(lhs, rhs, 'str')) return compareFn(asString(lhs), asString(rhs));
-  throw new Error('not handled yet for these types: ' + compareFn.toString());
+  if (oneOf(lhs, rhs, "num")) return compareFn(asNumber(lhs), asNumber(rhs));
+  if (oneOf(lhs, rhs, "str")) return compareFn(asString(lhs), asString(rhs));
+  throw new Error("not handled yet for these types: " + compareFn.toString());
 }

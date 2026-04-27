@@ -1,5 +1,5 @@
-import { XMLBuilder, XMLParser } from 'fast-xml-parser';
-import type { X2jOptions } from 'fast-xml-parser';
+import { XMLBuilder, XMLParser } from "fast-xml-parser";
+import type { X2jOptions } from "fast-xml-parser";
 
 /**
  * Converts an XML string to a JSON object.
@@ -7,7 +7,10 @@ import type { X2jOptions } from 'fast-xml-parser';
  * @param options - Optional fast-xml-parser options
  * @returns Parsed JSON object
  */
-export function xmlToJson<T = Record<string, any>>(xmlString: string, options: X2jOptions = {}) {
+export function xmlToJson<T = Record<string, any>>(
+  xmlString: string,
+  options: X2jOptions = {},
+) {
   const parser = new XMLParser(options);
   return parser.parse(xmlString) as T;
 }
@@ -29,13 +32,13 @@ export function jsonToXML(json: Record<string, any>) {
  * @throws Error if File API is not supported
  */
 export function xmlStringToFile(xmlString: string) {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     const blob = new Blob([xmlString]);
-    if ('File' in window) {
-      return new File([blob], 'submission.xml', { type: 'application/xml' });
+    if ("File" in window) {
+      return new File([blob], "submission.xml", { type: "application/xml" });
     }
   }
-  throw new Error('File api not supported in this environment');
+  throw new Error("File api not supported in this environment");
 }
 
 /**
@@ -46,7 +49,11 @@ export function xmlStringToFile(xmlString: string) {
  * @param options.content - The new content
  * @returns Updated XML string
  */
-export function xmlNodeReplaceContent(options: { xml: string; tagname: string; content: string }) {
+export function xmlNodeReplaceContent(options: {
+  xml: string;
+  tagname: string;
+  content: string;
+}) {
   const { xml, tagname, content } = options;
   const xmlDoc = parseXmlString(xml);
   const targetEl = xmlDoc.getElementsByTagName(tagname)[0];
@@ -56,5 +63,5 @@ export function xmlNodeReplaceContent(options: { xml: string; tagname: string; c
 }
 
 function parseXmlString(xmlString: string) {
-  return new DOMParser().parseFromString(xmlString, 'application/xml');
+  return new DOMParser().parseFromString(xmlString, "application/xml");
 }

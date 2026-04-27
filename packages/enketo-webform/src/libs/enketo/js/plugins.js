@@ -1,7 +1,7 @@
 /**
  * @external jQuery
  */
-import $ from 'jquery';
+import $ from "jquery";
 
 /**
  * Reverses a jQuery collection

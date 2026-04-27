@@ -8,11 +8,11 @@
  * @param {*} translationOptions - translation options
  */
 function TranslatedError(message, translationKey, translationOptions) {
-    this.message = message;
-    this.translationKey = translationKey;
-    this.translationOptions = translationOptions;
+  this.message = message;
+  this.translationKey = translationKey;
+  this.translationOptions = translationOptions;
 }
 TranslatedError.prototype = Object.create(Error.prototype);
-TranslatedError.prototype.name = 'TranslatedError';
+TranslatedError.prototype.name = "TranslatedError";
 
 export default TranslatedError;

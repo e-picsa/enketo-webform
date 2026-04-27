@@ -4,9 +4,9 @@
  * @module print
  */
 
-import $ from 'jquery';
-import dialog from './fake-dialog';
-import { MutationsTracker } from './dom-utils';
+import $ from "jquery";
+import dialog from "./fake-dialog";
+import { MutationsTracker } from "./dom-utils";
 
 let dpi;
 let printStyleSheet;
@@ -22,16 +22,16 @@ let printStyleSheetLink;
  */
 
 // make sure setDpi is not called until DOM is ready
-document.addEventListener('DOMContentLoaded', () => setDpi());
+document.addEventListener("DOMContentLoaded", () => setDpi());
 
 /**
  * Calculates the dots per inch and sets the dpi property
  */
 function setDpi() {
   const dpiO = {};
-  const e = document.body.appendChild(document.createElement('DIV'));
-  e.style.width = '1in';
-  e.style.padding = '0';
+  const e = document.body.appendChild(document.createElement("DIV"));
+  e.style.width = "1in";
+  e.style.padding = "0";
   dpiO.v = e.offsetWidth;
   e.parentNode.removeChild(e);
   dpi = dpiO.v;
@@ -47,7 +47,7 @@ function getPrintStyleSheet() {
   for (const i in document.styleSheets) {
     if (Object.prototype.hasOwnProperty.call(document.styleSheets, i)) {
       const sheet = document.styleSheets[i];
-      if (sheet.media.mediaText === 'print') {
+      if (sheet.media.mediaText === "print") {
         return sheet;
       }
     }
@@ -76,9 +76,9 @@ function styleToAll() {
   printStyleSheet = printStyleSheet || getPrintStyleSheet();
   printStyleSheetLink = printStyleSheetLink || getPrintStyleSheetLink();
   // Chrome:
-  printStyleSheet.media.mediaText = 'all';
+  printStyleSheet.media.mediaText = "all";
   // Firefox:
-  printStyleSheetLink.setAttribute('media', 'all');
+  printStyleSheetLink.setAttribute("media", "all");
 
   return !!printStyleSheet;
 }
@@ -89,15 +89,15 @@ function styleToAll() {
  * @static
  */
 function styleReset() {
-  printStyleSheet.media.mediaText = 'print';
-  printStyleSheetLink.setAttribute('media', 'print');
+  printStyleSheet.media.mediaText = "print";
+  printStyleSheetLink.setAttribute("media", "print");
   document
-    .querySelectorAll('.print-height-adjusted, .print-width-adjusted, .main')
+    .querySelectorAll(".print-height-adjusted, .print-width-adjusted, .main")
     .forEach((el) => {
-      el.removeAttribute('style');
-      el.classList.remove('print-height-adjusted', 'print-width-adjusted');
+      el.removeAttribute("style");
+      el.classList.remove("print-height-adjusted", "print-width-adjusted");
     });
-  $('.back-to-screen-view').off('click').remove();
+  $(".back-to-screen-view").off("click").remove();
 }
 
 /**
@@ -108,7 +108,7 @@ function styleReset() {
  */
 function isGrid() {
   return /theme-.*grid.*/.test(
-    document.querySelector('form.or').getAttribute('class')
+    document.querySelector("form.or").getAttribute("class"),
   );
 }
 
@@ -124,8 +124,8 @@ function fixGrid(paper, delay = 500) {
   const mutationsTracker = new MutationsTracker();
 
   // to ensure cells grow correctly with text-wrapping before fixing heights and widths.
-  const main = document.querySelector('.main');
-  const cls = 'print-width-adjusted';
+  const main = document.querySelector(".main");
+  const cls = "print-width-adjusted";
   const classChange = mutationsTracker.waitForClassChange(main, cls);
   main.style.width = getPaperPixelWidth(paper);
   main.classList.add(cls);
@@ -135,11 +135,11 @@ function fixGrid(paper, delay = 500) {
   return classChange.then(() => {
     let row = [];
     let rowTop;
-    const title = document.querySelector('#form-title');
+    const title = document.querySelector("#form-title");
     // the -1px adjustment is necessary because the h3 element width is calc(100% + 1px)
     const maxWidth = title ? title.offsetWidth - 1 : null;
     const els = document.querySelectorAll(
-      '.question:not(.draft), .trigger:not(.draft)'
+      ".question:not(.draft), .trigger:not(.draft)",
     );
 
     els.forEach((el, index) => {
@@ -170,12 +170,12 @@ function fixGrid(paper, delay = 500) {
         }
       } else if (rowTop < top) {
         console.error(
-          'unexpected question top position: ',
+          "unexpected question top position: ",
           top,
-          'for element:',
+          "for element:",
           el,
-          'expected >=',
-          rowTop
+          "expected >=",
+          rowTop,
         );
       }
     });
@@ -186,7 +186,7 @@ function fixGrid(paper, delay = 500) {
         // the waiting time for larger forms (more mutations).
         new Promise((resolve) => {
           setTimeout(resolve, delay);
-        })
+        }),
     );
   });
 }
@@ -202,7 +202,7 @@ function _resizeRowElements(row, maxWidth) {
   let maxHeight = 0;
 
   row.forEach((el) => {
-    const width = Number($(el).css('width').replace('px', ''));
+    const width = Number($(el).css("width").replace("px", ""));
     widths.push(width);
     cumulativeWidth += width;
   });
@@ -214,7 +214,7 @@ function _resizeRowElements(row, maxWidth) {
       const width = widths[index] + (widths[index] / cumulativeWidth) * diff;
       // round down to 2 decimals to avoid 100.001% totals
       el.style.width = `${Math.floor(((width * 100) / maxWidth) * 100) / 100}%`;
-      el.classList.add('print-width-adjusted');
+      el.classList.add("print-width-adjusted");
     });
   }
 
@@ -226,8 +226,8 @@ function _resizeRowElements(row, maxWidth) {
   row.forEach((el) => {
     // unset max height for image-map widget
     // (https://github.com/OpenClinica/enketo-express-oc/issues/363)
-    if (!el.classList.contains('or-appearance-image-map')) {
-      el.classList.add('print-height-adjusted');
+    if (!el.classList.contains("or-appearance-image-map")) {
+      el.classList.add("print-height-adjusted");
       el.style.height = `${maxHeight}px`;
     }
   });
@@ -255,12 +255,12 @@ function getPaperPixelWidth(paper) {
     A6: [4.13, 5.83],
   };
   paper.landscape =
-    typeof paper.landscape === 'boolean'
+    typeof paper.landscape === "boolean"
       ? paper.landscape
-      : paper.orientation === 'landscape';
+      : paper.orientation === "landscape";
   delete paper.orientation;
 
-  if (typeof paper.margin === 'undefined') {
+  if (typeof paper.margin === "undefined") {
     paper.margin = 0.4;
   } else if (/^[\d.]+in$/.test(paper.margin.trim())) {
     paper.margin = parseFloat(paper.margin, 10);
@@ -271,10 +271,10 @@ function getPaperPixelWidth(paper) {
   }
 
   paper.format =
-    typeof paper.format === 'string' &&
-    typeof FORMATS[paper.format] !== 'undefined'
+    typeof paper.format === "string" &&
+    typeof FORMATS[paper.format] !== "undefined"
       ? paper.format
-      : 'A4';
+      : "A4";
   printWidth =
     paper.landscape === true
       ? FORMATS[paper.format][1]
@@ -288,7 +288,7 @@ function getPaperPixelWidth(paper) {
  */
 function openAllDetails() {
   document
-    .querySelectorAll('details.or-form-guidance.active')
+    .querySelectorAll("details.or-form-guidance.active")
     .forEach((details) => {
       if (details.open) {
         details.dataset.previousOpen = true;
@@ -303,7 +303,7 @@ function openAllDetails() {
  */
 function closeAllDetails() {
   document
-    .querySelectorAll('details.or-form-guidance.active')
+    .querySelectorAll("details.or-form-guidance.active")
     .forEach((details) => {
       if (details.dataset.previousOpen) {
         delete details.dataset.previousOpen;
@@ -323,13 +323,13 @@ function closeAllDetails() {
  * @param {string} theme - theme name
  */
 function print(theme) {
-  if (theme === 'grid' || (!theme && isGrid())) {
+  if (theme === "grid" || (!theme && isGrid())) {
     let swapped = false;
     dialog
-      .prompt('Enter valid paper format', 'A4')
+      .prompt("Enter valid paper format", "A4")
       .then((format) => {
         if (!format) {
-          throw new Error('Print cancelled by user.');
+          throw new Error("Print cancelled by user.");
         }
         swapped = styleToAll();
 

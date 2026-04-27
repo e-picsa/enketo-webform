@@ -1,13 +1,13 @@
-import $ from 'jquery';
-import fileManager from '../../js/file-manager';
-import { t } from '../../js/fake-translator';
-import dialog from '../../js/fake-dialog';
-import Widget from '../../js/widget';
-import { getFilename, resizeImage, isNumber } from '../../js/utils';
-import downloadUtils from '../../js/download-utils';
-import events from '../../js/event';
-import TranslatedError from '../../js/translated-error';
-import { empty } from '../../js/dom-utils';
+import $ from "jquery";
+import fileManager from "../../js/file-manager";
+import { t } from "../../js/fake-translator";
+import dialog from "../../js/fake-dialog";
+import Widget from "../../js/widget";
+import { getFilename, resizeImage, isNumber } from "../../js/utils";
+import downloadUtils from "../../js/download-utils";
+import events from "../../js/event";
+import TranslatedError from "../../js/translated-error";
+import { empty } from "../../js/dom-utils";
 
 // TODO: remove remaining jquery (events, namespaces)
 // TODO: run (some) standard widget tests
@@ -27,34 +27,34 @@ class Filepicker extends Widget {
   }
 
   _init() {
-    const existingFileName = this.element.getAttribute('data-loaded-file-name');
+    const existingFileName = this.element.getAttribute("data-loaded-file-name");
     const that = this;
 
-    this.element.classList.add('hide');
-    this.question.classList.add('with-media', 'clearfix');
+    this.element.classList.add("hide");
+    this.question.classList.add("with-media", "clearfix");
 
     const fragment = document.createRange().createContextualFragment(
       `<div class="widget file-picker">
                     <input class="ignore fake-file-input"/>
                     <div class="file-feedback"></div>
                     <div class="file-preview"></div>
-                </div>`
+                </div>`,
     );
 
-    fragment.querySelector('input').after(this.downloadButtonHtml);
-    fragment.querySelector('input').after(this.resetButtonHtml);
+    fragment.querySelector("input").after(this.downloadButtonHtml);
+    fragment.querySelector("input").after(this.resetButtonHtml);
 
     this.element.after(fragment);
 
     this.disable();
 
-    const widget = this.question.querySelector('.widget');
-    this.feedback = widget.querySelector('.file-feedback');
-    this.preview = widget.querySelector('.file-preview');
-    this.fakeInput = widget.querySelector('.fake-file-input');
-    this.downloadLink = widget.querySelector('.btn-download');
+    const widget = this.question.querySelector(".widget");
+    this.feedback = widget.querySelector(".file-feedback");
+    this.preview = widget.querySelector(".file-preview");
+    this.fakeInput = widget.querySelector(".fake-file-input");
+    this.downloadLink = widget.querySelector(".btn-download");
 
-    that._setResetButtonListener(widget.querySelector('.btn-reset'));
+    that._setResetButtonListener(widget.querySelector(".btn-reset"));
 
     // Focus listener needs to be added synchronously
     that._setFocusListener();
@@ -63,17 +63,17 @@ class Filepicker extends Widget {
     this._showFileName(existingFileName);
 
     if (fileManager.isWaitingForPermissions()) {
-      this._showFeedback(t('filepicker.waitingForPermissions'), 'warning');
+      this._showFeedback(t("filepicker.waitingForPermissions"), "warning");
     }
 
     // Monitor maxSize changes to update placeholder text. This facilitates asynchronous
     // obtaining of max size from server without slowing down form loading.
     this._updatePlaceholder();
     this.element
-      .closest('form.or')
+      .closest("form.or")
       .addEventListener(
         events.UpdateMaxSize().type,
-        this._updatePlaceholder.bind(this)
+        this._updatePlaceholder.bind(this),
       );
 
     fileManager
@@ -93,16 +93,16 @@ class Filepicker extends Widget {
             })
             .catch(() => {
               that._showFeedback(
-                t('filepicker.notFound', {
+                t("filepicker.notFound", {
                   existing: existingFileName,
                 }),
-                'error'
+                "error",
               );
             });
         }
       })
       .catch((error) => {
-        that._showFeedback(error, 'error');
+        that._showFeedback(error, "error");
       });
   }
 
@@ -111,10 +111,10 @@ class Filepicker extends Widget {
    */
   _updatePlaceholder() {
     this.fakeInput.setAttribute(
-      'placeholder',
-      t('filepicker.placeholder', {
-        maxSize: fileManager.getMaxSizeReadable() || '?MB',
-      })
+      "placeholder",
+      t("filepicker.placeholder", {
+        maxSize: fileManager.getMaxSizeReadable() || "?MB",
+      }),
     );
   }
 
@@ -125,17 +125,17 @@ class Filepicker extends Widget {
    */
   _setResetButtonListener(resetButton) {
     if (resetButton) {
-      resetButton.addEventListener('click', () => {
+      resetButton.addEventListener("click", () => {
         if (this.originalInputValue || this.value) {
           dialog
             .confirm(
-              t('filepicker.resetWarning', {
-                item: t('filepicker.file'),
-              })
+              t("filepicker.resetWarning", {
+                item: t("filepicker.file"),
+              }),
             )
             .then((confirmed) => {
               if (confirmed) {
-                this.originalInputValue = '';
+                this.originalInputValue = "";
               }
             })
             .catch(() => {});
@@ -151,28 +151,28 @@ class Filepicker extends Widget {
     const that = this;
 
     $(this.element)
-      .on('click', (event) => {
+      .on("click", (event) => {
         // The purpose of this handler is to block the filepicker window
         // when the label is clicked outside of the input.
-        if (that.props.readonly || event.namespace !== 'propagate') {
+        if (that.props.readonly || event.namespace !== "propagate") {
           that.fakeInput.focus();
           event.stopImmediatePropagation();
 
           return false;
         }
       })
-      .on('change.propagate', (event) => {
+      .on("change.propagate", (event) => {
         let file;
         let fileName;
         let postfix;
         const loadedFileName = this.element.getAttribute(
-          'data-loaded-file-name'
+          "data-loaded-file-name",
         );
         const now = new Date();
 
-        if (event.namespace === 'propagate') {
+        if (event.namespace === "propagate") {
           // Trigger eventhandler to update instance value
-          $(this.element).trigger('change.file');
+          $(this.element).trigger("change.file");
 
           return false;
         }
@@ -204,25 +204,25 @@ class Filepicker extends Widget {
                 that._showFeedback();
                 that._showFileName(fileName);
                 if (loadedFileName && loadedFileName !== fileName) {
-                  that.element.removeAttribute('data-loaded-file-name');
+                  that.element.removeAttribute("data-loaded-file-name");
                 }
                 that._updateDownloadLink(url, fileName);
                 // Update record
-                $(that.element).trigger('change.propagate');
+                $(that.element).trigger("change.propagate");
               })
               .catch((error) => {
                 // Update record to clear any existing valid value
-                $(that.element).val('').trigger('change.propagate');
+                $(that.element).val("").trigger("change.propagate");
                 // Update UI
-                that._showFileName('');
+                that._showFileName("");
                 that._showPreview(null);
-                that._showFeedback(error, 'error');
-                that._updateDownloadLink('', '');
+                that._showFeedback(error, "error");
+                that._updateDownloadLink("", "");
               });
           });
       });
 
-    this.fakeInput.addEventListener('click', (event) => {
+    this.fakeInput.addEventListener("click", (event) => {
       /*
                 The purpose of this handler is to selectively propagate clicks on the fake
                 input to the underlying file input (to show the file picker window).
@@ -237,11 +237,11 @@ class Filepicker extends Widget {
 
         return;
       }
-      $(that.element).trigger('click.propagate');
+      $(that.element).trigger("click.propagate");
     });
 
     // For robustness, avoid any editing of filenames by user.
-    this.fakeInput.addEventListener('change', (event) => {
+    this.fakeInput.addEventListener("change", (event) => {
       event.preventDefault();
       event.stopPropagation();
     });
@@ -276,12 +276,12 @@ class Filepicker extends Widget {
       fb instanceof TranslatedError
         ? t(fb.translationKey, fb.translationOptions)
         : fb instanceof Error
-        ? fb.message
-        : fb || '';
-    status = status || '';
+          ? fb.message
+          : fb || "";
+    status = status || "";
     // replace text and replace all existing classes with the new status class
     this.feedback.textContent = message;
-    this.feedback.setAttribute('class', `file-feedback ${status}`);
+    this.feedback.setAttribute("class", `file-feedback ${status}`);
   }
 
   /**
@@ -294,20 +294,20 @@ class Filepicker extends Widget {
     empty(this.preview);
 
     switch (mediaType) {
-      case 'image/*':
-        htmlStr = '<img />';
+      case "image/*":
+        htmlStr = "<img />";
         break;
-      case 'audio/*':
+      case "audio/*":
         htmlStr = '<audio controls="controls"/>';
         break;
-      case 'video/*':
+      case "video/*":
         htmlStr = '<video controls="controls"/>';
         break;
     }
 
     if (url && htmlStr) {
       const fragment = document.createRange().createContextualFragment(htmlStr);
-      fragment.querySelector('*').src = url;
+      fragment.querySelector("*").src = url;
       this.preview.append(fragment);
     }
   }
@@ -319,7 +319,7 @@ class Filepicker extends Widget {
    */
   _resizeFile(file, mediaType) {
     return new Promise((resolve, reject) => {
-      if (mediaType !== 'image/*') {
+      if (mediaType !== "image/*") {
         reject(file);
       }
 
@@ -329,11 +329,11 @@ class Filepicker extends Widget {
           .then((blob) => {
             const reader = new FileReader();
             reader.addEventListener(
-              'load',
+              "load",
               () => {
                 resolve({ blob, dataURI: reader.result });
               },
-              false
+              false,
             );
             reader.readAsDataURL(blob);
           })
@@ -359,7 +359,7 @@ class Filepicker extends Widget {
    */
   disable() {
     this.element.disabled = true;
-    this.question.querySelector('.btn-reset').disabled = true;
+    this.question.querySelector(".btn-reset").disabled = true;
   }
 
   /**
@@ -367,7 +367,7 @@ class Filepicker extends Widget {
    */
   enable() {
     this.element.disabled = false;
-    this.question.querySelector('.btn-reset').disabled = false;
+    this.question.querySelector(".btn-reset").disabled = false;
   }
 
   /**
@@ -375,7 +375,7 @@ class Filepicker extends Widget {
    */
   get props() {
     const props = this._props;
-    props.mediaType = this.element.getAttribute('accept');
+    props.mediaType = this.element.getAttribute("accept");
 
     if (
       this.element.dataset.maxPixels &&

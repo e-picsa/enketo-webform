@@ -1,16 +1,16 @@
-declare module 'jquery' {
+declare module "jquery" {
   const $: any;
   export default $;
 }
 
-declare module 'jquery-touchswipe';
+declare module "jquery-touchswipe";
 
-declare module '*.ts' {
+declare module "*.ts" {
   const content: any;
   export default content;
 }
 
-declare module '*.js' {
+declare module "*.js" {
   const content: any;
   export default content;
 }

@@ -1,5 +1,5 @@
-import { DATE_STRING, dateToDays, dateStringToDays } from './date';
-import { toISOLocalString } from '../date-extensions';
+import { DATE_STRING, dateToDays, dateStringToDays } from "./date";
+import { toISOLocalString } from "../date-extensions";
 
 export { asBoolean, asNumber, asString };
 
@@ -7,9 +7,9 @@ export { asBoolean, asNumber, asString };
 function asBoolean(r) {
   if (isDomNode(r)) return !!asString(r).trim();
   switch (r.t) {
-    case 'arr':
+    case "arr":
       return !!r.v.length;
-    case 'date':
+    case "date":
       return !isNaN(r.v); // TODO should be handled in an extension rather than core code
     default:
       return !!r.v;
@@ -18,12 +18,12 @@ function asBoolean(r) {
 
 // cast to number, as per https://www.w3.org/TR/1999/REC-xpath-19991116/#section-Number-Functions
 function asNumber(r) {
-  if (r.t === 'num') return r.v;
-  if (r.t === 'bool') return r.v ? 1 : 0;
-  if (r.t === 'date') return dateToDays(r.v); // TODO should be handled in an extension rather than core code
+  if (r.t === "num") return r.v;
+  if (r.t === "bool") return r.v ? 1 : 0;
+  if (r.t === "date") return dateToDays(r.v); // TODO should be handled in an extension rather than core code
 
   const str = asString(r).trim();
-  if (str === '') return NaN;
+  if (str === "") return NaN;
   if (DATE_STRING.test(str)) return dateStringToDays(str); // TODO should be handled in an extension rather than core code
   return +str;
 }
@@ -32,14 +32,14 @@ function asNumber(r) {
 function asString(r) {
   if (isDomNode(r)) return nodeToString(r);
   switch (r.t) {
-    case 'str':
+    case "str":
       return r.v;
-    case 'arr':
-      return r.v.length ? r.v[0].textContent || '' : '';
-    case 'date':
-      return toISOLocalString(r.v).replace(/T00:00:00.000.*/, ''); // TODO should be handled in an extension rather than core code
-    case 'num':
-    case 'bool':
+    case "arr":
+      return r.v.length ? r.v[0].textContent || "" : "";
+    case "date":
+      return toISOLocalString(r.v).replace(/T00:00:00.000.*/, ""); // TODO should be handled in an extension rather than core code
+    case "num":
+    case "bool":
     default:
       return r.v.toString();
   }

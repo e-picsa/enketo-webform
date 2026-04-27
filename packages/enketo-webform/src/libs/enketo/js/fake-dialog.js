@@ -15,9 +15,9 @@
  * @param {string | DialogContentObj} content - Dialog content
  */
 function alert(content) {
-    window.alert(content);
+  window.alert(content);
 
-    return Promise.resolve();
+  return Promise.resolve();
 }
 
 /**
@@ -25,9 +25,9 @@ function alert(content) {
  * @param {string | DialogContentObj} content - Dialog content
  */
 function confirm(content) {
-    const msg = content.message ? content.message : content;
+  const msg = content.message ? content.message : content;
 
-    return Promise.resolve(window.confirm(msg));
+  return Promise.resolve(window.confirm(msg));
 }
 
 /**
@@ -36,11 +36,11 @@ function confirm(content) {
  * @param {string} def - Default input value
  */
 function prompt(content, def) {
-    return Promise.resolve(window.prompt(content, def));
+  return Promise.resolve(window.prompt(content, def));
 }
 
 export default {
-    alert,
-    confirm,
-    prompt,
+  alert,
+  confirm,
+  prompt,
 };

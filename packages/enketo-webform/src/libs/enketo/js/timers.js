@@ -7,13 +7,13 @@
 
 /** @type {OnIdle} */
 const onIdle =
-    typeof requestIdleCallback === 'function'
-        ? (callback, timeout) => {
-              requestIdleCallback(callback, { timeout });
-          }
-        : (callback) => {
-              setTimeout(callback);
-          };
+  typeof requestIdleCallback === "function"
+    ? (callback, timeout) => {
+        requestIdleCallback(callback, { timeout });
+      }
+    : (callback) => {
+        setTimeout(callback);
+      };
 
 /**
  * Queues `callback` to be called asynchronously:
@@ -27,5 +27,5 @@ const onIdle =
  * @param {number} maxDelay
  */
 export const callOnIdle = (callback, maxDelay = 16) => {
-    onIdle(callback, maxDelay);
+  onIdle(callback, maxDelay);
 };

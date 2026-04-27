@@ -14,7 +14,7 @@ npm install @picsa/enketo-webform
 
 ```html
 <script type="module" src="./enketo-webform.js"></script>
-<link rel="stylesheet" href="./enketo-webform.css">
+<link rel="stylesheet" href="./enketo-webform.css" />
 
 <enketo-webform
   form="<form xmlns='http://www.w3.org/1999/xhtml'>...</form>"
@@ -25,7 +25,7 @@ npm install @picsa/enketo-webform
 ### React Usage
 
 ```jsx
-import '@picsa/enketo-webform';
+import "@picsa/enketo-webform";
 
 function FormComponent({ form, model }) {
   const webformRef = useRef(null);
@@ -35,19 +35,19 @@ function FormComponent({ form, model }) {
     if (!webform) return;
 
     const handleDataUpdated = (event) => {
-      console.log('Data updated:', event.detail.xml);
+      console.log("Data updated:", event.detail.xml);
     };
 
     const handleFormSaved = (event) => {
-      console.log('Form saved:', event.detail.entry);
+      console.log("Form saved:", event.detail.entry);
     };
 
-    webform.addEventListener('dataUpdated', handleDataUpdated);
-    webform.addEventListener('formSaved', handleFormSaved);
+    webform.addEventListener("dataUpdated", handleDataUpdated);
+    webform.addEventListener("formSaved", handleFormSaved);
 
     return () => {
-      webform.removeEventListener('dataUpdated', handleDataUpdated);
-      webform.removeEventListener('formSaved', handleFormSaved);
+      webform.removeEventListener("dataUpdated", handleDataUpdated);
+      webform.removeEventListener("formSaved", handleFormSaved);
     };
   }, []);
 
@@ -69,37 +69,37 @@ function FormComponent({ form, model }) {
 Add the custom element import in your `main.ts` (or `app.component.ts`):
 
 ```typescript
-import '@picsa/enketo-webform';
+import "@picsa/enketo-webform";
 ```
 
 If using standalone components, import in the component file:
 
 ```typescript
-import '@picsa/enketo-webform';
+import "@picsa/enketo-webform";
 
 @Component({
-  selector: 'app-form',
+  selector: "app-form",
   standalone: true,
   imports: [],
-  templateUrl: './form.component.html'
+  templateUrl: "./form.component.html",
 })
 export class FormComponent implements AfterViewInit {
-  @ViewChild('webform') webformEl!: HTMLElement & {
+  @ViewChild("webform") webformEl!: HTMLElement & {
     form?: string;
     model?: string;
   };
 
   ngAfterViewInit() {
     const webform = this.webformEl;
-    
-    webform.addEventListener('dataUpdated', (event: Event) => {
+
+    webform.addEventListener("dataUpdated", (event: Event) => {
       const { xml, nodes } = (event as CustomEvent).detail;
-      console.log('Data updated:', xml);
+      console.log("Data updated:", xml);
     });
 
-    webform.addEventListener('formSaved', (event: Event) => {
+    webform.addEventListener("formSaved", (event: Event) => {
       const { entry } = (event as CustomEvent).detail;
-      console.log('Form saved:', entry);
+      console.log("Form saved:", entry);
     });
   }
 }
@@ -108,16 +108,21 @@ export class FormComponent implements AfterViewInit {
 #### Step 2: Use in template
 
 ```html
-<app-form #webform [form]="formXml" [model]="modelXml" [showButtons]="true"></app-form>
+<app-form
+  #webform
+  [form]="formXml"
+  [model]="modelXml"
+  [showButtons]="true"
+></app-form>
 ```
 
 Or with ngIf to ensure the element is registered:
 
 ```typescript
-import '@picsa/enketo-webform';
+import "@picsa/enketo-webform";
 
 @Component({
-  selector: 'app-form-wrapper',
+  selector: "app-form-wrapper",
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -130,18 +135,18 @@ import '@picsa/enketo-webform';
         (formSaved)="onFormSaved($event)"
       ></enketo-webform>
     </ng-container>
-  `
+  `,
 })
 export class FormWrapperComponent {
-  formXml = '<form>...</form>';
-  modelXml = '<model>...</model>';
+  formXml = "<form>...</form>";
+  modelXml = "<model>...</model>";
 
   onDataUpdated(event: CustomEvent) {
-    console.log('Data:', event.detail.xml);
+    console.log("Data:", event.detail.xml);
   }
 
   onFormSaved(event: CustomEvent) {
-    console.log('Saved:', event.detail.entry);
+    console.log("Saved:", event.detail.entry);
   }
 }
 ```
@@ -155,12 +160,12 @@ npm install ngx-custom-element
 ```
 
 ```typescript
-import { CustomElementModule } from 'ngx-custom-element';
-import '@picsa/enketo-webform';
+import { CustomElementModule } from "ngx-custom-element";
+import "@picsa/enketo-webform";
 
 @NgModule({
   imports: [CustomElementModule],
-  declarations: [FormComponent]
+  declarations: [FormComponent],
 })
 export class AppModule {}
 ```
@@ -169,11 +174,11 @@ export class AppModule {}
 
 ### `<enketo-webform>` Attributes & Properties
 
-| Name | Type | Default | Description |
-|------|------|---------|--------------|
-| `form` | `string` | required | XHTML form definition (required) |
-| `model` | `string` | required | XML data model (required) |
-| `showButtons` | `boolean` | `true` | Whether to show Save Draft / Submit buttons |
+| Name          | Type      | Default  | Description                                 |
+| ------------- | --------- | -------- | ------------------------------------------- |
+| `form`        | `string`  | required | XHTML form definition (required)            |
+| `model`       | `string`  | required | XML data model (required)                   |
+| `showButtons` | `boolean` | `true`   | Whether to show Save Draft / Submit buttons |
 
 ### Events
 
@@ -184,17 +189,17 @@ Dispatched when form data changes.
 ```typescript
 interface IEventDataUpdated {
   detail: {
-    xml: string;      // Current XML data string
-    nodes: string[];  // Array of changed node paths
-  }
+    xml: string; // Current XML data string
+    nodes: string[]; // Array of changed node paths
+  };
 }
 ```
 
 ```javascript
-webform.addEventListener('dataUpdated', (event) => {
+webform.addEventListener("dataUpdated", (event) => {
   const { xml, nodes } = event.detail;
-  console.log('Changed nodes:', nodes);
-  console.log('Current data:', xml);
+  console.log("Changed nodes:", nodes);
+  console.log("Current data:", xml);
 });
 ```
 
@@ -217,7 +222,7 @@ interface IEnketoFormEntry {
 interface IEventFormSaved {
   detail: {
     entry: IEnketoFormEntry;
-  }
+  };
 }
 ```
 
@@ -237,9 +242,9 @@ webform.addEventListener('formSaved', (event) => {
 Parses XML string to JSON object.
 
 ```typescript
-import { xmlToJson } from '@picsa/enketo-webform';
+import { xmlToJson } from "@picsa/enketo-webform";
 
-const json = xmlToJson<Record<string, any>>('<root><name>John</name></root>');
+const json = xmlToJson<Record<string, any>>("<root><name>John</name></root>");
 console.log(json.root.name); // "John"
 ```
 
@@ -248,9 +253,9 @@ console.log(json.root.name); // "John"
 Converts JSON object to XML string.
 
 ```typescript
-import { jsonToXML } from '@picsa/enketo-webform';
+import { jsonToXML } from "@picsa/enketo-webform";
 
-const xml = jsonToXML({ root: { name: 'John' } });
+const xml = jsonToXML({ root: { name: "John" } });
 // <?xml version="1.0" encoding="UTF-8"?><root><name>John</name></root>
 ```
 
@@ -259,9 +264,9 @@ const xml = jsonToXML({ root: { name: 'John' } });
 Creates a File object from XML string (browser only).
 
 ```typescript
-import { xmlStringToFile } from '@picsa/enketo-webform';
+import { xmlStringToFile } from "@picsa/enketo-webform";
 
-const file = xmlStringToFile('<root><name>John</name></root>');
+const file = xmlStringToFile("<root><name>John</name></root>");
 console.log(file.name); // "submission.xml"
 ```
 
@@ -270,12 +275,12 @@ console.log(file.name); // "submission.xml"
 Replaces content of a specific XML node.
 
 ```typescript
-import { xmlNodeReplaceContent } from '@picsa/enketo-webform';
+import { xmlNodeReplaceContent } from "@picsa/enketo-webform";
 
 const updated = xmlNodeReplaceContent({
-  xml: '<root><name>John</name></root>',
-  tagname: 'name',
-  content: 'Jane'
+  xml: "<root><name>John</name></root>",
+  tagname: "name",
+  content: "Jane",
 });
 // <root><name>Jane</name></root>
 ```
@@ -285,9 +290,9 @@ const updated = xmlNodeReplaceContent({
 Service for submitting forms to KoBoToolbox.
 
 ```typescript
-import { KoboService } from '@picsa/enketo-webform';
+import { KoboService } from "@picsa/enketo-webform";
 
-const kobo = new KoboService({ authToken: 'your-token' });
+const kobo = new KoboService({ authToken: "your-token" });
 
 const response = await kobo.submitXMLSubmission(xmlData);
 console.log(response.status, response.data);
@@ -303,7 +308,7 @@ new KoboService(config: IKoboServiceConfig)
 
 ```typescript
 interface IKoboServiceConfig {
-  authToken: string;  // KoBoToolbox API token
+  authToken: string; // KoBoToolbox API token
 }
 ```
 
@@ -320,8 +325,8 @@ const response = await kobo.submitXMLSubmission(xmlData);
 ### API Endpoints
 
 ```typescript
-kobo.apiEndpoints.v1  // "https://kc.kobotoolbox.org/api/v1"
-kobo.apiEndpoints.v2  // "https://kf.kobotoolbox.org/api/v2"
+kobo.apiEndpoints.v1; // "https://kc.kobotoolbox.org/api/v1"
+kobo.apiEndpoints.v2; // "https://kf.kobotoolbox.org/api/v2"
 ```
 
 ## TypeScript
@@ -329,5 +334,5 @@ kobo.apiEndpoints.v2  // "https://kf.kobotoolbox.org/api/v2"
 This package includes TypeScript definitions. Import types directly:
 
 ```typescript
-import type { IEventDataUpdated, IEventFormSaved } from '@picsa/enketo-webform';
+import type { IEventDataUpdated, IEventFormSaved } from "@picsa/enketo-webform";
 ```

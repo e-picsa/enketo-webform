@@ -8,7 +8,7 @@ function randomToken(length) {
     .fill(_random13chars)
     .reduce((string, func) => {
       return string + func();
-    }, '')
+    }, "")
     .substring(0, length);
 }
 
