@@ -267,8 +267,8 @@ export class EnketoWebform extends LitElement {
     return this.enketoForm?.getDataStr() ?? "";
   }
 
-  private handleEventDataUpdate(e: ReturnType<typeof Events.DataUpdate>) {
-    const nodes = e.detail.nodes;
+  private handleEventDataUpdate(e: CustomEvent<{ nodes: string[] }>) {
+    const nodes = e.detail?.nodes ?? [];
     this.dispatchEvent(
       new CustomEvent<IEventDataUpdated>("dataUpdated", {
         detail: { xml: this.xmlFormValue, nodes },
@@ -347,11 +347,5 @@ export class EnketoWebform extends LitElement {
       this.errorMessage = "No <form> element found in form HTML";
       debug("loadForm: no form element found");
     }
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    "enketo-webform": EnketoWebform;
   }
 }

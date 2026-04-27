@@ -10,10 +10,13 @@
       "import": "./dist/enketo-webform.js",
       "require": "./dist/enketo-webform.umd.cjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./types/preact": "./types/preact.d.ts",
+    "./types/react": "./types/react.d.ts"
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "build": "vite build",
@@ -31,5 +34,5 @@
     "mergexml": "^1.2.4"
   },
   "devDependencies": {},
-  "customElements": "../../docs/custom-elements.json"
+  "customElements": "custom-elements.json"
 }

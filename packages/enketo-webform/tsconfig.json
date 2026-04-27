@@ -6,6 +6,7 @@
     "module": "esnext",
     "lib": ["ES2023", "DOM"],
     "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
     "noImplicitAny": false,
     "noImplicitThis": false,
     "strict": false,
@@ -22,6 +23,6 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/**/*.ts", "src/**/*.scss"],
+  "include": ["src/**/*.ts", "src/**/*.scss", "types/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

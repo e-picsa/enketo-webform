@@ -8,7 +8,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 export default tseslint.config(
   // 1. Ignore build directories
   {
-    ignores: ["**/dist", "**/node_modules", "*.d.ts"],
+    ignores: ["**/dist", "**/node_modules", "**/*.d.ts", "docs/**"],
   },
 
   // 2. Base JS and TS recommended rules

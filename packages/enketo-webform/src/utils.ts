@@ -7,7 +7,7 @@ import type { X2jOptions } from "fast-xml-parser";
  * @param options - Optional fast-xml-parser options
  * @returns Parsed JSON object
  */
-export function xmlToJson<T = Record<string, any>>(
+export function xmlToJson<T = Record<string, unknown>>(
   xmlString: string,
   options: X2jOptions = {},
 ) {
@@ -20,7 +20,7 @@ export function xmlToJson<T = Record<string, any>>(
  * @param json - The JSON object to convert
  * @returns XML string
  */
-export function jsonToXML(json: Record<string, any>) {
+export function jsonToXML(json: Record<string, unknown>) {
   const builder = new XMLBuilder();
   return builder.build(json);
 }
