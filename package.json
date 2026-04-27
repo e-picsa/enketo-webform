@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
   "workspaces": [
     "packages/*",
     "demo"
@@ -13,14 +16,12 @@
     "lint": "bun run eslint && bun run prettier -- --check .",
     "prepare": "husky",
     "build": "bun run packages:build && bun run demo:build",
+    "build:types": "bun run --filter @picsa/enketo-webform docs:cem && custom-element-jsx-cli --in custom-elements.json --out src/jsx-types.d.ts",
     "preview": "bun run demo:preview",
     "test": "vitest",
     "test:run": "vitest run",
     "packages:build": "bun run --filter @picsa/enketo-webform build",
-    "demo:dev": "cd demo && bun run dev",
-    "demo:build": "cd demo && bun run build",
-    "demo:preview": "cd demo && bun run preview",
-    "docs": "bun run --filter @picsa/enketo-webform docs:cem && bun run scripts/docs-to-markdown.mjs"
+    "docs": "bun run scripts/docs-to-markdown.mjs"
   },
   "dependencies": {
     "bootstrap-datepicker": "^1.10.1",
@@ -39,7 +40,9 @@
     "@custom-elements-manifest/to-markdown": "^0.1.0",
     "@eslint/js": "^10.0.1",
     "@types/jquery": "^4.0.0",
+    "@types/node": "^24",
     "@vitest/coverage-v8": "^2.0.5",
+    "@wc-toolkit/jsx-types": "^1.5.2",
     "custom-elements-manifest": "^2.1.0",
     "esbuild": "^0.28.0",
     "eslint": "^10.2.1",
