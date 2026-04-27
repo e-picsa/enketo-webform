@@ -34,5 +34,5 @@
     "mergexml": "^1.2.4"
   },
   "devDependencies": {},
-  "customElements": "../../docs/custom-elements.json"
+  "customElements": "custom-elements.json"
 }

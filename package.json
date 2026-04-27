@@ -15,7 +15,7 @@
     "start": "bun run demo:dev",
     "lint": "bun run eslint && bun run prettier -- --check .",
     "prepare": "husky",
-    "build": "bun run build:types && bun run packages:build && bun run demo:build",
+    "build": "bun run build:types && bun run packages:build && cd demo && bun run build",
     "build:types": "custom-elements-manifest analyze --config custom-elements-manifest.config.mjs",
     "preview": "bun run demo:preview",
     "test": "vitest",
@@ -67,6 +67,5 @@
       "prettier --write",
       "eslint --fix"
     ]
-  },
-  "customElements": "docs/custom-elements.json"
+  }
 }
