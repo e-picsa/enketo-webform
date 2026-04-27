@@ -1,6 +1,5 @@
 import { LitElement, html, nothing, css } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import { Form } from 'enketo-core';
 import Events from './libs/enketo/js/event';
@@ -92,6 +91,15 @@ export class EnketoWebform extends LitElement {
   @state() private errorMessage = '';
 
   private _formLoaded = false;
+
+  /**
+   * Use Light DOM so external styles can apply to the form.
+   * This is the recommended approach for form libraries where
+   * users need to apply their own theming.
+   */
+  _createRenderRoot() {
+    return this;
+  }
 
   static styles = css`
     :host {
