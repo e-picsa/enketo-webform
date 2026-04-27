@@ -19,7 +19,7 @@ For example, to force a major release, format your PR merge commit message like 
 ```text
 feat: awesome new feature
 
-Release-As: 8.0.0
+Release-As: 1.3.0
 ```
 
 When this is merged, Release Please will update its pending Release PR to target your specified version.
