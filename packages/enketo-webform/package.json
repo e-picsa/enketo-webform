@@ -1,6 +1,9 @@
 {
   "name": "@picsa/enketo-webform",
-  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0",
   "type": "module",
   "main": "./dist/enketo-webform.umd.cjs",
   "module": "./dist/enketo-webform.js",
@@ -19,9 +22,7 @@
     "types"
   ],
   "scripts": {
-    "build": "vite build",
-    "build:watch": "vite build --watch",
-    "docs:cem": "custom-elements-manifest analyze --litelement --globs \"src/enketo-webform.ts\" \"src/utils.ts\" \"src/kobo-service.ts\" --outdir ../../docs"
+    "build": "vite build"
   },
   "dependencies": {
     "enketo-core": "^6.1.3",

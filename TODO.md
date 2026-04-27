@@ -1,4 +1,2 @@
-- [ ] Preact-based demo
-- [ ] Publish
 - [ ] Prod test (angular integration)
-- [ ] NPM publish CI
+- [ ] Consider moving package code to root src folder
