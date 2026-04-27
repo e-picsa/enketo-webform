@@ -1,7 +1,7 @@
 import { LitElement, html, nothing, css, unsafeCSS } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 
-import { Form } from "enketo-core";
+import { Form } from "./libs/enketo/js/form";
 import Events from "./libs/enketo/js/event";
 
 // Directly import styles to keep encapsulated
