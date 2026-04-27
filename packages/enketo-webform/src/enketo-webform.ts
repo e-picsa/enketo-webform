@@ -1,8 +1,11 @@
-import { LitElement, html, nothing, css } from "lit";
+import { LitElement, html, nothing, css, unsafeCSS } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 
 import { Form } from "enketo-core";
 import Events from "./libs/enketo/js/event";
+
+// Directly import styles to keep encapsulated
+import enketoStyles from "./enketo-webform.scss?inline";
 
 const DEBUG = import.meta.env?.DEV ?? false;
 
@@ -101,52 +104,55 @@ export class EnketoWebform extends LitElement {
     return this;
   }
 
-  static styles = css`
-    :host {
-      display: block;
-      position: relative;
-    }
-    .status-indicator {
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-    .status-idle {
-      background: #e0e0e0;
-      color: #666;
-    }
-    .status-loading {
-      background: #fff3cd;
-      color: #856404;
-    }
-    .status-ready {
-      background: #d4edda;
-      color: #155724;
-    }
-    .status-error {
-      background: #f8d7da;
-      color: #721c24;
-    }
-    #form-unavailable {
-      animation: appearDelayed 2s;
-      -webkit-animation: appearDelayed 2s;
-      -moz-animation: appearDelayed 2s;
-      -o-animation: appearDelayed 2s;
-      -ms-animation: appearDelayed 2s;
-    }
-    @keyframes appearDelayed {
-      0% {
-        opacity: 0;
+  static styles = [
+    unsafeCSS(enketoStyles),
+    css`
+      :host {
+        display: block;
+        position: relative;
       }
-      90% {
-        opacity: 0;
+      .status-indicator {
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-bottom: 8px;
       }
-      100% {
-        opacity: 1;
+      .status-idle {
+        background: #e0e0e0;
+        color: #666;
       }
-    }
-  `;
+      .status-loading {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .status-ready {
+        background: #d4edda;
+        color: #155724;
+      }
+      .status-error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      #form-unavailable {
+        animation: appearDelayed 2s;
+        -webkit-animation: appearDelayed 2s;
+        -moz-animation: appearDelayed 2s;
+        -o-animation: appearDelayed 2s;
+        -ms-animation: appearDelayed 2s;
+      }
+      @keyframes appearDelayed {
+        0% {
+          opacity: 0;
+        }
+        90% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    `,
+  ];
 
   render() {
     if (this.status === "error") {

@@ -1,8 +1,8 @@
-@import "libs/enketo/sass/formhub/formhub";
-@import "libs/enketo/sass/formhub/formhub-print";
-@import "libs/enketo/sass/grid/grid";
+@import "./libs/enketo/sass/grid/grid.scss";
 
-enketo-webform {
+:host {
+  max-width: 720px;
+  margin: auto;
   display: block;
   position: relative;
   font-family: "OpenSans", sans-serif;
