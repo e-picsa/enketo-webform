@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "bun run --filter demo dev",
-    "lint": "bun run eslint -- --max-warnings=-1; bun run prettier -- --check .",
+    "lint": "bun run eslint --max-warnings=-1; bun run prettier --check .",
     "prepare": "husky",
     "build": "bun run build:types && bun run build:package && bun run build:demo",
     "build:types": "custom-elements-manifest analyze --config custom-elements-manifest.config.mjs",
