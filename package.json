@@ -15,13 +15,12 @@
     "start": "bun run demo:dev",
     "lint": "bun run eslint && bun run prettier -- --check .",
     "prepare": "husky",
-    "build": "bun run build:types && bun run packages:build && cd demo && bun run build",
+    "build": "bun run build:types && bun run build:package && bun run build:demo",
     "build:types": "custom-elements-manifest analyze --config custom-elements-manifest.config.mjs",
-    "preview": "bun run demo:preview",
+    "build:package": "bun run --filter @picsa/enketo-webform build",
+    "build:demo": "bun run build:package && cd demo && bun run build && cd ../",
     "test": "vitest",
-    "test:run": "vitest run",
-    "packages:build": "bun run --filter @picsa/enketo-webform build",
-    "docs": "bun run scripts/docs-to-markdown.mjs"
+    "test:run": "vitest run"
   },
   "dependencies": {
     "bootstrap-datepicker": "^1.10.1",
@@ -67,5 +66,6 @@
       "prettier --write",
       "eslint --fix"
     ]
-  }
+  },
+  "customElements": "packages/enketo-webform/custom-elements.json"
 }
