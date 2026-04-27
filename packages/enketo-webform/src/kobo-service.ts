@@ -53,7 +53,7 @@ export class KoboService {
       Authorization: `Token ${this.config.authToken}`,
       "X-OpenRosa-Version": "1.0",
     };
-    let body: any;
+    let body: FormData | FormDataNode;
 
     const isBrowser = typeof window !== "undefined";
     if (isBrowser) {
@@ -63,7 +63,7 @@ export class KoboService {
     } else {
       const formData = new FormDataNode();
       headers = { ...headers, ...formData.getHeaders() };
-      body = formData as any;
+      body = formData;
     }
     const { status, text } = await this.httpHandlers.req(endpoint, {
       method: "POST",
@@ -91,7 +91,7 @@ export class KoboService {
     return { status, data };
   }
 
-  public wipUpdateJSONSubmission(data: Record<string, any>, id: string) {
+  public wipUpdateJSONSubmission(data: Record<string, unknown>, id: string) {
     if (!id) {
       throw new Error("ID required for update");
     }

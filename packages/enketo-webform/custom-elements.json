@@ -392,7 +392,7 @@
                 {
                   "name": "data",
                   "type": {
-                    "text": "Record<string, any>"
+                    "text": "Record<string, unknown>"
                   }
                 },
                 {
@@ -468,7 +468,7 @@
             {
               "name": "json",
               "type": {
-                "text": "Record<string, any>"
+                "text": "Record<string, unknown>"
               },
               "description": "The JSON object to convert"
             }
