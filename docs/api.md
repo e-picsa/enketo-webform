@@ -88,16 +88,17 @@
 
 ### Functions
 
-| Name                    | Description                                              | Parameters                                                                                                         | Return |
-| ----------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------ |
-| `xmlToJson`             | Converts an XML string to a JSON object.                 | `xmlString: string, options: X2jOptions`                                                                           |        |
-| `jsonToXML`             | Converts a JSON object to an XML string.                 | `json: Record<string, unknown>`                                                                                    |        |
-| `xmlStringToFile`       | Creates a File object from an XML string (browser only). | `xmlString: string`                                                                                                |        |
-| `xmlNodeReplaceContent` | Replaces the content of a specific XML node.             | `options: {
-  xml: string;
-  tagname: string;
-  content: string;
-}, options.xml, options.tagname, options.content` |        |
+| Name                    | Description                                              | Parameters                               | Return |
+| ----------------------- | -------------------------------------------------------- | ---------------------------------------- | ------ |
+| `xmlToJson`             | Converts an XML string to a JSON object.                 | `xmlString: string, options: X2jOptions` |        |
+| `jsonToXML`             | Converts a JSON object to an XML string.                 | `json: Record<string, unknown>`          |        |
+| `xmlStringToFile`       | Creates a File object from an XML string (browser only). | `xmlString: string`                      |        |
+| `xmlNodeReplaceContent` | Replaces the content of a specific XML node.             | `options: {                              |
+
+xml: string;
+tagname: string;
+content: string;
+}, options.xml, options.tagname, options.content` | |
 
 <hr/>
 
@@ -239,9 +240,9 @@
 
 ### Exports
 
-| Kind | Name      | Declaration                 | Module                                      | Package |
-| ---- | --------- | --------------------------- | ------------------------------------------- | ------- |
-| `js` | `default` | openrosa\_xpath\_extensions | ../src/libs/openrosa/openrosa-extensions.ts |         |
+| Kind | Name      | Declaration               | Module                                      | Package |
+| ---- | --------- | ------------------------- | ------------------------------------------- | ------- |
+| `js` | `default` | openrosa_xpath_extensions | ../src/libs/openrosa/openrosa-extensions.ts |         |
 
 ## `src/libs/openrosa/openrosa-xpath.ts`:
 
@@ -279,9 +280,9 @@
 
 ### Variables
 
-| Name               | Description                                                                                                                                                                                                                                                                                                                                                             | Type     |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `elementDataStore` | Adapted from https\://stackoverflow\.com/a/46522991/3071529&#xA;&#xA;A storage solution aimed at replacing jQuerys data function.&#xA;Implementation Note: Elements are stored in a (WeakMap)\[https\://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global\_Objects/WeakMap].&#xA;This makes sure the data is garbage collected when the node is removed. | `object` |
+| Name               | Description                                                                                                                                                                                                                                                                                                                                                            | Type     |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `elementDataStore` | Adapted from https\://stackoverflow\.com/a/46522991/3071529&#xA;&#xA;A storage solution aimed at replacing jQuerys data function.&#xA;Implementation Note: Elements are stored in a (WeakMap)\[https\://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap].&#xA;This makes sure the data is garbage collected when the node is removed. | `object` |
 
 <hr/>
 
@@ -409,7 +410,7 @@
 
 | Kind | Name               | Declaration      | Module                             | Package |
 | ---- | ------------------ | ---------------- | ---------------------------------- | ------- |
-| `js` | `DATE_STRING`      | DATE\_STRING     | ../src/libs/openrosa/utils/date.ts |         |
+| `js` | `DATE_STRING`      | DATE_STRING      | ../src/libs/openrosa/utils/date.ts |         |
 | `js` | `dateToDays`       | dateToDays       | ../src/libs/openrosa/utils/date.ts |         |
 | `js` | `dateStringToDays` | dateStringToDays | ../src/libs/openrosa/utils/date.ts |         |
 | `js` | `isValidDate`      | isValidDate      | ../src/libs/openrosa/utils/date.ts |         |
