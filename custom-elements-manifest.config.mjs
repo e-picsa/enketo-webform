@@ -1,63 +1,35 @@
 import { jsxTypesPlugin } from "@wc-toolkit/jsx-types";
 import { customElementsManifestToMarkdown } from "@custom-elements-manifest/to-markdown";
-import { writeFileSync } from "fs";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 
+const PACKAGE_PREFIX = "packages/enketo-webform/";
+const TYPES_OUTDIR = "./packages/enketo-webform/types";
+
+const stripPrefix = (p) =>
+  p?.startsWith(PACKAGE_PREFIX) ? p.slice(PACKAGE_PREFIX.length) : p;
+
+const relativize = (p) =>
+  p && !p.startsWith("../") && !p.startsWith("/") ? "../" + p : p;
+
+// Strips the monorepo prefix from manifest paths and relativizes declaration/export
+// paths so jsxTypesPlugin emits correct imports from the `types/` subdirectory.
 const fixModulePathsPlugin = () => ({
   name: "fix-module-paths",
   packageLinkPhase({ customElementsManifest }) {
-    // Strip the workspace prefix from all module paths in the manifest.
-    // This is needed because the analyzer runs from the monorepo root,
-    // but the package expects paths relative to its own directory.
-    // Additionally fixes export declaration modules, which are used by jsxTypesPlugin
-    // to generate import paths in the generated .d.ts files.
-    const prefix = "packages/enketo-webform/";
-
     for (const mod of customElementsManifest.modules ?? []) {
-      // Fix module path (e.g., "packages/enketo-webform/src/foo.ts" -> "src/foo.ts")
-      if (mod.path?.startsWith(prefix)) {
-        mod.path = mod.path.slice(prefix.length);
-      }
+      mod.path = stripPrefix(mod.path);
 
-      // Fix declaration paths in module declarations
-      // These are used by jsxTypesPlugin to generate import paths in the types files
       for (const decl of mod.declarations ?? []) {
-        if (decl.modulePath?.startsWith(prefix)) {
-          let modPath = decl.modulePath.slice(prefix.length);
-          if (!modPath.startsWith("../")) {
-            modPath = "../" + modPath;
-          }
-          decl.modulePath = modPath;
-        }
-        if (decl.definitionPath?.startsWith(prefix)) {
-          let defPath = decl.definitionPath.slice(prefix.length);
-          if (!defPath.startsWith("../")) {
-            defPath = "../" + defPath;
-          }
-          decl.definitionPath = defPath;
-        }
+        decl.modulePath = relativize(stripPrefix(decl.modulePath));
+        decl.definitionPath = relativize(stripPrefix(decl.definitionPath));
       }
 
-      // Fix export declaration module reference.
-      // This is critical for jsxTypesPlugin - it uses this to generate the import statement
-      // in react.d.ts/preact.d.ts (e.g., `import type { EnketoWebform } from "src/enketo-webform.ts"`).
-      //
-      // jsxTypesPlugin outputs files to a `types/` subdirectory, so relative imports
-      // need `../` prefix. For example, if export module is `src/enketo-webform.ts`,
-      // the generated import should be `from "../src/enketo-webform.ts"` because
-      // the types are generated in `packages/enketo-webform/types/` while
-      // the source is in `packages/enketo-webform/src/`.
       for (const exp of mod.exports ?? []) {
-        const modulePath = exp.declaration?.module;
-        if (modulePath) {
-          if (modulePath.startsWith(prefix)) {
-            exp.declaration.module = modulePath.slice(prefix.length);
-          }
-          if (
-            exp.declaration.module &&
-            !exp.declaration.module.startsWith("../")
-          ) {
-            exp.declaration.module = "../" + exp.declaration.module;
-          }
+        if (exp.declaration?.module) {
+          exp.declaration.module = relativize(
+            stripPrefix(exp.declaration.module),
+          );
         }
       }
     }
@@ -71,7 +43,9 @@ const toMarkdownPlugin = () => ({
       headingOffset: 1,
       classNameFilter: "^Enketo",
     });
-    writeFileSync("./docs/api.md", md);
+    const out = "./docs/api.md";
+    mkdirSync(dirname(out), { recursive: true });
+    writeFileSync(out, md);
   },
 });
 
@@ -82,29 +56,14 @@ export default {
   plugins: [
     fixModulePathsPlugin(),
     jsxTypesPlugin({
-      outdir: "./packages/enketo-webform/types",
+      outdir: TYPES_OUTDIR,
       fileName: "preact.d.ts",
       module: "preact",
-      // jsxTypesPlugin outputs types to a `types/` subdirectory, so prepend "../" to make
-      // paths relative to the package root. This ensures imports like `from "src/foo.ts"`
-      // become `from "../src/foo.ts"` in the generated type files.
-      componentTypePath: (name, tag, modulePath) => {
-        if (modulePath?.startsWith("src/")) {
-          return "../" + modulePath;
-        }
-        return modulePath;
-      },
     }),
     jsxTypesPlugin({
-      outdir: "./packages/enketo-webform/types",
+      outdir: TYPES_OUTDIR,
       fileName: "react.d.ts",
       module: "react",
-      componentTypePath: (name, tag, modulePath) => {
-        if (modulePath?.startsWith("src/")) {
-          return "../" + modulePath;
-        }
-        return modulePath;
-      },
     }),
     toMarkdownPlugin(),
   ],
