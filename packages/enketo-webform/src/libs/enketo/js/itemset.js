@@ -4,16 +4,16 @@
  * @module itemset
  */
 
-import dialog from './fake-dialog';
-import { t } from './fake-translator';
-import { parseFunctionFromExpression } from './utils';
+import dialog from "./fake-dialog";
+import { t } from "./fake-translator";
+import { parseFunctionFromExpression } from "./utils";
 import {
   closestAncestorUntil,
   getChild,
   getSiblingElement,
   elementDataStore as data,
-} from './dom-utils';
-import events from './event';
+} from "./dom-utils";
+import events from "./event";
 
 /**
  * This function tries to determine whether an XPath expression for a nodeset from an external instance is static.
@@ -52,114 +52,114 @@ export default {
 
     if (!this.form) {
       throw new Error(
-        'Output module not correctly instantiated with form property.'
+        "Output module not correctly instantiated with form property.",
       );
     }
 
     if (updated.relevantPath) {
       // Questions that are descendants of a group:
       nodes = this.form
-        .getRelatedNodes('data-items-path', '.itemset-template')
+        .getRelatedNodes("data-items-path", ".itemset-template")
         .get()
         .filter(
           (template) =>
             template.querySelector(
-              `[type="checkbox"][name^="${updated.relevantPath}/"]`
+              `[type="checkbox"][name^="${updated.relevantPath}/"]`,
             ) || // checkboxes, ancestor relevant
             template.querySelector(
-              `[type="radio"][data-name^="${updated.relevantPath}/"]`
+              `[type="radio"][data-name^="${updated.relevantPath}/"]`,
             ) || //  radiobuttons, ancestor relevant
             template.parentElement.matches(
-              `select[name^="${updated.relevantPath}/"]`
+              `select[name^="${updated.relevantPath}/"]`,
             ) || // select minimal, ancestor relevant
             template.parentElement.parentElement.querySelector(
-              `input[list][name^="${updated.relevantPath}/"]`
+              `input[list][name^="${updated.relevantPath}/"]`,
             ) || // autocomplete, ancestor relevant
             template.querySelector(
-              `[type="checkbox"][name="${updated.relevantPath}"]`
+              `[type="checkbox"][name="${updated.relevantPath}"]`,
             ) || // checkboxes, self relevant
             template.querySelector(
-              `[type="radio"][data-name="${updated.relevantPath}"]`
+              `[type="radio"][data-name="${updated.relevantPath}"]`,
             ) || //  radiobuttons, self relevant
             template.parentElement.matches(
-              `select[name="${updated.relevantPath}"]`
+              `select[name="${updated.relevantPath}"]`,
             ) || // select minimal, self relevant
             template.parentElement.parentElement.querySelector(
-              `input[list][name="${updated.relevantPath}"]`
-            ) // autocomplete, self relevant
+              `input[list][name="${updated.relevantPath}"]`,
+            ), // autocomplete, self relevant
         );
 
       // TODO: missing case: static shared itemlist in repeat
     } else {
       nodes = this.form
-        .getRelatedNodes('data-items-path', '.itemset-template', updated)
+        .getRelatedNodes("data-items-path", ".itemset-template", updated)
         .get();
     }
 
     const clonedRepeatsPresent =
       this.form.repeatsPresent &&
-      this.form.view.html.querySelector('.or-repeat.clone');
+      this.form.view.html.querySelector(".or-repeat.clone");
     const alerts = [];
 
     nodes.forEach((template) => {
       const shared =
-        template.parentElement.parentElement.matches('.or-repeat-info');
+        template.parentElement.parentElement.matches(".or-repeat-info");
       const inputAttributes = {};
 
       // Nodes are in document order, so we discard any nodes in questions/groups that have a disabled parent
-      if (closestAncestorUntil(template, '.disabled', '.or')) {
+      if (closestAncestorUntil(template, ".disabled", ".or")) {
         return;
       }
 
       const newItems = {};
-      const prevItems = data.get(template, 'items') || {};
+      const prevItems = data.get(template, "items") || {};
       const templateNodeName = template.nodeName.toLowerCase();
-      const list = template.parentElement.matches('select, datalist')
+      const list = template.parentElement.matches("select, datalist")
         ? template.parentElement
         : null;
 
       let input;
-      if (templateNodeName === 'label') {
-        const optionInput = getChild(template, 'input');
+      if (templateNodeName === "label") {
+        const optionInput = getChild(template, "input");
         [].slice.call(optionInput.attributes).forEach((attr) => {
           inputAttributes[attr.name] = attr.value;
         });
         // If this is a ranking widget:
-        input = optionInput.classList.contains('ignore')
+        input = optionInput.classList.contains("ignore")
           ? getSiblingElement(
-              optionInput.closest('.option-wrapper'),
-              'input.rank'
+              optionInput.closest(".option-wrapper"),
+              "input.rank",
             )
           : optionInput;
-      } else if (list && list.nodeName.toLowerCase() === 'select') {
+      } else if (list && list.nodeName.toLowerCase() === "select") {
         input = list;
-        if (input.matches('[readonly]')) {
-          inputAttributes.disabled = 'disabled';
+        if (input.matches("[readonly]")) {
+          inputAttributes.disabled = "disabled";
         }
-      } else if (list && list.nodeName.toLowerCase() === 'datalist') {
+      } else if (list && list.nodeName.toLowerCase() === "datalist") {
         if (shared) {
           // only the first input, is that okay?
           input = that.form.view.html.querySelector(
-            `input[name="${list.dataset.name}"]`
+            `input[name="${list.dataset.name}"]`,
           );
         } else {
-          input = getSiblingElement(list, 'input:not(.widget)');
+          input = getSiblingElement(list, "input:not(.widget)");
         }
       }
 
       const labelsContainer = getSiblingElement(
-        template.closest('label, select, datalist'),
-        '.itemset-labels'
+        template.closest("label, select, datalist"),
+        ".itemset-labels",
       );
       const itemsXpath = template.dataset.itemsPath;
       let { labelType } = labelsContainer.dataset;
       let { labelRef } = labelsContainer.dataset;
       // TODO: if translate() becomes official, move determination of labelType to enketo-xslt
       // and set labelRef correct in enketo-xslt
-      const matches = parseFunctionFromExpression(labelRef, 'translate');
+      const matches = parseFunctionFromExpression(labelRef, "translate");
       if (matches.length) {
         labelRef = matches[0][1][0];
-        labelType = 'langs';
+        labelType = "langs";
       }
 
       const { valueRef } = labelsContainer.dataset;
@@ -173,23 +173,23 @@ export default {
       const index =
         !shared &&
         clonedRepeatsPresent &&
-        closestAncestorUntil(input, '.or-repeat.clone', '.or')
+        closestAncestorUntil(input, ".or-repeat.clone", ".or")
           ? that.form.input.getIndex(input)
           : 0;
       const safeToTryNative = true;
       // Caching has no advantage here. This is a very quick query (natively).
       const instanceItems = this.form.model.evaluate(
         itemsXpath,
-        'nodes',
+        "nodes",
         context,
         index,
-        safeToTryNative
+        safeToTryNative,
       );
 
       // This property allows for more efficient 'itemschanged' detection
       newItems.length = instanceItems.length;
       // TODO: This may cause problems for large itemsets. Use md5 instead?
-      newItems.text = instanceItems.map((item) => item.textContent).join('');
+      newItems.text = instanceItems.map((item) => item.textContent).join("");
 
       if (
         newItems.length === prevItems.length &&
@@ -198,14 +198,14 @@ export default {
         return;
       }
 
-      data.put(template, 'items', newItems);
+      data.put(template, "items", newItems);
 
       /**
        * Remove current items before rebuilding a new itemset from scratch.
        */
       // the current <option> and <input> elements
       // datalist will catch the shared datalists inside .or-repeat-info
-      const question = template.closest('.question, datalist');
+      const question = template.closest(".question, datalist");
       [...question.querySelectorAll(templateNodeName)]
         .filter((el) => el !== template)
         .forEach((el) => el.remove());
@@ -214,9 +214,9 @@ export default {
       // next is a somewhat fragile match for option-translations belonging to a shared datalist in
       // .or-repeat-info if there are multiple shared datalists.
       const optionsTranslations =
-        next && next.matches('.or-option-translations')
+        next && next.matches(".or-option-translations")
           ? next
-          : question.querySelector('.or-option-translations');
+          : question.querySelector(".or-option-translations");
       if (optionsTranslations) {
         [...optionsTranslations.children].forEach((child) => child.remove());
       }
@@ -241,21 +241,21 @@ export default {
            */
           const labels = that.getNodesFromItem(labelRef, item);
           if (!labels || !labels.length) {
-            translations = [{ language: '', label: 'error', active: true }];
+            translations = [{ language: "", label: "error", active: true }];
           } else {
             switch (labelType) {
-              case 'itext':
+              case "itext":
                 // Search in the special .itemset-labels created in enketo-transformer for labels with itext ref.
                 translations = [
                   ...labelsContainer.querySelectorAll(
-                    `[data-itext-id="${labels[0].textContent}"]`
+                    `[data-itext-id="${labels[0].textContent}"]`,
                   ),
                 ].map((label) => {
-                  const language = label.getAttribute('lang');
+                  const language = label.getAttribute("lang");
                   const type = label.nodeName;
                   const { src } = label;
                   const contentNodes = [...label.childNodes];
-                  const active = label.classList.contains('active');
+                  const active = label.classList.contains("active");
                   const { alt } = label;
 
                   return {
@@ -268,9 +268,9 @@ export default {
                   };
                 });
                 break;
-              case 'langs':
+              case "langs":
                 translations = labels.map((label) => {
-                  const lang = label.getAttribute('lang');
+                  const lang = label.getAttribute("lang");
                   // Two falsy values should set active to true.
                   const active =
                     (!lang && !that.form.langs.currentLanguage) ||
@@ -278,7 +278,7 @@ export default {
 
                   return {
                     language: lang,
-                    type: 'span',
+                    type: "span",
                     contentNodes: [...label.childNodes],
                     active,
                   };
@@ -287,8 +287,8 @@ export default {
               default:
                 translations = [
                   {
-                    language: '',
-                    type: 'span',
+                    language: "",
+                    type: "span",
                     contentNodes:
                       labels && labels.length ? [...labels[0].childNodes] : [],
                     active: true,
@@ -302,19 +302,19 @@ export default {
            * #510 Show warning if select_multiple value has spaces
            */
           const multiple =
-            (inputAttributes['data-type-xml'] === 'select' &&
-              inputAttributes.type === 'checkbox') ||
+            (inputAttributes["data-type-xml"] === "select" &&
+              inputAttributes.type === "checkbox") ||
             (list && list.multiple);
-          if (multiple && value.indexOf(' ') > -1) {
-            alerts[alerts.length] = t('alert.valuehasspaces.multiple', {
+          if (multiple && value.indexOf(" ") > -1) {
+            alerts[alerts.length] = t("alert.valuehasspaces.multiple", {
               value,
             });
           }
-          if (templateNodeName === 'label') {
+          if (templateNodeName === "label") {
             optionsFragment.appendChild(
-              that.createInput(inputAttributes, translations, value)
+              that.createInput(inputAttributes, translations, value),
             );
-          } else if (templateNodeName === 'option') {
+          } else if (templateNodeName === "option") {
             let activeLabelContentNodes = [];
             if (translations.length > 1) {
               translations.forEach((translation) => {
@@ -322,21 +322,25 @@ export default {
                   activeLabelContentNodes = translation.contentNodes;
                 }
                 optionsTranslationsFragment.appendChild(
-                  that.createOptionTranslation(translation, value)
+                  that.createOptionTranslation(translation, value),
                 );
               });
             } else {
               activeLabelContentNodes = translations[0].contentNodes;
             }
             optionsFragment.appendChild(
-              that.createOption(inputAttributes, activeLabelContentNodes, value)
+              that.createOption(
+                inputAttributes,
+                activeLabelContentNodes,
+                value,
+              ),
             );
           }
         });
         // Do not cache radio button questions inside a repeat because each set (in each repeat) should maintain unique name attribute
         if (
           isStaticItemsetFromSecondaryInstance(itemsXpath) &&
-          !(input.type === 'radio' && input.closest('.or-repeat'))
+          !(input.type === "radio" && input.closest(".or-repeat"))
         ) {
           fragmentsCache[cacheKey] = {
             optionsFragment: optionsFragment.cloneNode(true),
@@ -360,14 +364,14 @@ export default {
       // It is not necessary to do this for default values in static itemsets because setAllVals takes care of this.
 
       let currentValue = that.form.model.node(context, index).getVal();
-      if (currentValue !== '') {
-        if (input.classList.contains('rank')) {
-          currentValue = '';
+      if (currentValue !== "") {
+        if (input.classList.contains("rank")) {
+          currentValue = "";
         }
         that.form.input.setVal(input, currentValue, events.Change());
       }
 
-      if (list || input.classList.contains('rank')) {
+      if (list || input.classList.contains("rank")) {
         input.dispatchEvent(events.ChangeOption());
       }
     });
@@ -375,7 +379,7 @@ export default {
       /**
        * We're assuming the enketo-core-consuming app has a dialog that supports some basic HTML rendering
        */
-      dialog.alert(alerts.join('<br>'));
+      dialog.alert(alerts.join("<br>"));
     }
   },
 
@@ -390,20 +394,20 @@ export default {
   getNodesFromItem(expr, context, single) {
     if (!expr) {
       throw new Error(
-        'Error: could not query instance item, no expression provided'
+        "Error: could not query instance item, no expression provided",
       );
     }
     const type = single ? 9 : 7;
     const evaluateFnName =
-      typeof this.form.model.xml.evaluate !== 'undefined'
-        ? 'evaluate'
-        : 'jsEvaluate';
+      typeof this.form.model.xml.evaluate !== "undefined"
+        ? "evaluate"
+        : "jsEvaluate";
     const result = this.form.model.xml[evaluateFnName](
       expr,
       context,
       this.form.model.getNsResolver(),
       type,
-      null
+      null,
     );
     const response = [];
     if (!single) {
@@ -437,13 +441,13 @@ export default {
    * @return {Element} created option
    */
   createOption(attributes, labelContentNodes, value) {
-    const option = document.createElement('option');
+    const option = document.createElement("option");
     Object.getOwnPropertyNames(attributes).forEach((attr) => {
       option.setAttribute(attr, attributes[attr]);
     });
     option.textContent = labelContentNodes
       .map((node) => node.textContent)
-      .join('');
+      .join("");
     option.value = value;
 
     return option;
@@ -459,14 +463,14 @@ export default {
    * @return {Element} created element
    */
   createOptionTranslation(translation, value) {
-    const el = document.createElement(translation.type || 'span');
+    const el = document.createElement(translation.type || "span");
     if (translation.contentNodes) {
-      el.classList.add('option-label');
+      el.classList.add("option-label");
       translation.contentNodes.forEach((node) =>
-        el.appendChild(node.cloneNode(true))
+        el.appendChild(node.cloneNode(true)),
       );
     }
-    el.classList.toggle('active', translation.active);
+    el.classList.toggle("active", translation.active);
     if (translation.language) {
       el.lang = translation.language;
     }
@@ -489,8 +493,8 @@ export default {
    */
   createInput(attributes, translations, value) {
     const that = this;
-    const label = document.createElement('label');
-    const input = document.createElement('input');
+    const label = document.createElement("label");
+    const input = document.createElement("input");
     Object.getOwnPropertyNames(attributes).forEach((attr) => {
       input.setAttribute(attr, attributes[attr]);
     });

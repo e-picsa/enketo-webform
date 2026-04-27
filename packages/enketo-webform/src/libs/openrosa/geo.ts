@@ -1,11 +1,11 @@
-import { asString } from './utils/xpath-cast';
+import { asString } from "./utils/xpath-cast";
 
 var EARTH_EQUATORIAL_RADIUS_METERS = 6378100;
 var PRECISION = 100;
 
 function _toLatLngs(geopoints) {
   return geopoints.map(function (geopoint) {
-    return geopoint.trim().split(' ');
+    return geopoint.trim().split(" ");
   });
 }
 
@@ -18,14 +18,14 @@ function _toRadians(angle) {
 function _latLngsValid(latLngs) {
   return latLngs.every(function (coords) {
     return (
-      coords[0] !== '' &&
+      coords[0] !== "" &&
       coords[0] >= -90 &&
       coords[0] <= 90 &&
-      coords[1] !== '' &&
+      coords[1] !== "" &&
       coords[1] >= -180 &&
       coords[1] <= 180 &&
-      (typeof coords[2] == 'undefined' || !isNaN(coords[2])) &&
-      (typeof coords[3] == 'undefined' || (!isNaN(coords[3]) && coords[3] >= 0))
+      (typeof coords[2] == "undefined" || !isNaN(coords[2])) &&
+      (typeof coords[3] == "undefined" || (!isNaN(coords[3]) && coords[3] >= 0))
     );
   });
 }
@@ -43,7 +43,7 @@ function _distanceBetween(p1, p2) {
   var φ2 = _toRadians(p2.lat);
   return (
     Math.acos(
-      Math.sin(φ1) * Math.sin(φ2) + Math.cos(φ1) * Math.cos(φ2) * Math.cos(Δλ)
+      Math.sin(φ1) * Math.sin(φ2) + Math.cos(φ1) * Math.cos(φ2) * Math.cos(Δλ),
     ) * EARTH_EQUATORIAL_RADIUS_METERS
   );
 }
@@ -117,8 +117,8 @@ function distance(geopoints) {
 export { asGeopoints, area, distance };
 
 function asGeopoints(r) {
-  if (r.t === 'arr' && r.v.length > 1) {
+  if (r.t === "arr" && r.v.length > 1) {
     return r.v.map(asString);
   }
-  return asString(r).split(';');
+  return asString(r).split(";");
 }

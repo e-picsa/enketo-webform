@@ -7,9 +7,9 @@
 import {
   getTimezoneOffsetAsTime,
   toISOLocalString,
-} from '../../openrosa/date-extensions';
-import { isNumber } from './utils';
-import { time } from './format';
+} from "../../openrosa/date-extensions";
+import { isNumber } from "./utils";
+import { time } from "./format";
 
 /**
  * @namespace types
@@ -24,7 +24,7 @@ const types = {
      * @return {string} converted value
      */
     convert(x) {
-      return x.replace(/^\s+$/, '');
+      return x.replace(/^\s+$/, "");
     },
     // max length of type string is 255 chars.Convert( truncate ) silently ?
     /**
@@ -72,7 +72,7 @@ const types = {
         num === Number.NEGATIVE_INFINITY
       ) {
         // Comply with XML schema decimal type that has no special values. '' is our only option.
-        return '';
+        return "";
       }
 
       return num;
@@ -107,7 +107,7 @@ const types = {
         num === Number.NEGATIVE_INFINITY
       ) {
         // Comply with XML schema int type that has no special values. '' is our only option.
-        return '';
+        return "";
       }
 
       return num >= 0 ? Math.floor(num) : -Math.floor(Math.abs(num));
@@ -164,22 +164,22 @@ const types = {
         // The XPath expression "2012-01-01" + 2 returns a number of days in XPath.
         const date = new Date(x * 24 * 60 * 60 * 1000);
 
-        return date.toString() === 'Invalid Date'
-          ? ''
-          : `${date.getFullYear().toString().padStart(4, '0')}-${(
+        return date.toString() === "Invalid Date"
+          ? ""
+          : `${date.getFullYear().toString().padStart(4, "0")}-${(
               date.getMonth() + 1
             )
               .toString()
-              .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+              .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
       }
       // For both dates and datetimes
       // If it's a datetime, we can quite safely assume it's in the local timezone, and therefore we can simply chop off
       // the time component.
       if (/[0-9]T[0-9]/.test(x)) {
-        x = x.split('T')[0];
+        x = x.split("T")[0];
       }
 
-      return this.validate(x) ? x : '';
+      return this.validate(x) ? x : "";
     },
   },
   /**
@@ -191,7 +191,7 @@ const types = {
      * @return {boolean} whether value is valid
      */
     validate(x) {
-      const parts = x.split('T');
+      const parts = x.split("T");
       if (parts.length === 2) {
         return (
           types.date.validate(parts[0]) && types.time.validate(parts[1], false)
@@ -205,8 +205,8 @@ const types = {
      * @return {string} converted value
      */
     convert(x) {
-      let date = 'Invalid Date';
-      const parts = x.split('T');
+      let date = "Invalid Date";
+      const parts = x.split("T");
       if (isNumber(x)) {
         // The XPath expression "2012-01-01T01:02:03+01:00" + 2 returns a number of days in XPath.
         date = new Date(x * 24 * 60 * 60 * 1000);
@@ -220,13 +220,11 @@ const types = {
       } else {
         const convertedDate = types.date.convert(parts[0]);
         if (convertedDate) {
-          return `${convertedDate}T00:00:00.000${getTimezoneOffsetAsTime(
-            new Date()
-          )}`;
+          return `${convertedDate}T00:00:00.000${getTimezoneOffsetAsTime(new Date())}`;
         }
       }
 
-      return date.toString() !== 'Invalid Date' ? toISOLocalString(date) : '';
+      return date.toString() !== "Invalid Date" ? toISOLocalString(date) : "";
     },
   },
   /**
@@ -244,7 +242,7 @@ const types = {
     validate(x, requireMillis) {
       let m = x.match(/^(\d\d):(\d\d):(\d\d)\.\d\d\d(\+|-)(\d\d):(\d\d)$/);
 
-      requireMillis = typeof requireMillis !== 'boolean' ? true : requireMillis;
+      requireMillis = typeof requireMillis !== "boolean" ? true : requireMillis;
 
       if (!m && !requireMillis) {
         m = x.match(/^(\d\d):(\d\d):(\d\d)(\+|-)(\d\d):(\d\d)$/);
@@ -283,55 +281,51 @@ const types = {
       let offset;
       const timeAppearsCorrect = /^[0-9]{1,2}:[0-9]{1,2}(:[0-9.]*)?/;
 
-      requireMillis = typeof requireMillis !== 'boolean' ? true : requireMillis;
+      requireMillis = typeof requireMillis !== "boolean" ? true : requireMillis;
 
       if (!timeAppearsCorrect.test(x)) {
         // An XPath expression would return a datetime string since there is no way to request a timeValue.
         // We can test this by trying to convert to a date.
         date = new Date(x);
-        if (date.toString() !== 'Invalid Date') {
+        if (date.toString() !== "Invalid Date") {
           x = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}${getTimezoneOffsetAsTime(
-            date
+            date,
           )}`;
         } else {
-          return '';
+          return "";
         }
       }
 
       parts = x.toString().split(/(\+|-|Z)/);
       // We're using a 'capturing group' here, so the + or - is included!.
       if (parts.length < 1) {
-        return '';
+        return "";
       }
 
-      time = parts[0].split(':');
+      time = parts[0].split(":");
       tz = parts[2]
-        ? [parts[1]].concat(parts[2].split(':'))
-        : parts[1] === 'Z'
-        ? ['+', '00', '00']
-        : [];
+        ? [parts[1]].concat(parts[2].split(":"))
+        : parts[1] === "Z"
+          ? ["+", "00", "00"]
+          : [];
 
-      o.hours = time[0].padStart(2, '0');
-      o.minutes = time[1].padStart(2, '0');
+      o.hours = time[0].padStart(2, "0");
+      o.minutes = time[1].padStart(2, "0");
 
-      secs = time[2] ? time[2].split('.') : ['00'];
+      secs = time[2] ? time[2].split(".") : ["00"];
 
       o.seconds = secs[0];
-      o.milliseconds = secs[1] || (requireMillis ? '000' : undefined);
+      o.milliseconds = secs[1] || (requireMillis ? "000" : undefined);
 
       if (tz.length === 0) {
         offset = getTimezoneOffsetAsTime(new Date());
       } else {
-        offset = `${tz[0] + tz[1].padStart(2, '0')}:${
-          tz[2] ? tz[2].padStart(2, '0') : '00'
-        }`;
+        offset = `${tz[0] + tz[1].padStart(2, "0")}:${tz[2] ? tz[2].padStart(2, "0") : "00"}`;
       }
 
-      x = `${o.hours}:${o.minutes}:${o.seconds}${
-        o.milliseconds ? `.${o.milliseconds}` : ''
-      }${offset}`;
+      x = `${o.hours}:${o.minutes}:${o.seconds}${o.milliseconds ? `.${o.milliseconds}` : ""}${offset}`;
 
-      return this.validate(x, requireMillis) ? x : '';
+      return this.validate(x, requireMillis) ? x : "";
     },
     /**
      * converts "11:30 AM", and "11:30 ", and "11:30 上午" to: "11:30"
@@ -343,20 +337,20 @@ const types = {
     convertMeridian(x) {
       x = x.trim();
       if (time.hasMeridian(x)) {
-        const parts = x.split(' ');
-        const timeParts = parts[0].split(':');
+        const parts = x.split(" ");
+        const timeParts = parts[0].split(":");
         if (parts.length > 0) {
           // This will only work for latin numbers but that should be fine because that's what the widget supports.
           if (parts[1] === time.pmNotation) {
             timeParts[0] = ((Number(timeParts[0]) % 12) + 12)
               .toString()
-              .padStart(2, '0');
+              .padStart(2, "0");
           } else if (parts[1] === time.amNotation) {
             timeParts[0] = (Number(timeParts[0]) % 12)
               .toString()
-              .padStart(2, '0');
+              .padStart(2, "0");
           }
-          x = timeParts.join(':');
+          x = timeParts.join(":");
         }
       }
 
@@ -383,20 +377,20 @@ const types = {
      * @return {boolean} whether value is valid
      */
     validate(x) {
-      const coords = x.toString().trim().split(' ');
+      const coords = x.toString().trim().split(" ");
 
       // Note that longitudes from -180 to 180 are problematic when recording points close to the international
       // dateline. They are therefore set from -360  to 360 (circumventing Earth twice, I think) which is
       // an arbitrary limit. https://github.com/kobotoolbox/enketo-express/issues/1033
       return (
-        coords[0] !== '' &&
+        coords[0] !== "" &&
         coords[0] >= -90 &&
         coords[0] <= 90 &&
-        coords[1] !== '' &&
+        coords[1] !== "" &&
         coords[1] >= -360 &&
         coords[1] <= 360 &&
-        (typeof coords[2] === 'undefined' || !isNaN(coords[2])) &&
-        (typeof coords[3] === 'undefined' ||
+        (typeof coords[2] === "undefined" || !isNaN(coords[2])) &&
+        (typeof coords[3] === "undefined" ||
           (!isNaN(coords[3]) && coords[3] >= 0))
       );
     },
@@ -417,7 +411,7 @@ const types = {
      * @return {boolean} whether value is valid
      */
     validate(x) {
-      const geopoints = x.toString().split(';');
+      const geopoints = x.toString().split(";");
 
       return (
         geopoints.length >= 2 &&
@@ -441,7 +435,7 @@ const types = {
      * @return {boolean} whether value is valid
      */
     validate(x) {
-      const geopoints = x.toString().split(';');
+      const geopoints = x.toString().split(";");
 
       return (
         geopoints.length >= 4 &&

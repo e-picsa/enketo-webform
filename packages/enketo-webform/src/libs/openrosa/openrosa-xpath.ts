@@ -1,7 +1,7 @@
-import ExtendedXPathEvaluator from './extended-xpath';
-import openrosaExtensions from './openrosa-extensions';
-import XPR from './xpr';
-import { asBoolean, asNumber, asString } from './utils/xpath-cast';
+import ExtendedXPathEvaluator from "./extended-xpath";
+import openrosaExtensions from "./openrosa-extensions";
+import XPR from "./xpr";
+import { asBoolean, asNumber, asString } from "./utils/xpath-cast";
 
 const cast = {
   string: asString,
@@ -22,11 +22,11 @@ export default () => {
       const argTypes = _args.map((a) => a.t);
       const allowedArgTypes = Object.keys(cast);
       const unsupportedArgTypes = argTypes.filter(
-        (t) => !allowedArgTypes.includes(t)
+        (t) => !allowedArgTypes.includes(t),
       );
       if (unsupportedArgTypes.length) {
         const quoted = unsupportedArgTypes.map((t) => `'${t}'`);
-        throw new Error(`Unsupported arg type(s): ${quoted.join(',')}`);
+        throw new Error(`Unsupported arg type(s): ${quoted.join(",")}`);
       }
 
       const allowedRetTypes = Object.keys(XPR);
@@ -37,12 +37,12 @@ export default () => {
       ore.func[name] = (...args) => {
         if (args.length !== argTypes.length) {
           throw new Error(
-            `Function "${name}" expected ${argTypes.length} arg(s), but got ${args.length}`
+            `Function "${name}" expected ${argTypes.length} arg(s), but got ${args.length}`,
           );
         }
 
         const convertedArgs = argTypes.map((type, idx) =>
-          cast[type](args[idx])
+          cast[type](args[idx]),
         );
         return XPR[ret](fn(...convertedArgs));
       };

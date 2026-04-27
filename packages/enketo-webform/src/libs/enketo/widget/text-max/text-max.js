@@ -1,5 +1,5 @@
-import config from '../../js/fake-dialog';
-import Widget from '../../js/widget';
+import config from "../../js/fake-dialog";
+import Widget from "../../js/widget";
 
 /**
  * Hardcodes a maximum character length to text input fields.
@@ -17,7 +17,7 @@ class TextMaxWidget extends Widget {
   _init() {
     const max = Number(config.textMaxChars);
     if (!isNaN(max) && max > 0) {
-      this.element.setAttribute('maxlength', config.textMaxChars);
+      this.element.setAttribute("maxlength", config.textMaxChars);
     }
   }
 }

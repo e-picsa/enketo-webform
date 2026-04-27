@@ -19,7 +19,7 @@ export class BlankDate extends Date {
   }
 
   toString() {
-    return '';
+    return "";
   }
 }
 
@@ -32,16 +32,16 @@ export class BlankDate extends Date {
 export const toISOLocalString = (date) => {
   //2012-09-05T12:57:00.000-04:00 (ODK)
 
-  if (['Invalid Date', ''].includes(date.toString())) {
+  if (["Invalid Date", ""].includes(date.toString())) {
     return date.toString();
   }
 
   var dt = new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000)
     .toISOString()
-    .replace('Z', getTimezoneOffsetAsTime(date));
+    .replace("Z", getTimezoneOffsetAsTime(date));
 
-  if (dt.indexOf('T00:00:00.000') > 0) {
-    return dt.split('T')[0];
+  if (dt.indexOf("T00:00:00.000") > 0) {
+    return dt.split("T")[0];
   } else {
     return dt;
   }
@@ -57,20 +57,20 @@ export const getTimezoneOffsetAsTime = (date) => {
   var minutes;
   var direction;
   var pad2 = function (x) {
-    return x < 10 ? '0' + x : x;
+    return x < 10 ? "0" + x : x;
   };
 
-  if (date.toString() === 'Invalid Date') {
+  if (date.toString() === "Invalid Date") {
     return date.toString();
   }
 
   offsetMinutesTotal = date.getTimezoneOffset();
 
-  direction = offsetMinutesTotal < 0 ? '+' : '-';
+  direction = offsetMinutesTotal < 0 ? "+" : "-";
   hours = pad2(Math.floor(Math.abs(offsetMinutesTotal / 60)));
   minutes = pad2(Math.floor(Math.abs(offsetMinutesTotal % 60)));
 
-  return direction + hours + ':' + minutes;
+  return direction + hours + ":" + minutes;
 };
 
 // /**

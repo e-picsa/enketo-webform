@@ -1,4 +1,4 @@
-import sortByDocumentOrder from './sort-by-document-order';
+import sortByDocumentOrder from "./sort-by-document-order";
 
 export { toSnapshotResult };
 

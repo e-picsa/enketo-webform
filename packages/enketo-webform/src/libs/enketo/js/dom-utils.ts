@@ -33,7 +33,7 @@ function getSiblingElements(element, selector) {
  * @param {string} [selector] - A CSS selector.
  * @return {Node} First sibling element in DOM order
  */
-function getSiblingElement(element, selector = '*'): Element {
+function getSiblingElement(element, selector = "*"): Element {
   let found;
   let current = element.parentElement.firstElementChild;
 
@@ -55,7 +55,7 @@ function getSiblingElement(element, selector = '*'): Element {
  * @param {boolean} [includeSelf] - Whether to include self.
  * @return {Array<Node>} Array of sibling nodes.
  */
-function _getSiblingElements(element, selector = '*', includeSelf = false) {
+function _getSiblingElements(element, selector = "*", includeSelf = false) {
   const results = [];
   let current = element.parentElement.firstElementChild;
 
@@ -81,7 +81,7 @@ function _getSiblingElements(element, selector = '*', includeSelf = false) {
  * @param {string} [endSelector] - A CSS selector indicating where to stop. It will include this element if matched by the filter.
  * @return {Array<Node>} Array of ancestors.
  */
-function getAncestors(element, filterSelector = '*', endSelector = null) {
+function getAncestors(element, filterSelector = "*", endSelector = null) {
   const ancestors = [];
   let parent = element.parentElement;
 
@@ -108,8 +108,8 @@ function getAncestors(element, filterSelector = '*', endSelector = null) {
  */
 function closestAncestorUntil(
   element,
-  filterSelector = '*',
-  endSelector = null
+  filterSelector = "*",
+  endSelector = null,
 ) {
   let parent = element.parentElement;
   let found = null;
@@ -132,7 +132,7 @@ function closestAncestorUntil(
  * @param {string} selector - A CSS selector.
  * @return {Array<Node>} Array of child elements.
  */
-function getChildren(element, selector = '*') {
+function getChildren(element, selector = "*") {
   return [...element.children].filter((el) => el.matches(selector));
 }
 
@@ -143,7 +143,7 @@ function getChildren(element, selector = '*') {
  * @param {string} selector - A CSS selector.
  * @return {Node} - First child element.
  */
-function getChild(element, selector = '*') {
+function getChild(element, selector = "*") {
   return [...element.children].find((el) => el.matches(selector));
 }
 
@@ -240,10 +240,10 @@ function hasPreviousCommentSiblingWithContent(node, content) {
  * @param {boolean} [includePosition] - Whether or not to include the positions `/path/to/repeat[2]/node`
  * @return {string} XPath
  */
-function getXPath(node, rootNodeName = '#document', includePosition = false) {
+function getXPath(node, rootNodeName = "#document", includePosition = false) {
   let index;
   const steps = [];
-  let position = '';
+  let position = "";
   if (!node || node.nodeType !== 1) {
     return null;
   }
@@ -260,17 +260,17 @@ function getXPath(node, rootNodeName = '#document', includePosition = false) {
 
   steps.push(nodeName + position);
 
-  while (parent && parentName !== rootNodeName && parentName !== '#document') {
+  while (parent && parentName !== rootNodeName && parentName !== "#document") {
     if (includePosition) {
       index = getRepeatIndex(parent);
-      position = hasSiblingElementSameName(parent) ? `[${index + 1}]` : '';
+      position = hasSiblingElementSameName(parent) ? `[${index + 1}]` : "";
     }
     steps.push(parentName + position);
     parent = parent.parentElement;
     parentName = parent ? parent.nodeName : null;
   }
 
-  return `/${steps.reverse().join('/')}`;
+  return `/${steps.reverse().join("/")}`;
 }
 
 /**
@@ -375,8 +375,8 @@ class MutationsTracker {
       mutations.forEach((mutation) => {
         currentMutations++;
         if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'class'
+          mutation.type === "attributes" &&
+          mutation.attributeName === "class"
         ) {
           const trackedClasses = this.classChanges.get(mutation.target) || [];
           trackedClasses.forEach((obj) => {
@@ -411,7 +411,7 @@ class MutationsTracker {
   }
 
   _resolveWhenTrue(fn) {
-    if (typeof fn !== 'function') {
+    if (typeof fn !== "function") {
       return Promise.reject();
     }
 
@@ -437,7 +437,7 @@ class MutationsTracker {
       () =>
         this.classChanges
           .get(element)
-          .find((obj) => obj.className === className).completed
+          .find((obj) => obj.className === className).completed,
     );
   }
 

@@ -7,19 +7,14 @@
  * @param {string} fileName - The filename of the file
  */
 function updateDownloadLink(anchor, objectUrl, fileName, ...rest) {
-    if (window.updateDownloadLinkIe11) {
-        return window.updateDownloadLinkIe11(
-            anchor,
-            objectUrl,
-            fileName,
-            ...rest
-        );
-    }
-    anchor.setAttribute('href', objectUrl || '');
-    anchor.setAttribute('download', fileName || '');
+  if (window.updateDownloadLinkIe11) {
+    return window.updateDownloadLinkIe11(anchor, objectUrl, fileName, ...rest);
+  }
+  anchor.setAttribute("href", objectUrl || "");
+  anchor.setAttribute("download", fileName || "");
 }
 
 // Export as default to facilitate overriding this function.
 export default {
-    updateDownloadLink,
+  updateDownloadLink,
 };

@@ -1,16 +1,16 @@
-import $ from 'jquery';
-import fileManager from '../../js/file-manager';
+import $ from "jquery";
+import fileManager from "../../js/file-manager";
 /**
  * @external SignaturePad
  */
-import SignaturePad from 'signature_pad';
-import { t } from '../../js/fake-translator';
-import dialog from '../../js/fake-dialog';
-import support from '../../js/support';
-import events from '../../js/event';
-import Widget from '../../js/widget';
-import { dataUriToBlobSync, getFilename } from '../../js/utils';
-import downloadUtils from '../../js/download-utils';
+import SignaturePad from "signature_pad";
+import { t } from "../../js/fake-translator";
+import dialog from "../../js/fake-dialog";
+import support from "../../js/support";
+import events from "../../js/event";
+import Widget from "../../js/widget";
+import { dataUriToBlobSync, getFilename } from "../../js/utils";
+import downloadUtils from "../../js/download-utils";
 
 const DELAY = 1500;
 
@@ -62,7 +62,7 @@ SignaturePad.prototype.fromObjectURL = function (objectUrl, options) {
           left,
           top,
           imgWidth * ratio,
-          imgHeight * ratio
+          imgHeight * ratio,
         );
       } else {
         // if image is smaller than canvas then show it in the center and don't stretch it
@@ -92,7 +92,7 @@ SignaturePad.prototype.updateData = function (pointGroups) {
     },
     (rawPoint) => {
       that._drawDot(rawPoint);
-    }
+    },
   );
 
   this._data = pointGroups;
@@ -117,7 +117,7 @@ class DrawWidget extends Widget {
     const that = this;
     const existingFilename = this.element.dataset.loadedFileName;
 
-    this.element.type = 'text';
+    this.element.type = "text";
     this.element.dataset.drawing = true;
 
     this.element.after(this._getMarkup());
@@ -125,9 +125,9 @@ class DrawWidget extends Widget {
 
     question.classList.add(`or-${this.props.type}-initialized`);
 
-    this.$widget = $(question.querySelector('.widget'));
+    this.$widget = $(question.querySelector(".widget"));
 
-    canvas = this.$widget[0].querySelector('.draw-widget__body__canvas');
+    canvas = this.$widget[0].querySelector(".draw-widget__body__canvas");
     this._handleResize(canvas);
     this._resizeCanvas(canvas);
 
@@ -138,7 +138,7 @@ class DrawWidget extends Widget {
     // We built a delay in saving on stroke "end", to avoid excessive updating
     // This event does not fire on touchscreens for which we use the .hide-canvas-btn click
     // to do the same thing.
-    canvas.addEventListener('blur', this._forceUpdate.bind(this));
+    canvas.addEventListener("blur", this._forceUpdate.bind(this));
 
     this.initialize = fileManager.init().then(() => {
       that.pad = new SignaturePad(canvas, {
@@ -148,10 +148,10 @@ class DrawWidget extends Widget {
           clearTimeout(that._updateWithDelay);
           that._updateWithDelay = setTimeout(
             that._updateValue.bind(that),
-            DELAY
+            DELAY,
           );
         },
-        penColor: that.props.colors[0] || 'black',
+        penColor: that.props.colors[0] || "black",
       });
       that.pad.off();
       if (existingFilename) {
@@ -168,29 +168,29 @@ class DrawWidget extends Widget {
     this.initialize
       .then(() => {
         that.$widget
-          .find('.btn-reset')
-          .on('click', that._reset.bind(that))
+          .find(".btn-reset")
+          .on("click", that._reset.bind(that))
           .end()
-          .find('.draw-widget__colorpicker')
-          .on('click', '.current', function () {
-            $(this).parent().toggleClass('reveal');
+          .find(".draw-widget__colorpicker")
+          .on("click", ".current", function () {
+            $(this).parent().toggleClass("reveal");
           })
-          .on('click', '[data-color]:not(.current)', function () {
+          .on("click", "[data-color]:not(.current)", function () {
             $(this)
               .siblings()
-              .removeClass('current')
+              .removeClass("current")
               .end()
-              .addClass('current')
+              .addClass("current")
               .parent()
-              .removeClass('reveal');
+              .removeClass("reveal");
             that.pad.penColor = this.dataset.color;
           })
           .end()
-          .find('.draw-widget__undo')
-          .on('click', () => {
+          .find(".draw-widget__undo")
+          .on("click", () => {
             const data = that.pad.toData();
             that.pad.clear();
-            const fileInput = that.$widget[0].querySelector('input[type=file]');
+            const fileInput = that.$widget[0].querySelector("input[type=file]");
             // that.element.dataset.loadedFileName will have been removed only after resetting
             const fileToLoad =
               fileInput && fileInput.files[0]
@@ -200,23 +200,23 @@ class DrawWidget extends Widget {
               that.pad.updateData(data.slice(0, -1));
               that._updateValue();
               that.pad.penColor = that.$widget.find(
-                '.draw-widget__colorpicker .current'
+                ".draw-widget__colorpicker .current",
               )[0].dataset.color;
             });
           })
           .end()
-          .find('.show-canvas-btn')
-          .on('click', () => {
-            that.$widget.addClass('full-screen');
+          .find(".show-canvas-btn")
+          .on("click", () => {
+            that.$widget.addClass("full-screen");
             that._resizeCanvas(canvas);
             that.enable();
 
             return false;
           })
           .end()
-          .find('.hide-canvas-btn')
-          .on('click', () => {
-            that.$widget.removeClass('full-screen');
+          .find(".hide-canvas-btn")
+          .on("click", () => {
+            that.$widget.removeClass("full-screen");
             that.pad.off();
             that._forceUpdate();
             that._resizeCanvas(canvas);
@@ -225,7 +225,7 @@ class DrawWidget extends Widget {
           })
           .click();
 
-        $(canvas).on('canvasreload', () => {
+        $(canvas).on("canvasreload", () => {
           if (that.cache) {
             that.pad
               .fromObjectURL(that.cache)
@@ -239,7 +239,7 @@ class DrawWidget extends Widget {
       });
 
     $(this.element)
-      .on('applyfocus', () => {
+      .on("applyfocus", () => {
         canvas.focus();
       })
       .closest('[role="page"]')
@@ -270,32 +270,32 @@ class DrawWidget extends Widget {
     // obtaining of max size from server without slowing down form loading.
     this._updatePlaceholder();
     this.element
-      .closest('form.or')
+      .closest("form.or")
       .addEventListener(
         events.UpdateMaxSize().type,
-        this._updatePlaceholder.bind(this)
+        this._updatePlaceholder.bind(this),
       );
 
     const that = this;
 
-    const $input = this.$widget.find('input[type=file]');
-    const $fakeInput = this.$widget.find('.fake-file-input');
+    const $input = this.$widget.find("input[type=file]");
+    const $fakeInput = this.$widget.find(".fake-file-input");
 
     // show loaded file name or placeholder regardless of whether widget is supported
     this._showFileName(loadedFileName);
 
     $input
-      .on('click', (event) => {
+      .on("click", (event) => {
         // The purpose of this handler is to block the filepicker window
         // when the label is clicked outside of the input.
-        if (that.props.readonly || event.namespace !== 'propagate') {
+        if (that.props.readonly || event.namespace !== "propagate") {
           that.$fakeInput.focus();
           event.stopImmediatePropagation();
 
           return false;
         }
       })
-      .on('change', function () {
+      .on("change", function () {
         // Get the file
         const file = this.files[0];
 
@@ -311,9 +311,9 @@ class DrawWidget extends Widget {
             });
           } else {
             that._showFeedback(
-              t('filepicker.toolargeerror', {
+              t("filepicker.toolargeerror", {
                 maxSize: fileManager.getMaxSizeReadable(),
-              })
+              }),
             );
           }
         } else {
@@ -322,7 +322,7 @@ class DrawWidget extends Widget {
       });
 
     $fakeInput
-      .on('click', function (event) {
+      .on("click", function (event) {
         /*
                     The purpose of this handler is to selectively propagate clicks on the fake
                     input to the underlying file input (to show the file picker window).
@@ -337,13 +337,13 @@ class DrawWidget extends Widget {
           return false;
         }
         event.preventDefault();
-        $input.trigger('click.propagate');
+        $input.trigger("click.propagate");
       })
       .on(
-        'change',
+        "change",
         () =>
           // For robustness, avoid any editing of filenames by user.
-          false
+          false,
       );
   }
 
@@ -352,20 +352,20 @@ class DrawWidget extends Widget {
    */
   _showFileName(fileName) {
     this.$widget
-      .find('.fake-file-input')
+      .find(".fake-file-input")
       .val(fileName)
-      .prop('readonly', !!fileName);
+      .prop("readonly", !!fileName);
   }
 
   /**
    * Updates placeholder
    */
   _updatePlaceholder() {
-    this.$widget.find('.fake-file-input').attr(
-      'placeholder',
-      t('filepicker.placeholder', {
-        maxSize: fileManager.getMaxSizeReadable() || '?MB',
-      })
+    this.$widget.find(".fake-file-input").attr(
+      "placeholder",
+      t("filepicker.placeholder", {
+        maxSize: fileManager.getMaxSizeReadable() || "?MB",
+      }),
     );
   }
 
@@ -376,15 +376,15 @@ class DrawWidget extends Widget {
     // HTML syntax copied from filepicker widget
     const load = this.props.load
       ? `<input type="file" class="ignore draw-widget__load"${
-          this.props.capture !== null ? ` capture="${this.props.capture}"` : ''
+          this.props.capture !== null ? ` capture="${this.props.capture}"` : ""
         } accept="${
           this.props.accept
         }"/><div class="widget file-picker"><input class="ignore fake-file-input"/><div class="file-feedback"></div></div>`
-      : '';
+      : "";
     const fullscreenBtns = this.props.touch
       ? '<button type="button" class="show-canvas-btn btn btn-default">Draw/Sign</button>' +
         '<button type="button" class="hide-canvas-btn btn btn-default"><span class="icon icon-arrow-left"> </span></button>'
-      : '';
+      : "";
     const fragment = document.createRange().createContextualFragment(
       `<div class="widget draw-widget">
                 <div class="draw-widget__body">
@@ -393,31 +393,31 @@ class DrawWidget extends Widget {
                     <canvas class="draw-widget__body__canvas noSwipe disabled" tabindex="0"></canvas>
                     <div class="draw-widget__colorpicker"></div>
                     ${
-                      this.props.type === 'signature'
-                        ? ''
+                      this.props.type === "signature"
+                        ? ""
                         : '<button class="btn-icon-only draw-widget__undo" aria-label="undo" type=button><i class="icon icon-undo"> </i></button>'
                     }
                 </div>
                 <div class="draw-widget__footer">
                     <div class="draw-widget__feedback"></div>
                 </div>
-            </div>`
+            </div>`,
     );
     fragment
-      .querySelector('.draw-widget__footer')
+      .querySelector(".draw-widget__footer")
       .prepend(this.downloadButtonHtml);
     fragment
-      .querySelector('.draw-widget__footer')
+      .querySelector(".draw-widget__footer")
       .prepend(this.resetButtonHtml);
 
-    const colorpicker = fragment.querySelector('.draw-widget__colorpicker');
+    const colorpicker = fragment.querySelector(".draw-widget__colorpicker");
 
     this.props.colors.forEach((color, index) => {
-      const current = index === 0 ? ' current' : '';
+      const current = index === 0 ? " current" : "";
       const colorDiv = document
         .createRange()
         .createContextualFragment(
-          `<div class="${current}"data-color="${color}" style="background: ${color};" />`
+          `<div class="${current}"data-color="${color}" style="background: ${color};" />`,
         );
       colorpicker.append(colorDiv);
     });
@@ -458,13 +458,13 @@ class DrawWidget extends Widget {
     if (this.element.value) {
       // This discombulated line is to help the i18next parser pick up all 3 keys.
       const item =
-        this.props.type === 'signature'
-          ? t('drawwidget.signature')
-          : this.props.type === 'drawing'
-          ? t('drawwidget.drawing')
-          : t('drawwidget.annotation');
+        this.props.type === "signature"
+          ? t("drawwidget.signature")
+          : this.props.type === "drawing"
+            ? t("drawwidget.drawing")
+            : t("drawwidget.annotation");
       dialog
-        .confirm(t('filepicker.resetWarning', { item }))
+        .confirm(t("filepicker.resetWarning", { item }))
         .then((confirmed) => {
           if (!confirmed) {
             return;
@@ -475,11 +475,11 @@ class DrawWidget extends Widget {
           // for drawings loaded from storage.
           delete that.element.dataset.loadedFileName;
           delete that.element.dataset.loadedUrl;
-          that.element.dataset.filenamePostfix = '';
-          $(that.element).val('').trigger('change');
+          that.element.dataset.filenamePostfix = "";
+          $(that.element).val("").trigger("change");
           // Annotate file input
-          that.$widget.find('input[type=file]').val('').trigger('change');
-          that._updateDownloadLink('');
+          that.$widget.find("input[type=file]").val("").trigger("change");
+          that._updateDownloadLink("");
           that.disable();
           that.enable();
         });
@@ -493,11 +493,11 @@ class DrawWidget extends Widget {
   _loadFileIntoPad(file) {
     const that = this;
     if (!file) {
-      return Promise.resolve('');
+      return Promise.resolve("");
     }
     if (
-      typeof file === 'string' &&
-      file.startsWith('jr://') &&
+      typeof file === "string" &&
+      file.startsWith("jr://") &&
       this.element.dataset.loadedUrl
     ) {
       file = this.element.dataset.loadedUrl;
@@ -513,8 +513,8 @@ class DrawWidget extends Widget {
       })
       .catch(() => {
         that._showFeedback(
-          'File could not be loaded (leave unchanged if already submitted and you want to preserve it).',
-          'error'
+          "File could not be loaded (leave unchanged if already submitted and you want to preserve it).",
+          "error",
         );
       });
   }
@@ -523,29 +523,29 @@ class DrawWidget extends Widget {
    * @param {string} message - the feedback message to show
    */
   _showFeedback(message) {
-    message = message || '';
+    message = message || "";
 
     // replace text and replace all existing classes with the new status class
-    this.$widget.find('.draw-widget__feedback').text(message);
+    this.$widget.find(".draw-widget__feedback").text(message);
   }
 
   /**
    * @param {string} url - the download URL
    */
   _updateDownloadLink(url) {
-    if (url && url.indexOf('data:') === 0) {
+    if (url && url.indexOf("data:") === 0) {
       url = URL.createObjectURL(dataUriToBlobSync(url));
     }
     const fileName = url
       ? getFilename(
           { name: this.element.value },
-          this.element.dataset.filenamePostfix
+          this.element.dataset.filenamePostfix,
         )
-      : '';
+      : "";
     downloadUtils.updateDownloadLink(
-      this.$widget.find('.btn-download')[0],
+      this.$widget.find(".btn-download")[0],
       url,
-      fileName
+      fileName,
     );
   }
 
@@ -556,7 +556,7 @@ class DrawWidget extends Widget {
    */
   _handleResize(canvas) {
     const that = this;
-    $(window).on('resize', () => {
+    $(window).on("resize", () => {
       // that._forceUpdate();
       that._resizeCanvas(canvas);
     });
@@ -579,8 +579,8 @@ class DrawWidget extends Widget {
       const ratio = Math.max(window.devicePixelRatio || 1, 1);
       canvas.width = canvas.offsetWidth * ratio;
       canvas.height = canvas.offsetHeight * ratio;
-      canvas.getContext('2d').scale(ratio, ratio);
-      $(canvas).trigger('canvasreload');
+      canvas.getContext("2d").scale(ratio, ratio);
+      $(canvas).trigger("canvasreload");
     }
   }
 
@@ -589,12 +589,12 @@ class DrawWidget extends Widget {
    */
   disable() {
     const that = this;
-    const canvas = this.$widget.find('.draw-widget__body__canvas')[0];
+    const canvas = this.$widget.find(".draw-widget__body__canvas")[0];
 
     this.initialize.then(() => {
       that.pad.off();
-      canvas.classList.add('disabled');
-      that.$widget.find('.btn-reset').prop('disabled', true);
+      canvas.classList.add("disabled");
+      that.$widget.find(".btn-reset").prop("disabled", true);
     });
   }
 
@@ -603,15 +603,15 @@ class DrawWidget extends Widget {
    */
   enable() {
     const that = this;
-    const canvas = this.$widget.find('.draw-widget__body__canvas')[0];
-    const touchNotFull = this.props.touch && !this.$widget.is('.full-screen');
+    const canvas = this.$widget.find(".draw-widget__body__canvas")[0];
+    const touchNotFull = this.props.touch && !this.$widget.is(".full-screen");
     const needFile = this.props.load && !this.element.value;
 
     this.initialize.then(() => {
       if (!that.props.readonly && !needFile && !touchNotFull) {
         that.pad.on();
-        canvas.classList.remove('disabled');
-        that.$widget.find('.btn-reset').prop('disabled', false);
+        canvas.classList.remove("disabled");
+        that.$widget.find(".btn-reset").prop("disabled", false);
       }
       // https://github.com/enketo/enketo-core/issues/450
       // When loading a question with a relevant, it is invisible
@@ -629,7 +629,7 @@ class DrawWidget extends Widget {
    * we need to do.
    */
   update() {
-    if (this.originalInputValue === '') {
+    if (this.originalInputValue === "") {
       this._reset();
     }
   }
@@ -640,34 +640,34 @@ class DrawWidget extends Widget {
   get props() {
     const props = this._props;
 
-    props.type = props.appearances.includes('draw')
-      ? 'drawing'
-      : props.appearances.includes('signature')
-      ? 'signature'
-      : 'annotation';
+    props.type = props.appearances.includes("draw")
+      ? "drawing"
+      : props.appearances.includes("signature")
+        ? "signature"
+        : "annotation";
     props.filename = `${props.type}.png`;
-    props.load = props.type === 'annotation';
+    props.load = props.type === "annotation";
     props.colors =
-      props.type === 'signature'
+      props.type === "signature"
         ? []
         : [
-            'black',
-            'lightblue',
-            'blue',
-            'red',
-            'orange',
-            'cyan',
-            'yellow',
-            'lightgreen',
-            'green',
-            'pink',
-            'purple',
-            'lightgray',
-            'darkgray',
+            "black",
+            "lightblue",
+            "blue",
+            "red",
+            "orange",
+            "cyan",
+            "yellow",
+            "lightgreen",
+            "green",
+            "pink",
+            "purple",
+            "lightgray",
+            "darkgray",
           ];
     props.touch = support.touch;
-    props.accept = this.element.getAttribute('accept');
-    props.capture = this.element.getAttribute('capture');
+    props.accept = this.element.getAttribute("accept");
+    props.capture = this.element.getAttribute("capture");
 
     return props;
   }
@@ -676,7 +676,7 @@ class DrawWidget extends Widget {
    * @type {string}
    */
   get value() {
-    return this.cache || '';
+    return this.cache || "";
   }
 
   set value(dataUrl) {

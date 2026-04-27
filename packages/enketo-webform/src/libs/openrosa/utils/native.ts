@@ -1,34 +1,34 @@
-import { asNumber, asString } from './xpath-cast';
-import xpr from '../xpr';
+import { asNumber, asString } from "./xpath-cast";
+import xpr from "../xpr";
 
 export { preprocessNativeArgs };
 
 const cast = { num: asNumber, str: asString };
 
 const fns = {
-  ceiling: { min: 1, max: 1, cast: ['num'] },
-  contains: { min: 2, max: 2, cast: ['str', 'str'] },
-  floor: { min: 1, max: 1, cast: ['num'] },
+  ceiling: { min: 1, max: 1, cast: ["num"] },
+  contains: { min: 2, max: 2, cast: ["str", "str"] },
+  floor: { min: 1, max: 1, cast: ["num"] },
   id: {
     min: 1,
     max: 1,
     conv: (r) => [
-      xpr.string(r.t === 'arr' ? r.v.map(asString).join(' ') : asString(r)),
+      xpr.string(r.t === "arr" ? r.v.map(asString).join(" ") : asString(r)),
     ],
   },
-  lang: { min: 1, max: 1, cast: ['str'] },
-  'starts-with': { min: 2, max: 2, cast: ['str', 'str'] },
+  lang: { min: 1, max: 1, cast: ["str"] },
+  "starts-with": { min: 2, max: 2, cast: ["str", "str"] },
   substring: { min: 2, max: 3, conv: convertSubstringArgs },
-  'substring-after': { min: 2, max: 2, cast: ['str', 'str'] },
-  'substring-before': { min: 2, max: 2, cast: ['str', 'str'] },
-  translate: { min: 3, max: 3, cast: ['str', 'str', 'str'] },
+  "substring-after": { min: 2, max: 2, cast: ["str", "str"] },
+  "substring-before": { min: 2, max: 2, cast: ["str", "str"] },
+  translate: { min: 3, max: 3, cast: ["str", "str", "str"] },
 };
 
 function preprocessNativeArgs(name, args) {
   const def = fns[name];
   if (!def) return args;
-  if (args.length < def.min) throw new Error('too few args');
-  if (args.length > def.max) throw new Error('too many args');
+  if (args.length < def.min) throw new Error("too few args");
+  if (args.length > def.max) throw new Error("too many args");
   if (def.conv) {
     return def.conv(...args);
   } else if (def.cast) {

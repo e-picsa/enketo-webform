@@ -22,7 +22,7 @@ export interface IEnketoFormEntry {
   created: number;
   draft: boolean;
   enketoId: string;
-  files: any[];
+  files: unknown[];
   instanceId: string;
   name: string;
   updated: number;
@@ -281,7 +281,8 @@ export class EnketoWebform extends LitElement {
   private handleEventXmlFormChange(
     _e: ReturnType<typeof Events.XFormsValueChanged>,
   ) {
-    const formXML = this.xmlFormValue;
+    console.log("xml change", _e);
+    // const formXML = this.xmlFormValue;
   }
 
   private loadForm() {

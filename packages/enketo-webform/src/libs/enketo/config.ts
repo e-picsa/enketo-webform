@@ -8,28 +8,28 @@ export default /** @type {const} */ {
      * corresponding UI updates will render more quickly as each step in the chain of
      * computations completes.
      */
-    computeAsync: window.location.search.includes('&computeAsync'),
+    computeAsync: window.location.search.includes("&computeAsync"),
   },
 
   /**
    * When set to `true`, non-relevant values will be treated as blank. This behavior
    * is largely consistent with JavaRosa.
    */
-  excludeNonRelevant: window.location.search.includes('&excludeNonRelevant'),
+  excludeNonRelevant: window.location.search.includes("&excludeNonRelevant"),
 
   maps: [
     {
-      tiles: ['https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'],
-      name: 'streets',
+      tiles: ["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      name: "streets",
       attribution:
         "© <a href='http://openstreetmap.org'>OpenStreetMap</a> | <a href='www.openstreetmap.org/copyright'>Terms</a>",
     },
     {
-      tiles: 'GOOGLE_SATELLITE',
-      name: 'satellite',
+      tiles: "GOOGLE_SATELLITE",
+      name: "satellite",
     },
   ],
-  googleApiKey: '',
+  googleApiKey: "",
   repeatOrdinals: false,
   validateContinuously: false,
   validatePage: true,

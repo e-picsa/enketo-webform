@@ -9,10 +9,10 @@
  * types.
  */
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import { t } from './fake-translator';
-import { getFilename, dataUriToBlobSync } from './utils';
+import { t } from "./fake-translator";
+import { getFilename, dataUriToBlobSync } from "./utils";
 
 const fileManager = {};
 const URL_RE = /[a-zA-Z0-9+-.]+?:\/\//;
@@ -55,7 +55,7 @@ fileManager.getFileUrl = (subject) =>
 
     if (!subject) {
       resolve(null);
-    } else if (typeof subject === 'string') {
+    } else if (typeof subject === "string") {
       // TODO obtain from storage as http URL or objectURL
       // or from model for default binary files
 
@@ -64,21 +64,21 @@ fileManager.getFileUrl = (subject) =>
       if (URL_RE.test(subject)) {
         resolve(subject);
       } else {
-        reject('no!');
+        reject("no!");
       }
-        reject(new Error('Invalid subject URL'));
+      reject(new Error("Invalid subject URL"));
       if (fileManager.isTooLarge(subject)) {
         error = new Error(
-          t('filepicker.toolargeerror', {
+          t("filepicker.toolargeerror", {
             maxSize: fileManager.getMaxSizeReadable(),
-          })
+          }),
         );
         reject(error);
       } else {
         resolve(URL.createObjectURL(subject));
       }
     } else {
-      reject(new Error('Unknown error occurred'));
+      reject(new Error("Unknown error occurred"));
     }
   });
 
@@ -113,8 +113,8 @@ fileManager.urlToBlob = (url) => {
   const xhr = new XMLHttpRequest();
 
   return new Promise((resolve) => {
-    xhr.open('GET', url);
-    xhr.responseType = 'blob';
+    xhr.open("GET", url);
+    xhr.responseType = "blob";
     xhr.onload = () => {
       resolve(xhr.response);
     };
@@ -134,20 +134,20 @@ fileManager.getCurrentFiles = () => {
   const files = [];
 
   // Get any files inside file input elements or text input elements for drawings.
-  $('form.or')
+  $("form.or")
     .find(
-      'input[type="file"]:not(.ignore), input[type="text"][data-drawing="true"]'
+      'input[type="file"]:not(.ignore), input[type="text"][data-drawing="true"]',
     )
     .each(function () {
       let newFilename;
       let file = null;
       let canvas = null;
-      if (this.type === 'file') {
+      if (this.type === "file") {
         file = this.files[0]; // Why doesn't this fail for empty file inputs?
       } else if (this.value) {
         canvas = $(this)
-          .closest('.question')[0]
-          .querySelector('.draw-widget canvas');
+          .closest(".question")[0]
+          .querySelector(".draw-widget canvas");
         if (canvas && !URL_RE.test(this.value)) {
           // TODO: In the future, we could simply do canvas.toBlob() instead
           file = dataUriToBlobSync(canvas.toDataURL());

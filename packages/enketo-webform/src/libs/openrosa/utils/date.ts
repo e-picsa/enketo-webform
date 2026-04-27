@@ -7,10 +7,10 @@ function dateToDays(d) {
 
 function dateStringToDays(d) {
   var temp = null;
-  if (d.indexOf('T') > 0) {
+  if (d.indexOf("T") > 0) {
     temp = new Date(d);
   } else {
-    temp = d.split('-');
+    temp = d.split("-");
     temp = new Date(temp[0], temp[1] - 1, temp[2]);
   }
   return dateToDays(temp);

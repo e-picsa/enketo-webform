@@ -1,7 +1,7 @@
-import $ from 'jquery';
-import { t } from '../../js/fake-translator';
-import Widget from '../../js/widget';
-import events from '../../js/event';
+import $ from "jquery";
+import { t } from "../../js/fake-translator";
+import Widget from "../../js/widget";
+import events from "../../js/event";
 
 /**
  * Visually transforms a question into a comment modal that can be shown on its linked question.
@@ -20,7 +20,7 @@ class Comment extends Widget {
    * @type {string}
    */
   static get helpersRequired() {
-    return ['input', 'pathToAbsolute'];
+    return ["input", "pathToAbsolute"];
   }
 
   _init() {
@@ -29,20 +29,20 @@ class Comment extends Widget {
 
     if (this.linkedQuestion) {
       // Adding role='comment' is for now only used to make sure that role is not 'page' as that messes things up
-      this.commentQuestion.classList.add('hide');
-      this.commentQuestion.setAttribute('role', 'comment');
+      this.commentQuestion.classList.add("hide");
+      this.commentQuestion.setAttribute("role", "comment");
 
       // Any <button> inside a <label> receives click events if the <label> is clicked!
       // See http://codepen.io/MartijnR/pen/rWJeOG?editors=1111
       const fragment = document
         .createRange()
         .createContextualFragment(
-          '<a class="btn-icon-only btn-comment aria-label="comment" type="button" href="#"><i class="icon"> </i></a>'
+          '<a class="btn-icon-only btn-comment aria-label="comment" type="button" href="#"><i class="icon"> </i></a>',
         );
-      const labels = this.linkedQuestion.querySelectorAll('.question-label');
+      const labels = this.linkedQuestion.querySelectorAll(".question-label");
       labels[labels.length - 1].after(fragment);
 
-      this.commentButton = this.linkedQuestion.querySelector('.btn-comment');
+      this.commentButton = this.linkedQuestion.querySelector(".btn-comment");
       this._setCommentButtonState(this.originalInputValue);
       this._setCommentButtonHandler();
       this._setValidationHandler();
@@ -59,17 +59,17 @@ class Comment extends Widget {
     const targetPath = this.element.dataset.for.trim();
     const absoluteTargetPath = this.options.helpers.pathToAbsolute(
       targetPath,
-      contextPath
+      contextPath,
     );
     // The root is nearest repeat or otherwise nearest form. This avoids having to calculate indices, without
     // diminishing the flexibility in any meaningful way,
     // as it e.g. wouldn't make sense to place a comment node for a top-level question, inside a repeat.
-    const root = input.closest('form.or, .or-repeat');
+    const root = input.closest("form.or, .or-repeat");
 
     return this.options.helpers.input.getWrapNode(
       root.querySelector(
-        `[name="${absoluteTargetPath}"], [data-name="${absoluteTargetPath}"]`
-      )
+        `[name="${absoluteTargetPath}"], [data-name="${absoluteTargetPath}"]`,
+      ),
     );
   }
 
@@ -78,8 +78,8 @@ class Comment extends Widget {
    */
   _commentHasError() {
     return (
-      this.commentQuestion.classList.contains('invalid-required') ||
-      this.commentQuestion.classList.contains('invalid-constraint')
+      this.commentQuestion.classList.contains("invalid-required") ||
+      this.commentQuestion.classList.contains("invalid-constraint")
     );
   }
 
@@ -88,16 +88,16 @@ class Comment extends Widget {
    * @param {Error} error - error instance
    */
   _setCommentButtonState(value, error) {
-    value = typeof value === 'string' ? value.trim() : value;
-    this.commentButton.classList.toggle('empty', !value);
-    this.commentButton.classList.toggle('invalid', !!error);
+    value = typeof value === "string" ? value.trim() : value;
+    this.commentButton.classList.toggle("empty", !value);
+    this.commentButton.classList.toggle("invalid", !!error);
   }
 
   /**
    * Sets comment button handler
    */
   _setCommentButtonHandler() {
-    this.commentButton.addEventListener('click', (ev) => {
+    this.commentButton.addEventListener("click", (ev) => {
       if (this._isCommentModalShown(this.linkedQuestion)) {
         this._hideCommentModal(this.linkedQuestion);
       } else {
@@ -113,7 +113,7 @@ class Comment extends Widget {
    */
   _setValidationHandler() {
     this.element
-      .closest('form.or')
+      .closest("form.or")
       .addEventListener(events.ValidationComplete().type, () => {
         const error = this._commentHasError();
         const value = this.originalInputValue;
@@ -125,14 +125,12 @@ class Comment extends Widget {
    * Sets focus handler
    */
   _setFocusHandler() {
-    $(this.element).on('applyfocus', () => {
-      if (this.commentButton.matches(':visible')) {
+    $(this.element).on("applyfocus", () => {
+      if (this.commentButton.matches(":visible")) {
         this.commentButton.click();
       } else {
         console.warn(
-          `The linked question is not visible. Cannot apply focus to ${this.element.getAttribute(
-            'name'
-          )}`
+          `The linked question is not visible. Cannot apply focus to ${this.element.getAttribute("name")}`,
         );
       }
     });
@@ -143,7 +141,7 @@ class Comment extends Widget {
    * @return {boolean} whether comment modal is currently shown
    */
   _isCommentModalShown(linkedQuestion) {
-    return !!linkedQuestion.querySelector('.or-comment-widget');
+    return !!linkedQuestion.querySelector(".or-comment-widget");
   }
 
   /**
@@ -151,14 +149,14 @@ class Comment extends Widget {
    */
   _showCommentModal() {
     const comment = this.question.cloneNode(true);
-    const updateText = t('widget.comment.update') || 'Update';
+    const updateText = t("widget.comment.update") || "Update";
     const input = comment.querySelector(
-      'input:not(.ignore), textarea:not(.ignore)'
+      "input:not(.ignore), textarea:not(.ignore)",
     );
 
-    comment.classList.remove('hide');
-    input.classList.add('ignore');
-    input.removeAttribute('name data-for data-type-xml');
+    comment.classList.remove("hide");
+    input.classList.add("ignore");
+    input.removeAttribute("name data-for data-type-xml");
 
     const fragment = document.createRange().createContextualFragment(
       `<section class="widget or-comment-widget">
@@ -167,14 +165,14 @@ class Comment extends Widget {
                     <button class="btn-icon-only or-comment-widget__content__btn-close-x" type="button">&times;</button>
                 </div>
             </section>
-            `
+            `,
     );
-    fragment.querySelector('.or-comment-widget__content').prepend(comment);
+    fragment.querySelector(".or-comment-widget__content").prepend(comment);
 
     const overlayFrag = document
       .createRange()
       .createContextualFragment(
-        '<div class="or-comment-widget__overlay"></div>'
+        '<div class="or-comment-widget__overlay"></div>',
       );
 
     this.linkedQuestion.prepend(fragment);
@@ -183,18 +181,18 @@ class Comment extends Widget {
     this.linkedQuestion.before(overlayFrag);
 
     const overlay = this.linkedQuestion.previousElementSibling;
-    const widget = this.linkedQuestion.querySelector('.or-comment-widget');
+    const widget = this.linkedQuestion.querySelector(".or-comment-widget");
     const updateButton = widget.querySelector(
-      '.or-comment-widget__content__btn-update'
+      ".or-comment-widget__content__btn-update",
     );
     const closeButton = widget.querySelector(
-      '.or-comment-widget__content__btn-close-x'
+      ".or-comment-widget__content__btn-close-x",
     );
 
     input.focus();
     widget.scrollIntoView(false);
 
-    updateButton.addEventListener('click', (ev) => {
+    updateButton.addEventListener("click", (ev) => {
       const { value } = input;
       this.originalInputValue = value;
       this.element.dispatchEvent(events.Change());
@@ -214,21 +212,21 @@ class Comment extends Widget {
       this.options.helpers.input.validate(
         $(
           this.linkedQuestion.querySelector(
-            'input:not(.ignore), select:not(.ignore), textarea:not(.ignore)'
-          )
-        )
+            "input:not(.ignore), select:not(.ignore), textarea:not(.ignore)",
+          ),
+        ),
       );
       ev.preventDefault();
       ev.stopPropagation();
     });
 
-    closeButton.addEventListener('click', (ev) => {
+    closeButton.addEventListener("click", (ev) => {
       this._hideCommentModal(this.linkedQuestion);
       ev.stopPropagation();
       ev.preventDefault();
     });
 
-    overlay.addEventListener('click', (ev) => {
+    overlay.addEventListener("click", (ev) => {
       this._hideCommentModal(this.linkedQuestion);
       ev.stopPropagation();
       ev.preventDefault();
@@ -241,9 +239,9 @@ class Comment extends Widget {
    * @param {Element} linkedQuestion - the HTML question the widget is linked with
    */
   _hideCommentModal(linkedQuestion) {
-    linkedQuestion.querySelector('.or-comment-widget').remove();
+    linkedQuestion.querySelector(".or-comment-widget").remove();
     const overlay = linkedQuestion.previousElementSibling;
-    if (overlay && overlay.matches('.or-comment-widget__overlay')) {
+    if (overlay && overlay.matches(".or-comment-widget__overlay")) {
       overlay.remove();
     }
   }

@@ -1,5 +1,5 @@
-import input from './input';
-import event from './event';
+import input from "./input";
+import event from "./event";
 
 const range = document.createRange();
 
@@ -20,7 +20,7 @@ class Widget {
   constructor(element: Element, options: boolean | { touch: boolean }) {
     this.element = element;
     this.options = options || {};
-    this.question = element.closest('.question');
+    this.question = element.closest(".question");
     this._props = this._getProps();
 
     // Some widgets (e.g. ImageMap) initialize asynchronously and init returns a promise.
@@ -45,20 +45,20 @@ class Widget {
   _getProps() {
     const that = this;
     const classList =
-      that.element.closest('.question, form.or')?.classList || [];
+      that.element.closest(".question, form.or")?.classList || [];
     return {
       get readonly() {
-        return that.element.nodeName.toLowerCase() === 'select'
-          ? that.element.hasAttribute('readonly')
+        return that.element.nodeName.toLowerCase() === "select"
+          ? that.element.hasAttribute("readonly")
           : !!that.element.readOnly;
       },
 
       appearances: [...classList]
-        .filter((cls) => cls.indexOf('or-appearance-') === 0)
+        .filter((cls) => cls.indexOf("or-appearance-") === 0)
         .map((cls) => cls.substring(14)),
       multiple: !!this.element.multiple,
       disabled: !!this.element.disabled,
-      type: this.element.getAttribute('data-type-xml'),
+      type: this.element.getAttribute("data-type-xml"),
     };
   }
 
@@ -105,7 +105,7 @@ class Widget {
                 class="btn-icon-only btn-reset"
                 aria-label="reset">
                 <i class="icon icon-refresh"> </i>
-            </button>`
+            </button>`,
     );
   }
 
@@ -121,7 +121,7 @@ class Widget {
                 class="btn-icon-only btn-download"
                 aria-label="download"
                 download
-                href=""><i class="icon icon-download"> </i></a>`
+                href=""><i class="icon icon-download"> </i></a>`,
     );
   }
 
@@ -143,7 +143,7 @@ class Widget {
    */
   set value(_value: any) {
     //
-  } // eslint-disable-line no-empty-function -- this is defining the API
+  }  
 
   /**
    * Obtains the value from the original form control the widget is instantiated on.

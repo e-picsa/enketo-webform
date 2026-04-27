@@ -1,5 +1,5 @@
 @mixin font-normal {
-  font-family: 'OpenSans', sans-serif, Arial;
+  font-family: "OpenSans", sans-serif, Arial;
   font-weight: normal;
   font-style: normal;
 }
@@ -69,7 +69,9 @@
 @mixin box-shadow-touch {
   //-webkit-box-shadow: inset 0 -1px 0 rgba(90, 90, 90, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
   //-moz-box-shadow: inset 0 -1px 0 rgba(90, 90, 90, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 -1px 0 rgba(90, 90, 90, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    inset 0 -1px 0 rgba(90, 90, 90, 0.25),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 @mixin tab-focus {
@@ -82,7 +84,7 @@
 @mixin clearfix {
   &:before,
   &:after {
-    content: ' '; // 1
+    content: " "; // 1
     display: table; // 2
   }
 
@@ -212,7 +214,12 @@
 
 // Creates two color stops, start and end, by specifying a color and position for each color stop.
 // Color stops are not available in IE9 and below.
-@mixin gradient-vertical($start-color: #555555, $end-color: #333333, $start-percent: 0%, $end-percent: 100%) {
+@mixin gradient-vertical(
+  $start-color: #555555,
+  $end-color: #333333,
+  $start-percent: 0%,
+  $end-percent: 100%
+) {
   background-image: -webkit-linear-gradient(
     top,
     $start-color $start-percent,
@@ -233,8 +240,16 @@
   $color-stop: 50%,
   $end-color: #c3325f
 ) {
-  background-image: -webkit-linear-gradient($start-color, $mid-color $color-stop, $end-color);
-  background-image: linear-gradient($start-color, $mid-color $color-stop, $end-color);
+  background-image: -webkit-linear-gradient(
+    $start-color,
+    $mid-color $color-stop,
+    $end-color
+  );
+  background-image: linear-gradient(
+    $start-color,
+    $mid-color $color-stop,
+    $end-color
+  );
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down, gets no color-stop at all for proper fallback
 }
@@ -280,12 +295,16 @@
 
 // from https://gist.github.com/JacobDB/0ffffaf8e772c12acf7102edb8a302be
 // Replace letters
-@function str-replace($string, $search, $replace: '') {
+@function str-replace($string, $search, $replace: "") {
   $index: str-index($string, $search);
 
   @if $index {
     @return str-slice($string, 1, $index - 1) + $replace +
-      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
   }
 
   @return $string;
@@ -295,29 +314,29 @@
 // Encode symbols
 @function url-encode($string) {
   $map: (
-    '%': '%25',
-    '<': '%3C',
-    '>': '%3E',
-    ' ': '%20',
-    '!': '%21',
-    '*': '%2A',
-    "'": '%27',
-    '"': '%22',
-    '(': '%28',
-    ')': '%29',
-    ';': '%3B',
-    ':': '%3A',
-    '@': '%40',
-    '&': '%26',
-    '=': '%3D',
-    '+': '%2B',
-    '$': '%24',
-    ',': '%2C',
-    '/': '%2F',
-    '?': '%3F',
-    '#': '%23',
-    '[': '%5B',
-    ']': '%5D',
+    "%": "%25",
+    "<": "%3C",
+    ">": "%3E",
+    " ": "%20",
+    "!": "%21",
+    "*": "%2A",
+    "'": "%27",
+    '"': "%22",
+    "(": "%28",
+    ")": "%29",
+    ";": "%3B",
+    ":": "%3A",
+    "@": "%40",
+    "&": "%26",
+    "=": "%3D",
+    "+": "%2B",
+    "$": "%24",
+    ",": "%2C",
+    "/": "%2F",
+    "?": "%3F",
+    "#": "%23",
+    "[": "%5B",
+    "]": "%5D",
   );
 
   $new: $string;
@@ -331,5 +350,5 @@
 
 // Format the SVG as a URL
 @function svg-as-url($string) {
-  @return url('data:image/svg+xml,#{url-encode($string)}');
+  @return url("data:image/svg+xml,#{url-encode($string)}");
 }

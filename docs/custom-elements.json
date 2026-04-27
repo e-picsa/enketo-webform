@@ -41,6 +41,36 @@
             },
             {
               "kind": "field",
+              "name": "enketoId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form definition (enketo ID)\nIf not provided, will be extracted from the form or generated",
+              "attribute": "enketoId"
+            },
+            {
+              "kind": "field",
+              "name": "formName",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Name for the form entry",
+              "attribute": "formName"
+            },
+            {
+              "kind": "field",
+              "name": "instanceId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form instance\nIf not provided, will be generated on first save",
+              "attribute": "instanceId"
+            },
+            {
+              "kind": "field",
               "name": "formContainerEl",
               "type": {
                 "text": "HTMLDivElement"
@@ -63,7 +93,25 @@
                 "text": "string"
               },
               "privacy": "private",
-              "default": "''"
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "\"idle\" | \"loading\" | \"ready\" | \"error\""
+              },
+              "privacy": "private",
+              "default": "\"idle\""
+            },
+            {
+              "kind": "field",
+              "name": "errorMessage",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "\"\""
             },
             {
               "kind": "field",
@@ -76,6 +124,11 @@
             },
             {
               "kind": "method",
+              "name": "renderDebugStatus",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
               "name": "renderEnketoLogo",
               "privacy": "private"
             },
@@ -83,6 +136,24 @@
               "kind": "method",
               "name": "renderFooter",
               "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "generateId",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "prefix",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
@@ -175,6 +246,33 @@
               "default": "true",
               "description": "Whether to show Save Draft / Submit buttons",
               "fieldName": "showButtons"
+            },
+            {
+              "name": "enketoId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form definition (enketo ID)\nIf not provided, will be extracted from the form or generated",
+              "fieldName": "enketoId"
+            },
+            {
+              "name": "formName",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Name for the form entry",
+              "fieldName": "formName"
+            },
+            {
+              "name": "instanceId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form instance\nIf not provided, will be generated on first save",
+              "fieldName": "instanceId"
             }
           ],
           "superclass": {
@@ -183,6 +281,18 @@
           },
           "tagName": "enketo-webform",
           "customElement": true
+        },
+        {
+          "kind": "variable",
+          "name": "enketoId"
+        },
+        {
+          "kind": "variable",
+          "name": "instanceId"
+        },
+        {
+          "kind": "variable",
+          "name": "name"
         }
       ],
       "exports": [
@@ -280,7 +390,7 @@
             {
               "name": "options",
               "type": {
-                "text": "{ xml: string; tagname: string; content: string }"
+                "text": "{\r\n  xml: string;\r\n  tagname: string;\r\n  content: string;\r\n}"
               },
               "description": "Configuration object"
             },
@@ -356,7 +466,7 @@
                 "text": "object"
               },
               "privacy": "public",
-              "default": "{ v1: 'https://kc.kobotoolbox.org/api/v1', v2: 'https://kf.kobotoolbox.org/api/v2', }",
+              "default": "{ v1: \"https://kc.kobotoolbox.org/api/v1\", v2: \"https://kf.kobotoolbox.org/api/v2\", }",
               "description": "KoBoToolbox API endpoints"
             },
             {

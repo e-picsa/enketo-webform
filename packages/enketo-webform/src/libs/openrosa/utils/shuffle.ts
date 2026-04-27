@@ -14,10 +14,10 @@ function shuffle(array, seed) {
   var rng;
   var result = [];
 
-  if (typeof seed !== 'undefined') {
+  if (typeof seed !== "undefined") {
     if (!Number.isInteger(seed)) {
       throw new Error(
-        'Invalid seed argument. Integer required, but got: ' + seed
+        "Invalid seed argument. Integer required, but got: " + seed,
       );
     }
     var rnd = new Random(seed);

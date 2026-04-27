@@ -2,10 +2,10 @@
  * @module widgets-controller
  */
 
-import $ from 'jquery';
-import _widgets from './widgets';
-import { elementDataStore as data } from './dom-utils';
-import events from './event';
+import $ from "jquery";
+import _widgets from "./widgets";
+import { elementDataStore as data } from "./dom-utils";
+import events from "./event";
 
 const widgets = _widgets.filter((widget) => widget.selector);
 let options;
@@ -22,7 +22,7 @@ let formHtml;
 function init($group, opts = {}) {
   if (!this.form) {
     throw new Error(
-      'Widgets module not correctly instantiated with form property.'
+      "Widgets module not correctly instantiated with form property.",
     );
   }
 
@@ -52,9 +52,9 @@ function init($group, opts = {}) {
 function enable(group) {
   widgets.forEach((Widget) => {
     const els = _getElements(group, Widget.selector).filter((el) =>
-      el.nodeName.toLowerCase() === 'select'
-        ? !el.hasAttribute('readonly')
-        : !el.readOnly
+      el.nodeName.toLowerCase() === "select"
+        ? !el.hasAttribute("readonly")
+        : !el.readOnly,
     );
     new Collection(els).enable(Widget);
   });
@@ -84,14 +84,14 @@ function disable(group) {
  */
 function _getElements(group, selector) {
   if (selector) {
-    if (selector === 'form') {
+    if (selector === "form") {
       return [formHtml];
     }
     // e.g. if the widget selector starts at .question level (e.g. ".or-appearance-draw input")
-    if (group.classList.contains('question')) {
+    if (group.classList.contains("question")) {
       return [
         ...group.querySelectorAll(
-          'input:not(.ignore), select:not(.ignore), textarea:not(.ignore)'
+          "input:not(.ignore), select:not(.ignore), textarea:not(.ignore)",
         ),
       ].filter((el) => el.matches(selector));
     }
@@ -178,11 +178,11 @@ function _setOptionChangeListener(Widget, els) {
  */
 function _setValChangeListener(Widget, els) {
   // avoid adding eventhandlers on widgets that apply to the <form> or <label> element
-  if (els.length > 0 && els[0].matches('input, select, textarea')) {
+  if (els.length > 0 && els[0].matches("input, select, textarea")) {
     els.forEach((el) =>
       el.addEventListener(events.InputUpdate().type, (event) => {
         new Collection(event.target).update(Widget);
-      })
+      }),
     );
   }
 }
@@ -238,7 +238,7 @@ class Collection {
    */
   instantiate(Widget, options) {
     this.elements.forEach((el) =>
-      this._instantiateSingleWidget(el, Widget, options)
+      this._instantiateSingleWidget(el, Widget, options),
     );
   }
 
@@ -246,21 +246,21 @@ class Collection {
    * @param {object} Widget - widget to instantiate
    */
   update(Widget) {
-    this._methodCall(Widget, 'update');
+    this._methodCall(Widget, "update");
   }
 
   /**
    * @param {object} Widget - widget to instantiate
    */
   disable(Widget) {
-    this._methodCall(Widget, 'disable');
+    this._methodCall(Widget, "disable");
   }
 
   /**
    * @param {object} Widget - The widget to instantiate
    */
   enable(Widget) {
-    this._methodCall(Widget, 'enable');
+    this._methodCall(Widget, "enable");
   }
 }
 

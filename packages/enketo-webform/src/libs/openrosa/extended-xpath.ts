@@ -1,7 +1,7 @@
-import { handleOperation } from './utils/operation';
-import { preprocessNativeArgs } from './utils/native';
-import { toSnapshotResult } from './utils/result';
-import { asBoolean, asNumber, asString } from './utils/xpath-cast';
+import { handleOperation } from "./utils/operation";
+import { preprocessNativeArgs } from "./utils/native";
+import { toSnapshotResult } from "./utils/result";
+import { asBoolean, asNumber, asString } from "./utils/xpath-cast";
 /*
  * From http://www.w3.org/TR/xpath/#section-Expressions XPath infix operator
  * precedence is left-associative.  In the constants that follow, all but the
@@ -44,18 +44,18 @@ export default function (wrapped, extensions) {
       let v, i, ordrd;
       switch (r.resultType) {
         case XPathResult.NUMBER_TYPE:
-          return { t: 'num', v: r.numberValue };
+          return { t: "num", v: r.numberValue };
         case XPathResult.BOOLEAN_TYPE:
-          return { t: 'bool', v: r.booleanValue };
+          return { t: "bool", v: r.booleanValue };
         case XPathResult.STRING_TYPE:
-          return { t: 'str', v: r.stringValue };
+          return { t: "str", v: r.stringValue };
         case XPathResult.ORDERED_NODE_ITERATOR_TYPE:
           ordrd = true;
         /* falls through */
         case XPathResult.UNORDERED_NODE_ITERATOR_TYPE:
           v = [];
           while ((i = r.iterateNext())) v.push(i);
-          return { t: 'arr', v, ordrd };
+          return { t: "arr", v, ordrd };
         case XPathResult.ORDERED_NODE_SNAPSHOT_TYPE:
           ordrd = true;
         /* falls through */
@@ -64,10 +64,10 @@ export default function (wrapped, extensions) {
           for (i = 0; i < r.snapshotLength; ++i) {
             v.push(r.snapshotItem(i));
           }
-          return { t: 'arr', v, ordrd };
+          return { t: "arr", v, ordrd };
         case XPathResult.ANY_UNORDERED_NODE_TYPE:
         case XPathResult.FIRST_ORDERED_NODE_TYPE:
-          return { t: 'arr', v: [r.singleNodeValue] };
+          return { t: "arr", v: [r.singleNodeValue] };
         default:
           throw new Error(`no handling for result type: ${r.resultType}`);
       }
@@ -84,19 +84,19 @@ export default function (wrapped, extensions) {
         case XPathResult.ANY_TYPE:
           // derive return type from the return value
           switch (r.t) {
-            case 'num':
+            case "num":
               return toExternalResult(r, XPathResult.NUMBER_TYPE);
-            case 'str':
+            case "str":
               return toExternalResult(r, XPathResult.STRING_TYPE);
-            case 'bool':
+            case "bool":
               return toExternalResult(r, XPathResult.BOOLEAN_TYPE);
-            case 'arr':
+            case "arr":
               return toExternalResult(
                 r,
-                XPathResult.UNORDERED_NODE_ITERATOR_TYPE
+                XPathResult.UNORDERED_NODE_ITERATOR_TYPE,
               );
             default:
-              throw new Error('unrecognised internal type: ' + r.t);
+              throw new Error("unrecognised internal type: " + r.t);
           }
         case XPathResult.NUMBER_TYPE:
           return {
@@ -120,7 +120,7 @@ export default function (wrapped, extensions) {
         case XPathResult.FIRST_ORDERED_NODE_TYPE:
           return toSnapshotResult(r, rt);
         default:
-          throw new Error('unrecognised return type:' + rt);
+          throw new Error("unrecognised return type:" + rt);
       }
     },
     typefor = function (val) {
@@ -128,9 +128,9 @@ export default function (wrapped, extensions) {
         const res = extendedProcessors.typefor(val);
         if (res) return res;
       }
-      if (typeof val === 'boolean') return 'bool';
-      if (typeof val === 'number') return 'num';
-      return 'str';
+      if (typeof val === "boolean") return "bool";
+      if (typeof val === "number") return "num";
+      return "str";
     };
 
   /**
@@ -144,10 +144,10 @@ export default function (wrapped, extensions) {
     rT,
     _,
     contextSize = 1,
-    contextPosition = 1
+    contextPosition = 1,
   ) {
     let i, cur;
-    const stack = [{ t: 'root', tokens: [] }],
+    const stack = [{ t: "root", tokens: [] }],
       peek = () => stack[stack.length - 1],
       pushToken = (t) => {
         const { tokens } = peek();
@@ -156,24 +156,24 @@ export default function (wrapped, extensions) {
       isDeadBranch = () => {
         const { dead, t, tokens } = peek() as any;
         if (dead) return true;
-        if (t === 'fn') {
+        if (t === "fn") {
           return prevToken() === D;
         } else {
           return tokens.includes(D);
         }
       },
       err = (m) => {
-        throw new Error((m || '') + JSON.stringify({ stack, cur }));
+        throw new Error((m || "") + JSON.stringify({ stack, cur }));
       },
       newCurrent = function () {
-        cur = { v: '' };
+        cur = { v: "" };
       },
       pushOp = function (t) {
         if (t <= AND) {
           evalOps(t);
         }
 
-        pushToken({ t: 'op', v: t });
+        pushToken({ t: "op", v: t });
 
         if (t <= AND) {
           const { tokens } = peek();
@@ -191,10 +191,10 @@ export default function (wrapped, extensions) {
         const args = [];
         for (let i = 0; i < supplied.length; ++i) {
           if (i % 2) {
-            if (supplied[i] !== ',')
+            if (supplied[i] !== ",")
               throw new Error(
-                'Weird args (should be separated by commas):' +
-                  JSON.stringify(supplied)
+                "Weird args (should be separated by commas):" +
+                  JSON.stringify(supplied),
               );
           } else args.push(supplied[i]);
         }
@@ -202,39 +202,39 @@ export default function (wrapped, extensions) {
         if (Object.prototype.hasOwnProperty.call(extendedFuncs, name)) {
           return extendedFuncs[name].apply(
             { cN, contextSize, contextPosition },
-            args
+            args,
           );
         }
 
         return callNative(name, preprocessNativeArgs(name, args));
       },
       callNative = function (name, args) {
-        let argString = name + '(';
+        let argString = name + "(";
         for (let i = 0; i < args.length; ++i) {
-          if (i) argString += ',';
+          if (i) argString += ",";
           const arg = args[i];
           switch (arg.t) {
-            case 'arr':
+            case "arr":
               throw new Error(
-                `callNative() can't handle nodeset functions yet for ${name}()`
+                `callNative() can't handle nodeset functions yet for ${name}()`,
               );
-            case 'bool':
-              argString += arg.v + '()';
+            case "bool":
+              argString += arg.v + "()";
               break;
-            case 'num':
-              if (arg.v === Infinity) argString += '( 1 div 0)';
-              else if (arg.v === -Infinity) argString += '(-1 div 0)';
+            case "num":
+              if (arg.v === Infinity) argString += "( 1 div 0)";
+              else if (arg.v === -Infinity) argString += "(-1 div 0)";
               else argString += arg.v.toFixed(20); // Prevent JS from converting to scientific notation
               break;
-            case 'str': {
+            case "str": {
               const quote =
                 arg.quote || (arg.v.indexOf('"') === -1 ? '"' : "'");
               // Firefox's native XPath implementation is 3.0, but Chrome's is 1.0.
               // XPath 1.0 has no support for escaping quotes in strings, so:
               if (arg.v.indexOf(quote) !== -1)
                 throw new Error(
-                  'Quote character found in String Literal: ' +
-                    JSON.stringify(arg.v)
+                  "Quote character found in String Literal: " +
+                    JSON.stringify(arg.v),
                 );
               argString += quote + arg.v + quote;
             }
@@ -242,7 +242,7 @@ export default function (wrapped, extensions) {
           }
         }
         return toInternalResult(
-          wrapped.evaluate(argString + ')', cN, nR, XPathResult.ANY_TYPE, null)
+          wrapped.evaluate(argString + ")", cN, nR, XPathResult.ANY_TYPE, null),
         );
       },
       evalOp = function (lhs, op, rhs) {
@@ -251,14 +251,14 @@ export default function (wrapped, extensions) {
         }
         if (extendedProcessors.handleInfix) {
           let res = extendedProcessors.handleInfix(err, lhs, op, rhs);
-          if (res && res.t === 'continue') {
+          if (res && res.t === "continue") {
             lhs = res.lhs;
             op = res.op;
             rhs = res.rhs;
             res = null;
           }
 
-          if (typeof res !== 'undefined' && res !== null) return res;
+          if (typeof res !== "undefined" && res !== null) return res;
         }
         return handleOperation(lhs, op, rhs);
       },
@@ -268,9 +268,9 @@ export default function (wrapped, extensions) {
         if (tokens.length < 2) return;
 
         if (tokens[2] === D && tokens[1].v >= lastOp) {
-          const endExpr = tokens.indexOf(',', 2);
+          const endExpr = tokens.indexOf(",", 2);
           tokens.splice(0, endExpr === -1 ? tokens.length : endExpr, {
-            t: 'bool',
+            t: "bool",
             v: asBoolean(tokens[0]),
           });
         }
@@ -278,7 +278,7 @@ export default function (wrapped, extensions) {
         for (let j = UNION; j >= lastOp; j -= 0b100) {
           let i = 1;
           while (i < tokens.length - 1) {
-            if (tokens[i].t === 'op' && tokens[i].v >= j) {
+            if (tokens[i].t === "op" && tokens[i].v >= j) {
               const res = evalOp(tokens[i - 1], tokens[i].v, tokens[i + 1]);
               tokens.splice(i, 2);
               tokens[i - 1] = { t: typefor(res), v: res };
@@ -293,14 +293,14 @@ export default function (wrapped, extensions) {
         }
         let expr = cur.v;
         const prev = prevToken();
-        if (prev && prev.t === 'arr') {
+        if (prev && prev.t === "arr") {
           // chop the leading slash from expr
-          if (expr.charAt(0) !== '/')
+          if (expr.charAt(0) !== "/")
             err(
-              `not sure how to handle expression called on nodeset that doesn't start with a '/': ${expr}`
+              `not sure how to handle expression called on nodeset that doesn't start with a '/': ${expr}`,
             );
           // prefix a '.' to make the expression relative to the context node:
-          expr = wrapped.createExpression('.' + expr, nR);
+          expr = wrapped.createExpression("." + expr, nR);
           const newNodeset = [];
           prev.v.forEach((node) => {
             const res = toInternalResult(expr.evaluate(node));
@@ -314,7 +314,7 @@ export default function (wrapped, extensions) {
           // attribute's owner document evaluates the expression correctly,
           // ensuring consistent behavior between Chrome, Safari and Firefox.
           const contextNode =
-            cN?.nodeType === Node.ATTRIBUTE_NODE && expr.startsWith('/')
+            cN?.nodeType === Node.ATTRIBUTE_NODE && expr.startsWith("/")
               ? cN.ownerDocument
               : cN;
 
@@ -325,9 +325,9 @@ export default function (wrapped, extensions) {
                 contextNode,
                 nR,
                 XPathResult.ANY_TYPE,
-                null
-              )
-            )
+                null,
+              ),
+            ),
           );
         }
 
@@ -346,14 +346,14 @@ export default function (wrapped, extensions) {
         return peeked[peeked.length - 1];
       },
       isNum = function (c) {
-        return c >= '0' && c <= '9';
+        return c >= "0" && c <= "9";
       };
 
     newCurrent();
 
     for (i = 0; i < input.length; ++i) {
       const c = input.charAt(i);
-      if (cur.t === 'sq') {
+      if (cur.t === "sq") {
         // Build the entire expression found within the square brackets:
         //
         // > A predicate filters a node-set with respect to an axis to produce a
@@ -370,11 +370,11 @@ export default function (wrapped, extensions) {
         // there is special handling for tracking when we're within a string.
         if (cur.inString) {
           if (cur.inString === c) delete cur.inString;
-        } else if (c === '[') {
+        } else if (c === "[") {
           ++cur.depth;
         } else if (c === "'" || c === '"') {
           cur.inString = c;
-        } else if (c === ']') {
+        } else if (c === "]") {
           if (--cur.depth) {
             cur.v += c;
           } else {
@@ -384,11 +384,11 @@ export default function (wrapped, extensions) {
             }
             let contextNodes;
             const prev = prevToken();
-            if (prev.t === 'arr') {
+            if (prev.t === "arr") {
               contextNodes = prev.v;
             } else
               throw new Error(
-                'Not sure how to handle context node for predicate in this situation.'
+                "Not sure how to handle context node for predicate in this situation.",
               );
 
             // > A PredicateExpr is evaluated by evaluating the Expr and converting
@@ -409,10 +409,10 @@ export default function (wrapped, extensions) {
                   XPathResult.ANY_TYPE,
                   null,
                   contextNodes.length,
-                  i + 1
-                )
+                  i + 1,
+                ),
               );
-              return res.t === 'num' ? asNumber(res) === 1 + i : asBoolean(res);
+              return res.t === "num" ? asNumber(res) === 1 + i : asBoolean(res);
             });
 
             prev.v = filteredNodes;
@@ -423,58 +423,58 @@ export default function (wrapped, extensions) {
         cur.v += c;
         continue;
       }
-      if (cur.t === 'str') {
+      if (cur.t === "str") {
         if (c === cur.quote) {
           pushToken(cur);
           newCurrent();
         } else cur.v += c;
         continue;
       }
-      if (cur.t === 'num') {
-        if (isNum(c) || c === 'e' || (c === '-' && input[i - 1] === 'e')) {
+      if (cur.t === "num") {
+        if (isNum(c) || c === "e" || (c === "-" && input[i - 1] === "e")) {
           cur.str += c;
           continue;
-        } else if (c === ' ' && cur.str === '-') {
+        } else if (c === " " && cur.str === "-") {
           continue;
-        } else if (c === '.' && !cur.decimal) {
+        } else if (c === "." && !cur.decimal) {
           cur.decimal = 1;
           cur.str += c;
         } else finaliseNum();
       }
       if (isNum(c)) {
-        if (cur.v === '') {
-          cur = { t: 'num', str: c };
+        if (cur.v === "") {
+          cur = { t: "num", str: c };
         } else cur.v += c;
       } else
         switch (c) {
           case "'":
           case '"':
-            if (cur.v === '') {
-              cur = { t: 'str', quote: c, v: '' };
-            } else err('Not sure how to handle: ' + c);
+            if (cur.v === "") {
+              cur = { t: "str", quote: c, v: "" };
+            } else err("Not sure how to handle: " + c);
             break;
-          case '(':
+          case "(":
             stack.push({
               v: cur.v,
-              t: 'fn',
+              t: "fn",
               dead: isDeadBranch(),
               tokens: [],
             } as any);
             newCurrent();
             break;
-          case ')':
-            if (cur.v !== '') handleXpathExpr();
+          case ")":
+            if (cur.v !== "") handleXpathExpr();
             evalOps(OR);
             cur = stack.pop();
 
-            if (cur.t !== 'fn') err('")" outside function!');
+            if (cur.t !== "fn") err('")" outside function!');
             if (cur.dead) {
               pushToken(D);
             } else if (cur.v) {
-              if (cur.v.charAt(0) === '/') {
+              if (cur.v.charAt(0) === "/") {
                 if (cur.tokens.length)
-                  err('Unexpected args for node test function!');
-                cur.v += '()';
+                  err("Unexpected args for node test function!");
+                cur.v += "()";
                 handleXpathExpr();
               } else {
                 pushToken(callFn(cur.v, cur.tokens));
@@ -482,63 +482,63 @@ export default function (wrapped, extensions) {
             } else {
               // bracketed expression
               if (cur.tokens.length !== 1)
-                err('Expected one token, but found: ' + cur.tokens.length);
+                err("Expected one token, but found: " + cur.tokens.length);
               pushToken(cur.tokens[0]);
             }
             newCurrent();
             break;
-          case ',':
-            if (peek().t !== 'fn')
-              err('Unexpected comma outside function arguments.');
+          case ",":
+            if (peek().t !== "fn")
+              err("Unexpected comma outside function arguments.");
             if (cur.v) handleXpathExpr();
-            pushToken(',');
+            pushToken(",");
             break;
-          case '*':
+          case "*":
             {
               // check if part of an XPath expression
               const prev = prevToken();
-              if (!prev || prev === ',' || prev.t === 'op' || cur.v) {
+              if (!prev || prev === "," || prev.t === "op" || cur.v) {
                 cur.v += c;
                 break;
               }
               pushOp(MULT);
             }
             break;
-          case '-':
+          case "-":
             {
               const prev = prevToken();
               if (
-                cur.v !== '' &&
-                nextChar() !== ' ' &&
-                input.charAt(i - 1) !== ' '
+                cur.v !== "" &&
+                nextChar() !== " " &&
+                input.charAt(i - 1) !== " "
               ) {
                 // function name expr
                 cur.v += c;
               } else if (
-                cur.v === '' &&
+                cur.v === "" &&
                 (!prev ||
                   // match case: ...+-1
-                  prev.t === 'op' ||
+                  prev.t === "op" ||
                   // previous was a separate function arg
-                  prev === ',')
+                  prev === ",")
               ) {
                 // -ve number
-                cur = { t: 'num', str: '-' };
+                cur = { t: "num", str: "-" };
               } else {
                 // TODO do we need to check for cur.v here?
                 pushOp(MINUS);
               }
             }
             break;
-          case '=':
+          case "=":
             switch (cur.v) {
-              case '<':
+              case "<":
                 pushOp(LTE);
                 break;
-              case '>':
+              case ">":
                 pushOp(GTE);
                 break;
-              case '!':
+              case "!":
                 pushOp(NE);
                 break;
               default:
@@ -546,77 +546,77 @@ export default function (wrapped, extensions) {
                 pushOp(EQ);
             }
             break;
-          case '!':
+          case "!":
             if (cur.v) handleXpathExpr();
             cur.v = c;
             break;
-          case '>':
-          case '<':
+          case ">":
+          case "<":
             if (cur.v) handleXpathExpr();
-            if (nextChar() === '=') {
+            if (nextChar() === "=") {
               cur.v = c;
             } else {
-              pushOp(c === '>' ? GT : LT);
+              pushOp(c === ">" ? GT : LT);
             }
             break;
-          case '+':
+          case "+":
             if (cur.v) handleXpathExpr();
             pushOp(PLUS);
             break;
-          case '|':
+          case "|":
             if (cur.v) handleXpathExpr();
             pushOp(UNION);
             break;
-          case '\n':
-          case '\r':
-          case '\t':
-          case ' ':
+          case "\n":
+          case "\r":
+          case "\t":
+          case " ":
             // whitespace, as defined at https://www.w3.org/TR/REC-xml/#NT-S
-            if (cur.v === '') break; // trim leading whitespace
+            if (cur.v === "") break; // trim leading whitespace
             if (!FUNCTION_NAME.test(cur.v)) handleXpathExpr();
             break;
-          case 'v':
+          case "v":
             // Mad as it seems, according to https://www.w3.org/TR/1999/REC-xpath-19991116/#exprlex,
             // there is no requirement for ExprWhitespace before or after any
             // ExprToken, including OperatorName.
-            if (cur.v === 'di') {
+            if (cur.v === "di") {
               // OperatorName: 'div'
               pushOp(DIV);
             } else cur.v += c;
             break;
-          case 'r':
+          case "r":
             // Mad as it seems, according to https://www.w3.org/TR/1999/REC-xpath-19991116/#exprlex,
             // there is no requirement for ExprWhitespace before or after any
             // ExprToken, including OperatorName.
-            if (cur.v === 'o') {
+            if (cur.v === "o") {
               // OperatorName: 'or'
               pushOp(OR);
             } else cur.v += c;
             break;
-          case 'd':
+          case "d":
             // Mad as it seems, according to https://www.w3.org/TR/1999/REC-xpath-19991116/#exprlex,
             // there is no requirement for ExprWhitespace before or after any
             // ExprToken, including OperatorName.
-            if (cur.v === 'an') {
+            if (cur.v === "an") {
               // OperatorName: 'and'
               pushOp(AND);
-            } else if (cur.v === 'mo') {
+            } else if (cur.v === "mo") {
               // OperatorName: 'mod'
               pushOp(MOD);
             } else cur.v += c;
             break;
-          case '[':
+          case "[":
             // evaluate previous part if there is any
             if (cur.v) {
               handleXpathExpr();
               newCurrent();
             }
-            cur.t = 'sq';
+            cur.t = "sq";
             cur.depth = 1;
             break;
-          case '.':
-            if (cur.v === '' && isNum(nextChar())) {
-              cur = { t: 'num', str: c };
+          case ".":
+            if (cur.v === "" && isNum(nextChar())) {
+              cur = { t: "num", str: c };
               break;
             }
           /* falls through */
@@ -625,13 +625,13 @@ export default function (wrapped, extensions) {
         }
     }
 
-    if (cur.t === 'num') finaliseNum();
+    if (cur.t === "num") finaliseNum();
     if (cur.v) handleXpathExpr();
-    if (stack.length !== 1) err('Stuff left on stack.');
-    if (stack[0].t !== 'root') err('Weird stuff on stack.');
-    if (stack[0].tokens.length === 0) err('No tokens.');
+    if (stack.length !== 1) err("Stuff left on stack.");
+    if (stack[0].t !== "root") err("Weird stuff on stack.");
+    if (stack[0].tokens.length === 0) err("No tokens.");
     evalOps(OR);
-    if (stack[0].tokens.length !== 1) err('Too many tokens.');
+    if (stack[0].tokens.length !== 1) err("Too many tokens.");
 
     return toExternalResult(stack[0].tokens[0], rT);
   });

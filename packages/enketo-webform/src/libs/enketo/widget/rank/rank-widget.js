@@ -1,9 +1,9 @@
-import $ from 'jquery';
-import sortable from 'html5sortable/dist/html5sortable.cjs';
-import { t } from '../../js/fake-translator';
-import Widget from '../../js/widget';
-import support from '../../js/support';
-import events from '../../js/event';
+import $ from "jquery";
+import sortable from "html5sortable/dist/html5sortable.cjs";
+import { t } from "../../js/fake-translator";
+import Widget from "../../js/widget";
+import support from "../../js/support";
+import events from "../../js/event";
 
 /**
  * @augments Widget
@@ -13,7 +13,7 @@ class RankWidget extends Widget {
    * @type {string}
    */
   static get selector() {
-    return '.question input.rank';
+    return ".question input.rank";
   }
 
   /**
@@ -27,36 +27,36 @@ class RankWidget extends Widget {
     const that = this;
     const loadedValue = this.originalInputValue;
     const startTextKey = support.touch
-      ? 'rankwidget.tapstart'
-      : 'rankwidget.clickstart';
+      ? "rankwidget.tapstart"
+      : "rankwidget.clickstart";
 
-    this.itemSelector = 'label:not(.itemset-template)';
+    this.itemSelector = "label:not(.itemset-template)";
     this.list = $(this.element)
-      .next('.option-wrapper')
-      .addClass('widget rank-widget')[0];
+      .next(".option-wrapper")
+      .addClass("widget rank-widget")[0];
 
     $(this.list)
-      .toggleClass('rank-widget--empty', !loadedValue)
+      .toggleClass("rank-widget--empty", !loadedValue)
       .append(this.resetButtonHtml)
       .append(
         `<div class="rank-widget__overlay"><span class="rank-widget__overlay__content" data-i18n="${startTextKey}">${
-          support.touch ? t('rankwidget.tapstart') : t('rankwidget.clickstart')
-        }</span></div>`
+          support.touch ? t("rankwidget.tapstart") : t("rankwidget.clickstart")
+        }</span></div>`,
       )
-      .on('click', function () {
+      .on("click", function () {
         if (!that.element.disabled) {
-          this.classList.remove('rank-widget--empty');
+          this.classList.remove("rank-widget--empty");
           that.originalInputValue = that.value;
           that.element.dispatchEvent(events.FakeFocus());
         }
       });
 
-    this.list.querySelector('.btn-reset').addEventListener('click', (evt) => {
+    this.list.querySelector(".btn-reset").addEventListener("click", (evt) => {
       this._reset();
       evt.stopPropagation();
     });
 
-    this.element.classList.add('hide');
+    this.element.classList.add("hide");
 
     this.value = loadedValue;
 
@@ -69,10 +69,10 @@ class RankWidget extends Widget {
           value: [].slice
             .call(container.node.querySelectorAll(`${that.itemSelector} input`))
             .map((input) => input.value)
-            .join(' '),
+            .join(" "),
         };
       },
-    })[0].addEventListener('sortupdate', () => {
+    })[0].addEventListener("sortupdate", () => {
       this.originalInputValue = this.value;
       this.element.dispatchEvent(events.FakeFocus());
     });
@@ -86,14 +86,14 @@ class RankWidget extends Widget {
    * Resets widget
    */
   _reset() {
-    this.originalInputValue = '';
+    this.originalInputValue = "";
   }
 
   /**
    * @type {string}
    */
   get value() {
-    const result = sortable(this.list, 'serialize');
+    const result = sortable(this.list, "serialize");
 
     return result[0].container.value;
   }
@@ -103,7 +103,7 @@ class RankWidget extends Widget {
       this._reset();
     } else {
       const that = this;
-      const values = value.split(' ');
+      const values = value.split(" ");
       const items = [
         ...this.list.querySelectorAll(`${this.itemSelector} input`),
       ];
@@ -111,7 +111,7 @@ class RankWidget extends Widget {
       // Basic error check
       if (values.length !== items.length) {
         throw new Error(
-          'Could not load rank widget value. Number of items mismatch.'
+          "Could not load rank widget value. Number of items mismatch.",
         );
       }
 
@@ -121,7 +121,7 @@ class RankWidget extends Widget {
         const bIndex = values.indexOf(b.value);
         if (aIndex === -1 || bIndex === -1) {
           throw new Error(
-            'Could not load rank widget value. Mismatch in item values.'
+            "Could not load rank widget value. Mismatch in item values.",
           );
         }
 
@@ -129,7 +129,7 @@ class RankWidget extends Widget {
       });
 
       items.forEach((item) => {
-        $(that.list).find('.btn-reset').before($(item.parentNode).detach());
+        $(that.list).find(".btn-reset").before($(item.parentNode).detach());
       });
     }
   }
@@ -139,12 +139,12 @@ class RankWidget extends Widget {
    */
   disable() {
     $(this.element)
-      .prop('disabled', true)
-      .next('.widget')
-      .find('input, button')
-      .prop('disabled', true);
+      .prop("disabled", true)
+      .next(".widget")
+      .find("input, button")
+      .prop("disabled", true);
 
-    sortable(this.list, 'disable');
+    sortable(this.list, "disable");
   }
 
   /**
@@ -152,12 +152,12 @@ class RankWidget extends Widget {
    */
   enable() {
     $(this.element)
-      .prop('disabled', false)
-      .next('.widget')
-      .find('input, button')
-      .prop('disabled', false);
+      .prop("disabled", false)
+      .next(".widget")
+      .find("input, button")
+      .prop("disabled", false);
 
-    sortable(this.list, 'enable');
+    sortable(this.list, "enable");
   }
 
   /**
@@ -192,7 +192,7 @@ class RankWidget extends Widget {
    */
   set originalInputValue(value) {
     super.originalInputValue = value;
-    this.list.classList.toggle('rank-widget--empty', !value);
+    this.list.classList.toggle("rank-widget--empty", !value);
   }
 }
 

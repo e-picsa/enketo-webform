@@ -2,10 +2,10 @@
  * @module calculate
  */
 
-import config from '../config';
-import { getAncestors, getSiblingElementsAndSelf } from './dom-utils';
-import events from './event';
-import { getCurrentPosition } from './geolocation';
+import config from "../config";
+import { getAncestors, getSiblingElementsAndSelf } from "./dom-utils";
+import events from "./event";
+import { getCurrentPosition } from "./geolocation";
 
 export default {
   /**
@@ -15,12 +15,12 @@ export default {
    * @param {string} [filter] - CSS selector filter
    * @param {boolean} [emptyNonRelevant] - Whether to empty non-relevant calculation nodes
    */
-  update(updated = {}, filter = '', emptyNonRelevant = false) {
+  update(updated = {}, filter = "", emptyNonRelevant = false) {
     let nodes;
 
     if (!this.form) {
       throw new Error(
-        'Calculation module not correctly instantiated with form property.'
+        "Calculation module not correctly instantiated with form property.",
       );
     }
 
@@ -29,27 +29,27 @@ export default {
       // Questions that are descendants of a group:
       nodes = this.form
         .getRelatedNodes(
-          'data-calculate',
-          `[name^="${updated.relevantPath}/"]${filter}`
+          "data-calculate",
+          `[name^="${updated.relevantPath}/"]${filter}`,
         )
         // Individual questions:
         .add(
           this.form.getRelatedNodes(
-            'data-calculate',
-            `[name="${updated.relevantPath}"]${filter}`
-          )
+            "data-calculate",
+            `[name="${updated.relevantPath}"]${filter}`,
+          ),
         )
         // Individual radiobutton questions with a calculate....:
         .add(
           this.form.getRelatedNodes(
-            'data-calculate',
-            `[data-name="${updated.relevantPath}"]${filter}`
-          )
+            "data-calculate",
+            `[data-name="${updated.relevantPath}"]${filter}`,
+          ),
         )
         .get();
     } else {
       nodes = this.form
-        .getRelatedNodes('data-calculate', filter, updated)
+        .getRelatedNodes("data-calculate", filter, updated)
         .get();
     }
 
@@ -78,19 +78,19 @@ export default {
            * and the dependent node is inside the same repeat, we can prevent the expensive index determination
            */
           const dataNodeName =
-            name.lastIndexOf('/') !== -1
-              ? name.substring(name.lastIndexOf('/') + 1)
+            name.lastIndexOf("/") !== -1
+              ? name.substring(name.lastIndexOf("/") + 1)
               : name;
           const childNodeList = this.form.model
             .node(updated.repeatPath, updated.repeatIndex)
             .getElement()
             .querySelectorAll(dataNodeName);
           const dataNode = Array.from(childNodeList).filter((node) =>
-            dataNodes.includes(node)
+            dataNodes.includes(node),
           )[0];
           props.index = dataNodes.indexOf(dataNode);
           this._updateCalc(control, props, emptyNonRelevant);
-        } else if (control.type === 'hidden') {
+        } else if (control.type === "hidden") {
           /*
            * This case is the consequence of the  decision to place calculated items without a visible form control,
            * as a separate group (.or-calculated-items, or .or-setvalue-items, or .or-setgeopoint-items), instead of in the Form DOM in the locations .
@@ -107,11 +107,11 @@ export default {
            * present, without calculated items that HAVE a visible form control.
            */
           const repeatSiblings = getSiblingElementsAndSelf(
-            control.closest('.or-repeat'),
-            '.or-repeat'
+            control.closest(".or-repeat"),
+            ".or-repeat",
           );
           if (repeatSiblings.length === dataNodes.length) {
-            props.index = repeatSiblings.indexOf(control.closest('.or-repeat'));
+            props.index = repeatSiblings.indexOf(control.closest(".or-repeat"));
             this._updateCalc(control, props, emptyNonRelevant);
           }
         }
@@ -136,14 +136,14 @@ export default {
       // https://github.com/OpenClinica/enketo-express-oc/issues/355#issuecomment-725640823
       return [
         ...this.form.view.html.querySelectorAll(
-          `.${action} [data-${action}][data-event*="${event.type}"]`
+          `.${action} [data-${action}][data-event*="${event.type}"]`,
         ),
       ].concat(
         this.form.filterRadioCheckSiblings([
           ...this.form.view.html.querySelectorAll(
-            `.question [data-${action}][data-event*="${event.type}"]`
+            `.question [data-${action}][data-event*="${event.type}"]`,
           ),
-        ])
+        ]),
       );
     }
     if (event.type === new events.NewRepeat().type) {
@@ -156,7 +156,7 @@ export default {
         .getRelatedNodes(
           `data-${action}`,
           `.${action} [data-event*="${event.type}"]`,
-          event.detail
+          event.detail,
         )
         .get()
         .concat(
@@ -164,18 +164,18 @@ export default {
             .getRelatedNodes(
               `data-${action}`,
               `.question [data-event*="${event.type}"]`,
-              event.detail
+              event.detail,
             )
-            .get()
+            .get(),
         );
     }
     if (event.type === new events.XFormsValueChanged().type) {
-      const question = event.target.closest('.question');
+      const question = event.target.closest(".question");
 
       return question
         ? [
             ...question.querySelectorAll(
-              `[data-${action}][data-event*="${event.type}"]`
+              `[data-${action}][data-event*="${event.type}"]`,
             ),
           ]
         : [];
@@ -195,7 +195,7 @@ export default {
 
     if (!this.form) {
       throw new Error(
-        `${action} action not correctly instantiated with form property.`
+        `${action} action not correctly instantiated with form property.`,
       );
     }
 
@@ -211,14 +211,14 @@ export default {
         dataType: this.form.input.getXmlType(actionControl),
         relevantExpr: this.form.input.getRelevant(actionControl),
         index:
-          event.detail && typeof event.detail.repeatIndex !== 'undefined'
+          event.detail && typeof event.detail.repeatIndex !== "undefined"
             ? event.detail.repeatIndex
             : 0,
         dataNodesObj,
         type: action,
       };
 
-      if (action === 'setvalue') {
+      if (action === "setvalue") {
         props.expr = actionControl.dataset.setvalue;
       }
 
@@ -254,7 +254,7 @@ export default {
         this._updateCalc(control, props);
       } else {
         console.error(
-          'performAction called for node that does not exist in model.'
+          "performAction called for node that does not exist in model.",
         );
       }
     });
@@ -269,15 +269,15 @@ export default {
   _updateCalc(control, props, emptyNonRelevant) {
     if (
       !emptyNonRelevant &&
-      props.type !== 'setvalue' &&
-      props.type !== 'setgeopoint' &&
+      props.type !== "setvalue" &&
+      props.type !== "setgeopoint" &&
       this._hasNeverBeenRelevant(control, props) &&
       !this._isRelevant(props)
     ) {
       return;
     }
 
-    if (props.type === 'setgeopoint') {
+    if (props.type === "setgeopoint") {
       const options = {
         enableHighAccuracy: true,
         maximumAge: 0,
@@ -288,7 +288,7 @@ export default {
           this._updateValue(control, props, geopoint);
         })
         .catch(() => {
-          this._updateValue(control, props, '');
+          this._updateValue(control, props, "");
         });
 
       return;
@@ -299,17 +299,17 @@ export default {
     // Not sure if using 'string' is always correct
     const newExpr = this.form.replaceChoiceNameFn(
       props.expr,
-      'string',
+      "string",
       props.name,
-      props.index
+      props.index,
     );
 
     // It is possible that the fixed expr is '' which causes an error in XPath
     // const xpathType = this.form.input.getInputType( control ) === 'number' ? 'number' : 'string';
     const result =
       !empty && newExpr
-        ? this.form.model.evaluate(newExpr, 'string', props.name, props.index)
-        : '';
+        ? this.form.model.evaluate(newExpr, "string", props.name, props.index)
+        : "";
 
     // Filter the result set to only include the target node
     this._updateValue(control, props, result);
@@ -349,7 +349,7 @@ export default {
        * We need to specifically call validate on the question itself, because the validationUpdate
        * in the evaluation cascade only updates questions with a _dependency_ on this question.
        */
-      if (control.type !== 'hidden' && config.validateContinuously === true) {
+      if (control.type !== "hidden" && config.validateContinuously === true) {
         this.form.validateInput(control);
       }
     }
@@ -365,15 +365,15 @@ export default {
     let relevant = props.relevantExpr
       ? this.form.model.evaluate(
           props.relevantExpr,
-          'boolean',
+          "boolean",
           props.name,
-          props.index
+          props.index,
         )
       : true;
 
     // Only look at ancestors if self is relevant.
     if (relevant) {
-      const pathParts = props.name.split('/');
+      const pathParts = props.name.split("/");
       /*
        * First determine immediate group parent of node, which will always be in correct location in DOM. This is where
        * we can use the index to be guaranteed to get the correct node.
@@ -385,32 +385,32 @@ export default {
        *
        * Note: getting the parents of control wouldn't work for nodes inside #calculated-items!
        */
-      const parentPath = pathParts.splice(0, pathParts.length - 1).join('/');
+      const parentPath = pathParts.splice(0, pathParts.length - 1).join("/");
       let startElement;
 
       if (props.index === 0) {
         startElement = this.form.view.html.querySelector(
-          `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`
+          `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`,
         );
       } else {
         startElement =
           this.form.view.html.querySelectorAll(
-            `.or-repeat[name="${parentPath}"]`
+            `.or-repeat[name="${parentPath}"]`,
           )[props.index] ||
           this.form.view.html.querySelectorAll(
-            `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`
+            `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`,
           )[props.index];
       }
       const ancestorGroups = startElement
         ? [startElement].concat(
-            getAncestors(startElement, '.or-group, .or-group-data')
+            getAncestors(startElement, ".or-group, .or-group-data"),
           )
         : [];
 
       if (ancestorGroups.length) {
         // Start at the highest level, and traverse down to the immediate parent group.
         relevant = ancestorGroups
-          .filter((el) => el.matches('[data-relevant]'))
+          .filter((el) => el.matches("[data-relevant]"))
           .map((group) => {
             const nm = this.form.input.getName(group);
 
@@ -419,7 +419,7 @@ export default {
               // thankfully relevants on repeats are not possible with XLSForm-produced forms
               index: [
                 ...this.form.view.html.querySelectorAll(
-                  `.or-group[name="${nm}"], .or-group-data[name="${nm}"]`
+                  `.or-group[name="${nm}"], .or-group-data[name="${nm}"]`,
                 ),
               ].indexOf(group), // performance....
               expr: this.form.input.getRelevant(group),
@@ -436,11 +436,11 @@ export default {
             item.expr
               ? this.form.model.evaluate(
                   item.expr,
-                  'boolean',
+                  "boolean",
                   item.context,
-                  item.index
+                  item.index,
                 )
-              : true
+              : true,
           );
       }
     }
@@ -449,11 +449,11 @@ export default {
   },
 
   _hasNeverBeenRelevant(control, props) {
-    if (control && control.closest('.pre-init')) {
+    if (control && control.closest(".pre-init")) {
       return true;
     }
     // Check parents including when the calculation has no form control.
-    const pathParts = props.name.split('/');
+    const pathParts = props.name.split("/");
     /*
      * First determine immediate group parent of node, which will always be in correct location in DOM. This is where
      * we can use the index to be guaranteed to get the correct node.
@@ -465,23 +465,23 @@ export default {
      *
      * Note: getting the parents of control wouldn't work for nodes inside #calculated-items!
      */
-    const parentPath = pathParts.splice(0, pathParts.length - 1).join('/');
+    const parentPath = pathParts.splice(0, pathParts.length - 1).join("/");
     let startElement;
 
     if (props.index === 0) {
       startElement = this.form.view.html.querySelector(
-        `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`
+        `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`,
       );
     } else {
       startElement =
         this.form.view.html.querySelectorAll(
-          `.or-repeat[name="${parentPath}"]`
+          `.or-repeat[name="${parentPath}"]`,
         )[props.index] ||
         this.form.view.html.querySelectorAll(
-          `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`
+          `.or-group[name="${parentPath}"],.or-group-data[name="${parentPath}"]`,
         )[props.index];
     }
 
-    return startElement ? !!startElement.closest('.pre-init') : false;
+    return startElement ? !!startElement.closest(".pre-init") : false;
   },
 };
