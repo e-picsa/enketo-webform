@@ -1,8 +1,9 @@
 {
   "packages": {
-    ".": {
+    "packages/enketo-webform": {
       "release-type": "node",
-      "changelog-path": "CHANGELOG.md"
+      "package-name": "enketo-webform",
+      "changelog-path": "../../CHANGELOG.md"
     }
   }
 }

@@ -40,7 +40,7 @@ jobs:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
 
-        # Remove husky prepare script before publish
+      # Build from root dir to ensure types generated
       - run: |
           bun run build
           cd packages/enketo-webform
