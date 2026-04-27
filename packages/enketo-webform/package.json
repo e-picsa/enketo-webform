@@ -10,11 +10,7 @@
       "import": "./dist/enketo-webform.js",
       "require": "./dist/enketo-webform.umd.cjs",
       "types": "./dist/index.d.ts"
-    },
-    "./styles": "./src/enketo-webform.scss",
-    "./styles/grid": "./src/libs/enketo/sass/grid/grid.scss",
-    "./styles/plain": "./src/libs/enketo/sass/plain/plain.scss",
-    "./styles/formhub": "./src/libs/enketo/sass/formhub/formhub.scss"
+    }
   },
   "files": [
     "dist"

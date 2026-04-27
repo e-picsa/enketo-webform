@@ -1,46 +1,52 @@
-import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
-import { resolve } from 'path';
+import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
+import { resolve } from "path";
 
 export default defineConfig({
   plugins: [
     dts({
-      include: ['src/enketo-webform.ts', 'src/kobo-service.ts', 'src/utils.ts', 'src/types.d.ts'],
-      exclude: ['src/**/*.test.ts', 'src/libs'],
+      include: [
+        "src/enketo-webform.ts",
+        "src/kobo-service.ts",
+        "src/utils.ts",
+        "src/types.d.ts",
+      ],
+      exclude: ["src/**/*.test.ts", "src/libs"],
     }),
   ],
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler',
+        api: "modern-compiler",
       },
     },
   },
   build: {
-    target: 'esnext',
+    target: "esnext",
     lib: {
-      entry: resolve(__dirname, 'src/enketo-webform.ts'),
-      name: 'EnketoWebform',
-      formats: ['es', 'umd'],
-      fileName: (format) => `enketo-webform.${format === 'es' ? 'js' : 'umd.cjs'}`,
+      entry: resolve(__dirname, "src/enketo-webform.ts"),
+      name: "EnketoWebform",
+      formats: ["es", "umd"],
+      fileName: (format) =>
+        `enketo-webform.${format === "es" ? "js" : "umd.cjs"}`,
     },
     rollupOptions: {
       external(id) {
-        if (id === 'jquery' || id === 'jquery-touchswipe') return false;
-        if (id.includes('node_modules')) return true;
+        if (id === "jquery" || id === "jquery-touchswipe") return false;
+        if (id.includes("node_modules")) return true;
         return false;
       },
       output: {
-        assetFileNames: 'enketo-webform[extname]',
+        assetFileNames: "enketo-webform[extname]",
         globals: {
-          jquery: 'jQuery',
+          jquery: "jQuery",
         },
       },
     },
   },
   resolve: {
     alias: {
-      '@': '/src',
+      "@": "/src",
     },
   },
 });
