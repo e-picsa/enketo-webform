@@ -8,10 +8,20 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 export default defineConfig({
   plugins: [
     preact({
-      // Tell Preact's Babel transform to ignore the parent src directory.
-      // The regex handles both Windows (\) and Unix (/) file paths.
-      exclude: [/[/\\]src[/\\]/],
+      // Only include the demo's own source files for Preact transformation.
+      include: ["src/**"],
     }),
+    // Custom plugin to force a full reload when the library source changes.
+    // This avoids "already registered" errors with web components in HMR.
+    {
+      name: "full-reload-lib",
+      handleHotUpdate({ file, server }) {
+        if (file.includes("/src/") && !file.includes("/demo/")) {
+          server.ws.send({ type: "full-reload" });
+          return [];
+        }
+      },
+    },
   ],
   resolve: {
     alias: {
@@ -20,7 +30,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    // Prevent Vite from trying to pre-bundle the local aliased file
     exclude: ["@picsa/enketo-webform"],
   },
   server: {
