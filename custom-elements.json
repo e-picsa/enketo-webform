@@ -1,0 +1,3075 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "../src/enketo-webform.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "EnketoWebform",
+          "members": [
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "string"
+              },
+              "description": "XHTML form definition (required)",
+              "attribute": "form"
+            },
+            {
+              "kind": "field",
+              "name": "model",
+              "type": {
+                "text": "string"
+              },
+              "description": "XML data model (required)",
+              "attribute": "model"
+            },
+            {
+              "kind": "field",
+              "name": "showButtons",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Whether to show Save Draft / Submit buttons",
+              "attribute": "showButtons"
+            },
+            {
+              "kind": "field",
+              "name": "enketoId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form definition (enketo ID)\nIf not provided, will be extracted from the form or generated",
+              "attribute": "enketoId"
+            },
+            {
+              "kind": "field",
+              "name": "formName",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Name for the form entry",
+              "attribute": "formName"
+            },
+            {
+              "kind": "field",
+              "name": "instanceId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form instance\nIf not provided, will be generated on first save",
+              "attribute": "instanceId"
+            },
+            {
+              "kind": "field",
+              "name": "formContainerEl",
+              "type": {
+                "text": "HTMLDivElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "enketoForm",
+              "type": {
+                "text": "Form | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "formHtml",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "\"idle\" | \"loading\" | \"ready\" | \"error\""
+              },
+              "privacy": "private",
+              "default": "\"idle\""
+            },
+            {
+              "kind": "field",
+              "name": "errorMessage",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "_formLoaded",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "renderDebugStatus",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderEnketoLogo",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderFooter",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "generateId",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "prefix",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "save",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "opts",
+                  "default": "{ draft: false }"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "xmlFormValue",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "handleEventDataUpdate",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<{ nodes: string[] }>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleEventXmlFormChange",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "_e",
+                  "type": {
+                    "text": "ReturnType<typeof Events.XFormsValueChanged>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "loadForm",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "name": "formSaved",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "dataUpdated",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "form",
+              "type": {
+                "text": "string"
+              },
+              "description": "XHTML form definition (required)",
+              "fieldName": "form"
+            },
+            {
+              "name": "model",
+              "type": {
+                "text": "string"
+              },
+              "description": "XML data model (required)",
+              "fieldName": "model"
+            },
+            {
+              "name": "showButtons",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Whether to show Save Draft / Submit buttons",
+              "fieldName": "showButtons"
+            },
+            {
+              "name": "enketoId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form definition (enketo ID)\nIf not provided, will be extracted from the form or generated",
+              "fieldName": "enketoId"
+            },
+            {
+              "name": "formName",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Name for the form entry",
+              "fieldName": "formName"
+            },
+            {
+              "name": "instanceId",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "Unique identifier for the form instance\nIf not provided, will be generated on first save",
+              "fieldName": "instanceId"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "enketo-webform",
+          "customElement": true,
+          "modulePath": "../src/enketo-webform.ts",
+          "definitionPath": "../src/enketo-webform.ts"
+        },
+        {
+          "kind": "variable",
+          "name": "enketoId"
+        },
+        {
+          "kind": "variable",
+          "name": "instanceId"
+        },
+        {
+          "kind": "variable",
+          "name": "name"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "EnketoWebform",
+          "declaration": {
+            "name": "EnketoWebform",
+            "module": "../src/enketo-webform.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "enketo-webform",
+          "declaration": {
+            "name": "EnketoWebform",
+            "module": "../src/enketo-webform.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "EnketoWebform",
+          "declaration": {
+            "name": "EnketoWebform",
+            "module": "../enketo-webform"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "../src/types"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/kobo-service.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Service for submitting forms to KoBoToolbox.",
+          "name": "KoboService",
+          "members": [
+            {
+              "kind": "field",
+              "name": "apiEndpoints",
+              "type": {
+                "text": "object"
+              },
+              "privacy": "public",
+              "default": "{ v1: \"https://kc.kobotoolbox.org/api/v1\", v2: \"https://kf.kobotoolbox.org/api/v2\", }",
+              "description": "KoBoToolbox API endpoints"
+            },
+            {
+              "kind": "field",
+              "name": "httpHandlers",
+              "type": {
+                "text": "object"
+              },
+              "privacy": "public",
+              "default": "{ req: (endpoint: string, options: RequestInit) => fetch(endpoint, options).then(async (res) => { const status = res.status; const text = await res.text(); return { status, text }; }), }",
+              "description": "HTTP request handler"
+            },
+            {
+              "kind": "method",
+              "name": "submitXMLSubmission",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              },
+              "parameters": [
+                {
+                  "name": "xmlSubmission",
+                  "type": {
+                    "text": "string"
+                  },
+                  "description": "The XML submission string"
+                }
+              ],
+              "description": "Submits XML data to KoBoToolbox API v1."
+            },
+            {
+              "kind": "method",
+              "name": "formatResponse",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "status",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "text",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "wipUpdateJSONSubmission",
+              "privacy": "public",
+              "parameters": [
+                {
+                  "name": "data",
+                  "type": {
+                    "text": "Record<string, unknown>"
+                  }
+                },
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "formatXML",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "xmlString",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "KoboService",
+          "declaration": {
+            "name": "KoboService",
+            "module": "../src/kobo-service.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/utils.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "xmlToJson",
+          "parameters": [
+            {
+              "name": "xmlString",
+              "type": {
+                "text": "string"
+              },
+              "description": "The XML string to parse"
+            },
+            {
+              "name": "options",
+              "default": "{}",
+              "type": {
+                "text": "X2jOptions"
+              },
+              "description": "Optional fast-xml-parser options"
+            }
+          ],
+          "description": "Converts an XML string to a JSON object.",
+          "return": {
+            "type": {
+              "text": ""
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "jsonToXML",
+          "parameters": [
+            {
+              "name": "json",
+              "type": {
+                "text": "Record<string, unknown>"
+              },
+              "description": "The JSON object to convert"
+            }
+          ],
+          "description": "Converts a JSON object to an XML string.",
+          "return": {
+            "type": {
+              "text": ""
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "xmlStringToFile",
+          "parameters": [
+            {
+              "name": "xmlString",
+              "type": {
+                "text": "string"
+              },
+              "description": "The XML string"
+            }
+          ],
+          "description": "Creates a File object from an XML string (browser only).",
+          "return": {
+            "type": {
+              "text": ""
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "xmlNodeReplaceContent",
+          "parameters": [
+            {
+              "name": "options",
+              "type": {
+                "text": "{\n  xml: string;\n  tagname: string;\n  content: string;\n}"
+              },
+              "description": "Configuration object"
+            },
+            {
+              "description": "The XML string",
+              "name": "options.xml"
+            },
+            {
+              "description": "The tag name to replace content in",
+              "name": "options.tagname"
+            },
+            {
+              "description": "The new content",
+              "name": "options.content"
+            }
+          ],
+          "description": "Replaces the content of a specific XML node.",
+          "return": {
+            "type": {
+              "text": ""
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "xmlToJson",
+          "declaration": {
+            "name": "xmlToJson",
+            "module": "../src/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "jsonToXML",
+          "declaration": {
+            "name": "jsonToXML",
+            "module": "../src/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "xmlStringToFile",
+          "declaration": {
+            "name": "xmlStringToFile",
+            "module": "../src/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "xmlNodeReplaceContent",
+          "declaration": {
+            "name": "xmlNodeReplaceContent",
+            "module": "../src/utils.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/date-extensions.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Consistent with JavaRosa, the following should produce an empty string:\n\n- `date('')`\n- `format-date('')`\n- `format-date(date(''))`\n\nConversions of `date('')` to a number is still invalid. This behavior\ndeviates from JavaRosa by producing 'Invalid Date' rather than `NaN`,\nfor consistency with historical behavior.",
+          "name": "BlankDate",
+          "members": [
+            {
+              "kind": "method",
+              "name": "toString"
+            }
+          ],
+          "superclass": {
+            "name": "Date",
+            "module": "src/libs/openrosa/date-extensions.ts"
+          }
+        },
+        {
+          "kind": "function",
+          "name": "toISOLocalString",
+          "parameters": [
+            {
+              "name": "date",
+              "type": {
+                "text": "Date"
+              }
+            }
+          ],
+          "description": "Converts a native Date UTC String to a RFC 3339-compliant date string with local offsets\nused in ODK, so it replaces the Z in the ISOstring with a local offset",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getTimezoneOffsetAsTime",
+          "parameters": [
+            {
+              "name": "date",
+              "type": {
+                "text": "Date"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BlankDate",
+          "declaration": {
+            "name": "BlankDate",
+            "module": "../src/libs/openrosa/date-extensions.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "toISOLocalString",
+          "declaration": {
+            "name": "toISOLocalString",
+            "module": "../src/libs/openrosa/date-extensions.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getTimezoneOffsetAsTime",
+          "declaration": {
+            "name": "getTimezoneOffsetAsTime",
+            "module": "../src/libs/openrosa/date-extensions.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/extended-xpath.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "wrapped"
+            },
+            {
+              "name": "extensions"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": "",
+          "type": {
+            "text": "typeof document.evaluate"
+          }
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "../src/libs/openrosa/extended-xpath.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/geo.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "area",
+          "parameters": [
+            {
+              "name": "geopoints"
+            }
+          ],
+          "description": "Adapted from https://github.com/Leaflet/Leaflet.draw/blob/3cba37065ea5be28f42efe9cc47836c9e3f5db8c/src/ext/GeometryUtil.js#L3-L20"
+        },
+        {
+          "kind": "function",
+          "name": "distance",
+          "parameters": [
+            {
+              "name": "geopoints",
+              "type": {
+                "text": "any"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": ""
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "asGeopoints",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "asGeopoints",
+          "declaration": {
+            "name": "asGeopoints",
+            "module": "../src/libs/openrosa/geo.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "area",
+          "declaration": {
+            "name": "area",
+            "module": "../src/libs/openrosa/geo.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "distance",
+          "declaration": {
+            "name": "distance",
+            "module": "../src/libs/openrosa/geo.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/openrosa-extensions.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "openrosa_xpath_extensions",
+          "default": "function () { const TOO_MANY_ARGS = new Error(\"too many args\"), TOO_FEW_ARGS = new Error(\"too few args\"), _round = function (num) { if (num < 0) { return -Math.round(-num); } return Math.round(num); }, format_date = function (date, format) { date = asDate(date); format = asString(format); if (\"\" === date.toString() || isNaN(date)) return \"\"; let c, i, sb = \"\"; const year = 1900 + date.getYear(); const month = 1 + date.getMonth(); const day = date.getDate(); const hour = date.getHours(); const locale = (globalThis.window as any)?.enketoFormLocale; for (i = 0; i < format.length; ++i) { c = format.charAt(i); if (c === \"%\") { if (++i >= format.length) { throw new Error(\"date format string ends with %\"); } c = format.charAt(i); if (c === \"%\") { // literal '%' sb += \"%\"; } else if (c === \"Y\") { //4-digit year sb += _zeroPad(year, 4); } else if (c === \"y\") { //2-digit year sb += _zeroPad(year, 4).substring(2); } else if (c === \"m\") { //0-padded month sb += _zeroPad(month, 2); } else if (c === \"n\") { //numeric month sb += month; } else if (c === \"b\") { //short text month sb += date.toLocaleDateString(locale, { month: \"short\" }); } else if (c === \"d\") { //0-padded day of month sb += _zeroPad(day, 2); } else if (c === \"e\") { //day of month sb += day; } else if (c === \"H\") { //0-padded hour (24-hr time) sb += _zeroPad(hour, 2); } else if (c === \"h\") { //hour (24-hr time) sb += hour; } else if (c === \"M\") { //0-padded minute sb += _zeroPad(date.getMinutes(), 2); } else if (c === \"S\") { //0-padded second sb += _zeroPad(date.getSeconds(), 2); } else if (c === \"3\") { //0-padded millisecond ticks (000-999) sb += _zeroPad(date.getMilliseconds(), 3); } else if (c === \"a\") { //Three letter short text day sb += date.toLocaleDateString(locale, { weekday: \"short\" }); } else if (c === \"Z\" || c === \"A\" || c === \"B\") { throw new Error( \"unsupported escape in date format string [%\" + c + \"]\", ); } else { throw new Error( \"unrecognized escape in date format string [%\" + c + \"]\", ); } } else { sb += c; } } return sb; }, ret: { func; process; XPR; _now } = {} as any; const func = { abs: function (r) { return XPR.number(Math.abs(asNumber(r))); }, acos: function (r) { return XPR.number(Math.acos(asNumber(r))); }, asin: function (r) { return XPR.number(Math.asin(asNumber(r))); }, atan: function (r) { return XPR.number(Math.atan(asNumber(r))); }, atan2: function (r) { if (arguments.length > 1) { const y = asNumber(arguments[0]); const x = asNumber(arguments[1]); return XPR.number(Math.atan2(y, x)); } return XPR.number(Math.atan2(asNumber(r), 0)); }, boolean: function (r) { if (arguments.length === 0) throw new Error(\"too few args\"); if (arguments.length > 1) throw new Error(\"too few args\"); return XPR.boolean(asBoolean(r)); }, \"boolean-from-string\": function (r) { if (r.t === \"num\" && r.v > 0 && !r.decimal) { return XPR.boolean(true); } r = asString(r); return XPR.boolean(r === \"1\" || r === \"true\"); }, area: function (r) { if (arguments.length === 0) throw TOO_FEW_ARGS; return XPR.number(area(asGeopoints(r))); }, checklist: function (min, max, ...list) { min = asNumber(min); max = asNumber(max); const trues = mapFn(asBoolean, ...list).reduce( (acc, v) => (v ? acc + 1 : acc), 0, ); return XPR.boolean( (min < 0 || trues >= min) && (max < 0 || trues <= max), ); }, coalesce: function (a, b) { return XPR.string(asString(a) || asString(b)); }, concat: function (...args) { return XPR.string(mapFn(asString, ...args).join(\"\")); }, cos: function (r) { return XPR.number(Math.cos(asNumber(r))); }, count: function (selecter) { // count() is part of XPath 1.0, but Chrome and Firefox disagree on how it should work. if (arguments.length === 0) throw new Error(\"too few args\"); if (arguments.length > 1) throw new Error(\"too few args\"); if (selecter.t !== \"arr\") throw new Error(\"Unpexpected arg type: '\" + selecter.t + \"'\"); return XPR.number(selecter.v.length); }, \"count-non-empty\": function (r) { if (arguments.length === 0) throw new Error(\"too few args\"); if (arguments.length > 1) throw new Error(\"too many args\"); if (r.t !== \"arr\") throw new Error(\"wrong arg type:\" + JSON.stringify(r)); return XPR.number( mapFn(asString, r).reduce((acc, v) => (v ? acc + 1 : acc), 0), ); }, \"count-selected\": function (s) { const parts = asString(s).split(\" \"); let i = parts.length, count = 0; while (--i >= 0) if (parts[i].length) ++count; return XPR.number(count); }, date: function (it) { return XPR.date(asDate(it)); }, \"decimal-date-time\": function (r) { if (arguments.length > 1) throw TOO_MANY_ARGS; const days = r.t === \"num\" ? asNumber(r) : dateStringToDays(asString(r)); return XPR.number(days); }, \"decimal-time\": function (r) { if (arguments.length > 1) throw TOO_MANY_ARGS; if (r.t === \"num\") return XPR.number(NaN); const time = asString(r); // There is no Time type, and so far we don't need it so we do all validation // and conversion here, manually. const m = time.match( /^(\\d\\d):(\\d\\d):(\\d\\d)(\\.\\d\\d?\\d?)?(\\+|-)(\\d\\d):(\\d\\d)$/, ); let dec; if ( m && m[1] < 24 && m[1] >= 0 && m[2] < 60 && m[2] >= 0 && m[3] < 60 && m[3] >= 0 && m[6] < 24 && m[6] >= 0 && // this could be tighter m[7] < 60 && m[7] >= 0 // this is probably either 0 or 30 ) { const today = new Date(); // use today to cater to daylight savings time. const d = new Date( today.getFullYear() + \"-\" + _zeroPad(today.getMonth() + 1) + \"-\" + _zeroPad(today.getDate()) + \"T\" + time, ); if (d.toString() === \"Invalid Date\") { dec = NaN; } else { dec = (d.getSeconds() / 3600 + d.getMinutes() / 60 + d.getHours()) / 24; } } else { dec = NaN; } return XPR.number(dec); }, distance: function (r) { if (arguments.length === 0) throw TOO_FEW_ARGS; return XPR.number(distance(asGeopoints(r))); }, exp: function (r) { return XPR.number(Math.exp(asNumber(r))); }, exp10: function (r) { return XPR.number(Math.pow(10, asNumber(r))); }, false: function () { if (arguments.length) throw TOO_MANY_ARGS; return XPR.boolean(false); }, \"format-date\": function (date, format) { if (arguments.length < 2) throw new Error(\"format-date() :: not enough args\"); return XPR.string(format_date(date, format)); }, if: function (con, a, b) { return asBoolean(con) ? a : b; }, \"ends-with\": function (a, b) { if (arguments.length > 2) throw TOO_MANY_ARGS; if (arguments.length < 2) throw TOO_FEW_ARGS; return XPR.boolean(asString(a).endsWith(asString(b))); }, int: function (v) { return XPR.number(asInteger(v)); }, join: function (delim, ...args) { return XPR.string(mapFn(asString, ...args).join(asString(delim))); }, last: function () { if (arguments.length) throw new Error(`last() does not take arguments`); return XPR.number(this.contextSize); }, \"local-name\": function (r) { // This is actually supported natively, but currently it's simpler to implement // ourselves than convert the supplied nodeset into a single node and pass this // somehow to the native implementation. // // See: https://www.w3.org/TR/1999/REC-xpath-19991116/#function-local-name const name = getNodeName(this, r); return XPR.string(name.match(/^(?:[^:]*:)?(.*)/)[1]); }, name: function (r) { // This is actually supported natively, but currently it's simpler to implement // ourselves than convert the supplied nodeset into a single node and pass this // somehow to the native implementation. // // See: https://www.w3.org/TR/1999/REC-xpath-19991116/#function-name return XPR.string(getNodeName(this, r)); }, log: function (r) { return XPR.number(Math.log(asNumber(r))); }, log10: function (r) { return XPR.number(Math.log10(asNumber(r))); }, max: function (...args) { const nums = mapFn(asNumber, ...args); if (!nums.length || nums.some((v) => isNaN(v))) return XPR.number(NaN); return XPR.number(Math.max(...nums)); }, min: function (...args) { const nums = mapFn(asNumber, ...args); if (!nums.length || nums.some((v) => isNaN(v))) return XPR.number(NaN); return XPR.number(Math.min(...nums)); }, \"namespace-uri\": function (r) { // This is actually supported natively, but currently it's simpler to implement // ourselves than convert the supplied nodeset into a single node and pass this // somehow to the native implementation. // // See: https://www.w3.org/TR/1999/REC-xpath-19991116/#function-namespace-uri const node = getNode(this, r); return XPR.string((node && node.namespaceURI) || \"\"); }, \"normalize-space\": function (r) { // TODO this seems to do a lot more than the spec at https://www.w3.org/TR/1999/REC-xpath-19991116/#function-normalize-space // I think we should just be able to return: XPR.string(asString(r || this.cN).replace(/[\\t\\r\\n ]+/g, ' ').trim()); if (arguments.length > 1) throw new Error(\"too many args\"); let res = asString(r || this.cN); res = res.replace(/\\f/g, \"\\\\f\"); res = res.replace(/\\r\\v/g, \"\\v\"); res = res.replace(/\\v/g, \"\\\\v\"); res = res.replace(/\\s+/g, \" \"); res = res.replace(/^\\s+|\\s+$/g, \"\"); res = res.replace(/\\\\v/g, \"\\v\"); res = res.replace(/\\\\f/g, \"\\f\"); return XPR.string(res); }, /* * As per https://github.com/alxndrsn/openrosa-xpath-evaluator/issues/15, * the pass-through to the wrapped implementation always requests * XPathResult.STRING_TYPE. This seems to cause an issue with the response * from `not()` calls, which should ideally be handled by the built-in * XPath implementation. The following method is supplied as a workaround, * and ideally would be unnecessary. */ not: function (r) { if (arguments.length === 0) throw TOO_FEW_ARGS; if (arguments.length > 1) throw TOO_MANY_ARGS; return XPR.boolean(!asBoolean(r)); }, now: function () { return XPR.date(new Date()); }, number: function (r) { if (arguments.length > 1) throw new Error( `number() passed wrong arg count (expected 0 or 1, but got ${arguments.length})`, ); let arg = arguments.length ? r : this.cN; const str = asString(arg); if (DATE_STRING.test(str)) { // TODO cleanup regex and splitting return XPR.number(dateStringToDays(str)); } return XPR.number(asNumber(arg)); }, today: function () { return XPR.date(ret._now()); }, /** * The once function returns the value of the parameter if its own value * is not empty, NaN, [Infinity or -Infinity]. The naming is therefore misleading! * Also note that the parameter expr is always evaluated. * This function simply decides whether to return the new result or the old value. */ once: function (r) { const current = asString(this.cN); return XPR.string(current || asString(r)); }, pi: function () { return XPR.number(Math.PI); }, position: function (r) { // N.B.: I suspect there is a bug here - this will return position within the parent node, rather than the evaluation context. // I suspect this is contrary to the spec, which reads: // > The position function returns a number equal to the context position from the expression evaluation context. // - https://www.w3.org/TR/1999/REC-xpath-19991116/#function-position // I'd have thought e.g. a union of all first-children in a doc would not all have position()=1 within that nodeset if (arguments.length > 1) throw new Error(\"too many args\"); if (r && r.t !== \"arr\") throw new Error( \"wrong arg type for position() - expected nodeset, but got: \" + r.t, ); if (r && !r.v.length) throw new Error(\"cannot call position() on an empty nodeset\"); if (!r) return XPR.number(this.contextPosition); let position = 1; let node = r.v[0]; const nodeName = node.tagName; while ( node.previousElementSibling && node.previousElementSibling.tagName === nodeName ) { node = node.previousElementSibling; position++; } return XPR.number(position); }, pow: function (x, y) { return XPR.number(Math.pow(asNumber(x), asNumber(y))); }, random: function () { return XPR.number(parseFloat(Math.random().toFixed(15))); }, randomize: function (r, seed) { if (!arguments.length) throw TOO_FEW_ARGS; //only rT passed if (arguments.length > 2) throw TOO_MANY_ARGS; if (!r || r.t !== \"arr\") throw new Error(\"randomize() must be called on a nodeset\"); seed = seed && asNumber(seed); return { t: \"arr\", v: shuffle(r.v, seed) }; }, regex: function (haystack, pattern) { return XPR.boolean( new RegExp(asString(pattern)).test(asString(haystack)), ); }, round: function (number, num_digits) { if (arguments.length === 0) throw TOO_FEW_ARGS; if (arguments.length > 2) throw TOO_MANY_ARGS; number = asNumber(number); if (!num_digits) { return XPR.number(_round(number)); } num_digits = asInteger(num_digits); const pow = Math.pow(10, Math.abs(num_digits)); if (num_digits > 0) { return XPR.number(_round(number * pow) / pow); } else { return XPR.number(pow * _round(number / pow)); } }, selected: function (haystack, needle) { return XPR.boolean( asString(haystack).split(\" \").indexOf(asString(needle).trim()) !== -1, ); }, \"selected-at\": function (list, index) { if (!index) throw new Error( \"No index provided for selected-at() [index=\" + index + \"; list=\" + JSON.stringify(list), ); return XPR.string(asString(list).split(\" \")[asInteger(index)] || \"\"); }, sin: function (r) { return XPR.number(Math.sin(asNumber(r))); }, sqrt: function (r) { return XPR.number(Math.sqrt(asNumber(r))); }, string: function (r) { if (arguments.length > 1) throw new Error( `string() passed wrong arg count (expected 0 or 1, but got ${arguments.length})`, ); return XPR.string(asString(r || this.cN)); }, // TODO this is not an extension - should be a \"native\" function \"string-length\": function (r) { if (arguments.length > 1) throw new Error(\"too many args\"); const str = asString(r || this.cN); // implemented as per https://www.w3.org/TR/1999/REC-xpath-19991116/#function-string-length, rather than the restricted ODK implementation return XPR.number(str.length); }, substr: function (s, startIndex, endIndex) { return XPR.string( asString(s).slice(asNumber(startIndex), endIndex && asNumber(endIndex)), ); }, sum: function (r) { if (!r || r.t !== \"arr\") throw new Error(\"sum() must be called on a nodeset\"); let sum = 0, i = r.v.length; while (i--) sum += asNumber(r.v[i]); return XPR.number(sum); }, tan: function (r) { return XPR.number(Math.tan(asNumber(r))); }, true: function () { if (arguments.length) throw TOO_MANY_ARGS; return XPR.boolean(true); }, uuid: function (r) { if (r) return XPR.string(randomToken(asNumber(r))); return XPR.string(uuid()); }, \"weighted-checklist\": function (min, max, ...list) { min = asNumber(min); max = asNumber(max); let values = [], weights = [], weightedTrues = 0; for (let i = 0; i < list.length; i += 2) { const v = list[i]; const w = list[i + 1]; if (v && w) { // value or weight might be a nodeset values = values.concat(mapFn(asBoolean, v)); weights = weights.concat(mapFn(asNumber, w)); } } for (let i = 0; i < values.length; i++) { if (values[i]) { weightedTrues += weights[i] || 0; } } return XPR.boolean( (min < 0 || weightedTrues >= min) && (max < 0 || weightedTrues <= max), ); }, }; // function aliases func[\"date-time\"] = func.date; func[\"format-date-time\"] = func[\"format-date\"]; const process = { toExternalResult: function (r, resultType) { if (r.t === \"arr\" && resultType === XPathResult.NUMBER_TYPE) { const str = asString(r); if (DATE_STRING.test(str)) { return { resultType, numberValue: dateStringToDays(str) }; } } if (r.t === \"date\") { switch (resultType) { case XPathResult.BOOLEAN_TYPE: return { resultType, booleanValue: !isNaN(r.v) }; case XPathResult.NUMBER_TYPE: return { resultType, numberValue: asNumber(r) }; case XPathResult.ANY_TYPE: case XPathResult.STRING_TYPE: return { resultType, stringValue: asString(r) }; default: throw new Error( `toExternalResult() doesn't know how to convert a date to ${resultType}`, ); } } }, typefor: function (val) { if (val instanceof Date) return \"date\"; }, handleInfix: function (_err, lhs, op, rhs) { if (lhs.t === \"date\" || rhs.t === \"date\") { if (lhs.t === \"bool\" || rhs.t === \"bool\") { // date comparisons with booleans should be coerced to boolean return; } // For comparisons and math, we must make sure that both values are numbers if (lhs.t === \"arr\" || lhs.t === \"str\") lhs = XPR.date(asDate(lhs)); if (rhs.t === \"arr\" || rhs.t === \"str\") rhs = XPR.date(asDate(rhs)); if (lhs.t === \"date\") lhs = { t: \"num\", v: dateToDays(lhs.v) }; if (rhs.t === \"date\") rhs = { t: \"num\", v: dateToDays(rhs.v) }; return { t: \"continue\", lhs: lhs, op: op, rhs: rhs }; } // try to coerce non-dates into dates :o if (op === PLUS || op === MINUS) { const lStr = asString(lhs); if (DATE_STRING.test(lStr)) { const lDays = dateStringToDays(lStr); const rDays = asNumber(rhs); const delta = op === PLUS ? lDays + rDays : lDays - rDays; return delta; } const rStr = asString(rhs); if (DATE_STRING.test(rStr)) { const rDays = dateStringToDays(rStr); const lDays = asNumber(lhs); const delta = op === PLUS ? lDays + rDays : lDays - rDays; return delta; } } else if (op >= EQ && op <= GTE) { const lStr = asString(lhs); if (DATE_STRING.test(lStr)) lhs = XPR.number(dateStringToDays(lStr)); const rStr = asString(rhs); if (DATE_STRING.test(rStr)) rhs = XPR.number(dateStringToDays(rStr)); return { t: \"continue\", lhs, op, rhs }; } }, }; ret.func = func; ret.process = process; ret.XPR = XPR; ret._now = function () { // This is exposed in ret to allow for unit testing, although this is not currently utilised. const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }; return ret; }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "openrosa_xpath_extensions",
+            "module": "../src/libs/openrosa/openrosa-extensions.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/openrosa-xpath.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "../src/libs/openrosa/openrosa-xpath.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/random-token.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "randomToken",
+          "parameters": [
+            {
+              "name": "length"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "randomToken",
+          "declaration": {
+            "name": "randomToken",
+            "module": "../src/libs/openrosa/random-token.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/xpr.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "../src/libs/openrosa/xpr.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/config.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "../src/libs/enketo/config.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/utils/date.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "DATE_STRING",
+          "default": "/^\\d\\d\\d\\d-\\d{1,2}-\\d{1,2}(?:T\\d\\d:\\d\\d:\\d\\d\\.?\\d?\\d?(?:Z|[+-]\\d\\d:\\d\\d)|.*)?$/"
+        },
+        {
+          "kind": "function",
+          "name": "dateToDays",
+          "parameters": [
+            {
+              "name": "d"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "dateStringToDays",
+          "parameters": [
+            {
+              "name": "d"
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "isValidDate",
+          "default": "function (y, m, d) { m = parseInt(m, 10) - 1; return m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y); }",
+          "description": "Check if a date is valid",
+          "parameters": [
+            {
+              "description": "The year",
+              "name": "y",
+              "type": {
+                "text": "[type]"
+              }
+            },
+            {
+              "description": "The month",
+              "name": "m",
+              "type": {
+                "text": "[type]"
+              }
+            },
+            {
+              "description": "The day",
+              "name": "d",
+              "type": {
+                "text": "[type]"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "Boolean"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DATE_STRING",
+          "declaration": {
+            "name": "DATE_STRING",
+            "module": "../src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dateToDays",
+          "declaration": {
+            "name": "dateToDays",
+            "module": "../src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dateStringToDays",
+          "declaration": {
+            "name": "dateStringToDays",
+            "module": "../src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isValidDate",
+          "declaration": {
+            "name": "isValidDate",
+            "module": "../src/libs/openrosa/utils/date.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/utils/native.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "preprocessNativeArgs",
+          "parameters": [
+            {
+              "name": "name"
+            },
+            {
+              "name": "args"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "preprocessNativeArgs",
+          "declaration": {
+            "name": "preprocessNativeArgs",
+            "module": "../src/libs/openrosa/utils/native.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/utils/operation.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "handleOperation",
+          "parameters": [
+            {
+              "name": "lhs"
+            },
+            {
+              "name": "op"
+            },
+            {
+              "name": "rhs"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "handleOperation",
+          "declaration": {
+            "name": "handleOperation",
+            "module": "../src/libs/openrosa/utils/operation.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/utils/result.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "toSnapshotResult",
+          "parameters": [
+            {
+              "name": "arr"
+            },
+            {
+              "name": "resultType"
+            },
+            {
+              "name": "singleItem",
+              "optional": true
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "toSnapshotResult",
+          "declaration": {
+            "name": "toSnapshotResult",
+            "module": "../src/libs/openrosa/utils/result.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/utils/shuffle.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "shuffle",
+          "parameters": [
+            {
+              "name": "array"
+            },
+            {
+              "name": "seed",
+              "description": "the seed value",
+              "type": {
+                "text": "number="
+              }
+            },
+            {
+              "description": ">}        array the array to shuffle",
+              "name": "",
+              "type": {
+                "text": "<*"
+              }
+            }
+          ],
+          "description": "Performs the \"inside-out\" variant of the Fisher-Yates array shuffle.",
+          "return": {
+            "type": {
+              "text": "<*"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "shuffle",
+            "module": "../src/libs/openrosa/utils/shuffle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/utils/sort-by-document-order.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "ir"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "../src/libs/openrosa/utils/sort-by-document-order.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/openrosa/utils/xpath-cast.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "asBoolean",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "asNumber",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "asString",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "asBoolean",
+          "declaration": {
+            "name": "asBoolean",
+            "module": "../src/libs/openrosa/utils/xpath-cast.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "asNumber",
+          "declaration": {
+            "name": "asNumber",
+            "module": "../src/libs/openrosa/utils/xpath-cast.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "asString",
+          "declaration": {
+            "name": "asString",
+            "module": "../src/libs/openrosa/utils/xpath-cast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/dom-utils.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getSiblingElementsAndSelf",
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            },
+            {
+              "name": "selector",
+              "description": "A CSS selector for siblings (not for self).",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Gets siblings that match selector and self _in DOM order_.",
+          "return": {
+            "type": {
+              "text": "Array<Node>"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getSiblingElements",
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            },
+            {
+              "name": "selector",
+              "description": "A CSS selector.",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Gets siblings that match selector _in DOM order_.",
+          "return": {
+            "type": {
+              "text": "Array<Node>"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getSiblingElement",
+          "return": {
+            "type": {
+              "text": "Node"
+            }
+          },
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            },
+            {
+              "name": "selector",
+              "default": "\"*\"",
+              "description": "A CSS selector.",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Returns first sibling element (in DOM order) that optionally matches the provided selector."
+        },
+        {
+          "kind": "function",
+          "name": "getAncestors",
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            },
+            {
+              "name": "filterSelector",
+              "default": "\"*\"",
+              "description": "A CSS selector.",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "endSelector",
+              "default": "null",
+              "description": "A CSS selector indicating where to stop. It will include this element if matched by the filter.",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Gets ancestors that match selector _in DOM order_.",
+          "return": {
+            "type": {
+              "text": "Array<Node>"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "closestAncestorUntil",
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            },
+            {
+              "name": "filterSelector",
+              "default": "\"*\"",
+              "description": "A CSS selector.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "endSelector",
+              "default": "null",
+              "description": "A CSS selector indicating where to stop. It will include this element if matched by the filter.",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Gets closest ancestor that match selector until the end selector.",
+          "return": {
+            "type": {
+              "text": "Node"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getChildren",
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            },
+            {
+              "name": "selector",
+              "default": "\"*\"",
+              "description": "A CSS selector.",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Gets child elements, that (optionally) match a selector.",
+          "return": {
+            "type": {
+              "text": "Array<Node>"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getChild",
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            },
+            {
+              "name": "selector",
+              "default": "\"*\"",
+              "description": "A CSS selector.",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "Gets first child element, that (optionally) matches a selector.",
+          "return": {
+            "type": {
+              "text": "Node"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "empty",
+          "parameters": [
+            {
+              "name": "element",
+              "description": "Target element.",
+              "type": {
+                "text": "Node"
+              }
+            }
+          ],
+          "description": "Removes all children elements.",
+          "return": {
+            "type": {
+              "text": "undefined"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "hasPreviousSiblingElementSameName",
+          "parameters": [
+            {
+              "name": "el",
+              "description": "Target node",
+              "type": {
+                "text": "Element"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "hasNextSiblingElementSameName",
+          "parameters": [
+            {
+              "name": "el",
+              "description": "Target node",
+              "type": {
+                "text": "Element"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "hasSiblingElementSameName",
+          "parameters": [
+            {
+              "name": "el",
+              "description": "Target node",
+              "type": {
+                "text": "Element"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "hasPreviousCommentSiblingWithContent",
+          "parameters": [
+            {
+              "name": "node",
+              "description": "Target node",
+              "type": {
+                "text": "Element"
+              }
+            },
+            {
+              "name": "content",
+              "description": "Text content to look for",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getXPath",
+          "parameters": [
+            {
+              "name": "node",
+              "description": "XML node",
+              "type": {
+                "text": "Element"
+              }
+            },
+            {
+              "name": "rootNodeName",
+              "default": "\"#document\"",
+              "description": "Defaults to #document",
+              "optional": true,
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "includePosition",
+              "default": "false",
+              "description": "Whether or not to include the positions `/path/to/repeat[2]/node`",
+              "optional": true,
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "description": "Creates an XPath from a node",
+          "return": {
+            "type": {
+              "text": "string"
+            }
+          }
+        },
+        {
+          "kind": "function",
+          "name": "getRepeatIndex",
+          "parameters": [
+            {
+              "name": "node",
+              "description": "XML node",
+              "type": {
+                "text": "Element"
+              }
+            }
+          ],
+          "description": "Obtains the index of a repeat instance within its own series.",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          }
+        },
+        {
+          "kind": "variable",
+          "name": "elementDataStore",
+          "type": {
+            "text": "object"
+          },
+          "default": "{ /** * @type {WeakMap} */ _storage: new WeakMap(), /** * Adds object to element storage. Ensures that element storage exist. * * @param {Node} element - target element * @param {string} key - name of the stored data * @param {object} obj - stored data */ put(element, key, obj) { if (!this._storage.has(element)) { this._storage.set(element, new Map()); } this._storage.get(element).set(key, obj); }, /** * Return object from element storage. * * @param {Node} element - target element * @param {string} key - name of the stored data * @return {object} stored data object */ get(element, key) { const item = this._storage.get(element); return item ? item.get(key) : item; }, /** * Checkes whether element has given storage item. * * @param {Node} element - target element * @param {string} key - name of the stored data * @return {boolean} whether data is present */ has(element, key) { const item = this._storage.get(element); return item && item.has(key); }, /** * Removes item from element storage. Removes element storage if empty. * * @param {Node} element - target element * @param {string} key - name of the stored data * @return {object} removed data object */ remove(element, key) { const ret = this._storage.get(element).delete(key); if (this._storage.get(key).size !== 0) { this._storage.delete(element); } return ret; }, }",
+          "description": "Adapted from https://stackoverflow.com/a/46522991/3071529\n\nA storage solution aimed at replacing jQuerys data function.\nImplementation Note: Elements are stored in a (WeakMap)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap].\nThis makes sure the data is garbage collected when the node is removed."
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "MutationsTracker",
+          "members": [
+            {
+              "kind": "field",
+              "name": "classChanges",
+              "default": "new WeakMap()"
+            },
+            {
+              "kind": "field",
+              "name": "quiet",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "kind": "method",
+              "name": "_resolveWhenTrue",
+              "parameters": [
+                {
+                  "name": "fn"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "waitForClassChange",
+              "parameters": [
+                {
+                  "name": "element"
+                },
+                {
+                  "name": "className"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "waitForQuietness"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "elementDataStore",
+          "declaration": {
+            "name": "elementDataStore",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getSiblingElementsAndSelf",
+          "declaration": {
+            "name": "getSiblingElementsAndSelf",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getSiblingElements",
+          "declaration": {
+            "name": "getSiblingElements",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getSiblingElement",
+          "declaration": {
+            "name": "getSiblingElement",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getAncestors",
+          "declaration": {
+            "name": "getAncestors",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getChildren",
+          "declaration": {
+            "name": "getChildren",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getChild",
+          "declaration": {
+            "name": "getChild",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getRepeatIndex",
+          "declaration": {
+            "name": "getRepeatIndex",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getXPath",
+          "declaration": {
+            "name": "getXPath",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "hasPreviousCommentSiblingWithContent",
+          "declaration": {
+            "name": "hasPreviousCommentSiblingWithContent",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "hasPreviousSiblingElementSameName",
+          "declaration": {
+            "name": "hasPreviousSiblingElementSameName",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "hasNextSiblingElementSameName",
+          "declaration": {
+            "name": "hasNextSiblingElementSameName",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "hasSiblingElementSameName",
+          "declaration": {
+            "name": "hasSiblingElementSameName",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "closestAncestorUntil",
+          "declaration": {
+            "name": "closestAncestorUntil",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "empty",
+          "declaration": {
+            "name": "empty",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "MutationsTracker",
+          "declaration": {
+            "name": "MutationsTracker",
+            "module": "../src/libs/enketo/js/dom-utils.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/event.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "../src/libs/enketo/js/event.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/form.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Form",
+          "members": [
+            {
+              "kind": "field",
+              "name": "nonRepeats",
+              "type": {
+                "text": "{}"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "all",
+              "type": {
+                "text": "{}"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "FormOptions"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "view",
+              "type": {
+                "text": "{\n    $: any;\n    html: HTMLElement;\n    clone: Node;\n  }"
+              },
+              "default": "{ $: $form, html: formEl, clone: formEl.cloneNode(true), }"
+            },
+            {
+              "kind": "field",
+              "name": "model",
+              "type": {
+                "text": "FormModel"
+              },
+              "default": "new FormModel(data)"
+            },
+            {
+              "kind": "field",
+              "name": "repeatsPresent",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "!!this.view.html.querySelector(\".or-repeat\")"
+            },
+            {
+              "kind": "field",
+              "name": "widgetsInitialized",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "repeatsInitialized",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "pageNavigationBlocked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "initialized",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "toc",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "pages",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "langs",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "progress",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "widgets",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "preloads",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "relevant",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "repeats",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "output",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "itemset",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "calc",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mask",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "repeatPathPrefixes",
+              "type": {
+                "text": "string[] | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "requiredTransformerVersion",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"2.1.6\"",
+              "description": "Static property with required enketo-transformer version."
+            },
+            {
+              "kind": "field",
+              "name": "nodePathToRepeatPath",
+              "type": {
+                "text": "Record<string, string | null>"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "evaluationCascadeAdditions",
+              "type": {
+                "text": "any[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "evaluationCascade",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "recordName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "editStatus",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "surveyName",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "instanceID",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "deprecatedID",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "instanceName",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "version",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "encryptionKey",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "action",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "method",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "id",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "constraintClassesInvalid",
+              "description": "To facilitate forks that support multiple constraints per question",
+              "type": {
+                "text": "Array<string>"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "constraintAttributes",
+              "description": "To facilitate forks that support multiple constraints per question",
+              "type": {
+                "text": "Array<string>"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "languages",
+              "type": {
+                "text": "Array<string>"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "currentLanguage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "addModule",
+              "privacy": "public",
+              "default": "function (module) { return Object.create(module, { form: { value: this, }, }); }",
+              "description": "Returns a module and adds the form property to it.",
+              "parameters": [
+                {
+                  "description": "Enketo Core module",
+                  "name": "module",
+                  "type": {
+                    "text": "object"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "object"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "init",
+              "privacy": "public",
+              "default": "function () { let loadErrors = []; const that = this; initTimeLocalization(this.view.html); this.toc = this.addModule(tocModule); this.pages = this.addModule(pageModule); this.langs = this.addModule(languageModule); this.progress = this.addModule(progressModule); this.widgets = this.addModule(widgetModule); this.preloads = this.addModule(preloadModule); this.relevant = this.addModule(relevantModule); this.repeats = this.addModule(repeatModule); this.input = this.addModule(inputHelper); this.output = this.addModule(outputModule); this.itemset = this.addModule(itemsetModule); this.calc = this.addModule(calculationModule); this.required = this.addModule(requiredModule); this.mask = this.addModule(maskModule); this.readonly = this.addModule(readonlyModule); // Handle odk-instance-first-load event this.model.events.addEventListener( events.InstanceFirstLoad().type, (event) => { this.calc.performAction(\"setvalue\", event); this.calc.performAction(\"setgeopoint\", event); }, ); // Handle odk-new-repeat event before initializing repeats this.view.html.addEventListener(events.NewRepeat().type, (event) => { this.calc.performAction(\"setvalue\", event); this.calc.performAction(\"setgeopoint\", event); }); // Handle xforms-value-changed this.view.html.addEventListener( events.XFormsValueChanged().type, (event) => { this.calc.performAction(\"setvalue\", event); this.calc.performAction(\"setgeopoint\", event); }, ); // Before initializing form view and model, passthrough some model events externally // Because of instance-first-load actions, this should be done before the model is initialized. This is important for custom // applications that submit each individual value separately (opposed to a full XML model at the end). this.model.events.addEventListener(events.DataUpdate().type, (event) => { that.view.html.dispatchEvent(events.DataUpdate(event.detail)); }); // This probably does not need to be before model.init(); this.model.events.addEventListener(events.Removed().type, (event) => { that.view.html.dispatchEvent(events.Removed(event.detail)); }); loadErrors = loadErrors.concat(this.model.init()); if ( typeof this.model === \"undefined\" || !(this.model instanceof FormModel) ) { loadErrors.push(\"Form could not be initialized without a model.\"); return loadErrors; } try { this.preloads.init(); // before widgets.init (as instanceID used in offlineFilepicker widget) // store the current instanceID as data on the form element so it can be easily accessed by e.g. widgets this.view.$.data({ instanceID: this.model.instanceID, }); // before calc.update! this.grosslyViolateStandardComplianceByIgnoringCertainCalcs(); // before repeats.init to make sure the jr:repeat-count calculation has been evaluated this.calc.update(); // before itemset.update this.langs.init(this.options.language); // before repeats.init so that template contains role=\"page\" when applicable this.pages.init(); // after radio button data-name setting (now done in XLST) let repeatsAdded = 0; const tempHandlerAddRepeat = () => { repeatsAdded += 1; }; this.view.html.addEventListener( events.AddRepeat().type, tempHandlerAddRepeat, ); this.repeatsInitialized = true; this.repeats.init(); // Recalculate after repeats are initialized. Previously this was performed in // `tempHandlerAddRepeat`, but recalculating them all at once is significantly faster. if (repeatsAdded > 0) { this.calc.update({ allRepeats: true, cloned: true, }); this.all = {}; // Builds a cache of known repeat path prefixes `repeat.init`. // The cache is sorted by length, longest to shortest, to ensure // that lookups using this cache find the deepest nested repeat // for a given path. this.repeatPathPrefixes = Array.from<any>( this.view.html.querySelectorAll(\".or-repeat-info\"), ) .map((element) => `${element.dataset.name}/`) .sort((a, b) => b.length - a.length); } this.view.html.removeEventListener( events.AddRepeat().type, tempHandlerAddRepeat, ); // after repeats.init, but before itemset.update this.output.update(); // after repeats.init this.itemset.update(); // after repeats.init this.setAllVals(); this.readonly.update(); // after setAllVals(); // after setAllVals, after repeats.init this.options.input = this.input; this.options.pathToAbsolute = this.pathToAbsolute.bind(this); this.options.evaluate = this.model.evaluate.bind(this.model); this.options.getModelValue = this.getModelValue.bind(this); this.widgetsInitialized = this.widgets.init(null, this.options); // after widgets.init(), and after repeats.init(), and after pages.init() this.relevant.update(); // after widgets init to make sure widget handlers are called before // after loading existing instance to not trigger an 'edit' event this.setEventHandlers(); // Update field calculations again to make sure that dependent // field values are calculated this.calc.update(); this.required.update(); this.mask.init(); this.editStatus = false; if (this.options.printRelevantOnly !== false) { this.view.$.addClass(\"print-relevant-only\"); } setTimeout(() => { that.progress.update(); }, 0); this.initialized = true; return loadErrors; } catch (e) { console.error(e); loadErrors.push(`${e.name}: ${e.message}`); } document.querySelector(\"body\").scrollIntoView(); return loadErrors; }",
+              "description": "Function: init\n\nInitializes the Form instance (XML Model and HTML View).",
+              "return": {
+                "type": {
+                  "text": "Array<string>"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "goTo",
+              "privacy": "public",
+              "default": "function (xpath) { const errors = []; if (!this.goToTarget(this.getGoToTarget(xpath))) { errors.push( t(\"alert.gotonotfound.msg\", { path: xpath.substring(xpath.lastIndexOf(\"/\") + 1), }), ); } return errors; }",
+              "parameters": [
+                {
+                  "description": "simple path to question",
+                  "name": "xpath",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Array<string>"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "getDataStr",
+              "privacy": "public",
+              "default": "function (include: any = {}) { // By default everything is included if (include.irrelevant === false) { return this.getDataStrWithoutIrrelevantNodes(); } return this.model.getStr(); }",
+              "description": "Obtains a string of primary instance.",
+              "parameters": [
+                {
+                  "description": "Optional object items to exclude if false",
+                  "name": "include",
+                  "optional": true,
+                  "type": {
+                    "text": "{include: boolean}"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "resetView",
+              "privacy": "public",
+              "default": "function () { // form language selector was moved outside of <form> so has to be separately removed if (this.langs.formLanguages) { this.langs.formLanguages.remove(); } this.view.html.replaceWith(this.view.clone); return document.querySelector(\"form.or\"); }",
+              "description": "Restores HTML form to pre-initialized state. It is meant to be called before re-initializing with\nnew Form ( .....) and form.init()\nFor this reason, it does not fix event handler, $form, formView.$ etc.!\nIt also does not affect the XML instance!",
+              "return": {
+                "type": {
+                  "text": "Element"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "replaceChoiceNameFn",
+              "privacy": "public",
+              "default": "function ( expr, resTypeStr, context, index, tryNative, ) { const choiceNames = parseFunctionFromExpression(expr, \"jr:choice-name\"); choiceNames.forEach((choiceName) => { const params = choiceName[1]; if (params.length === 2) { let label = \"\"; const value = this.model.evaluate( params[0], resTypeStr, context, index, tryNative, ); let name = stripQuotes(params[1]).trim(); name = name.startsWith(\"/\") ? name : joinPath(context, name); const inputs = [ ...this.view.html.querySelectorAll( `[name=\"${name}\"], [data-name=\"${name}\"]`, ), ]; const nodeName = inputs.length ? inputs[0].nodeName.toLowerCase() : null; if (!value || !inputs.length) { label = \"\"; } else if (nodeName === \"select\") { const found = inputs.find((input) => input.querySelector(`[value=\"${CSS.escape(value)}\"]`), ); label = found ? found.querySelector(`[value=\"${CSS.escape(value)}\"]`).textContent : \"\"; } else if (nodeName === \"input\") { const list = inputs[0].getAttribute(\"list\"); if (!list) { const found = inputs.find( (input) => input.getAttribute(\"value\") === value, ); const firstSiblingLabelEl = found ? getSiblingElement(found, \".option-label.active\") : []; label = firstSiblingLabelEl ? (firstSiblingLabelEl as Element).textContent : \"\"; } else { const firstSiblingListEl = getSiblingElement( inputs[0], `datalist#${CSS.escape(list)}`, ); if (firstSiblingListEl) { const optionEl = firstSiblingListEl.querySelector( `[data-value=\"${value}\"]`, ); label = optionEl ? optionEl.getAttribute(\"value\") : \"\"; } } } expr = expr.replace(choiceName[0], `\"${label}\"`); } else { throw new FormLogicError( `jr:choice-name function has incorrect number of parameters: ${choiceName[0]}`, ); } }); return expr; }",
+              "description": "Implements jr:choice-name\nTODO: this needs to work for all expressions (relevants, constraints), now it only works for calculated items\nIdeally this belongs in the form Model, but unfortunately it needs access to the view",
+              "parameters": [
+                {
+                  "description": "XPath expression",
+                  "name": "expr",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "type of result",
+                  "name": "resTypeStr",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "context path",
+                  "name": "context",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "index of context",
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "description": "whether to try the native evaluator, i.e. if there is no risk it would create an incorrect result such as with date comparisons",
+                  "name": "tryNative",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "setAllVals",
+              "privacy": "public",
+              "default": "function ($group, groupIndex) { const that = this; const selector = $group && $group.attr(\"name\") ? $group.attr(\"name\") : null; groupIndex = typeof groupIndex !== \"undefined\" ? groupIndex : null; this.model .node(selector, groupIndex) .getElements() .reduce((nodes, current) => { const newNodes = [...current.querySelectorAll(\"*\")].filter( (n) => n.children.length === 0 && n.textContent, ); return nodes.concat(newNodes); }, []) .forEach((element) => { let value; let name; try { value = element.textContent; name = getXPath(element, \"instance\"); const index = that.model.node(name).getElements().indexOf(element); const control = that.input.find(name, index); if (control) { that.input.setVal(control, value, null); if ( that.input.getXmlType(control) === \"binary\" && value.startsWith(\"jr://\") && element.getAttribute(\"src\") ) { control.setAttribute( \"data-loaded-url\", element.getAttribute(\"src\"), ); } } } catch (e) { console.error(e); // TODO: Test if this correctly adds to loadErrors // loadErrors.push( 'Could not load input field value with name: ' + name + ' and value: ' + value ); throw new Error( `Could not load input field value with name: ${name} and value: ${value}`, ); } }); }",
+              "description": "Uses current state of model to set all the values in the form.\nSince not all data nodes with a value have a corresponding input element,\nwe cycle through the HTML form elements and check for each form element whether data is available.",
+              "parameters": [
+                {
+                  "description": "group of elements for which form controls should be updated (with current model values)",
+                  "name": "$group",
+                  "type": {
+                    "text": "jQuery"
+                  }
+                },
+                {
+                  "description": "index of the group",
+                  "name": "groupIndex",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "getModelValue",
+              "privacy": "public",
+              "default": "function ($control) { const control = $control[0]; const path = this.input.getName(control); const index = this.input.getIndex(control); return this.model.node(path, index).getVal(); }",
+              "parameters": [
+                {
+                  "description": "HTML form control",
+                  "name": "$control",
+                  "type": {
+                    "text": "jQuery"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "string|undefined"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "getRelatedNodes",
+              "privacy": "public",
+              "default": "function (attr, filter, updated) { let repeatControls = null; let controls; updated = updated || {}; filter = filter || \"\"; const { allRepeats, cloned, repeatPath } = updated; // The collection of non-repeat inputs, calculations and groups is cached (unchangeable) if (!allRepeats && !this.nonRepeats[attr]) { controls = [ ...this.view.html.querySelectorAll(`:not(.or-repeat-info)[${attr}]`), ].filter((el) => !el.closest(\".or-repeat\")); this.nonRepeats[attr] = this.filterRadioCheckSiblings(controls); } if (allRepeats) { const controls = [ ...this.view.html.querySelectorAll(`form.or .or-repeat [${attr}]`), ]; repeatControls = this.filterRadioCheckSiblings(controls); } else if (typeof repeatPath !== \"undefined\" && updated.repeatIndex >= 0) { // If the updated node is inside a repeat (and there are multiple repeats present) const repeatEl = [ ...this.view.html.querySelectorAll(`.or-repeat[name=\"${repeatPath}\"]`), ][updated.repeatIndex]; controls = repeatEl ? [...repeatEl.querySelectorAll(`[${attr}]`)] : []; repeatControls = this.filterRadioCheckSiblings(controls); } // If a new repeat was created, update the cached collection of all form controls with that attribute // If a repeat was deleted (updated.repeatPath && !updated.cloned), rebuild cache. // Exclude outputs from the cache, because outputs can be added via itemsets (in labels). if (!this.all[attr] || (repeatPath && !cloned) || filter === \".or-output\") { // (re)build the cache // However, if repeats have not been initialized exclude nodes inside a repeat until the first repeat has been added during repeat initialization. // The default view repeat will be removed during initialization (and stored as template), before it is re-added, if necessary. // We need to avoid adding these fields to the initial cache, // so we don't waste time evaluating logic, and don't have to rebuild the cache after repeats have been initialized. this.all[attr] = this.repeatsInitialized ? this.filterRadioCheckSiblings([ ...this.view.html.querySelectorAll(`[${attr}]`), ]) : this.nonRepeats[attr]; } else if (cloned && repeatControls) { // update the cache this.all[attr] = this.all[attr].concat(repeatControls); } /** * If the update was triggered from a repeat, it improves performance (a lot) * to exclude all those repeats that did not trigger it... * However, this will break if people are referring to nodes in other * repeats such as with /path/to/repeat[3]/node, /path/to/repeat[position() = 3]/node or indexed-repeat(/path/to/repeat/node, /path/to/repeat, 3). * We accept that for now. * */ let collection; if (repeatControls) { // The non-repeat fields have to be added too, e.g. to update a calculated item with count(to/repeat/node) at the top level collection = this.nonRepeats[attr].concat(repeatControls); } else { collection = this.all[attr]; } let selector = []; // Add selectors based on specific changed nodes if (!updated.nodes || updated.nodes.length === 0) { if (repeatControls != null && cloned && filter === \".itemset-template\") { selector = [`.or-repeat[name=\"${repeatPath}\"] ${filter}[${attr}]`]; } else { selector = [`${filter}[${attr}]`]; } } else { updated.nodes.forEach((node) => { selector = selector.concat( this.getQuerySelectorsForLogic(filter, attr, node), ); }); // add all the paths that use the /* selector at end of path selector = selector.concat( this.getQuerySelectorsForLogic(filter, attr, \"*\"), ); } const selectorStr = selector.join(\", \"); collection = selectorStr ? collection.filter((el) => el.matches(selectorStr)) : collection; // TODO: exclude descendents of disabled elements? .find( ':not(:disabled) span.active' ) // TODO: remove jQuery wrapper, just return array of elements return $(collection); }",
+              "description": "Finds nodes that have attributes with XPath expressions that refer to particular XML elements.",
+              "parameters": [
+                {
+                  "description": "The attribute name to search for",
+                  "name": "attr",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "The optional filter to append to each selector",
+                  "name": "filter",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "object that contains information on updated nodes",
+                  "name": "updated",
+                  "type": {
+                    "text": "UpdatedDataNodes"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "jQuery"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "filterRadioCheckSiblings",
+              "privacy": "public",
+              "parameters": [
+                {
+                  "description": "radiobutton/checkbox HTML input elements",
+                  "name": "controls",
+                  "type": {
+                    "text": "Array<Element>"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Array<Element>"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "getQuerySelectorsForLogic",
+              "privacy": "public",
+              "description": "Crafts an optimized selector for element attributes that contain an expression with a target node name.",
+              "parameters": [
+                {
+                  "description": "The filter to use",
+                  "name": "filter",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "The attribute to target",
+                  "name": "attr",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "The XML nodeName to find",
+                  "name": "nodeName",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "getDataStrWithoutIrrelevantNodes",
+              "privacy": "public",
+              "default": "function () { const that = this; const modelClone = new FormModel(this.model.getStr()); modelClone.init(); // Since we are removing nodes, we need to go in reverse order to make sure // the indices are still correct! this.getRelatedNodes(\"data-relevant\") .reverse() .each(function () { const node = this; const relevant = that.input.getRelevant(node); const index = that.input.getIndex(node); const path = that.input.getName(node); let target; /* * Copied from relevant.js: * * If the relevant is placed on a group and that group contains repeats with the same name, * but currently has 0 repeats, the context will not be available. */ if ( getChild(node, `.or-repeat-info[data-name=\"${path}\"]`) && !getChild(node, `.or-repeat[name=\"${path}\"]`) ) { target = null; } else { // If a calculation without a form control (i.e. in .calculated-items) inside a repeat // has a relevant, and there 0 instances of that repeat, // there is nothing to remove (and target is undefined) // https://github.com/enketo/enketo-core/issues/761 // TODO: It would be so much nicer if form-control-less calculations were placed inside the repeat instead. target = modelClone.node(path, index).getElement(); } /* * If performance becomes an issue, some opportunities are: * - check if ancestor is relevant * - use cache of relevant.update * - check for repeatClones to avoid calculating index (as in relevant.update) */ if (target && !that.model.evaluate(relevant, \"boolean\", path, index)) { target.remove(); } }); return modelClone.getStr(); }",
+              "description": "Obtains the XML primary instance as string without nodes that have a relevant\nthat evaluates to false.\n\nThough this function may be slow it is slow when it doesn't matter much (upon saving). The\nalternative is to add some logic to relevant.update to mark irrelevant nodes in the model\nbut that would slow down form loading and form traversal when it does matter.",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "grosslyViolateStandardComplianceByIgnoringCertainCalcs",
+              "privacy": "public",
+              "default": "function () { const $culprit = this.view.$.find('[name$=\"instanceID\"][data-calculate]'); if ($culprit.length > 0) { $culprit.removeAttr(\"data-calculate\"); } }",
+              "description": "See https://groups.google.com/forum/?fromgroups=#!topic/opendatakit-developers/oBn7eQNQGTg\nand http://code.google.com/p/opendatakit/issues/detail?id=706\n\nThis is using an aggressive name attribute selector to also find e.g. name=\"/../orx:meta/orx:instanceID\", with\n*ANY* namespace prefix.\n\nOnce the following is complete this function can and should be removed:\n\n1. ODK Collect starts supporting an instanceID preload item (or automatic handling of meta->instanceID without binding)\n2. Pyxforms changes the instanceID binding from calculate to preload (or without binding)\n3. Formhub has re-generated all stored XML forms from the stored XLS forms with the updated pyxforms"
+            },
+            {
+              "kind": "field",
+              "name": "validationUpdate",
+              "privacy": "public",
+              "default": "function (updated: any = {}) { if (config.validateContinuously === true) { let upd = { ...updated }; if (updated.cloned) { /* * We don't want requireds and constraints of questions in a newly created * repeat to be evaluated immediately after the repeat is created. * However, we do want constraints and requireds outside the repeat that * depend on e.g. the count() of repeats to be re-evaluated. * To achieve this we use a dirty trick and convert the \"cloned\" updated object * to a regular \"node\" updated object. */ upd = { nodes: updated.repeatPath.split(\"/\").reverse().slice(0, 1), }; } // Find all inputs that have a dependency on the changed node. Avoid duplicates with Set. const nodes = new Set( this.getRelatedNodes(\"data-required\", \"\", upd).get(), ); this.constraintAttributes.forEach((attr) => this.getRelatedNodes(attr, \"\", upd).get().forEach(nodes.add, nodes), ); nodes.forEach(this.validateInput, this); } }",
+              "description": "This re-validates questions that have a dependency on a question that has just been updated.\n\nNote: it does not take care of re-validating a question itself after its value has changed due to a calculation update!",
+              "parameters": [
+                {
+                  "description": "object that contains information on updated nodes",
+                  "name": "updated",
+                  "type": {
+                    "text": "UpdatedDataNodes"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "setEventHandlers",
+              "privacy": "public",
+              "default": "function () { const that = this; // Prevent default submission, e.g. when text field is filled in and Enter key is pressed this.view.$.attr(\"onsubmit\", \"return false;\"); /* * The listener below catches both change and change.file events. * The .file namespace is used in the filepicker to avoid an infinite loop. * * Fields with the \"ignore\" class are dynamically added to the DOM in a widget and are supposed to be handled * by the widget itself, e.g. the search field in a geopoint widget. They should be ignored by the main engine. * * Readonly fields are not excluded because of this scenario: * 1. readonly field has a calculation * 2. readonly field becomes non-relevant (e.g. parent group with relevant) * 3. this clears value in view, which should propagate to model via 'change' event */ this.view.$.on( \"change.file\", \"input:not(.ignore), select:not(.ignore), textarea:not(.ignore)\", function () { const input = this; const n = { path: that.input.getName(input), inputType: that.input.getInputType(input), xmlType: that.input.getXmlType(input), val: that.input.getVal(input), index: that.input.getIndex(input), }; // set file input values to the uniqified actual name of file (without c://fakepath or anything like that) if ( n.val.length > 0 && n.inputType === \"file\" && input.files[0] && input.files[0].size > 0 ) { n.val = getFilename(input.files[0], input.dataset.filenamePostfix); } if (n.val.length > 0 && n.inputType === \"drawing\") { n.val = getFilename( { name: n.val, }, input.dataset.filenamePostfix, ); } const updated = that.model .node(n.path, n.index) .setVal(n.val, n.xmlType); if (updated) { that.validateInput(input).then(() => { // after internal processing is completed input.dispatchEvent( events.XFormsValueChanged({ repeatIndex: n.index }), ); }); } }, ); // doing this on the focus event may have little effect on performance, because nothing else is happening :) this.view.html.addEventListener(\"focusin\", (event) => { // update the form progress status this.progress.update(event.target); }); this.view.html.addEventListener(events.FakeFocus().type, (event) => { // update the form progress status this.progress.update(event.target); }); this.model.events.addEventListener(events.DataUpdate().type, (event) => { that.evaluationCascade.forEach((fn) => { fn.call(that, event.detail); }, true); // edit is fired when the model changes after the form has been initialized that.editStatus = true; }); this.view.html.addEventListener(events.AddRepeat().type, (event) => { const $clone = $(event.target); // Set template-defined static defaults of added repeats in Form, setAllVals does not trigger change event this.setAllVals($clone, event.detail.repeatIndex); // Initialize calculations, relevant, itemset, required, output inside that repeat. this.evaluationCascade.forEach((fn) => { fn.call(that, event.detail); }); this.progress.update(); }); this.view.html.addEventListener(events.RemoveRepeat().type, () => { this.progress.update(); }); this.view.html.addEventListener(events.ChangeLanguage().type, () => { this.output.update(); }); this.view.$.find(\".or-group > h4\").on(\"click\", function () { // The resize trigger is to make sure canvas widgets start working. $(this) .closest(\".or-group\") .toggleClass(\"or-appearance-compact\") .trigger(\"resize\"); }); }",
+              "description": "A big function that sets event handlers."
+            },
+            {
+              "kind": "field",
+              "name": "setValid",
+              "privacy": "public",
+              "default": "function (control, type) { const wrap = this.input.getWrapNode(control); if (!wrap) { // TODO: this condition occurs, at least in tests for itemsets, but we need find out how. return; } const classes = type ? [`invalid-${type}`] : [...wrap.classList].filter((cl) => cl.indexOf(\"invalid-\") === 0); wrap.classList.remove(...classes); }",
+              "description": "Removes an invalid mark on a question in the form UI.",
+              "parameters": [
+                {
+                  "description": "form control HTML element",
+                  "name": "control",
+                  "type": {
+                    "text": "Element"
+                  }
+                },
+                {
+                  "description": "One of \"constraint\", \"required\" and \"relevant\".",
+                  "name": "type",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "setInvalid",
+              "privacy": "public",
+              "default": "function (control, type = \"constraint\") { const wrap = this.input.getWrapNode(control); if (!wrap) { // TODO: this condition occurs, at least in tests for itemsets, but we need find out how. return; } if (config.validatePage === false && this.isValid(control)) { this.blockPageNavigation(); } wrap.classList.add(`invalid-${type}`); }",
+              "description": "Marks a question as invalid in the form UI.",
+              "parameters": [
+                {
+                  "description": "form control HTML element",
+                  "name": "control",
+                  "type": {
+                    "text": "Element"
+                  }
+                },
+                {
+                  "description": "One of \"constraint\", \"required\" and \"relevant\".",
+                  "name": "type",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "updateValidityInUi",
+              "privacy": "public",
+              "default": "function (control, result) { const passed = result.requiredValid !== false && result.constraintValid !== false; // Update UI if (result.requiredValid === false) { this.setValid(control, \"constraint\"); this.setInvalid(control, \"required\"); } else if (result.constraintValid === false) { this.setValid(control, \"required\"); this.setInvalid(control, \"constraint\"); } else { this.setValid(control, \"constraint\"); this.setValid(control, \"required\"); } if (!passed) { control.dispatchEvent(events.Invalidated()); } }",
+              "parameters": [
+                {
+                  "description": "form control HTML element",
+                  "name": "control",
+                  "type": {
+                    "text": "*"
+                  }
+                },
+                {
+                  "description": "result object obtained from Nodeset.validate",
+                  "name": "result",
+                  "type": {
+                    "text": "*"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "blockPageNavigation",
+              "privacy": "public",
+              "default": "function () { const that = this; this.pageNavigationBlocked = true; window.clearTimeout(this.blockPageNavigationTimeout); this.blockPageNavigationTimeout = window.setTimeout(() => { that.pageNavigationBlocked = false; }, 600); }",
+              "description": "Blocks page navigation for a short period.\nThis can be used to ensure that the user sees a new error message before moving to another page."
+            },
+            {
+              "kind": "field",
+              "name": "isValid",
+              "privacy": "public",
+              "default": "function (node) { const invalidSelectors = [\".invalid-required\", \".invalid-relevant\"].concat( this.constraintClassesInvalid.map((cls) => `.${cls}`), ); if (node) { const question = this.input.getWrapNode(node); const cls = question.classList; return !invalidSelectors.some((selector) => cls.contains(selector)); } return !this.view.html.querySelector(invalidSelectors.join(\", \")); }",
+              "description": "Checks whether the question is not currently marked as invalid. If no argument is provided, it checks the whole form.",
+              "parameters": [
+                {
+                  "description": "form control HTML element",
+                  "name": "node",
+                  "type": {
+                    "text": "Element"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "!boolean"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "clearNonRelevant",
+              "privacy": "public",
+              "default": "function () { this.relevant.update(null, true); }",
+              "description": "Clears non-relevant values."
+            },
+            {
+              "kind": "field",
+              "name": "validateAll",
+              "privacy": "public",
+              "default": "function () { const that = this; // to not delay validation unnecessarily we only clear non-relevants if necessary this.clearNonRelevant(); return this.validateContent(this.view.$).then((valid) => { that.view.html.dispatchEvent(events.ValidationComplete()); return valid; }); }",
+              "description": "Clears all non-relevant question values if necessary and then\nvalidates all enabled input fields after first resetting everything as valid.",
+              "return": {
+                "type": {
+                  "text": "Promise"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validate",
+              "privacy": "public",
+              "description": "Alias of validateAll"
+            },
+            {
+              "kind": "field",
+              "name": "validateContent",
+              "privacy": "public",
+              "default": "function ($container) { const that = this; const invalidSelector = [\".invalid-required\", \".invalid-relevant\"] .concat(this.constraintClassesInvalid.map((cls) => `.${cls}`)) .join(\", \"); // can't fire custom events on disabled elements therefore we set them all as valid $container .find( \"fieldset:disabled input, fieldset:disabled select, fieldset:disabled textarea, \" + \"input:disabled, select:disabled, textarea:disabled\", ) .each(function () { that.setValid(this); }); const validations = $container .find(\".question\") .addBack(\".question\") .map(function () { // only trigger validate on first input and use a **pure CSS** selector (huge performance impact) const elem = this.querySelector( \"input:not(.ignore):not(:disabled), select:not(.ignore):not(:disabled), textarea:not(.ignore):not(:disabled)\", ); if (!elem) { return Promise.resolve(); } return that.validateInput(elem); }) .toArray(); return Promise.all(validations) .then(() => { const container = $container[0]; const firstError = container.matches(invalidSelector) ? container : container.querySelector(invalidSelector); if (firstError) { that.goToTarget(firstError); } return !firstError; }) .catch( () => // fail whole-form validation if any of the question // validations threw. false, ); }",
+              "description": "Validates all enabled input fields in the supplied container, after first resetting everything as valid.",
+              "parameters": [
+                {
+                  "description": "HTML container element inside which to validate form controls",
+                  "name": "$container",
+                  "type": {
+                    "text": "jQuery"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Promise"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "pathToAbsolute",
+              "privacy": "public",
+              "default": "function (targetPath, contextPath) { let target; if (targetPath.indexOf(\"/\") === 0) { return targetPath; } // index is non-relevant (no positions in returned path) target = this.model.evaluate(targetPath, \"node\", contextPath, 0, true); return getXPath(target, \"instance\", false); }",
+              "parameters": [
+                {
+                  "description": "simple relative or absolute path",
+                  "name": "targetPath",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "description": "absolute context path",
+                  "name": "contextPath",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validateInput",
+              "privacy": "public",
+              "default": "function (control) { if (!this.initialized) { return Promise.resolve(); } const that = this; let getValidationResult; // All properties, except for the **very expensive** index property // There is some scope for performance improvement by determining other properties when they // are needed, but that may not be so significant. const n = { path: this.input.getName(control), inputType: this.input.getInputType(control), xmlType: this.input.getXmlType(control), enabled: this.input.isEnabled(control), constraint: this.input.getConstraint(control), calculation: this.input.getCalculation(control), required: this.input.getRequired(control), readonly: this.input.getReadonly(control), val: this.input.getVal(control), }; // No need to validate, **nor send validation events**. Meant for simple empty \"notes\" only. if ( n.readonly && !n.val && !n.required && !n.constraint && !n.calculation ) { return Promise.resolve(); } // The enabled check serves a purpose only when an input field itself is marked as enabled but its parent fieldset is not. // If an element is disabled mark it as valid (to undo a previously shown branch with fields marked as invalid). if (n.enabled && n.inputType !== \"hidden\") { // Only now, will we determine the index. n[\"ind\"] = this.input.getIndex(control); getValidationResult = this.model .node(n.path, n[\"ind\"]) .validate(n.constraint, n.required, n.xmlType); } else { getValidationResult = Promise.resolve({ requiredValid: true, constraintValid: true, }); } return getValidationResult .then((result) => { if (n.inputType !== \"hidden\") { this.updateValidityInUi(control, result); } return result; }) .catch((e) => { console.error(\"validation error\", e); that.setInvalid(control, \"constraint\"); throw e; }); }",
+              "description": "Validates question values.",
+              "parameters": [
+                {
+                  "description": "form control HTML element",
+                  "name": "control",
+                  "type": {
+                    "text": "Element"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Promise<undefined|ValidateInputResolution>"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "getGoToTarget",
+              "privacy": "public",
+              "default": "function (path) { let hits; let modelNode; let target; let intermediateTarget; let selector = \"\"; const repeatRegEx = /([^[]+)\\[(\\d+)\\]([^[]*$)?/g; if (!path) { return; } modelNode = this.model.node(path).getElement(); if (!modelNode) { return; } // Convert to absolute path, while maintaining positions. path = getXPath(modelNode, \"instance\", true); // Not inside a cloned repeat. target = this.view.html.querySelector(`[name=\"${path}\"]`); // If inside a cloned repeat (i.e. a repeat that is not first-in-series) if (!target) { intermediateTarget = this.view.html; while ((hits = repeatRegEx.exec(path)) !== null && intermediateTarget) { selector += hits[1]; intermediateTarget = intermediateTarget.querySelectorAll( `[name=\"${selector}\"], [data-name=\"${selector}\"]`, )[hits[2]]; if (intermediateTarget && hits[3]) { selector += hits[3]; intermediateTarget = intermediateTarget.querySelector( `[name=\"${selector}\"],[data-name=\"${selector}\"]`, ); } target = intermediateTarget; } } return target ? this.input.getWrapNode(target) : target; }",
+              "parameters": [
+                {
+                  "description": "path to HTML form control",
+                  "name": "path",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "null|Element"
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "goToTarget",
+              "privacy": "public",
+              "default": "function (target: HTMLElement) { // console.trace('scroll to target', target); if (target) { if (this.pages.active) { // Flip to page this.pages.flipToPageContaining($(target)); } // check if the target has a form control if (target.closest(\".calculation, .setvalue, .setgeopoint\")) { // It is up to the apps to decide what to do with this event. target.dispatchEvent(events.GoToInvisible()); } // check if the nearest question or group is irrelevant after page flip if (target.closest(\".or-branch.disabled\")) { // It is up to the apps to decide what to do with this event. target.dispatchEvent(events.GoToIrrelevant()); } // Scroll to element target.scrollIntoView(); // Focus on the first non .ignore form control // If the element is hidden (e.g. because it's been replaced by a widget), // the focus event will not fire, so we also trigger an applyfocus event that widgets can listen for. const input = target.querySelector<HTMLInputElement>( \"input:not(.ignore), textarea:not(.ignore), select:not(.ignore)\", ); input.focus(); input.dispatchEvent(events.ApplyFocus()); } return !!target; }",
+              "description": "Scrolls to an HTML question or group element, flips to the page it is on and focuses on the nearest form control.",
+              "parameters": [
+                {
+                  "description": "An HTML question or group element to scroll to",
+                  "name": "target",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Form",
+          "declaration": {
+            "name": "Form",
+            "module": "../src/libs/enketo/js/form.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FormModel",
+          "declaration": {
+            "name": "FormModel",
+            "module": "../src/libs/enketo/js/form.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/page.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "../src/libs/enketo/js/page.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/type-def.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/widget.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A Widget class that can be extended to provide some of the basic widget functionality out of the box.",
+          "name": "Widget",
+          "members": [
+            {
+              "kind": "field",
+              "name": "element",
+              "type": {
+                "text": "any"
+              },
+              "default": "element"
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "question",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_props",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_init",
+              "description": "Meant to be overridden, but automatically called."
+            },
+            {
+              "kind": "method",
+              "name": "_getProps",
+              "description": "Not meant to be overridden, but could be. Recommend to extend `get props()` instead.",
+              "return": {
+                "type": {
+                  "text": "object"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "disable",
+              "description": "Disallow user input into widget by making it readonly."
+            },
+            {
+              "kind": "method",
+              "name": "enable",
+              "description": "Performs opposite action of disable() function."
+            },
+            {
+              "kind": "field",
+              "name": "props",
+              "description": "Returns widget properties. May need to be extended.",
+              "readonly": true,
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "resetButtonHtml",
+              "description": "Returns a HTML document fragment for a reset button.",
+              "readonly": true,
+              "type": {
+                "text": "Element"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "downloadButtonHtml",
+              "description": "Returns a HTML document fragment for a download button.",
+              "readonly": true,
+              "type": {
+                "text": "Element"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "description": "Sets a value in the widget. Should be overridden.",
+              "readonly": true,
+              "type": {
+                "text": "*"
+              },
+              "parameters": [
+                {
+                  "description": "value to set",
+                  "name": "_value",
+                  "type": {
+                    "text": "*"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "originalInputValue",
+              "description": "Updates the value in the original form control the widget is instantiated on.\nThis form control is often hidden by the widget.",
+              "readonly": true,
+              "type": {
+                "text": "*"
+              },
+              "parameters": [
+                {
+                  "description": "value to set",
+                  "name": "value",
+                  "type": {
+                    "text": "*"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "list",
+              "static": true,
+              "description": "Returns true if the widget is using a list of options.",
+              "readonly": true,
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "condition",
+              "static": true,
+              "description": "Tests whether widget needs to be instantiated (e.g. if not to be used for touchscreens).\nNote that the Element (used in the constructor) will be provided as parameter.",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "Widget",
+            "module": "../src/libs/enketo/js/widget.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/widgets.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "../src/libs/enketo/js/widgets.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "../src/libs/enketo/js/xpath-evaluator-binding.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "../src/libs/enketo/js/xpath-evaluator-binding.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

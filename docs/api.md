@@ -1,4 +1,4 @@
-## `src/enketo-webform.ts`:
+## `../src/enketo-webform.ts`:
 
 ### class: `EnketoWebform`, `enketo-webform`
 
@@ -76,7 +76,16 @@
 | `js`                        | `EnketoWebform`  | EnketoWebform | ../src/enketo-webform.ts |         |
 | `custom-element-definition` | `enketo-webform` | EnketoWebform | ../src/enketo-webform.ts |         |
 
-## `src/kobo-service.ts`:
+## `../src/index.ts`:
+
+### Exports
+
+| Kind | Name            | Declaration   | Module            | Package |
+| ---- | --------------- | ------------- | ----------------- | ------- |
+| `js` | `EnketoWebform` | EnketoWebform | ../enketo-webform |         |
+| `js` | `*`             | \*            | ../src/types      |         |
+
+## `../src/kobo-service.ts`:
 
 ### Exports
 
@@ -84,7 +93,7 @@
 | ---- | ------------- | ----------- | ---------------------- | ------- |
 | `js` | `KoboService` | KoboService | ../src/kobo-service.ts |         |
 
-## `src/utils.ts`:
+## `../src/utils.ts`:
 
 ### Functions
 
@@ -110,15 +119,7 @@
 | `js` | `xmlStringToFile`       | xmlStringToFile       | ../src/utils.ts |         |
 | `js` | `xmlNodeReplaceContent` | xmlNodeReplaceContent | ../src/utils.ts |         |
 
-## `src/libs/enketo/config.ts`:
-
-### Exports
-
-| Kind | Name      | Declaration | Module                       | Package |
-| ---- | --------- | ----------- | ---------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/enketo/config.ts |         |
-
-## `src/libs/openrosa/date-extensions.ts`:
+## `../src/libs/openrosa/date-extensions.ts`:
 
 ### Functions
 
@@ -137,15 +138,7 @@
 | `js` | `toISOLocalString`        | toISOLocalString        | ../src/libs/openrosa/date-extensions.ts |         |
 | `js` | `getTimezoneOffsetAsTime` | getTimezoneOffsetAsTime | ../src/libs/openrosa/date-extensions.ts |         |
 
-## `src/libs/openrosa/digest.ts`:
-
-### Exports
-
-| Kind | Name      | Declaration | Module                         | Package |
-| ---- | --------- | ----------- | ------------------------------ | ------- |
-| `js` | `default` |             | ../src/libs/openrosa/digest.ts |         |
-
-## `src/libs/openrosa/extended-xpath.ts`:
+## `../src/libs/openrosa/extended-xpath.ts`:
 
 ### Functions
 
@@ -207,7 +200,7 @@
 | ---- | --------- | ----------- | -------------------------------------- | ------- |
 | `js` | `default` |             | ../src/libs/openrosa/extended-xpath.ts |         |
 
-## `src/libs/openrosa/geo.ts`:
+## `../src/libs/openrosa/geo.ts`:
 
 ### Functions
 
@@ -227,7 +220,7 @@
 | `js` | `area`        | area        | ../src/libs/openrosa/geo.ts |         |
 | `js` | `distance`    | distance    | ../src/libs/openrosa/geo.ts |         |
 
-## `src/libs/openrosa/openrosa-extensions.ts`:
+## `../src/libs/openrosa/openrosa-extensions.ts`:
 
 ### Variables
 
@@ -243,7 +236,7 @@
 | ---- | --------- | --------------------------- | ------------------------------------------- | ------- |
 | `js` | `default` | openrosa\_xpath\_extensions | ../src/libs/openrosa/openrosa-extensions.ts |         |
 
-## `src/libs/openrosa/openrosa-xpath.ts`:
+## `../src/libs/openrosa/openrosa-xpath.ts`:
 
 ### Exports
 
@@ -251,7 +244,7 @@
 | ---- | --------- | ----------- | -------------------------------------- | ------- |
 | `js` | `default` |             | ../src/libs/openrosa/openrosa-xpath.ts |         |
 
-## `src/libs/openrosa/random-token.ts`:
+## `../src/libs/openrosa/random-token.ts`:
 
 ### Functions
 
@@ -267,7 +260,7 @@
 | ---- | ------------- | ----------- | ------------------------------------ | ------- |
 | `js` | `randomToken` | randomToken | ../src/libs/openrosa/random-token.ts |         |
 
-## `src/libs/openrosa/xpr.ts`:
+## `../src/libs/openrosa/xpr.ts`:
 
 ### Exports
 
@@ -275,7 +268,145 @@
 | ---- | --------- | ----------- | --------------------------- | ------- |
 | `js` | `default` |             | ../src/libs/openrosa/xpr.ts |         |
 
-## `src/libs/enketo/js/dom-utils.ts`:
+## `../src/libs/enketo/config.ts`:
+
+### Exports
+
+| Kind | Name      | Declaration | Module                       | Package |
+| ---- | --------- | ----------- | ---------------------------- | ------- |
+| `js` | `default` |             | ../src/libs/enketo/config.ts |         |
+
+## `../src/libs/openrosa/utils/date.ts`:
+
+### Variables
+
+| Name          | Description              | Type |
+| ------------- | ------------------------ | ---- |
+| `DATE_STRING` |                          |      |
+| `isValidDate` | Check if a date is valid |      |
+
+<hr/>
+
+### Functions
+
+| Name               | Description | Parameters | Return |
+| ------------------ | ----------- | ---------- | ------ |
+| `dateToDays`       |             | `d`        |        |
+| `dateStringToDays` |             | `d`        |        |
+
+<hr/>
+
+### Exports
+
+| Kind | Name               | Declaration      | Module                             | Package |
+| ---- | ------------------ | ---------------- | ---------------------------------- | ------- |
+| `js` | `DATE_STRING`      | DATE\_STRING     | ../src/libs/openrosa/utils/date.ts |         |
+| `js` | `dateToDays`       | dateToDays       | ../src/libs/openrosa/utils/date.ts |         |
+| `js` | `dateStringToDays` | dateStringToDays | ../src/libs/openrosa/utils/date.ts |         |
+| `js` | `isValidDate`      | isValidDate      | ../src/libs/openrosa/utils/date.ts |         |
+
+## `../src/libs/openrosa/utils/native.ts`:
+
+### Functions
+
+| Name                   | Description | Parameters   | Return |
+| ---------------------- | ----------- | ------------ | ------ |
+| `preprocessNativeArgs` |             | `name, args` |        |
+
+<hr/>
+
+### Exports
+
+| Kind | Name                   | Declaration          | Module                               | Package |
+| ---- | ---------------------- | -------------------- | ------------------------------------ | ------- |
+| `js` | `preprocessNativeArgs` | preprocessNativeArgs | ../src/libs/openrosa/utils/native.ts |         |
+
+## `../src/libs/openrosa/utils/operation.ts`:
+
+### Functions
+
+| Name              | Description | Parameters     | Return |
+| ----------------- | ----------- | -------------- | ------ |
+| `handleOperation` |             | `lhs, op, rhs` |        |
+
+<hr/>
+
+### Exports
+
+| Kind | Name              | Declaration     | Module                                  | Package |
+| ---- | ----------------- | --------------- | --------------------------------------- | ------- |
+| `js` | `handleOperation` | handleOperation | ../src/libs/openrosa/utils/operation.ts |         |
+
+## `../src/libs/openrosa/utils/result.ts`:
+
+### Functions
+
+| Name               | Description | Parameters                    | Return |
+| ------------------ | ----------- | ----------------------------- | ------ |
+| `toSnapshotResult` |             | `arr, resultType, singleItem` |        |
+
+<hr/>
+
+### Exports
+
+| Kind | Name               | Declaration      | Module                               | Package |
+| ---- | ------------------ | ---------------- | ------------------------------------ | ------- |
+| `js` | `toSnapshotResult` | toSnapshotResult | ../src/libs/openrosa/utils/result.ts |         |
+
+## `../src/libs/openrosa/utils/shuffle.ts`:
+
+### Functions
+
+| Name      | Description                                                          | Parameters                   | Return |
+| --------- | -------------------------------------------------------------------- | ---------------------------- | ------ |
+| `shuffle` | Performs the "inside-out" variant of the Fisher-Yates array shuffle. | `array, seed: number=, : <*` | `<*`   |
+
+<hr/>
+
+### Exports
+
+| Kind | Name      | Declaration | Module                                | Package |
+| ---- | --------- | ----------- | ------------------------------------- | ------- |
+| `js` | `default` | shuffle     | ../src/libs/openrosa/utils/shuffle.ts |         |
+
+## `../src/libs/openrosa/utils/sort-by-document-order.ts`:
+
+### Functions
+
+| Name | Description | Parameters | Return |
+| ---- | ----------- | ---------- | ------ |
+|      |             | `ir`       |        |
+|      |             |            |        |
+
+<hr/>
+
+### Exports
+
+| Kind | Name      | Declaration | Module                                               | Package |
+| ---- | --------- | ----------- | ---------------------------------------------------- | ------- |
+| `js` | `default` |             | ../src/libs/openrosa/utils/sort-by-document-order.ts |         |
+
+## `../src/libs/openrosa/utils/xpath-cast.ts`:
+
+### Functions
+
+| Name        | Description | Parameters | Return |
+| ----------- | ----------- | ---------- | ------ |
+| `asBoolean` |             | `r`        |        |
+| `asNumber`  |             | `r`        |        |
+| `asString`  |             | `r`        |        |
+
+<hr/>
+
+### Exports
+
+| Kind | Name        | Declaration | Module                                   | Package |
+| ---- | ----------- | ----------- | ---------------------------------------- | ------- |
+| `js` | `asBoolean` | asBoolean   | ../src/libs/openrosa/utils/xpath-cast.ts |         |
+| `js` | `asNumber`  | asNumber    | ../src/libs/openrosa/utils/xpath-cast.ts |         |
+| `js` | `asString`  | asString    | ../src/libs/openrosa/utils/xpath-cast.ts |         |
+
+## `../src/libs/enketo/js/dom-utils.ts`:
 
 ### Variables
 
@@ -327,7 +458,7 @@
 | `js` | `empty`                                | empty                                | ../src/libs/enketo/js/dom-utils.ts |         |
 | `js` | `MutationsTracker`                     | MutationsTracker                     | ../src/libs/enketo/js/dom-utils.ts |         |
 
-## `src/libs/enketo/js/event.ts`:
+## `../src/libs/enketo/js/event.ts`:
 
 ### Exports
 
@@ -335,7 +466,7 @@
 | ---- | --------- | ----------- | ------------------------------ | ------- |
 | `js` | `default` |             | ../src/libs/enketo/js/event.ts |         |
 
-## `src/libs/enketo/js/form.ts`:
+## `../src/libs/enketo/js/form.ts`:
 
 ### Exports
 
@@ -344,7 +475,7 @@
 | `js` | `Form`      | Form        | ../src/libs/enketo/js/form.ts |         |
 | `js` | `FormModel` | FormModel   | ../src/libs/enketo/js/form.ts |         |
 
-## `src/libs/enketo/js/page.ts`:
+## `../src/libs/enketo/js/page.ts`:
 
 ### Exports
 
@@ -352,7 +483,7 @@
 | ---- | --------- | ----------- | ----------------------------- | ------- |
 | `js` | `default` |             | ../src/libs/enketo/js/page.ts |         |
 
-## `src/libs/enketo/js/widget.ts`:
+## `../src/libs/enketo/js/widget.ts`:
 
 ### Exports
 
@@ -360,7 +491,7 @@
 | ---- | --------- | ----------- | ------------------------------- | ------- |
 | `js` | `default` | Widget      | ../src/libs/enketo/js/widget.ts |         |
 
-## `src/libs/enketo/js/widgets.ts`:
+## `../src/libs/enketo/js/widgets.ts`:
 
 ### Exports
 
@@ -368,7 +499,7 @@
 | ---- | --------- | ----------- | -------------------------------- | ------- |
 | `js` | `default` |             | ../src/libs/enketo/js/widgets.ts |         |
 
-## `src/libs/enketo/js/xpath-evaluator-binding.ts`:
+## `../src/libs/enketo/js/xpath-evaluator-binding.ts`:
 
 ### Functions
 
@@ -384,133 +515,3 @@
 | Kind | Name      | Declaration | Module                                           | Package |
 | ---- | --------- | ----------- | ------------------------------------------------ | ------- |
 | `js` | `default` |             | ../src/libs/enketo/js/xpath-evaluator-binding.ts |         |
-
-## `src/libs/openrosa/utils/date.ts`:
-
-### Variables
-
-| Name          | Description              | Type |
-| ------------- | ------------------------ | ---- |
-| `DATE_STRING` |                          |      |
-| `isValidDate` | Check if a date is valid |      |
-
-<hr/>
-
-### Functions
-
-| Name               | Description | Parameters | Return |
-| ------------------ | ----------- | ---------- | ------ |
-| `dateToDays`       |             | `d`        |        |
-| `dateStringToDays` |             | `d`        |        |
-
-<hr/>
-
-### Exports
-
-| Kind | Name               | Declaration      | Module                             | Package |
-| ---- | ------------------ | ---------------- | ---------------------------------- | ------- |
-| `js` | `DATE_STRING`      | DATE\_STRING     | ../src/libs/openrosa/utils/date.ts |         |
-| `js` | `dateToDays`       | dateToDays       | ../src/libs/openrosa/utils/date.ts |         |
-| `js` | `dateStringToDays` | dateStringToDays | ../src/libs/openrosa/utils/date.ts |         |
-| `js` | `isValidDate`      | isValidDate      | ../src/libs/openrosa/utils/date.ts |         |
-
-## `src/libs/openrosa/utils/native.ts`:
-
-### Functions
-
-| Name                   | Description | Parameters   | Return |
-| ---------------------- | ----------- | ------------ | ------ |
-| `preprocessNativeArgs` |             | `name, args` |        |
-
-<hr/>
-
-### Exports
-
-| Kind | Name                   | Declaration          | Module                               | Package |
-| ---- | ---------------------- | -------------------- | ------------------------------------ | ------- |
-| `js` | `preprocessNativeArgs` | preprocessNativeArgs | ../src/libs/openrosa/utils/native.ts |         |
-
-## `src/libs/openrosa/utils/operation.ts`:
-
-### Functions
-
-| Name              | Description | Parameters     | Return |
-| ----------------- | ----------- | -------------- | ------ |
-| `handleOperation` |             | `lhs, op, rhs` |        |
-
-<hr/>
-
-### Exports
-
-| Kind | Name              | Declaration     | Module                                  | Package |
-| ---- | ----------------- | --------------- | --------------------------------------- | ------- |
-| `js` | `handleOperation` | handleOperation | ../src/libs/openrosa/utils/operation.ts |         |
-
-## `src/libs/openrosa/utils/result.ts`:
-
-### Functions
-
-| Name               | Description | Parameters                    | Return |
-| ------------------ | ----------- | ----------------------------- | ------ |
-| `toSnapshotResult` |             | `arr, resultType, singleItem` |        |
-
-<hr/>
-
-### Exports
-
-| Kind | Name               | Declaration      | Module                               | Package |
-| ---- | ------------------ | ---------------- | ------------------------------------ | ------- |
-| `js` | `toSnapshotResult` | toSnapshotResult | ../src/libs/openrosa/utils/result.ts |         |
-
-## `src/libs/openrosa/utils/shuffle.ts`:
-
-### Functions
-
-| Name      | Description                                                          | Parameters                   | Return |
-| --------- | -------------------------------------------------------------------- | ---------------------------- | ------ |
-| `shuffle` | Performs the "inside-out" variant of the Fisher-Yates array shuffle. | `array, seed: number=, : <*` | `<*`   |
-
-<hr/>
-
-### Exports
-
-| Kind | Name      | Declaration | Module                                | Package |
-| ---- | --------- | ----------- | ------------------------------------- | ------- |
-| `js` | `default` | shuffle     | ../src/libs/openrosa/utils/shuffle.ts |         |
-
-## `src/libs/openrosa/utils/sort-by-document-order.ts`:
-
-### Functions
-
-| Name | Description | Parameters | Return |
-| ---- | ----------- | ---------- | ------ |
-|      |             | `ir`       |        |
-|      |             |            |        |
-
-<hr/>
-
-### Exports
-
-| Kind | Name      | Declaration | Module                                               | Package |
-| ---- | --------- | ----------- | ---------------------------------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/openrosa/utils/sort-by-document-order.ts |         |
-
-## `src/libs/openrosa/utils/xpath-cast.ts`:
-
-### Functions
-
-| Name        | Description | Parameters | Return |
-| ----------- | ----------- | ---------- | ------ |
-| `asBoolean` |             | `r`        |        |
-| `asNumber`  |             | `r`        |        |
-| `asString`  |             | `r`        |        |
-
-<hr/>
-
-### Exports
-
-| Kind | Name        | Declaration | Module                                   | Package |
-| ---- | ----------- | ----------- | ---------------------------------------- | ------- |
-| `js` | `asBoolean` | asBoolean   | ../src/libs/openrosa/utils/xpath-cast.ts |         |
-| `js` | `asNumber`  | asNumber    | ../src/libs/openrosa/utils/xpath-cast.ts |         |
-| `js` | `asString`  | asString    | ../src/libs/openrosa/utils/xpath-cast.ts |         |

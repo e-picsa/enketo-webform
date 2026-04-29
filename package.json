@@ -10,31 +10,28 @@
   },
   "main": "./dist/enketo-webform.umd.cjs",
   "module": "./dist/enketo-webform.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/enketo-webform.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/enketo-webform.d.ts",
       "import": "./dist/enketo-webform.js",
-      "require": "./dist/enketo-webform.umd.cjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./types/preact": "./types/preact.d.ts",
-    "./types/react": "./types/react.d.ts"
+      "require": "./dist/enketo-webform.umd.cjs"
+    }
   },
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "workspaces": [
     "demo"
   ],
   "scripts": {
-    "start": "bun run --filter demo dev",
+    "start": "cd demo && bun run dev && cd ../",
     "lint": "bun run eslint --max-warnings=-1; bun run prettier --check .",
     "prepare": "husky",
     "build": "bun run build:types && bun run build:lib && bun run build:demo",
     "build:types": "custom-elements-manifest analyze --config custom-elements-manifest.config.mjs",
     "build:lib": "vite build",
-    "build:demo": "bun run build:package && cd demo && bun run build && cd ../",
+    "build:demo": "cd demo && bun run build && cd ../",
     "test": "vitest",
     "test:run": "vitest run"
   },

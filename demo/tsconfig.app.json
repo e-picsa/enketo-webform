@@ -13,10 +13,10 @@
     "noImplicitThis": false,
     "paths": {
       "@picsa/enketo-webform": [
-        "../../src"
+        "../src"
       ],
       "@picsa/enketo-webform/types/*": [
-        "../../types/*"
+        "../types/*"
       ],
       "react": ["./node_modules/preact/compat/"],
       "react-dom": ["./node_modules/preact/compat/"]

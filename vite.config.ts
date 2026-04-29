@@ -9,7 +9,7 @@ export default defineConfig({
         "src/enketo-webform.ts",
         "src/kobo-service.ts",
         "src/utils.ts",
-        "src/types.d.ts",
+        "src/index.ts",
       ],
       exclude: ["src/**/*.test.ts", "src/libs"],
     }),

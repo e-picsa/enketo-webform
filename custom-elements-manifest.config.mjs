@@ -18,7 +18,7 @@ const fixModulePathsPlugin = () => ({
   name: "fix-module-paths",
   packageLinkPhase({ customElementsManifest }) {
     for (const mod of customElementsManifest.modules ?? []) {
-      mod.path = stripPrefix(mod.path);
+      mod.path = relativize(stripPrefix(mod.path));
 
       for (const decl of mod.declarations ?? []) {
         decl.modulePath = relativize(stripPrefix(decl.modulePath));

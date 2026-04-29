@@ -6,6 +6,11 @@ import Events from "./libs/enketo/js/event";
 
 // Directly import styles to keep encapsulated
 import enketoStyles from "./enketo-webform.scss?inline";
+import type {
+  IEnketoFormEntry,
+  IEventDataUpdated,
+  IEventFormSaved,
+} from "./types";
 
 const DEBUG = import.meta.env?.DEV ?? false;
 
@@ -13,35 +18,6 @@ function debug(...args: unknown[]) {
   if (DEBUG) {
     console.debug("[enketo-webform]", ...args);
   }
-}
-
-/**
- * Interface representing a saved form entry
- */
-export interface IEnketoFormEntry {
-  created: number;
-  draft: boolean;
-  enketoId: string;
-  files: unknown[];
-  instanceId: string;
-  name: string;
-  updated: number;
-  xml: string;
-}
-
-/**
- * Event detail for formSaved event
- */
-export interface IEventFormSaved {
-  entry: IEnketoFormEntry;
-}
-
-/**
- * Event detail for dataUpdated event
- */
-export interface IEventDataUpdated {
-  xml: string;
-  nodes: string[];
 }
 
 @customElement("enketo-webform")
