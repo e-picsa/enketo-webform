@@ -9,27 +9,25 @@ const TYPES_OUTDIR = "./types";
 const stripPrefix = (p) =>
   p?.startsWith(PACKAGE_PREFIX) ? p.slice(PACKAGE_PREFIX.length) : p;
 
-const relativize = (p) =>
-  p && !p.startsWith("../") && !p.startsWith("/") ? "../" + p : p;
+// Used ONLY for type generation in the types/ folder
+const relativize = (p) => {
+  if (p === "src/enketo-webform.ts") return "../dist/enketo-webform.js";
+  return p && !p.startsWith("../") && !p.startsWith("/") ? "../" + p : p;
+};
 
-// Strips the monorepo prefix from manifest paths and relativizes declaration/export
-// paths so jsxTypesPlugin emits correct imports from the `types/` subdirectory.
-const fixModulePathsPlugin = () => ({
-  name: "fix-module-paths",
+// Surgical replacement plugin for type generation
+const typeRelativizePlugin = () => ({
+  name: "type-relativize",
   packageLinkPhase({ customElementsManifest }) {
     for (const mod of customElementsManifest.modules ?? []) {
       mod.path = relativize(stripPrefix(mod.path));
-
       for (const decl of mod.declarations ?? []) {
         decl.modulePath = relativize(stripPrefix(decl.modulePath));
         decl.definitionPath = relativize(stripPrefix(decl.definitionPath));
       }
-
       for (const exp of mod.exports ?? []) {
         if (exp.declaration?.module) {
-          exp.declaration.module = relativize(
-            stripPrefix(exp.declaration.module),
-          );
+          exp.declaration.module = relativize(stripPrefix(exp.declaration.module));
         }
       }
     }
@@ -54,7 +52,8 @@ export default {
   globs: ["src/**/*.ts"],
   litelement: true,
   plugins: [
-    fixModulePathsPlugin(),
+    // 1. Generate types with relativized paths
+    typeRelativizePlugin(),
     jsxTypesPlugin({
       outdir: TYPES_OUTDIR,
       fileName: "preact.d.ts",
@@ -65,6 +64,23 @@ export default {
       fileName: "react.d.ts",
       module: "react",
     }),
+    // 2. Restore EVERYTHING to root-relative paths for manifest and docs
+    {
+      name: "restore-root-paths",
+      packageLinkPhase({ customElementsManifest }) {
+        for (const mod of customElementsManifest.modules ?? []) {
+          // Point back to sibling src/ without ../
+          mod.path = stripPrefix(mod.path.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", ""));
+          for (const decl of mod.declarations ?? []) {
+            if (decl.modulePath) decl.modulePath = decl.modulePath.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", "");
+            if (decl.definitionPath) decl.definitionPath = decl.definitionPath.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", "");
+          }
+          for (const exp of mod.exports ?? []) {
+            if (exp.declaration?.module) exp.declaration.module = exp.declaration.module.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", "");
+          }
+        }
+      },
+    },
     toMarkdownPlugin(),
   ],
 };

@@ -13,7 +13,7 @@
     "noImplicitThis": false,
     "paths": {
       "@picsa/enketo-webform": [
-        "../src"
+        "../dist/enketo-webform.js"
       ],
       "@picsa/enketo-webform/types/*": [
         "../types/*"

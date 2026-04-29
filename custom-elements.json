@@ -4,7 +4,7 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "../src/enketo-webform.ts",
+      "path": "src/enketo-webform.ts",
       "declarations": [
         {
           "kind": "class",
@@ -281,8 +281,8 @@
           },
           "tagName": "enketo-webform",
           "customElement": true,
-          "modulePath": "../src/enketo-webform.ts",
-          "definitionPath": "../src/enketo-webform.ts"
+          "modulePath": "src/enketo-webform.ts",
+          "definitionPath": "src/enketo-webform.ts"
         },
         {
           "kind": "variable",
@@ -303,7 +303,7 @@
           "name": "EnketoWebform",
           "declaration": {
             "name": "EnketoWebform",
-            "module": "../src/enketo-webform.ts"
+            "module": "src/enketo-webform.ts"
           }
         },
         {
@@ -311,14 +311,14 @@
           "name": "enketo-webform",
           "declaration": {
             "name": "EnketoWebform",
-            "module": "../src/enketo-webform.ts"
+            "module": "src/enketo-webform.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/index.ts",
+      "path": "src/index.ts",
       "declarations": [],
       "exports": [
         {
@@ -326,7 +326,7 @@
           "name": "EnketoWebform",
           "declaration": {
             "name": "EnketoWebform",
-            "module": "../enketo-webform"
+            "module": "enketo-webform"
           }
         },
         {
@@ -334,14 +334,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "module": "../src/types"
+            "module": "src/types"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/kobo-service.ts",
+      "path": "src/kobo-service.ts",
       "declarations": [
         {
           "kind": "class",
@@ -448,20 +448,20 @@
           "name": "KoboService",
           "declaration": {
             "name": "KoboService",
-            "module": "../src/kobo-service.ts"
+            "module": "src/kobo-service.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/types.ts",
+      "path": "src/types.ts",
       "declarations": [],
       "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "../src/utils.ts",
+      "path": "src/utils.ts",
       "declarations": [
         {
           "kind": "function",
@@ -566,7 +566,7 @@
           "name": "xmlToJson",
           "declaration": {
             "name": "xmlToJson",
-            "module": "../src/utils.ts"
+            "module": "src/utils.ts"
           }
         },
         {
@@ -574,7 +574,7 @@
           "name": "jsonToXML",
           "declaration": {
             "name": "jsonToXML",
-            "module": "../src/utils.ts"
+            "module": "src/utils.ts"
           }
         },
         {
@@ -582,7 +582,7 @@
           "name": "xmlStringToFile",
           "declaration": {
             "name": "xmlStringToFile",
-            "module": "../src/utils.ts"
+            "module": "src/utils.ts"
           }
         },
         {
@@ -590,14 +590,28 @@
           "name": "xmlNodeReplaceContent",
           "declaration": {
             "name": "xmlNodeReplaceContent",
-            "module": "../src/utils.ts"
+            "module": "src/utils.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/openrosa/date-extensions.ts",
+      "path": "src/libs/enketo/config.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/libs/enketo/config.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/date-extensions.ts",
       "declarations": [
         {
           "kind": "class",
@@ -656,7 +670,7 @@
           "name": "BlankDate",
           "declaration": {
             "name": "BlankDate",
-            "module": "../src/libs/openrosa/date-extensions.ts"
+            "module": "src/libs/openrosa/date-extensions.ts"
           }
         },
         {
@@ -664,7 +678,7 @@
           "name": "toISOLocalString",
           "declaration": {
             "name": "toISOLocalString",
-            "module": "../src/libs/openrosa/date-extensions.ts"
+            "module": "src/libs/openrosa/date-extensions.ts"
           }
         },
         {
@@ -672,14 +686,14 @@
           "name": "getTimezoneOffsetAsTime",
           "declaration": {
             "name": "getTimezoneOffsetAsTime",
-            "module": "../src/libs/openrosa/date-extensions.ts"
+            "module": "src/libs/openrosa/date-extensions.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/openrosa/extended-xpath.ts",
+      "path": "src/libs/openrosa/extended-xpath.ts",
       "declarations": [
         {
           "kind": "function",
@@ -887,14 +901,14 @@
           "name": "default",
           "declaration": {
             "name": "",
-            "module": "../src/libs/openrosa/extended-xpath.ts"
+            "module": "src/libs/openrosa/extended-xpath.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/openrosa/geo.ts",
+      "path": "src/libs/openrosa/geo.ts",
       "declarations": [
         {
           "kind": "function",
@@ -939,7 +953,7 @@
           "name": "asGeopoints",
           "declaration": {
             "name": "asGeopoints",
-            "module": "../src/libs/openrosa/geo.ts"
+            "module": "src/libs/openrosa/geo.ts"
           }
         },
         {
@@ -947,7 +961,7 @@
           "name": "area",
           "declaration": {
             "name": "area",
-            "module": "../src/libs/openrosa/geo.ts"
+            "module": "src/libs/openrosa/geo.ts"
           }
         },
         {
@@ -955,14 +969,14 @@
           "name": "distance",
           "declaration": {
             "name": "distance",
-            "module": "../src/libs/openrosa/geo.ts"
+            "module": "src/libs/openrosa/geo.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/openrosa/openrosa-extensions.ts",
+      "path": "src/libs/openrosa/openrosa-extensions.ts",
       "declarations": [
         {
           "kind": "variable",
@@ -976,28 +990,28 @@
           "name": "default",
           "declaration": {
             "name": "openrosa_xpath_extensions",
-            "module": "../src/libs/openrosa/openrosa-extensions.ts"
+            "module": "src/libs/openrosa/openrosa-extensions.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/openrosa/openrosa-xpath.ts",
+      "path": "src/libs/openrosa/openrosa-xpath.ts",
       "declarations": [],
       "exports": [
         {
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "../src/libs/openrosa/openrosa-xpath.ts"
+            "module": "src/libs/openrosa/openrosa-xpath.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/openrosa/random-token.ts",
+      "path": "src/libs/openrosa/random-token.ts",
       "declarations": [
         {
           "kind": "function",
@@ -1015,363 +1029,28 @@
           "name": "randomToken",
           "declaration": {
             "name": "randomToken",
-            "module": "../src/libs/openrosa/random-token.ts"
+            "module": "src/libs/openrosa/random-token.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/openrosa/xpr.ts",
+      "path": "src/libs/openrosa/xpr.ts",
       "declarations": [],
       "exports": [
         {
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "../src/libs/openrosa/xpr.ts"
+            "module": "src/libs/openrosa/xpr.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/config.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "../src/libs/enketo/config.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/openrosa/utils/date.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "DATE_STRING",
-          "default": "/^\\d\\d\\d\\d-\\d{1,2}-\\d{1,2}(?:T\\d\\d:\\d\\d:\\d\\d\\.?\\d?\\d?(?:Z|[+-]\\d\\d:\\d\\d)|.*)?$/"
-        },
-        {
-          "kind": "function",
-          "name": "dateToDays",
-          "parameters": [
-            {
-              "name": "d"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "dateStringToDays",
-          "parameters": [
-            {
-              "name": "d"
-            }
-          ]
-        },
-        {
-          "kind": "variable",
-          "name": "isValidDate",
-          "default": "function (y, m, d) { m = parseInt(m, 10) - 1; return m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y); }",
-          "description": "Check if a date is valid",
-          "parameters": [
-            {
-              "description": "The year",
-              "name": "y",
-              "type": {
-                "text": "[type]"
-              }
-            },
-            {
-              "description": "The month",
-              "name": "m",
-              "type": {
-                "text": "[type]"
-              }
-            },
-            {
-              "description": "The day",
-              "name": "d",
-              "type": {
-                "text": "[type]"
-              }
-            }
-          ],
-          "return": {
-            "type": {
-              "text": "Boolean"
-            }
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "DATE_STRING",
-          "declaration": {
-            "name": "DATE_STRING",
-            "module": "../src/libs/openrosa/utils/date.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "dateToDays",
-          "declaration": {
-            "name": "dateToDays",
-            "module": "../src/libs/openrosa/utils/date.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "dateStringToDays",
-          "declaration": {
-            "name": "dateStringToDays",
-            "module": "../src/libs/openrosa/utils/date.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "isValidDate",
-          "declaration": {
-            "name": "isValidDate",
-            "module": "../src/libs/openrosa/utils/date.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/openrosa/utils/native.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "preprocessNativeArgs",
-          "parameters": [
-            {
-              "name": "name"
-            },
-            {
-              "name": "args"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "preprocessNativeArgs",
-          "declaration": {
-            "name": "preprocessNativeArgs",
-            "module": "../src/libs/openrosa/utils/native.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/openrosa/utils/operation.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "handleOperation",
-          "parameters": [
-            {
-              "name": "lhs"
-            },
-            {
-              "name": "op"
-            },
-            {
-              "name": "rhs"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "handleOperation",
-          "declaration": {
-            "name": "handleOperation",
-            "module": "../src/libs/openrosa/utils/operation.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/openrosa/utils/result.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "toSnapshotResult",
-          "parameters": [
-            {
-              "name": "arr"
-            },
-            {
-              "name": "resultType"
-            },
-            {
-              "name": "singleItem",
-              "optional": true
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "toSnapshotResult",
-          "declaration": {
-            "name": "toSnapshotResult",
-            "module": "../src/libs/openrosa/utils/result.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/openrosa/utils/shuffle.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "shuffle",
-          "parameters": [
-            {
-              "name": "array"
-            },
-            {
-              "name": "seed",
-              "description": "the seed value",
-              "type": {
-                "text": "number="
-              }
-            },
-            {
-              "description": ">}        array the array to shuffle",
-              "name": "",
-              "type": {
-                "text": "<*"
-              }
-            }
-          ],
-          "description": "Performs the \"inside-out\" variant of the Fisher-Yates array shuffle.",
-          "return": {
-            "type": {
-              "text": "<*"
-            }
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "shuffle",
-            "module": "../src/libs/openrosa/utils/shuffle.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/openrosa/utils/sort-by-document-order.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "",
-          "parameters": [
-            {
-              "name": "ir"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": ""
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "",
-            "module": "../src/libs/openrosa/utils/sort-by-document-order.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/openrosa/utils/xpath-cast.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "asBoolean",
-          "parameters": [
-            {
-              "name": "r"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "asNumber",
-          "parameters": [
-            {
-              "name": "r"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "asString",
-          "parameters": [
-            {
-              "name": "r"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "asBoolean",
-          "declaration": {
-            "name": "asBoolean",
-            "module": "../src/libs/openrosa/utils/xpath-cast.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "asNumber",
-          "declaration": {
-            "name": "asNumber",
-            "module": "../src/libs/openrosa/utils/xpath-cast.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "asString",
-          "declaration": {
-            "name": "asString",
-            "module": "../src/libs/openrosa/utils/xpath-cast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/dom-utils.ts",
+      "path": "src/libs/enketo/js/dom-utils.ts",
       "declarations": [
         {
           "kind": "function",
@@ -1797,7 +1476,7 @@
           "name": "elementDataStore",
           "declaration": {
             "name": "elementDataStore",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1805,7 +1484,7 @@
           "name": "getSiblingElementsAndSelf",
           "declaration": {
             "name": "getSiblingElementsAndSelf",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1813,7 +1492,7 @@
           "name": "getSiblingElements",
           "declaration": {
             "name": "getSiblingElements",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1821,7 +1500,7 @@
           "name": "getSiblingElement",
           "declaration": {
             "name": "getSiblingElement",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1829,7 +1508,7 @@
           "name": "getAncestors",
           "declaration": {
             "name": "getAncestors",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1837,7 +1516,7 @@
           "name": "getChildren",
           "declaration": {
             "name": "getChildren",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1845,7 +1524,7 @@
           "name": "getChild",
           "declaration": {
             "name": "getChild",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1853,7 +1532,7 @@
           "name": "getRepeatIndex",
           "declaration": {
             "name": "getRepeatIndex",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1861,7 +1540,7 @@
           "name": "getXPath",
           "declaration": {
             "name": "getXPath",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1869,7 +1548,7 @@
           "name": "hasPreviousCommentSiblingWithContent",
           "declaration": {
             "name": "hasPreviousCommentSiblingWithContent",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1877,7 +1556,7 @@
           "name": "hasPreviousSiblingElementSameName",
           "declaration": {
             "name": "hasPreviousSiblingElementSameName",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1885,7 +1564,7 @@
           "name": "hasNextSiblingElementSameName",
           "declaration": {
             "name": "hasNextSiblingElementSameName",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1893,7 +1572,7 @@
           "name": "hasSiblingElementSameName",
           "declaration": {
             "name": "hasSiblingElementSameName",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1901,7 +1580,7 @@
           "name": "closestAncestorUntil",
           "declaration": {
             "name": "closestAncestorUntil",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1909,7 +1588,7 @@
           "name": "empty",
           "declaration": {
             "name": "empty",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         },
         {
@@ -1917,28 +1596,28 @@
           "name": "MutationsTracker",
           "declaration": {
             "name": "MutationsTracker",
-            "module": "../src/libs/enketo/js/dom-utils.ts"
+            "module": "src/libs/enketo/js/dom-utils.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/event.ts",
+      "path": "src/libs/enketo/js/event.ts",
       "declarations": [],
       "exports": [
         {
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "../src/libs/enketo/js/event.ts"
+            "module": "src/libs/enketo/js/event.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/form.ts",
+      "path": "src/libs/enketo/js/form.ts",
       "declarations": [
         {
           "kind": "class",
@@ -2839,7 +2518,7 @@
           "name": "Form",
           "declaration": {
             "name": "Form",
-            "module": "../src/libs/enketo/js/form.ts"
+            "module": "src/libs/enketo/js/form.ts"
           }
         },
         {
@@ -2847,34 +2526,34 @@
           "name": "FormModel",
           "declaration": {
             "name": "FormModel",
-            "module": "../src/libs/enketo/js/form.ts"
+            "module": "src/libs/enketo/js/form.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/page.ts",
+      "path": "src/libs/enketo/js/page.ts",
       "declarations": [],
       "exports": [
         {
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "../src/libs/enketo/js/page.ts"
+            "module": "src/libs/enketo/js/page.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/type-def.ts",
+      "path": "src/libs/enketo/js/type-def.ts",
       "declarations": [],
       "exports": []
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/widget.ts",
+      "path": "src/libs/enketo/js/widget.ts",
       "declarations": [
         {
           "kind": "class",
@@ -3028,28 +2707,28 @@
           "name": "default",
           "declaration": {
             "name": "Widget",
-            "module": "../src/libs/enketo/js/widget.ts"
+            "module": "src/libs/enketo/js/widget.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/widgets.ts",
+      "path": "src/libs/enketo/js/widgets.ts",
       "declarations": [],
       "exports": [
         {
           "kind": "js",
           "name": "default",
           "declaration": {
-            "module": "../src/libs/enketo/js/widgets.ts"
+            "module": "src/libs/enketo/js/widgets.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "../src/libs/enketo/js/xpath-evaluator-binding.ts",
+      "path": "src/libs/enketo/js/xpath-evaluator-binding.ts",
       "declarations": [
         {
           "kind": "function",
@@ -3066,7 +2745,328 @@
           "name": "default",
           "declaration": {
             "name": "",
-            "module": "../src/libs/enketo/js/xpath-evaluator-binding.ts"
+            "module": "src/libs/enketo/js/xpath-evaluator-binding.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/date.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "DATE_STRING",
+          "default": "/^\\d\\d\\d\\d-\\d{1,2}-\\d{1,2}(?:T\\d\\d:\\d\\d:\\d\\d\\.?\\d?\\d?(?:Z|[+-]\\d\\d:\\d\\d)|.*)?$/"
+        },
+        {
+          "kind": "function",
+          "name": "dateToDays",
+          "parameters": [
+            {
+              "name": "d"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "dateStringToDays",
+          "parameters": [
+            {
+              "name": "d"
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "isValidDate",
+          "default": "function (y, m, d) { m = parseInt(m, 10) - 1; return m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y); }",
+          "description": "Check if a date is valid",
+          "parameters": [
+            {
+              "description": "The year",
+              "name": "y",
+              "type": {
+                "text": "[type]"
+              }
+            },
+            {
+              "description": "The month",
+              "name": "m",
+              "type": {
+                "text": "[type]"
+              }
+            },
+            {
+              "description": "The day",
+              "name": "d",
+              "type": {
+                "text": "[type]"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "Boolean"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DATE_STRING",
+          "declaration": {
+            "name": "DATE_STRING",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dateToDays",
+          "declaration": {
+            "name": "dateToDays",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dateStringToDays",
+          "declaration": {
+            "name": "dateStringToDays",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isValidDate",
+          "declaration": {
+            "name": "isValidDate",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/native.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "preprocessNativeArgs",
+          "parameters": [
+            {
+              "name": "name"
+            },
+            {
+              "name": "args"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "preprocessNativeArgs",
+          "declaration": {
+            "name": "preprocessNativeArgs",
+            "module": "src/libs/openrosa/utils/native.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/operation.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "handleOperation",
+          "parameters": [
+            {
+              "name": "lhs"
+            },
+            {
+              "name": "op"
+            },
+            {
+              "name": "rhs"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "handleOperation",
+          "declaration": {
+            "name": "handleOperation",
+            "module": "src/libs/openrosa/utils/operation.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/result.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "toSnapshotResult",
+          "parameters": [
+            {
+              "name": "arr"
+            },
+            {
+              "name": "resultType"
+            },
+            {
+              "name": "singleItem",
+              "optional": true
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "toSnapshotResult",
+          "declaration": {
+            "name": "toSnapshotResult",
+            "module": "src/libs/openrosa/utils/result.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/shuffle.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "shuffle",
+          "parameters": [
+            {
+              "name": "array"
+            },
+            {
+              "name": "seed",
+              "description": "the seed value",
+              "type": {
+                "text": "number="
+              }
+            },
+            {
+              "description": ">}        array the array to shuffle",
+              "name": "",
+              "type": {
+                "text": "<*"
+              }
+            }
+          ],
+          "description": "Performs the \"inside-out\" variant of the Fisher-Yates array shuffle.",
+          "return": {
+            "type": {
+              "text": "<*"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "shuffle",
+            "module": "src/libs/openrosa/utils/shuffle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/sort-by-document-order.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "ir"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/libs/openrosa/utils/sort-by-document-order.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/xpath-cast.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "asBoolean",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "asNumber",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "asString",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "asBoolean",
+          "declaration": {
+            "name": "asBoolean",
+            "module": "src/libs/openrosa/utils/xpath-cast.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "asNumber",
+          "declaration": {
+            "name": "asNumber",
+            "module": "src/libs/openrosa/utils/xpath-cast.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "asString",
+          "declaration": {
+            "name": "asString",
+            "module": "src/libs/openrosa/utils/xpath-cast.ts"
           }
         }
       ]
