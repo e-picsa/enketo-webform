@@ -9,10 +9,7 @@ export default defineConfig({
   plugins: [preact()],
   resolve: {
     alias: {
-      "@picsa/enketo-webform": resolve(
-        __dirname,
-        "../packages/enketo-webform/src/enketo-webform.ts",
-      ),
+      "@picsa/enketo-webform": resolve(__dirname, "../src/enketo-webform.ts"),
     },
   },
 });

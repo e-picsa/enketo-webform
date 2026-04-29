@@ -66,7 +66,7 @@ export default tseslint.config(
 
   // 5. Legacy enketo libs
   {
-    files: ["packages/enketo-webform/src/libs/**/*.{js,cjs,ts}"],
+    files: ["src/libs/**/*.{js,cjs,ts}"],
     rules: {
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-explicit-any": "off",

@@ -3,8 +3,8 @@ import { customElementsManifestToMarkdown } from "@custom-elements-manifest/to-m
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
-const PACKAGE_PREFIX = "packages/enketo-webform/";
-const TYPES_OUTDIR = "./packages/enketo-webform/types";
+const PACKAGE_PREFIX = "./";
+const TYPES_OUTDIR = "./types";
 
 const stripPrefix = (p) =>
   p?.startsWith(PACKAGE_PREFIX) ? p.slice(PACKAGE_PREFIX.length) : p;
@@ -50,8 +50,8 @@ const toMarkdownPlugin = () => ({
 });
 
 export default {
-  outdir: "./packages/enketo-webform",
-  globs: ["packages/enketo-webform/src/**/*.ts"],
+  outdir: "./",
+  globs: ["src/**/*.ts"],
   litelement: true,
   plugins: [
     fixModulePathsPlugin(),

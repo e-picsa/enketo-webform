@@ -13,10 +13,10 @@
     "noImplicitThis": false,
     "paths": {
       "@picsa/enketo-webform": [
-        "../../packages/enketo-webform/dist/enketo-webform.js"
+        "../../src"
       ],
       "@picsa/enketo-webform/types/*": [
-        "../../packages/enketo-webform/types/*"
+        "../../types/*"
       ],
       "react": ["./node_modules/preact/compat/"],
       "react-dom": ["./node_modules/preact/compat/"]
@@ -35,5 +35,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "../../packages/enketo-webform/types/**/*.d.ts"]
+  "include": ["src"]
 }
