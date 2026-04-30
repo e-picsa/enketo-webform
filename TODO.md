@@ -12,6 +12,16 @@
         Consider removing other themes, create custom with more variables exposed
 
 - [ ] Add docs for use in angular standalone (register schema and import webcomponetn)
+
+```ts
+import '@picsa/enketo-webform';
+
+@Component({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+
+```
+
 - [ ] Consider font managmenet (e.g. exposing way to set)
 - [ ] Consider removing leaflet or other external deps (?)
 - [ ] Document geopicker widget removed and node-forge/digest
