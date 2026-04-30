@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "../../sass/core/variables";
+
 // @import '../../../../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min';
 
 /** fixes by martijn **/
@@ -5,7 +8,7 @@
 .question .date {
   input[type="text"] {
     display: inline-block;
-    width: $input-min-width;
+    width: variables.$input-min-width;
     min-width: 0;
   }
 }
@@ -51,7 +54,7 @@ $table-border-color: #dddddd !default;
     > th.#{$state}:hover,
     &.#{$state}:hover > td,
     &.#{$state}:hover > th {
-      background-color: darken($background, 5%);
+      background-color: color.adjust($background, $lightness: -5%);
     }
   }
 }

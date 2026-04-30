@@ -1,3 +1,8 @@
+@use "sass:color";
+@use "sass:math";
+@use "sass:string";
+@use "variables";
+
 @mixin font-normal {
   font-family: "OpenSans", sans-serif, Arial;
   font-weight: normal;
@@ -158,7 +163,7 @@
   @if $total==null {
     $flex: $value;
   } @else if $total>=$value {
-    $flex: percentage($value / $total);
+    $flex: math.percentage($value / $total);
   }
 
   -webkit-flex: $flex;
@@ -172,7 +177,7 @@
   @if $total==null {
     $flex: $value;
   } @else if $total>=$value {
-    $flex: percentage($value / $total);
+    $flex: math.percentage($value / $total);
   }
 
   flex-grow: 1;
@@ -231,7 +236,7 @@
     $end-color $end-percent
   ); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{color.ie-hex-str($start-color)}', endColorstr='#{color.ie-hex-str($end-color)}', GradientType=0); // IE9 and down
 }
 
 @mixin gradient-vertical-three-colors(
@@ -251,7 +256,7 @@
     $end-color
   );
   background-repeat: no-repeat;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down, gets no color-stop at all for proper fallback
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{color.ie-hex-str($start-color)}', endColorstr='#{color.ie-hex-str($end-color)}', GradientType=0); // IE9 and down, gets no color-stop at all for proper fallback
 }
 
 @mixin form-footer-margin($padding) {
@@ -272,9 +277,9 @@
 @mixin question-invalid {
   @include transition-fast;
 
-  background-color: $state-danger-bg;
-  border-color: $state-danger-border;
-  border-radius: $border-radius-small;
+  background-color: variables.$state-danger-bg;
+  border-color: variables.$state-danger-border;
+  border-radius: variables.$border-radius-small;
 
   $pad: 10px;
 
@@ -290,18 +295,18 @@
   font-weight: bold;
   padding-top: 5px;
   font-size: 0.85em;
-  color: $state-danger-text;
+  color: variables.$state-danger-text;
 }
 
 // from https://gist.github.com/JacobDB/0ffffaf8e772c12acf7102edb8a302be
 // Replace letters
 @function str-replace($string, $search, $replace: "") {
-  $index: str-index($string, $search);
+  $index: string.index($string, $search);
 
   @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace +
+    @return string.slice($string, 1, $index - 1) + $replace +
       str-replace(
-        str-slice($string, $index + str-length($search)),
+        string.slice($string, $index + string.length($search)),
         $search,
         $replace
       );

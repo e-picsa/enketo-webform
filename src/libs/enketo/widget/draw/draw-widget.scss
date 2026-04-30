@@ -1,3 +1,7 @@
+@use "../../sass/core/mixins" as core-mixins;
+@use "../../sass/core/variables";
+@use "../../sass/grid/mixins";
+
 /*
  * To save headaches with resizing canvases, it is important to maintain fixed aspect
  * ratios at all times:
@@ -42,8 +46,8 @@ $picker-border: 2px solid grey;
     &__canvas {
       background: white;
       // for plain theme:
-      border: 1px solid $gray-lighter; // override border:
-      @include form-control;
+      border: 1px solid variables.$gray-lighter; // override border:
+      @include mixins.form-control;
 
       position: absolute;
       top: 0;
@@ -102,7 +106,7 @@ $picker-border: 2px solid grey;
   }
 
   &__feedback {
-    @include question-error-message;
+    @include core-mixins.question-error-message;
   }
 
   &__undo {
@@ -147,11 +151,11 @@ $picker-border: 2px solid grey;
   }
 
   &.full-screen {
-    @include display-flex;
+    @include core-mixins.display-flex;
 
-    @include flex-direction(column);
+    @include core-mixins.flex-direction(column);
 
-    @include flex-wrap(nowrap);
+    @include core-mixins.flex-wrap(nowrap);
 
     position: fixed;
     left: 0;
