@@ -15,8 +15,8 @@ $note-border: 1px solid #e1e1e1 !default;
 $note-border-radius: 0 !default;
 $input-border-focus: #66afe9 !default;
 $input-border-focus-shadow: rgba(
-  color.red($input-border-focus),
-  color.green($input-border-focus),
-  color.blue($input-border-focus),
+  color.channel($input-border-focus, 'red', $space: rgb),
+  color.channel($input-border-focus, 'green', $space: rgb),
+  color.channel($input-border-focus, 'blue', $space: rgb),
   0.6
 ) !default;
