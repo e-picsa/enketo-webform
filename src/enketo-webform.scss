@@ -1,6 +1,7 @@
 @use "libs/enketo/sass/grid/grid.scss";
 
-:host {
+:host,
+enketo-webform {
   max-width: 720px;
   margin: auto;
   display: block;

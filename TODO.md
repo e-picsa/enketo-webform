@@ -8,6 +8,8 @@
 - [ ] Fix ranking widget not working
 - [ ] Replace digest with lightweight alt (if likely to need... or document)
 
+- [ ] Improve styling, organise variables to better mimic https://ee.kobotoolbox.org/x/8JGrcU96
+        Consider removing other themes, create custom with more variables exposed
 
 - [ ] Add docs for use in angular standalone (register schema and import webcomponetn)
 - [ ] Consider font managmenet (e.g. exposing way to set)

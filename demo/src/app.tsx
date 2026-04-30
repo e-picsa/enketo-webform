@@ -3,6 +3,7 @@ import "@picsa/enketo-webform";
 import basic from "./fixtures/basic.json";
 import kitchenSink from "./fixtures/kitchen-sink.json";
 import widgets from "./fixtures/widgets.json";
+import "./form.scss";
 
 type DemoType = "basic" | "widgets" | "kitchenSink";
 
