@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.2.1...enketo-webform-v1.3.0) (2026-04-30)
+
+
+### Features
+
+* flat file structures ([#17](https://github.com/e-picsa/enketo-webform/issues/17)) ([791a6b7](https://github.com/e-picsa/enketo-webform/commit/791a6b71f8455d8a67cd19c655abcceaab9882bb))
+
 ## [1.2.1](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.2.0...enketo-webform-v1.2.1) (2026-04-27)
 
 
