@@ -6,7 +6,10 @@
 /** The next styles are meant to easily customize the background and border of radiobuttons and checkboxes, not their size! */
 
 @mixin disabled-radiocheck-style {
-  border-color: color.adjust(core-variables.$radiocheck-unchecked-color, $lightness: 5%);
+  border-color: color.adjust(
+    core-variables.$radiocheck-unchecked-color,
+    $lightness: 5%
+  );
 }
 
 @mixin checkbox-unchecked-style {
@@ -100,7 +103,8 @@
   height: core-variables.$input-height;
 
   // Make inputs at least the height of their button counterpart (base line-height + padding + border)
-  padding: core-variables.$padding-base-vertical core-variables.$padding-base-horizontal;
+  padding: core-variables.$padding-base-vertical
+    core-variables.$padding-base-horizontal;
 
   @include mixins.font-normal;
 

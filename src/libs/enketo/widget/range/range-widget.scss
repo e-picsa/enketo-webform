@@ -344,7 +344,12 @@ $green: rgb(60, 182, 67);
       border-bottom-right-radius: 0;
       border-bottom: none;
       margin-top: -15px;
-      @include core-mixins.gradient-vertical-three-colors($red, $yellow, 50%, $green);
+      @include core-mixins.gradient-vertical-three-colors(
+        $red,
+        $yellow,
+        50%,
+        $green
+      );
       z-index: 1;
     }
 

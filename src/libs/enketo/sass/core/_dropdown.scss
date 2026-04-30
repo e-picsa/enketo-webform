@@ -13,7 +13,10 @@ $dropdown-divider-bg: #e5e5e5 !default;
 $dropdown-bg: white !default;
 $dropdown-border: rgba(0, 0, 0, 0.15) !default;
 $dropdown-link-color: variables.$gray-dark !default;
-$dropdown-link-hover-color: color.adjust(variables.$gray-dark, $lightness: -5%) !default;
+$dropdown-link-hover-color: color.adjust(
+  variables.$gray-dark,
+  $lightness: -5%
+) !default;
 $dropdown-link-hover-bg: whitesmoke !default;
 $component-active-color: white !default;
 $component-active-bg: variables.$brand-primary-color !default;

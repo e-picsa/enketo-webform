@@ -50,7 +50,10 @@
       z-index: -1;
 
       &:not([disabled]):not([readonly]) ~ .active:hover {
-        border-color: color.adjust(variables.$brand-primary-color, $lightness: 30%);
+        border-color: color.adjust(
+          variables.$brand-primary-color,
+          $lightness: 30%
+        );
       }
 
       &[disabled],

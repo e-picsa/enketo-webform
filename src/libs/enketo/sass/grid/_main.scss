@@ -6,7 +6,6 @@
 @use "mixins";
 @use "variables";
 
-
 /** core/layout **/
 
 body,
@@ -35,7 +34,10 @@ body {
   }
 
   input[type="checkbox"]:checked {
-    @include formhub-mixins.checkbox-checked-style(core-variables.$radiocheck-checked-color, transparent);
+    @include formhub-mixins.checkbox-checked-style(
+      core-variables.$radiocheck-checked-color,
+      transparent
+    );
 
     background-position: -1px;
   }
@@ -60,7 +62,8 @@ h4 + .or-repeat {
 .or-group > h4 {
   background: #ffffff;
   margin: 0 -1px 0 0;
-  padding: 12px variables.$q-pad-side variables.$q-pad-side variables.$q-pad-side; // collapse icon positioning;
+  padding: 12px variables.$q-pad-side variables.$q-pad-side
+    variables.$q-pad-side; // collapse icon positioning;
 
   &::before {
     margin-top: 14px;

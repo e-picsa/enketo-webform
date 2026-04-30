@@ -1,7 +1,6 @@
 @use "jquery.relevant-dropdown";
 @use "../../sass/core/variables";
 
-
 input[type="text"].autocomplete {
   // width of input same as width of regular select
   width: variables.$input-min-width * variables.$golden-ratio - 14px;
