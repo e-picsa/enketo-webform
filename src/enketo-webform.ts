@@ -22,18 +22,26 @@ function debug(...args: unknown[]) {
   }
 }
 
-// Ensure styles are a string and inject into head
-// This is because we are using global styles (easier to override)
-const cssString =
-  typeof compiledStyles === "string"
-    ? compiledStyles
-    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ((compiledStyles as any)?.default ?? "");
-if (typeof document !== "undefined" && cssString) {
-  const style = document.createElement("style");
-  style.id = "enketo-webform-styles";
-  style.textContent = cssString;
-  document.head.appendChild(style);
+injectStyles();
+
+function injectStyles() {
+  // Ensure styles are a string and inject into head
+  // This is because we are using global styles (easier to override)
+  const cssString =
+    typeof compiledStyles === "string"
+      ? compiledStyles
+      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ((compiledStyles as any)?.default ?? "");
+  if (
+    typeof document !== "undefined" &&
+    cssString &&
+    !document.getElementById("enketo-webform-styles")
+  ) {
+    const style = document.createElement("style");
+    style.id = "enketo-webform-styles";
+    style.textContent = cssString;
+    document.head.appendChild(style);
+  }
 }
 
 @customElement("enketo-webform")
