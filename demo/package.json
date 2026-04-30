@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@picsa/enketo-webform": "workspace:*",
     "preact": "^10.29.1"
   },
   "devDependencies": {

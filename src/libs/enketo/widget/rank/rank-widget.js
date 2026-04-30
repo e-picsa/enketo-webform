@@ -1,5 +1,5 @@
 import $ from "jquery";
-import sortable from "html5sortable/dist/html5sortable.cjs";
+import sortable from "html5sortable";
 import { t } from "../../js/fake-translator";
 import Widget from "../../js/widget";
 import support from "../../js/support";

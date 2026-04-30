@@ -1,11 +1,18 @@
-import { LitElement, html, nothing, css, unsafeCSS } from "lit";
+import "./setup";
+import { LitElement, html, nothing, css } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 
 import { Form } from "./libs/enketo/js/form";
 import Events from "./libs/enketo/js/event";
 
-// Directly import styles to keep encapsulated
-import enketoStyles from "./enketo-webform.scss?inline";
+// Directly import styles globally since we are using Light DOM
+import compiledStyles from "./enketo-webform.scss?inline";
+
+import type {
+  IEnketoFormEntry,
+  IEventDataUpdated,
+  IEventFormSaved,
+} from "./types";
 
 const DEBUG = import.meta.env?.DEV ?? false;
 
@@ -15,33 +22,18 @@ function debug(...args: unknown[]) {
   }
 }
 
-/**
- * Interface representing a saved form entry
- */
-export interface IEnketoFormEntry {
-  created: number;
-  draft: boolean;
-  enketoId: string;
-  files: unknown[];
-  instanceId: string;
-  name: string;
-  updated: number;
-  xml: string;
-}
-
-/**
- * Event detail for formSaved event
- */
-export interface IEventFormSaved {
-  entry: IEnketoFormEntry;
-}
-
-/**
- * Event detail for dataUpdated event
- */
-export interface IEventDataUpdated {
-  xml: string;
-  nodes: string[];
+// Ensure styles are a string and inject into head
+// This is because we are using global styles (easier to override)
+const cssString =
+  typeof compiledStyles === "string"
+    ? compiledStyles
+    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ((compiledStyles as any)?.default ?? "");
+if (typeof document !== "undefined" && cssString) {
+  const style = document.createElement("style");
+  style.id = "enketo-webform-styles";
+  style.textContent = cssString;
+  document.head.appendChild(style);
 }
 
 @customElement("enketo-webform")
@@ -88,6 +80,10 @@ export class EnketoWebform extends LitElement {
 
   @query("#form-container") private formContainerEl!: HTMLDivElement;
 
+  protected createRenderRoot() {
+    return this;
+  }
+
   @state() private enketoForm: Form | null = null;
   @state() private formHtml = "";
   @state() private status: "idle" | "loading" | "ready" | "error" = "idle";
@@ -96,7 +92,6 @@ export class EnketoWebform extends LitElement {
   private _formLoaded = false;
 
   static styles = [
-    unsafeCSS(enketoStyles),
     css`
       :host {
         display: block;

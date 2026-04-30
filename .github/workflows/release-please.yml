@@ -43,6 +43,5 @@ jobs:
       # Build from root dir to ensure types generated
       - run: |
           bun run build
-          cd packages/enketo-webform
           npm publish --provenance
         if: ${{ steps.release.outputs.release_created }}

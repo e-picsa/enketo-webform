@@ -1,6 +1,5 @@
 import { BlankDate, getTimezoneOffsetAsTime } from "./date-extensions";
 import { asGeopoints, area, distance } from "./geo";
-import digest from "./digest";
 import { randomToken } from "./random-token";
 import {
   DATE_STRING,
@@ -245,9 +244,6 @@ const openrosa_xpath_extensions = function () {
         dec = NaN;
       }
       return XPR.number(dec);
-    },
-    digest: function (msg, algo, encoding) {
-      return XPR.string(digest(msg, algo, encoding));
     },
     distance: function (r) {
       if (arguments.length === 0) throw TOO_FEW_ARGS;

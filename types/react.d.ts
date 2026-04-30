@@ -1,4 +1,4 @@
-import type { EnketoWebform } from "src/enketo-webform.ts";
+import type { EnketoWebform } from "../dist/enketo-webform.js";
 
 /**
  * This type can be used to create scoped tags for your components.

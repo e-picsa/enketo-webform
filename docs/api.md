@@ -71,18 +71,27 @@
 
 ### Exports
 
-| Kind                        | Name             | Declaration   | Module                   | Package |
-| --------------------------- | ---------------- | ------------- | ------------------------ | ------- |
-| `js`                        | `EnketoWebform`  | EnketoWebform | ../src/enketo-webform.ts |         |
-| `custom-element-definition` | `enketo-webform` | EnketoWebform | ../src/enketo-webform.ts |         |
+| Kind                        | Name             | Declaration   | Module                | Package |
+| --------------------------- | ---------------- | ------------- | --------------------- | ------- |
+| `js`                        | `EnketoWebform`  | EnketoWebform | src/enketo-webform.ts |         |
+| `custom-element-definition` | `enketo-webform` | EnketoWebform | src/enketo-webform.ts |         |
+
+## `src/index.ts`:
+
+### Exports
+
+| Kind | Name            | Declaration   | Module         | Package |
+| ---- | --------------- | ------------- | -------------- | ------- |
+| `js` | `EnketoWebform` | EnketoWebform | enketo-webform |         |
+| `js` | `*`             | \*            | src/types      |         |
 
 ## `src/kobo-service.ts`:
 
 ### Exports
 
-| Kind | Name          | Declaration | Module                 | Package |
-| ---- | ------------- | ----------- | ---------------------- | ------- |
-| `js` | `KoboService` | KoboService | ../src/kobo-service.ts |         |
+| Kind | Name          | Declaration | Module              | Package |
+| ---- | ------------- | ----------- | ------------------- | ------- |
+| `js` | `KoboService` | KoboService | src/kobo-service.ts |         |
 
 ## `src/utils.ts`:
 
@@ -103,20 +112,20 @@
 
 ### Exports
 
-| Kind | Name                    | Declaration           | Module          | Package |
-| ---- | ----------------------- | --------------------- | --------------- | ------- |
-| `js` | `xmlToJson`             | xmlToJson             | ../src/utils.ts |         |
-| `js` | `jsonToXML`             | jsonToXML             | ../src/utils.ts |         |
-| `js` | `xmlStringToFile`       | xmlStringToFile       | ../src/utils.ts |         |
-| `js` | `xmlNodeReplaceContent` | xmlNodeReplaceContent | ../src/utils.ts |         |
+| Kind | Name                    | Declaration           | Module       | Package |
+| ---- | ----------------------- | --------------------- | ------------ | ------- |
+| `js` | `xmlToJson`             | xmlToJson             | src/utils.ts |         |
+| `js` | `jsonToXML`             | jsonToXML             | src/utils.ts |         |
+| `js` | `xmlStringToFile`       | xmlStringToFile       | src/utils.ts |         |
+| `js` | `xmlNodeReplaceContent` | xmlNodeReplaceContent | src/utils.ts |         |
 
 ## `src/libs/enketo/config.ts`:
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                       | Package |
-| ---- | --------- | ----------- | ---------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/enketo/config.ts |         |
+| Kind | Name      | Declaration | Module                    | Package |
+| ---- | --------- | ----------- | ------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/config.ts |         |
 
 ## `src/libs/openrosa/date-extensions.ts`:
 
@@ -131,19 +140,11 @@
 
 ### Exports
 
-| Kind | Name                      | Declaration             | Module                                  | Package |
-| ---- | ------------------------- | ----------------------- | --------------------------------------- | ------- |
-| `js` | `BlankDate`               | BlankDate               | ../src/libs/openrosa/date-extensions.ts |         |
-| `js` | `toISOLocalString`        | toISOLocalString        | ../src/libs/openrosa/date-extensions.ts |         |
-| `js` | `getTimezoneOffsetAsTime` | getTimezoneOffsetAsTime | ../src/libs/openrosa/date-extensions.ts |         |
-
-## `src/libs/openrosa/digest.ts`:
-
-### Exports
-
-| Kind | Name      | Declaration | Module                         | Package |
-| ---- | --------- | ----------- | ------------------------------ | ------- |
-| `js` | `default` |             | ../src/libs/openrosa/digest.ts |         |
+| Kind | Name                      | Declaration             | Module                               | Package |
+| ---- | ------------------------- | ----------------------- | ------------------------------------ | ------- |
+| `js` | `BlankDate`               | BlankDate               | src/libs/openrosa/date-extensions.ts |         |
+| `js` | `toISOLocalString`        | toISOLocalString        | src/libs/openrosa/date-extensions.ts |         |
+| `js` | `getTimezoneOffsetAsTime` | getTimezoneOffsetAsTime | src/libs/openrosa/date-extensions.ts |         |
 
 ## `src/libs/openrosa/extended-xpath.ts`:
 
@@ -203,9 +204,9 @@
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                                 | Package |
-| ---- | --------- | ----------- | -------------------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/openrosa/extended-xpath.ts |         |
+| Kind | Name      | Declaration | Module                              | Package |
+| ---- | --------- | ----------- | ----------------------------------- | ------- |
+| `js` | `default` |             | src/libs/openrosa/extended-xpath.ts |         |
 
 ## `src/libs/openrosa/geo.ts`:
 
@@ -221,11 +222,11 @@
 
 ### Exports
 
-| Kind | Name          | Declaration | Module                      | Package |
-| ---- | ------------- | ----------- | --------------------------- | ------- |
-| `js` | `asGeopoints` | asGeopoints | ../src/libs/openrosa/geo.ts |         |
-| `js` | `area`        | area        | ../src/libs/openrosa/geo.ts |         |
-| `js` | `distance`    | distance    | ../src/libs/openrosa/geo.ts |         |
+| Kind | Name          | Declaration | Module                   | Package |
+| ---- | ------------- | ----------- | ------------------------ | ------- |
+| `js` | `asGeopoints` | asGeopoints | src/libs/openrosa/geo.ts |         |
+| `js` | `area`        | area        | src/libs/openrosa/geo.ts |         |
+| `js` | `distance`    | distance    | src/libs/openrosa/geo.ts |         |
 
 ## `src/libs/openrosa/openrosa-extensions.ts`:
 
@@ -239,17 +240,17 @@
 
 ### Exports
 
-| Kind | Name      | Declaration                 | Module                                      | Package |
-| ---- | --------- | --------------------------- | ------------------------------------------- | ------- |
-| `js` | `default` | openrosa\_xpath\_extensions | ../src/libs/openrosa/openrosa-extensions.ts |         |
+| Kind | Name      | Declaration                 | Module                                   | Package |
+| ---- | --------- | --------------------------- | ---------------------------------------- | ------- |
+| `js` | `default` | openrosa\_xpath\_extensions | src/libs/openrosa/openrosa-extensions.ts |         |
 
 ## `src/libs/openrosa/openrosa-xpath.ts`:
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                                 | Package |
-| ---- | --------- | ----------- | -------------------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/openrosa/openrosa-xpath.ts |         |
+| Kind | Name      | Declaration | Module                              | Package |
+| ---- | --------- | ----------- | ----------------------------------- | ------- |
+| `js` | `default` |             | src/libs/openrosa/openrosa-xpath.ts |         |
 
 ## `src/libs/openrosa/random-token.ts`:
 
@@ -263,17 +264,17 @@
 
 ### Exports
 
-| Kind | Name          | Declaration | Module                               | Package |
-| ---- | ------------- | ----------- | ------------------------------------ | ------- |
-| `js` | `randomToken` | randomToken | ../src/libs/openrosa/random-token.ts |         |
+| Kind | Name          | Declaration | Module                            | Package |
+| ---- | ------------- | ----------- | --------------------------------- | ------- |
+| `js` | `randomToken` | randomToken | src/libs/openrosa/random-token.ts |         |
 
 ## `src/libs/openrosa/xpr.ts`:
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                      | Package |
-| ---- | --------- | ----------- | --------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/openrosa/xpr.ts |         |
+| Kind | Name      | Declaration | Module                   | Package |
+| ---- | --------- | ----------- | ------------------------ | ------- |
+| `js` | `default` |             | src/libs/openrosa/xpr.ts |         |
 
 ## `src/libs/enketo/js/dom-utils.ts`:
 
@@ -308,65 +309,65 @@
 
 ### Exports
 
-| Kind | Name                                   | Declaration                          | Module                             | Package |
-| ---- | -------------------------------------- | ------------------------------------ | ---------------------------------- | ------- |
-| `js` | `elementDataStore`                     | elementDataStore                     | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getSiblingElementsAndSelf`            | getSiblingElementsAndSelf            | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getSiblingElements`                   | getSiblingElements                   | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getSiblingElement`                    | getSiblingElement                    | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getAncestors`                         | getAncestors                         | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getChildren`                          | getChildren                          | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getChild`                             | getChild                             | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getRepeatIndex`                       | getRepeatIndex                       | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getXPath`                             | getXPath                             | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasPreviousCommentSiblingWithContent` | hasPreviousCommentSiblingWithContent | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasPreviousSiblingElementSameName`    | hasPreviousSiblingElementSameName    | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasNextSiblingElementSameName`        | hasNextSiblingElementSameName        | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasSiblingElementSameName`            | hasSiblingElementSameName            | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `closestAncestorUntil`                 | closestAncestorUntil                 | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `empty`                                | empty                                | ../src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `MutationsTracker`                     | MutationsTracker                     | ../src/libs/enketo/js/dom-utils.ts |         |
+| Kind | Name                                   | Declaration                          | Module                          | Package |
+| ---- | -------------------------------------- | ------------------------------------ | ------------------------------- | ------- |
+| `js` | `elementDataStore`                     | elementDataStore                     | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getSiblingElementsAndSelf`            | getSiblingElementsAndSelf            | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getSiblingElements`                   | getSiblingElements                   | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getSiblingElement`                    | getSiblingElement                    | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getAncestors`                         | getAncestors                         | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getChildren`                          | getChildren                          | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getChild`                             | getChild                             | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getRepeatIndex`                       | getRepeatIndex                       | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getXPath`                             | getXPath                             | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasPreviousCommentSiblingWithContent` | hasPreviousCommentSiblingWithContent | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasPreviousSiblingElementSameName`    | hasPreviousSiblingElementSameName    | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasNextSiblingElementSameName`        | hasNextSiblingElementSameName        | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasSiblingElementSameName`            | hasSiblingElementSameName            | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `closestAncestorUntil`                 | closestAncestorUntil                 | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `empty`                                | empty                                | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `MutationsTracker`                     | MutationsTracker                     | src/libs/enketo/js/dom-utils.ts |         |
 
 ## `src/libs/enketo/js/event.ts`:
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                         | Package |
-| ---- | --------- | ----------- | ------------------------------ | ------- |
-| `js` | `default` |             | ../src/libs/enketo/js/event.ts |         |
+| Kind | Name      | Declaration | Module                      | Package |
+| ---- | --------- | ----------- | --------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/event.ts |         |
 
 ## `src/libs/enketo/js/form.ts`:
 
 ### Exports
 
-| Kind | Name        | Declaration | Module                        | Package |
-| ---- | ----------- | ----------- | ----------------------------- | ------- |
-| `js` | `Form`      | Form        | ../src/libs/enketo/js/form.ts |         |
-| `js` | `FormModel` | FormModel   | ../src/libs/enketo/js/form.ts |         |
+| Kind | Name        | Declaration | Module                     | Package |
+| ---- | ----------- | ----------- | -------------------------- | ------- |
+| `js` | `Form`      | Form        | src/libs/enketo/js/form.ts |         |
+| `js` | `FormModel` | FormModel   | src/libs/enketo/js/form.ts |         |
 
 ## `src/libs/enketo/js/page.ts`:
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                        | Package |
-| ---- | --------- | ----------- | ----------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/enketo/js/page.ts |         |
+| Kind | Name      | Declaration | Module                     | Package |
+| ---- | --------- | ----------- | -------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/page.ts |         |
 
 ## `src/libs/enketo/js/widget.ts`:
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                          | Package |
-| ---- | --------- | ----------- | ------------------------------- | ------- |
-| `js` | `default` | Widget      | ../src/libs/enketo/js/widget.ts |         |
+| Kind | Name      | Declaration | Module                       | Package |
+| ---- | --------- | ----------- | ---------------------------- | ------- |
+| `js` | `default` | Widget      | src/libs/enketo/js/widget.ts |         |
 
 ## `src/libs/enketo/js/widgets.ts`:
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                           | Package |
-| ---- | --------- | ----------- | -------------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/enketo/js/widgets.ts |         |
+| Kind | Name      | Declaration | Module                        | Package |
+| ---- | --------- | ----------- | ----------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/widgets.ts |         |
 
 ## `src/libs/enketo/js/xpath-evaluator-binding.ts`:
 
@@ -381,9 +382,9 @@
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                                           | Package |
-| ---- | --------- | ----------- | ------------------------------------------------ | ------- |
-| `js` | `default` |             | ../src/libs/enketo/js/xpath-evaluator-binding.ts |         |
+| Kind | Name      | Declaration | Module                                        | Package |
+| ---- | --------- | ----------- | --------------------------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/xpath-evaluator-binding.ts |         |
 
 ## `src/libs/openrosa/utils/date.ts`:
 
@@ -407,12 +408,12 @@
 
 ### Exports
 
-| Kind | Name               | Declaration      | Module                             | Package |
-| ---- | ------------------ | ---------------- | ---------------------------------- | ------- |
-| `js` | `DATE_STRING`      | DATE\_STRING     | ../src/libs/openrosa/utils/date.ts |         |
-| `js` | `dateToDays`       | dateToDays       | ../src/libs/openrosa/utils/date.ts |         |
-| `js` | `dateStringToDays` | dateStringToDays | ../src/libs/openrosa/utils/date.ts |         |
-| `js` | `isValidDate`      | isValidDate      | ../src/libs/openrosa/utils/date.ts |         |
+| Kind | Name               | Declaration      | Module                          | Package |
+| ---- | ------------------ | ---------------- | ------------------------------- | ------- |
+| `js` | `DATE_STRING`      | DATE\_STRING     | src/libs/openrosa/utils/date.ts |         |
+| `js` | `dateToDays`       | dateToDays       | src/libs/openrosa/utils/date.ts |         |
+| `js` | `dateStringToDays` | dateStringToDays | src/libs/openrosa/utils/date.ts |         |
+| `js` | `isValidDate`      | isValidDate      | src/libs/openrosa/utils/date.ts |         |
 
 ## `src/libs/openrosa/utils/native.ts`:
 
@@ -426,9 +427,9 @@
 
 ### Exports
 
-| Kind | Name                   | Declaration          | Module                               | Package |
-| ---- | ---------------------- | -------------------- | ------------------------------------ | ------- |
-| `js` | `preprocessNativeArgs` | preprocessNativeArgs | ../src/libs/openrosa/utils/native.ts |         |
+| Kind | Name                   | Declaration          | Module                            | Package |
+| ---- | ---------------------- | -------------------- | --------------------------------- | ------- |
+| `js` | `preprocessNativeArgs` | preprocessNativeArgs | src/libs/openrosa/utils/native.ts |         |
 
 ## `src/libs/openrosa/utils/operation.ts`:
 
@@ -442,9 +443,9 @@
 
 ### Exports
 
-| Kind | Name              | Declaration     | Module                                  | Package |
-| ---- | ----------------- | --------------- | --------------------------------------- | ------- |
-| `js` | `handleOperation` | handleOperation | ../src/libs/openrosa/utils/operation.ts |         |
+| Kind | Name              | Declaration     | Module                               | Package |
+| ---- | ----------------- | --------------- | ------------------------------------ | ------- |
+| `js` | `handleOperation` | handleOperation | src/libs/openrosa/utils/operation.ts |         |
 
 ## `src/libs/openrosa/utils/result.ts`:
 
@@ -458,9 +459,9 @@
 
 ### Exports
 
-| Kind | Name               | Declaration      | Module                               | Package |
-| ---- | ------------------ | ---------------- | ------------------------------------ | ------- |
-| `js` | `toSnapshotResult` | toSnapshotResult | ../src/libs/openrosa/utils/result.ts |         |
+| Kind | Name               | Declaration      | Module                            | Package |
+| ---- | ------------------ | ---------------- | --------------------------------- | ------- |
+| `js` | `toSnapshotResult` | toSnapshotResult | src/libs/openrosa/utils/result.ts |         |
 
 ## `src/libs/openrosa/utils/shuffle.ts`:
 
@@ -474,9 +475,9 @@
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                                | Package |
-| ---- | --------- | ----------- | ------------------------------------- | ------- |
-| `js` | `default` | shuffle     | ../src/libs/openrosa/utils/shuffle.ts |         |
+| Kind | Name      | Declaration | Module                             | Package |
+| ---- | --------- | ----------- | ---------------------------------- | ------- |
+| `js` | `default` | shuffle     | src/libs/openrosa/utils/shuffle.ts |         |
 
 ## `src/libs/openrosa/utils/sort-by-document-order.ts`:
 
@@ -491,9 +492,9 @@
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                                               | Package |
-| ---- | --------- | ----------- | ---------------------------------------------------- | ------- |
-| `js` | `default` |             | ../src/libs/openrosa/utils/sort-by-document-order.ts |         |
+| Kind | Name      | Declaration | Module                                            | Package |
+| ---- | --------- | ----------- | ------------------------------------------------- | ------- |
+| `js` | `default` |             | src/libs/openrosa/utils/sort-by-document-order.ts |         |
 
 ## `src/libs/openrosa/utils/xpath-cast.ts`:
 
@@ -509,8 +510,8 @@
 
 ### Exports
 
-| Kind | Name        | Declaration | Module                                   | Package |
-| ---- | ----------- | ----------- | ---------------------------------------- | ------- |
-| `js` | `asBoolean` | asBoolean   | ../src/libs/openrosa/utils/xpath-cast.ts |         |
-| `js` | `asNumber`  | asNumber    | ../src/libs/openrosa/utils/xpath-cast.ts |         |
-| `js` | `asString`  | asString    | ../src/libs/openrosa/utils/xpath-cast.ts |         |
+| Kind | Name        | Declaration | Module                                | Package |
+| ---- | ----------- | ----------- | ------------------------------------- | ------- |
+| `js` | `asBoolean` | asBoolean   | src/libs/openrosa/utils/xpath-cast.ts |         |
+| `js` | `asNumber`  | asNumber    | src/libs/openrosa/utils/xpath-cast.ts |         |
+| `js` | `asString`  | asString    | src/libs/openrosa/utils/xpath-cast.ts |         |

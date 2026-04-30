@@ -4,10 +4,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    include: [
-      "packages/enketo-webform/**/*.test.ts",
-      "packages/enketo-webform/**/*.spec.ts",
-    ],
+    include: ["src/**/*.test.ts", "src/**/*.spec.ts"],
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
