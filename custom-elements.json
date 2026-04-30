@@ -455,6 +455,21 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/setup.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "jQuery",
+            "module": "src/setup.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/types.ts",
       "declarations": [],
       "exports": []

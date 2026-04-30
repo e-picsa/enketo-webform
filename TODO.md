@@ -6,3 +6,10 @@
 - [ ] Fix rating widget not showing stars
         Could be form compilation error, or style error
 - [ ] Fix ranking widget not working
+- [ ] Replace digest with lightweight alt (if likely to need... or document)
+
+
+- [ ] Add docs for use in angular standalone (register schema and import webcomponetn)
+- [ ] Consider font managmenet (e.g. exposing way to set)
+- [ ] Consider removing leaflet or other external deps (?)
+- [ ] Document geopicker widget removed and node-forge/digest
