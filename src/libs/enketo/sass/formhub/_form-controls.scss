@@ -1,3 +1,6 @@
+@use "radiocheck" as *;
+@use "mixins" as *;
+
 input[type="text"],
 .print-input-text,
 input[type="tel"],
@@ -139,5 +142,3 @@ input[type="checkbox"] {
     cursor: not-allowed;
   }
 }
-
-@use "radiocheck" as *;

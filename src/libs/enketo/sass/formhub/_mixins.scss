@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 /** The next styles are meant to easily customize the background and border of radiobuttons and checkboxes, not their size! */
 
 @mixin disabled-radiocheck-style {
@@ -60,12 +62,16 @@
 @mixin focus-shadow-border {
   border-color: $input-border-focus;
   outline: 0;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $input-border-focus-shadow;
+  box-shadow:
+    inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px $input-border-focus-shadow;
 }
 
 @mixin focus-shadow {
   outline: 0;
-  box-shadow: 0 0 0 1px $input-border-focus, 0 0 8px $input-border-focus-shadow;
+  box-shadow:
+    0 0 0 1px $input-border-focus,
+    0 0 8px $input-border-focus-shadow;
 }
 
 @mixin form-control-focus {

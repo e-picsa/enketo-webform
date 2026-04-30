@@ -1,5 +1,6 @@
 @use "./jquery.relevant-dropdown" as *;
 @use "../../sass/core" as *;
+@use "../../sass/core/variables" as *;
 
 input[type="text"].autocomplete {
   // width of input same as width of regular select

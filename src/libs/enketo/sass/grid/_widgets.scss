@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 //widget scss overrides
 .question .geopoint.widget {
   input[type="number"],
