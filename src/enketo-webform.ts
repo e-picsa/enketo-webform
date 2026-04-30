@@ -27,7 +27,8 @@ function debug(...args: unknown[]) {
 const cssString =
   typeof compiledStyles === "string"
     ? compiledStyles
-    : ((compiledStyles as any)?.default ?? "");
+    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ((compiledStyles as any)?.default ?? "");
 if (typeof document !== "undefined" && cssString) {
   const style = document.createElement("style");
   style.id = "enketo-webform-styles";

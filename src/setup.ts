@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import jQuery from "jquery";
 
 // Force jquery into global window

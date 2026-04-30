@@ -27,7 +27,9 @@ const typeRelativizePlugin = () => ({
       }
       for (const exp of mod.exports ?? []) {
         if (exp.declaration?.module) {
-          exp.declaration.module = relativize(stripPrefix(exp.declaration.module));
+          exp.declaration.module = relativize(
+            stripPrefix(exp.declaration.module),
+          );
         }
       }
     }
@@ -70,13 +72,26 @@ export default {
       packageLinkPhase({ customElementsManifest }) {
         for (const mod of customElementsManifest.modules ?? []) {
           // Point back to sibling src/ without ../
-          mod.path = stripPrefix(mod.path.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", ""));
+          mod.path = stripPrefix(
+            mod.path
+              .replace("../dist/enketo-webform.js", "src/enketo-webform.ts")
+              .replace("../", ""),
+          );
           for (const decl of mod.declarations ?? []) {
-            if (decl.modulePath) decl.modulePath = decl.modulePath.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", "");
-            if (decl.definitionPath) decl.definitionPath = decl.definitionPath.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", "");
+            if (decl.modulePath)
+              decl.modulePath = decl.modulePath
+                .replace("../dist/enketo-webform.js", "src/enketo-webform.ts")
+                .replace("../", "");
+            if (decl.definitionPath)
+              decl.definitionPath = decl.definitionPath
+                .replace("../dist/enketo-webform.js", "src/enketo-webform.ts")
+                .replace("../", "");
           }
           for (const exp of mod.exports ?? []) {
-            if (exp.declaration?.module) exp.declaration.module = exp.declaration.module.replace("../dist/enketo-webform.js", "src/enketo-webform.ts").replace("../", "");
+            if (exp.declaration?.module)
+              exp.declaration.module = exp.declaration.module
+                .replace("../dist/enketo-webform.js", "src/enketo-webform.ts")
+                .replace("../", "");
           }
         }
       },

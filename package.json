@@ -29,6 +29,7 @@
     "dev:lib": "vite build --watch",
     "dev:demo": "bun run --cwd demo dev",
     "lint": "bun run eslint --max-warnings=-1; bun run prettier --check .",
+    "format": "bun run eslint --fix; bun run prettier --write .",
     "prepare": "husky",
     "build": "bun run build:types && bun run build:lib && bun run build:demo",
     "build:types": "custom-elements-manifest analyze --config custom-elements-manifest.config.mjs",
