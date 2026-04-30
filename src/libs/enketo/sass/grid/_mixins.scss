@@ -15,7 +15,7 @@
 
 // override form-control from core
 @mixin form-control {
-  flex: 1;
+  @include flex(1);
 
   border: none;
   box-shadow: none;

@@ -1,5 +1,17 @@
 @use "variables" as *;
 
+@mixin font-normal {
+  font-family: "OpenSans", sans-serif, Arial;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin tab-focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
 /** The next styles are meant to easily customize the background and border of radiobuttons and checkboxes, not their size! */
 
 @mixin disabled-radiocheck-style {

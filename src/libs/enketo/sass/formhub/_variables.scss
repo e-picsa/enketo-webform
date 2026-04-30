@@ -1,6 +1,16 @@
 // load this before the core/variables
 
 $font-size-base: 15px !default;
+$input-height: 34px !default;
+$padding-base-vertical: 6px !default;
+$padding-base-horizontal: 12px !default;
+$line-height-base: 1.42857 !default;
+$input-color: black !default;
+$input-bg: white !default;
+$input-border: #ccc !default;
+$input-border-radius: 4px !default;
+$input-color-placeholder: #999 !default;
+$input-bg-disabled: #eee !default;
 $brand-primary-color: #ce4f07 !default;
 $brand-secondary-color: lighten($brand-primary-color, 50%) !default;
 

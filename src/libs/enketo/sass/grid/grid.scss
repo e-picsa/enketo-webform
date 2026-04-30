@@ -2,10 +2,10 @@
 @use "variables" as *;
 @use "../formhub/variables" as *;
 @use "../core/variables" as *;
+@use "../formhub/form-controls" as *;
 @use "../core/mixins" as *;
-@use "../formhub/mixins" as *;
+@use "../formhub/mixins" as fh-mixins;
 @use "mixins" as *;
-
 @use "../core/reset" as *;
 
 @use "../core/utilities" as *;
