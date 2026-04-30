@@ -1,6 +1,6 @@
 @use "timepicker";
 @use "../../sass/core/variables";
-
+@use "../../sass/core/icons" as *;
 
 .timepicker {
   input[type="text"] {
