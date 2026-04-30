@@ -163,7 +163,7 @@
   @if $total==null {
     $flex: $value;
   } @else if $total>=$value {
-    $flex: math.percentage($value / $total);
+    $flex: math.percentage(math.div($value, $total));
   }
 
   -webkit-flex: $flex;
@@ -177,7 +177,7 @@
   @if $total==null {
     $flex: $value;
   } @else if $total>=$value {
-    $flex: math.percentage($value / $total);
+    $flex: math.percentage(math.div($value, $total));
   }
 
   flex-grow: 1;
