@@ -1,24 +1,28 @@
+@use "../../sass/core/mixins" as core-mixins;
+@use "../../sass/core/variables";
+@use "../../sass/grid/mixins";
+
 .file-picker {
   .fake-file-input {
-    @include form-control;
+    @include mixins.form-control;
     display: inline-block;
-    width: $input-max-width;
+    width: variables.$input-max-width;
     text-align: start;
   }
 
   .file-feedback,
   .file-preview {
-    @include font-normal;
+    @include mixins.font-normal;
   }
 
   .file-feedback.error {
-    @include question-error-message;
+    @include core-mixins.question-error-message;
   }
 
   .file-feedback.warning {
-    @include question-error-message;
+    @include core-mixins.question-error-message;
 
-    color: $state-warning-text;
+    color: variables.$state-warning-text;
   }
 
   .file-preview {

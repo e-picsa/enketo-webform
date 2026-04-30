@@ -68,7 +68,7 @@ export class KoboService {
     const { status, text } = await this.httpHandlers.req(endpoint, {
       method: "POST",
       headers,
-      body,
+      body: body as BodyInit,
     });
     return this.formatResponse(status, text);
   }

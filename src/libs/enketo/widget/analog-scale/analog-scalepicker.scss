@@ -1,3 +1,8 @@
+@use "../../sass/core/mixins" as core-mixins;
+@use "../../sass/core/variables";
+@use "../../sass/grid/mixins";
+@use "../../sass/core/reset" as *;
+
 $analog-picker-tick-color: black !default;
 $border: 1px solid $analog-picker-tick-color;
 $analog-picker-handle-color: #d42c2c !default;
@@ -74,21 +79,21 @@ $q-pad-right: 0px !default;
 
     @extend h5;
 
-    @include font-normal;
+    @include mixins.font-normal;
   }
 
   .show-value__value {
     font-weight: bold;
-    font-size: $font-size-base * 1.25;
+    font-size: variables.$font-size-base * 1.25;
     padding: 8px;
     display: block;
     min-width: 1px;
-    min-height: $font-size-base * 1.25 + 22px;
+    min-height: variables.$font-size-base * 1.25 + 22px;
   }
 
   .max-label,
   .min-label {
-    @include font-normal;
+    @include mixins.font-normal;
 
     text-align: center;
   }
@@ -178,14 +183,14 @@ $q-pad-right: 0px !default;
   }
 
   &.or-appearance-vertical:not(.disabled) {
-    @include display-flex;
+    @include core-mixins.display-flex;
 
-    @include flex(100%);
+    @include core-mixins.flex(100%);
 
-    @include flex-direction(row);
+    @include core-mixins.flex-direction(row);
 
     .label-content {
-      @include flex(100%);
+      @include core-mixins.flex(100%);
     }
 
     .analog-scale-widget {
@@ -236,7 +241,7 @@ $q-pad-right: 0px !default;
 .pages.or [role="page"] {
   &.or-analog-scale-initialized {
     &.current:not(.or-appearance-horizontal) {
-      @include display-flex;
+      @include core-mixins.display-flex;
     }
 
     &:not(.current) {

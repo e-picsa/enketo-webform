@@ -1,11 +1,15 @@
+@use "../grid/mixins";
+@use "mixins" as core-mixins;
+@use "variables";
+
 enketo-webform {
   * {
-    @include box-sizing(border-box);
+    @include core-mixins.box-sizing(border-box);
   }
 
   *:before,
   *:after {
-    @include box-sizing(border-box);
+    @include core-mixins.box-sizing(border-box);
   }
 
   html {
@@ -14,12 +18,12 @@ enketo-webform {
   }
 
   body {
-    @include font-normal;
+    @include mixins.font-normal;
 
-    font-size: $font-size-base;
-    line-height: $line-height-base;
-    color: $text-color;
-    background-color: $body-bg;
+    font-size: variables.$font-size-base;
+    line-height: variables.$line-height-base;
+    color: variables.$text-color;
+    background-color: variables.$body-bg;
   }
 
   input,
@@ -32,15 +36,15 @@ enketo-webform {
   }
 
   a {
-    color: $link-color;
+    color: variables.$link-color;
 
     &:hover,
     &:focus {
-      color: $link-hover-color;
+      color: variables.$link-hover-color;
     }
 
     &:focus {
-      @include tab-focus;
+      @include core-mixins.tab-focus;
     }
   }
 
@@ -53,10 +57,10 @@ enketo-webform {
   }
 
   hr {
-    margin-top: $line-height-computed;
-    margin-bottom: $line-height-computed;
+    margin-top: variables.$line-height-computed;
+    margin-bottom: variables.$line-height-computed;
     border: 0;
-    border-top: 1px solid $hr-border;
+    border-top: 1px solid variables.$hr-border;
   }
 
   strong {
@@ -64,27 +68,27 @@ enketo-webform {
   }
 
   h1 {
-    font-size: $font-size-base * 2.75;
+    font-size: variables.$font-size-base * 2.75;
   }
 
   h2 {
-    font-size: $font-size-base * 2.25;
+    font-size: variables.$font-size-base * 2.25;
   }
 
   h3 {
-    font-size: $font-size-base * 1.75;
+    font-size: variables.$font-size-base * 1.75;
   }
 
   h4 {
-    font-size: $font-size-base * 1.25;
+    font-size: variables.$font-size-base * 1.25;
   }
 
   h5 {
-    font-size: $font-size-base;
+    font-size: variables.$font-size-base;
   }
 
   h6 {
-    font-size: $font-size-base * 0.85;
+    font-size: variables.$font-size-base * 0.85;
   }
 
   h2,

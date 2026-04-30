@@ -11,6 +11,7 @@ export default defineConfig({
         "src/kobo-service.ts",
         "src/utils.ts",
         "src/index.ts",
+        "vite-env.d.ts",
       ],
       exclude: ["src/**/*.test.ts", "src/libs"],
     }),

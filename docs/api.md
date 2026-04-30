@@ -93,6 +93,14 @@
 | ---- | ------------- | ----------- | ------------------- | ------- |
 | `js` | `KoboService` | KoboService | src/kobo-service.ts |         |
 
+## `src/setup.ts`:
+
+### Exports
+
+| Kind | Name      | Declaration | Module       | Package |
+| ---- | --------- | ----------- | ------------ | ------- |
+| `js` | `default` | jQuery      | src/setup.ts |         |
+
 ## `src/utils.ts`:
 
 ### Functions

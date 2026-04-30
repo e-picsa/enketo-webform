@@ -1,9 +1,11 @@
-@import "timepicker";
+@use "timepicker";
+@use "../../sass/core/variables";
+@use "../../sass/core/icons" as *;
 
 .timepicker {
   input[type="text"] {
     display: inline-block;
-    width: $input-min-width;
+    width: variables.$input-min-width;
   }
 }
 

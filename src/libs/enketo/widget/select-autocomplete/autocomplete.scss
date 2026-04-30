@@ -1,11 +1,12 @@
-@import "./jquery.relevant-dropdown";
+@use "jquery.relevant-dropdown";
+@use "../../sass/core/variables";
 
 input[type="text"].autocomplete {
   // width of input same as width of regular select
-  width: $input-min-width * $golden-ratio - 14px;
+  width: variables.$input-min-width * variables.$golden-ratio - 14px;
 
   &.notfound {
-    color: $gray-light;
+    color: variables.$gray-light;
   }
 }
 

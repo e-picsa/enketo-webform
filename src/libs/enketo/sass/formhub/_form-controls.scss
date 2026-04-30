@@ -1,3 +1,8 @@
+@use "sass:meta";
+@use "../core/mixins" as core-mixins;
+@use "../core/variables";
+@use "../grid/mixins";
+
 input[type="text"],
 .print-input-text,
 input[type="tel"],
@@ -12,7 +17,7 @@ input[type="datetime-local"],
 input[type="number"],
 select,
 textarea {
-  @include form-control;
+  @include mixins.form-control;
 }
 
 // fix readonly inputs inside widgets that are not actually 'readonly'
@@ -31,11 +36,11 @@ input:not([readonly]) + .widget {
   select,
   textarea {
     &[readonly] {
-      background-color: $input-bg;
+      background-color: variables.$input-bg;
       cursor: auto;
 
       &:hover {
-        background-color: $input-bg;
+        background-color: variables.$input-bg;
       }
     }
   }
@@ -74,7 +79,7 @@ fieldset {
 
 // Override content-box in Normalize (* isn't specific enough)
 input[type="search"] {
-  @include box-sizing(border-box);
+  @include core-mixins.box-sizing(border-box);
 }
 
 // Position radios and checkboxes better
@@ -108,7 +113,7 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  @include tab-focus;
+  @include core-mixins.tab-focus;
 }
 
 // Search inputs in iOS
@@ -126,7 +131,7 @@ input[type="search"] {
 // In Mobile Safari, date inputs require a pixel line-height that matches the
 // given height of the input.
 input[type="date"] {
-  line-height: $input-height;
+  line-height: variables.$input-height;
 }
 
 // Apply same disabled cursor tweak as for inputs
@@ -140,4 +145,4 @@ input[type="checkbox"] {
   }
 }
 
-@import "radiocheck";
+@include meta.load-css("radiocheck");

@@ -13,5 +13,5 @@
     "noEmit": true,
     "strict": false
   },
-  "include": ["src/**/*.ts", "types/**/*.d.ts"]
+  "include": ["src/**/*.ts", "*.d.ts", "types/**/*.d.ts"]
 }
