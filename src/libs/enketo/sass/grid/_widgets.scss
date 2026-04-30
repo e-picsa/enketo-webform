@@ -12,18 +12,16 @@
 .widget.date,
 .widget.timepicker,
 .widget.datetimepicker {
-  @include display-flex;
-
-  @include flex-wrap(nowrap);
-
-  @include flex-direction(row);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
 }
 
 .question .widget.datetimepicker {
   .date,
   .timepicker {
-    @include display-flex;
-    @include flex(1);
+    display: flex;
+    flex: 1;
   }
 
   .timepicker {
@@ -36,7 +34,7 @@
   margin-top: 10px;
 
   > label {
-    @include flex-direction(column-reverse);
+    flex-direction: column-reverse;
     justify-content: flex-end;
   }
 }

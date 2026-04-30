@@ -111,11 +111,11 @@ label.geo {
 // We can not rely on cross-browser printing of CSS background images
 // so to be sure that a box is correctly shown to be "checked", we use the default appearance.
 input[type="radio"] {
-  @include appearance(radio !important);
+  appearance: radio !important;
 }
 
 input[type="checkbox"] {
-  @include appearance(checkbox !important);
+  appearance: checkbox !important;
 }
 
 .or {
@@ -182,7 +182,7 @@ input[type="checkbox"] {
     border-radius: 0px;
     box-shadow: none;
 
-    @include appearance-none;
+    appearance: none;
 
     border: none;
     background: none;
@@ -277,12 +277,9 @@ input[type="checkbox"] {
     display: none;
 
     ~ .dropdown-menu {
-      @include display-flex;
-
-      @include flex-wrap(wrap);
-
-      @include flex-direction(row);
-
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
       display: block;
       position: static;
       border: none;

@@ -1,5 +1,7 @@
 $media-margin: 10px;
 
+@use "../core" as *;
+
 /** hide stuff **/
 
 .or [lang]:not(.active),
@@ -326,9 +328,8 @@ legend {
 //works in safari, some other webkit browsers
 .option-wrapper {
   // this flexiness is required for appearance="random"
-  @include display-flex;
-
-  @include flex-direction(column);
+  display: flex;
+  flex-direction: column;
 
   > label {
     @include font-normal;

@@ -612,20 +612,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/libs/enketo/config.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/libs/enketo/config.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/libs/openrosa/date-extensions.ts",
       "declarations": [
         {
@@ -1059,6 +1045,341 @@
           "name": "default",
           "declaration": {
             "module": "src/libs/openrosa/xpr.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/enketo/config.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/libs/enketo/config.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/date.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "DATE_STRING",
+          "default": "/^\\d\\d\\d\\d-\\d{1,2}-\\d{1,2}(?:T\\d\\d:\\d\\d:\\d\\d\\.?\\d?\\d?(?:Z|[+-]\\d\\d:\\d\\d)|.*)?$/"
+        },
+        {
+          "kind": "function",
+          "name": "dateToDays",
+          "parameters": [
+            {
+              "name": "d"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "dateStringToDays",
+          "parameters": [
+            {
+              "name": "d"
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "isValidDate",
+          "default": "function (y, m, d) { m = parseInt(m, 10) - 1; return m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y); }",
+          "description": "Check if a date is valid",
+          "parameters": [
+            {
+              "description": "The year",
+              "name": "y",
+              "type": {
+                "text": "[type]"
+              }
+            },
+            {
+              "description": "The month",
+              "name": "m",
+              "type": {
+                "text": "[type]"
+              }
+            },
+            {
+              "description": "The day",
+              "name": "d",
+              "type": {
+                "text": "[type]"
+              }
+            }
+          ],
+          "return": {
+            "type": {
+              "text": "Boolean"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DATE_STRING",
+          "declaration": {
+            "name": "DATE_STRING",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dateToDays",
+          "declaration": {
+            "name": "dateToDays",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "dateStringToDays",
+          "declaration": {
+            "name": "dateStringToDays",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isValidDate",
+          "declaration": {
+            "name": "isValidDate",
+            "module": "src/libs/openrosa/utils/date.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/native.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "preprocessNativeArgs",
+          "parameters": [
+            {
+              "name": "name"
+            },
+            {
+              "name": "args"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "preprocessNativeArgs",
+          "declaration": {
+            "name": "preprocessNativeArgs",
+            "module": "src/libs/openrosa/utils/native.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/operation.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "handleOperation",
+          "parameters": [
+            {
+              "name": "lhs"
+            },
+            {
+              "name": "op"
+            },
+            {
+              "name": "rhs"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "handleOperation",
+          "declaration": {
+            "name": "handleOperation",
+            "module": "src/libs/openrosa/utils/operation.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/result.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "toSnapshotResult",
+          "parameters": [
+            {
+              "name": "arr"
+            },
+            {
+              "name": "resultType"
+            },
+            {
+              "name": "singleItem",
+              "optional": true
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "toSnapshotResult",
+          "declaration": {
+            "name": "toSnapshotResult",
+            "module": "src/libs/openrosa/utils/result.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/shuffle.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "shuffle",
+          "parameters": [
+            {
+              "name": "array"
+            },
+            {
+              "name": "seed",
+              "description": "the seed value",
+              "type": {
+                "text": "number="
+              }
+            },
+            {
+              "description": ">}        array the array to shuffle",
+              "name": "",
+              "type": {
+                "text": "<*"
+              }
+            }
+          ],
+          "description": "Performs the \"inside-out\" variant of the Fisher-Yates array shuffle.",
+          "return": {
+            "type": {
+              "text": "<*"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "shuffle",
+            "module": "src/libs/openrosa/utils/shuffle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/sort-by-document-order.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "ir"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/libs/openrosa/utils/sort-by-document-order.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/libs/openrosa/utils/xpath-cast.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "asBoolean",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "asNumber",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "asString",
+          "parameters": [
+            {
+              "name": "r"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "asBoolean",
+          "declaration": {
+            "name": "asBoolean",
+            "module": "src/libs/openrosa/utils/xpath-cast.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "asNumber",
+          "declaration": {
+            "name": "asNumber",
+            "module": "src/libs/openrosa/utils/xpath-cast.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "asString",
+          "declaration": {
+            "name": "asString",
+            "module": "src/libs/openrosa/utils/xpath-cast.ts"
           }
         }
       ]
@@ -2761,327 +3082,6 @@
           "declaration": {
             "name": "",
             "module": "src/libs/enketo/js/xpath-evaluator-binding.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/libs/openrosa/utils/date.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "DATE_STRING",
-          "default": "/^\\d\\d\\d\\d-\\d{1,2}-\\d{1,2}(?:T\\d\\d:\\d\\d:\\d\\d\\.?\\d?\\d?(?:Z|[+-]\\d\\d:\\d\\d)|.*)?$/"
-        },
-        {
-          "kind": "function",
-          "name": "dateToDays",
-          "parameters": [
-            {
-              "name": "d"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "dateStringToDays",
-          "parameters": [
-            {
-              "name": "d"
-            }
-          ]
-        },
-        {
-          "kind": "variable",
-          "name": "isValidDate",
-          "default": "function (y, m, d) { m = parseInt(m, 10) - 1; return m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y); }",
-          "description": "Check if a date is valid",
-          "parameters": [
-            {
-              "description": "The year",
-              "name": "y",
-              "type": {
-                "text": "[type]"
-              }
-            },
-            {
-              "description": "The month",
-              "name": "m",
-              "type": {
-                "text": "[type]"
-              }
-            },
-            {
-              "description": "The day",
-              "name": "d",
-              "type": {
-                "text": "[type]"
-              }
-            }
-          ],
-          "return": {
-            "type": {
-              "text": "Boolean"
-            }
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "DATE_STRING",
-          "declaration": {
-            "name": "DATE_STRING",
-            "module": "src/libs/openrosa/utils/date.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "dateToDays",
-          "declaration": {
-            "name": "dateToDays",
-            "module": "src/libs/openrosa/utils/date.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "dateStringToDays",
-          "declaration": {
-            "name": "dateStringToDays",
-            "module": "src/libs/openrosa/utils/date.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "isValidDate",
-          "declaration": {
-            "name": "isValidDate",
-            "module": "src/libs/openrosa/utils/date.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/libs/openrosa/utils/native.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "preprocessNativeArgs",
-          "parameters": [
-            {
-              "name": "name"
-            },
-            {
-              "name": "args"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "preprocessNativeArgs",
-          "declaration": {
-            "name": "preprocessNativeArgs",
-            "module": "src/libs/openrosa/utils/native.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/libs/openrosa/utils/operation.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "handleOperation",
-          "parameters": [
-            {
-              "name": "lhs"
-            },
-            {
-              "name": "op"
-            },
-            {
-              "name": "rhs"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "handleOperation",
-          "declaration": {
-            "name": "handleOperation",
-            "module": "src/libs/openrosa/utils/operation.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/libs/openrosa/utils/result.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "toSnapshotResult",
-          "parameters": [
-            {
-              "name": "arr"
-            },
-            {
-              "name": "resultType"
-            },
-            {
-              "name": "singleItem",
-              "optional": true
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "toSnapshotResult",
-          "declaration": {
-            "name": "toSnapshotResult",
-            "module": "src/libs/openrosa/utils/result.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/libs/openrosa/utils/shuffle.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "shuffle",
-          "parameters": [
-            {
-              "name": "array"
-            },
-            {
-              "name": "seed",
-              "description": "the seed value",
-              "type": {
-                "text": "number="
-              }
-            },
-            {
-              "description": ">}        array the array to shuffle",
-              "name": "",
-              "type": {
-                "text": "<*"
-              }
-            }
-          ],
-          "description": "Performs the \"inside-out\" variant of the Fisher-Yates array shuffle.",
-          "return": {
-            "type": {
-              "text": "<*"
-            }
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "shuffle",
-            "module": "src/libs/openrosa/utils/shuffle.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/libs/openrosa/utils/sort-by-document-order.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "",
-          "parameters": [
-            {
-              "name": "ir"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": ""
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "",
-            "module": "src/libs/openrosa/utils/sort-by-document-order.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/libs/openrosa/utils/xpath-cast.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "asBoolean",
-          "parameters": [
-            {
-              "name": "r"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "asNumber",
-          "parameters": [
-            {
-              "name": "r"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "asString",
-          "parameters": [
-            {
-              "name": "r"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "asBoolean",
-          "declaration": {
-            "name": "asBoolean",
-            "module": "src/libs/openrosa/utils/xpath-cast.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "asNumber",
-          "declaration": {
-            "name": "asNumber",
-            "module": "src/libs/openrosa/utils/xpath-cast.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "asString",
-          "declaration": {
-            "name": "asString",
-            "module": "src/libs/openrosa/utils/xpath-cast.ts"
           }
         }
       ]

@@ -1,3 +1,5 @@
+@use "../../sass/core" as *;
+
 /*
  * To save headaches with resizing canvases, it is important to maintain fixed aspect
  * ratios at all times:
@@ -147,11 +149,9 @@ $picker-border: 2px solid grey;
   }
 
   &.full-screen {
-    @include display-flex;
-
-    @include flex-direction(column);
-
-    @include flex-wrap(nowrap);
+display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 
     position: fixed;
     left: 0;

@@ -11,14 +11,12 @@
   }
 
   .option-wrapper {
-    @include display-flex;
-
-    @include flex-direction(row);
-
-    @include flex-wrap(nowrap);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 
     label {
-      @include flex(1);
+      flex: 1;
 
       text-align: center;
       padding: 4px 0;

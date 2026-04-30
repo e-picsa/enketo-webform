@@ -1,3 +1,5 @@
+@use "../core" as *;
+
 @media screen and (max-width: $main-breakpoint) {
   $form-padding: 45px;
   $form-header-padding: 16px;

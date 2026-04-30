@@ -1,3 +1,5 @@
+@use "../../sass/core" as *;
+
 $padding: 30px;
 
 .or-comment-widget {
@@ -82,7 +84,7 @@ $padding: 30px;
     }
   }
   &.invalid {
-    @include transition-fast;
+    transition: all 0.6s ease-out;
     color: $state-dangerest-text;
     .icon {
       font-weight: bold;

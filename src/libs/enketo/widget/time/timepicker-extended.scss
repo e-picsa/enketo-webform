@@ -1,4 +1,5 @@
 @use "timepicker" as *;
+@use "../../sass/core" as *;
 
 .timepicker {
   input[type="text"] {

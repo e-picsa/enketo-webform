@@ -1,11 +1,14 @@
+@use "../core/variables" as *;
+@use "../core/mixins" as *;
+
 enketo-webform {
   * {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
   }
 
   *:before,
   *:after {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
   }
 
   html {
@@ -14,7 +17,9 @@ enketo-webform {
   }
 
   body {
-    @include font-normal;
+    font-family: "OpenSans", sans-serif, Arial;
+    font-weight: normal;
+    font-style: normal;
 
     font-size: $font-size-base;
     line-height: $line-height-base;
@@ -40,7 +45,9 @@ enketo-webform {
     }
 
     &:focus {
-      @include tab-focus;
+      outline: thin dotted;
+      outline: 5px auto -webkit-focus-ring-color;
+      outline-offset: -2px;
     }
   }
 

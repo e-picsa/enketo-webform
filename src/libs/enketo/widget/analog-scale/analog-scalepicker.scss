@@ -1,3 +1,5 @@
+@use "../../sass/core" as *;
+
 $analog-picker-tick-color: black !default;
 $border: 1px solid $analog-picker-tick-color;
 $analog-picker-handle-color: #d42c2c !default;
@@ -178,14 +180,12 @@ $q-pad-right: 0px !default;
   }
 
   &.or-appearance-vertical:not(.disabled) {
-    @include display-flex;
-
-    @include flex(100%);
-
-    @include flex-direction(row);
+    display: flex;
+    flex: 100%;
+    flex-direction: row;
 
     .label-content {
-      @include flex(100%);
+      flex: 100%;
     }
 
     .analog-scale-widget {
@@ -236,7 +236,7 @@ $q-pad-right: 0px !default;
 .pages.or [role="page"] {
   &.or-analog-scale-initialized {
     &.current:not(.or-appearance-horizontal) {
-      @include display-flex;
+      display: flex;
     }
 
     &:not(.current) {

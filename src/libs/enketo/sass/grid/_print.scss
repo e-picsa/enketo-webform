@@ -167,7 +167,7 @@ $printBaseFontSize: 10px;
   //default;
   width: 100%;
 
-  @include display-inline-flex;
+  display: inline-flex;
 
   vertical-align: top; //padding: 5px 5px 12px 5px;
 
@@ -197,7 +197,7 @@ $printBaseFontSize: 10px;
 
       @for $width from 1 through $total {
         .or-appearance-w#{$width} {
-          @include display-inline-flex;
+          display: inline-flex;
 
           width: $width / $total * 100%;
         }

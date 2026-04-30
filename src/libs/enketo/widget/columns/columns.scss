@@ -1,3 +1,5 @@
+@use "../../sass/core" as *;
+
 @mixin margin($dir: right) {
   margin-#{$dir}: 10px;
 }
@@ -68,16 +70,14 @@
 
 .or-columns-initialized {
   .option-wrapper {
-    @include display-flex;
-
-    @include flex-wrap(wrap);
-
-    @include flex-direction(row);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   label,
   .filler {
-    @include flex(1 0 30%);
+    flex: 1 0 30%;
   }
 
   .filler,
@@ -91,11 +91,9 @@
 .or-appearance-columns-pack {
   // the flexiness is only for appearance=random
   .option-wrapper {
-    @include display-flex;
-
-    @include flex-wrap(wrap);
-
-    @include flex-direction(row);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   label {
@@ -132,9 +130,8 @@
 
     .option-wrapper {
       // this flexiness is required for appearance=random
-      @include flex-direction(row);
-
-      @include flex-wrap(wrap);
+      flex-direction: row;
+      flex-wrap: wrap;
     }
 
     label {

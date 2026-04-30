@@ -6,7 +6,7 @@
 }
 
 @mixin radiocheck-setup {
-  @include appearance-none;
+  appearance: none;
 
   display: inline-block;
   width: 20px;

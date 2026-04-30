@@ -1,3 +1,5 @@
+@use "../../sass/core" as *;
+
 @mixin likert-filler {
   content: "";
   display: block;
@@ -12,20 +14,15 @@
 
 .or-appearance-likert {
   .option-wrapper {
-    @include display-flex;
-
-    @include flex-wrap(nowrap);
-
-    @include flex-direction(row);
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
 
     > label {
-      @include flex(1);
-
-      @include display-flex;
-
-      @include flex-wrap(nowrap);
-
-      @include flex-direction(column);
+      flex: 1;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
 
       margin: 0;
       float: none;

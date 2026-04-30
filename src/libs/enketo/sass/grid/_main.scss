@@ -1,5 +1,6 @@
 @use "widgets" as *;
 @use "../formhub/form-controls" as *;
+@use "../core" as *;
 
 /** core/layout **/
 
@@ -19,7 +20,8 @@ body {
 }
 
 .paper {
-  @include paper-border;
+  border-radius: 7px;
+  border: 7px solid #ddd;
 }
 
 .question {
@@ -66,27 +68,27 @@ h4 + .or-repeat {
 .or-group,
 .or-group-data,
 .or-repeat {
-  @include display-flex;
-  @include flex-wrap(wrap);
-  @include flex-direction(row);
-  @include align-content(flex-start);
-  @include border-box;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: flex-start;
+  box-sizing: border-box;
 }
 
 // override to flexboxes in pages mode, except when question = page
 .pages.or [role="page"].current:not(.question) {
-  @include display-flex;
-  @include flex-wrap(wrap);
-  @include flex-direction(row);
-  @include border-box;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  box-sizing: border-box;
 
   .or-group:not(.disabled),
   .or-group-data:not(.disabled),
   .or-repeat:not(.disabled) {
-    @include display-flex;
-    @include flex-wrap(wrap);
-    @include flex-direction(row);
-    @include border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    box-sizing: border-box;
   }
 }
 
@@ -123,8 +125,8 @@ h4 + .or-repeat {
 
 // gridable elements - ie. wrappers around questions and notes
 .question {
-  @include flex(1, 1);
-  @include border-box;
+  flex: 1 1;
+  box-sizing: border-box;
 
   border-bottom: $grid-border;
   border-left: $grid-border; // overrides note border
@@ -147,9 +149,9 @@ h4 + .or-repeat {
  */
 
 .question {
-  @include display-flex;
-  @include flex-wrap(nowrap);
-  @include flex-direction(column);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
 
   &:not(.readonly):not(.focus):hover {
     background: $question-hover-bg;
@@ -346,7 +348,7 @@ h4 + .or-repeat {
 .or-group,
 .or-group-data,
 .or-repeat {
-  @include flex(1, 1);
+  flex: 1 1;
 }
 
 // fix for radiobuttons/checkboxes
@@ -395,11 +397,11 @@ h4 + .or-repeat {
   @for $total from 1 through $max-columns {
     .or-appearance-w#{$total} {
       //default total of 4 if not provided
-      @include flex_IEhack($total, $default-grid-width);
+      flex: 1 1;
       //the actual proper grid
       @for $width from 1 through $total {
         .or-appearance-w#{$width} {
-          @include flex_IEhack($width, $total);
+          flex: 1 1;
         }
       }
     }
