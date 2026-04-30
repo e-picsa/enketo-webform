@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.1](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.3.0...enketo-webform-v1.3.1) (2026-04-30)
+
+
+### Bug Fixes
+
+* re-trigger release after failed deployment ([0259c3e](https://github.com/e-picsa/enketo-webform/commit/0259c3e5bb64ae674e3e662a94524f673e0c423a))
+* release please release ([ae2500d](https://github.com/e-picsa/enketo-webform/commit/ae2500d51602ee112775ab4c802c8a71659be780))
+* release-please version ([2d5a786](https://github.com/e-picsa/enketo-webform/commit/2d5a786068e05f51cc85be9e06099bccb2c48f91))
+
 ## [1.2.1](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.2.9...enketo-webform-v1.2.1) (2026-04-30)
 
 
