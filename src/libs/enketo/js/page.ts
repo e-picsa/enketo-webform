@@ -478,7 +478,7 @@ export default {
   _pauseMultimedia(pageEl) {
     $(pageEl)
       .find("audio, video")
-      .each((_idx, element) => element.pause());
+      .each((_idx, element) => (element as HTMLMediaElement).pause());
   },
   /**
    * Updates Table of Contents

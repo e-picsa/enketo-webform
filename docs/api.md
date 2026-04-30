@@ -127,6 +127,14 @@
 | `js` | `xmlStringToFile`       | xmlStringToFile       | src/utils.ts |         |
 | `js` | `xmlNodeReplaceContent` | xmlNodeReplaceContent | src/utils.ts |         |
 
+## `src/libs/enketo/config.ts`:
+
+### Exports
+
+| Kind | Name      | Declaration | Module                    | Package |
+| ---- | --------- | ----------- | ------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/config.ts |         |
+
 ## `src/libs/openrosa/date-extensions.ts`:
 
 ### Functions
@@ -276,13 +284,115 @@
 | ---- | --------- | ----------- | ------------------------ | ------- |
 | `js` | `default` |             | src/libs/openrosa/xpr.ts |         |
 
-## `src/libs/enketo/config.ts`:
+## `src/libs/enketo/js/dom-utils.ts`:
+
+### Variables
+
+| Name               | Description                                                                                                                                                                                                                                                                                                                                                             | Type     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `elementDataStore` | Adapted from https\://stackoverflow\.com/a/46522991/3071529&#xA;&#xA;A storage solution aimed at replacing jQuerys data function.&#xA;Implementation Note: Elements are stored in a (WeakMap)\[https\://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global\_Objects/WeakMap].&#xA;This makes sure the data is garbage collected when the node is removed. | `object` |
+
+<hr/>
+
+### Functions
+
+| Name                                   | Description                                                                                 | Parameters                                                      | Return        |
+| -------------------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------- |
+| `getSiblingElementsAndSelf`            | Gets siblings that match selector and self \_in DOM order\_.                                | `element: Node, selector: string`                               | `Array<Node>` |
+| `getSiblingElements`                   | Gets siblings that match selector \_in DOM order\_.                                         | `element: Node, selector: string`                               | `Array<Node>` |
+| `getSiblingElement`                    | Returns first sibling element (in DOM order) that optionally matches the provided selector. | `element: Node, selector: string`                               | `Node`        |
+| `getAncestors`                         | Gets ancestors that match selector \_in DOM order\_.                                        | `element: Node, filterSelector: string, endSelector: string`    | `Array<Node>` |
+| `closestAncestorUntil`                 | Gets closest ancestor that match selector until the end selector.                           | `element: Node, filterSelector: string, endSelector: string`    | `Node`        |
+| `getChildren`                          | Gets child elements, that (optionally) match a selector.                                    | `element: Node, selector: string`                               | `Array<Node>` |
+| `getChild`                             | Gets first child element, that (optionally) matches a selector.                             | `element: Node, selector: string`                               | `Node`        |
+| `empty`                                | Removes all children elements.                                                              | `element: Node`                                                 | `undefined`   |
+| `hasPreviousSiblingElementSameName`    |                                                                                             | `el: Element`                                                   | `boolean`     |
+| `hasNextSiblingElementSameName`        |                                                                                             | `el: Element`                                                   | `boolean`     |
+| `hasSiblingElementSameName`            |                                                                                             | `el: Element`                                                   | `boolean`     |
+| `hasPreviousCommentSiblingWithContent` |                                                                                             | `node: Element, content: string`                                | `boolean`     |
+| `getXPath`                             | Creates an XPath from a node                                                                | `node: Element, rootNodeName: string, includePosition: boolean` | `string`      |
+| `getRepeatIndex`                       | Obtains the index of a repeat instance within its own series.                               | `node: Element`                                                 | `number`      |
+
+<hr/>
 
 ### Exports
 
-| Kind | Name      | Declaration | Module                    | Package |
-| ---- | --------- | ----------- | ------------------------- | ------- |
-| `js` | `default` |             | src/libs/enketo/config.ts |         |
+| Kind | Name                                   | Declaration                          | Module                          | Package |
+| ---- | -------------------------------------- | ------------------------------------ | ------------------------------- | ------- |
+| `js` | `elementDataStore`                     | elementDataStore                     | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getSiblingElementsAndSelf`            | getSiblingElementsAndSelf            | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getSiblingElements`                   | getSiblingElements                   | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getSiblingElement`                    | getSiblingElement                    | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getAncestors`                         | getAncestors                         | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getChildren`                          | getChildren                          | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getChild`                             | getChild                             | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getRepeatIndex`                       | getRepeatIndex                       | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `getXPath`                             | getXPath                             | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasPreviousCommentSiblingWithContent` | hasPreviousCommentSiblingWithContent | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasPreviousSiblingElementSameName`    | hasPreviousSiblingElementSameName    | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasNextSiblingElementSameName`        | hasNextSiblingElementSameName        | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `hasSiblingElementSameName`            | hasSiblingElementSameName            | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `closestAncestorUntil`                 | closestAncestorUntil                 | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `empty`                                | empty                                | src/libs/enketo/js/dom-utils.ts |         |
+| `js` | `MutationsTracker`                     | MutationsTracker                     | src/libs/enketo/js/dom-utils.ts |         |
+
+## `src/libs/enketo/js/event.ts`:
+
+### Exports
+
+| Kind | Name      | Declaration | Module                      | Package |
+| ---- | --------- | ----------- | --------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/event.ts |         |
+
+## `src/libs/enketo/js/form.ts`:
+
+### Exports
+
+| Kind | Name        | Declaration | Module                     | Package |
+| ---- | ----------- | ----------- | -------------------------- | ------- |
+| `js` | `Form`      | Form        | src/libs/enketo/js/form.ts |         |
+| `js` | `FormModel` | FormModel   | src/libs/enketo/js/form.ts |         |
+
+## `src/libs/enketo/js/page.ts`:
+
+### Exports
+
+| Kind | Name      | Declaration | Module                     | Package |
+| ---- | --------- | ----------- | -------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/page.ts |         |
+
+## `src/libs/enketo/js/widget.ts`:
+
+### Exports
+
+| Kind | Name      | Declaration | Module                       | Package |
+| ---- | --------- | ----------- | ---------------------------- | ------- |
+| `js` | `default` | Widget      | src/libs/enketo/js/widget.ts |         |
+
+## `src/libs/enketo/js/widgets.ts`:
+
+### Exports
+
+| Kind | Name      | Declaration | Module                        | Package |
+| ---- | --------- | ----------- | ----------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/widgets.ts |         |
+
+## `src/libs/enketo/js/xpath-evaluator-binding.ts`:
+
+### Functions
+
+| Name | Description | Parameters | Return |
+| ---- | ----------- | ---------- | ------ |
+|      |             |            |        |
+|      |             |            |        |
+
+<hr/>
+
+### Exports
+
+| Kind | Name      | Declaration | Module                                        | Package |
+| ---- | --------- | ----------- | --------------------------------------------- | ------- |
+| `js` | `default` |             | src/libs/enketo/js/xpath-evaluator-binding.ts |         |
 
 ## `src/libs/openrosa/utils/date.ts`:
 
@@ -413,113 +523,3 @@
 | `js` | `asBoolean` | asBoolean   | src/libs/openrosa/utils/xpath-cast.ts |         |
 | `js` | `asNumber`  | asNumber    | src/libs/openrosa/utils/xpath-cast.ts |         |
 | `js` | `asString`  | asString    | src/libs/openrosa/utils/xpath-cast.ts |         |
-
-## `src/libs/enketo/js/dom-utils.ts`:
-
-### Variables
-
-| Name               | Description                                                                                                                                                                                                                                                                                                                                                             | Type     |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `elementDataStore` | Adapted from https\://stackoverflow\.com/a/46522991/3071529&#xA;&#xA;A storage solution aimed at replacing jQuerys data function.&#xA;Implementation Note: Elements are stored in a (WeakMap)\[https\://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global\_Objects/WeakMap].&#xA;This makes sure the data is garbage collected when the node is removed. | `object` |
-
-<hr/>
-
-### Functions
-
-| Name                                   | Description                                                                                 | Parameters                                                      | Return        |
-| -------------------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------- |
-| `getSiblingElementsAndSelf`            | Gets siblings that match selector and self \_in DOM order\_.                                | `element: Node, selector: string`                               | `Array<Node>` |
-| `getSiblingElements`                   | Gets siblings that match selector \_in DOM order\_.                                         | `element: Node, selector: string`                               | `Array<Node>` |
-| `getSiblingElement`                    | Returns first sibling element (in DOM order) that optionally matches the provided selector. | `element: Node, selector: string`                               | `Node`        |
-| `getAncestors`                         | Gets ancestors that match selector \_in DOM order\_.                                        | `element: Node, filterSelector: string, endSelector: string`    | `Array<Node>` |
-| `closestAncestorUntil`                 | Gets closest ancestor that match selector until the end selector.                           | `element: Node, filterSelector: string, endSelector: string`    | `Node`        |
-| `getChildren`                          | Gets child elements, that (optionally) match a selector.                                    | `element: Node, selector: string`                               | `Array<Node>` |
-| `getChild`                             | Gets first child element, that (optionally) matches a selector.                             | `element: Node, selector: string`                               | `Node`        |
-| `empty`                                | Removes all children elements.                                                              | `element: Node`                                                 | `undefined`   |
-| `hasPreviousSiblingElementSameName`    |                                                                                             | `el: Element`                                                   | `boolean`     |
-| `hasNextSiblingElementSameName`        |                                                                                             | `el: Element`                                                   | `boolean`     |
-| `hasSiblingElementSameName`            |                                                                                             | `el: Element`                                                   | `boolean`     |
-| `hasPreviousCommentSiblingWithContent` |                                                                                             | `node: Element, content: string`                                | `boolean`     |
-| `getXPath`                             | Creates an XPath from a node                                                                | `node: Element, rootNodeName: string, includePosition: boolean` | `string`      |
-| `getRepeatIndex`                       | Obtains the index of a repeat instance within its own series.                               | `node: Element`                                                 | `number`      |
-
-<hr/>
-
-### Exports
-
-| Kind | Name                                   | Declaration                          | Module                          | Package |
-| ---- | -------------------------------------- | ------------------------------------ | ------------------------------- | ------- |
-| `js` | `elementDataStore`                     | elementDataStore                     | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getSiblingElementsAndSelf`            | getSiblingElementsAndSelf            | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getSiblingElements`                   | getSiblingElements                   | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getSiblingElement`                    | getSiblingElement                    | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getAncestors`                         | getAncestors                         | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getChildren`                          | getChildren                          | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getChild`                             | getChild                             | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getRepeatIndex`                       | getRepeatIndex                       | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `getXPath`                             | getXPath                             | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasPreviousCommentSiblingWithContent` | hasPreviousCommentSiblingWithContent | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasPreviousSiblingElementSameName`    | hasPreviousSiblingElementSameName    | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasNextSiblingElementSameName`        | hasNextSiblingElementSameName        | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `hasSiblingElementSameName`            | hasSiblingElementSameName            | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `closestAncestorUntil`                 | closestAncestorUntil                 | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `empty`                                | empty                                | src/libs/enketo/js/dom-utils.ts |         |
-| `js` | `MutationsTracker`                     | MutationsTracker                     | src/libs/enketo/js/dom-utils.ts |         |
-
-## `src/libs/enketo/js/event.ts`:
-
-### Exports
-
-| Kind | Name      | Declaration | Module                      | Package |
-| ---- | --------- | ----------- | --------------------------- | ------- |
-| `js` | `default` |             | src/libs/enketo/js/event.ts |         |
-
-## `src/libs/enketo/js/form.ts`:
-
-### Exports
-
-| Kind | Name        | Declaration | Module                     | Package |
-| ---- | ----------- | ----------- | -------------------------- | ------- |
-| `js` | `Form`      | Form        | src/libs/enketo/js/form.ts |         |
-| `js` | `FormModel` | FormModel   | src/libs/enketo/js/form.ts |         |
-
-## `src/libs/enketo/js/page.ts`:
-
-### Exports
-
-| Kind | Name      | Declaration | Module                     | Package |
-| ---- | --------- | ----------- | -------------------------- | ------- |
-| `js` | `default` |             | src/libs/enketo/js/page.ts |         |
-
-## `src/libs/enketo/js/widget.ts`:
-
-### Exports
-
-| Kind | Name      | Declaration | Module                       | Package |
-| ---- | --------- | ----------- | ---------------------------- | ------- |
-| `js` | `default` | Widget      | src/libs/enketo/js/widget.ts |         |
-
-## `src/libs/enketo/js/widgets.ts`:
-
-### Exports
-
-| Kind | Name      | Declaration | Module                        | Package |
-| ---- | --------- | ----------- | ----------------------------- | ------- |
-| `js` | `default` |             | src/libs/enketo/js/widgets.ts |         |
-
-## `src/libs/enketo/js/xpath-evaluator-binding.ts`:
-
-### Functions
-
-| Name | Description | Parameters | Return |
-| ---- | ----------- | ---------- | ------ |
-|      |             |            |        |
-|      |             |            |        |
-
-<hr/>
-
-### Exports
-
-| Kind | Name      | Declaration | Module                                        | Package |
-| ---- | --------- | ----------- | --------------------------------------------- | ------- |
-| `js` | `default` |             | src/libs/enketo/js/xpath-evaluator-binding.ts |         |
