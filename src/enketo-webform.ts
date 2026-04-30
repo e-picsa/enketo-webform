@@ -1,11 +1,13 @@
-import { LitElement, html, nothing, css, unsafeCSS } from "lit";
+import "./setup";
+import { LitElement, html, nothing, css } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 
 import { Form } from "./libs/enketo/js/form";
 import Events from "./libs/enketo/js/event";
 
-// Directly import styles to keep encapsulated
-import enketoStyles from "./enketo-webform.scss?inline";
+// Directly import styles globally since we are using Light DOM
+import compiledStyles from "./enketo-webform.scss?inline";
+
 import type {
   IEnketoFormEntry,
   IEventDataUpdated,
@@ -18,6 +20,19 @@ function debug(...args: unknown[]) {
   if (DEBUG) {
     console.debug("[enketo-webform]", ...args);
   }
+}
+
+// Ensure styles are a string and inject into head
+// This is because we are using global styles (easier to override)
+const cssString =
+  typeof compiledStyles === "string"
+    ? compiledStyles
+    : ((compiledStyles as any)?.default ?? "");
+if (typeof document !== "undefined" && cssString) {
+  const style = document.createElement("style");
+  style.id = "enketo-webform-styles";
+  style.textContent = cssString;
+  document.head.appendChild(style);
 }
 
 @customElement("enketo-webform")
@@ -64,6 +79,10 @@ export class EnketoWebform extends LitElement {
 
   @query("#form-container") private formContainerEl!: HTMLDivElement;
 
+  protected createRenderRoot() {
+    return this;
+  }
+
   @state() private enketoForm: Form | null = null;
   @state() private formHtml = "";
   @state() private status: "idle" | "loading" | "ready" | "error" = "idle";
@@ -72,7 +91,6 @@ export class EnketoWebform extends LitElement {
   private _formLoaded = false;
 
   static styles = [
-    unsafeCSS(enketoStyles),
     css`
       :host {
         display: block;

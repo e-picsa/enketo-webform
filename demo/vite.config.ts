@@ -11,13 +11,16 @@ export default defineConfig({
       // Only include the demo's own source files for Preact transformation.
       include: ["src/**"],
     }),
-    // Custom plugin to force a full reload when the library source changes.
-    // This avoids "already registered" errors with web components in HMR.
     {
-      name: "full-reload-lib",
+      name: "force-web-component-reload",
       handleHotUpdate({ file, server }) {
-        if (file.includes("/src/") && !file.includes("/demo/")) {
+        // Because of the Bun workspace symlink, Vite will resolve 'file'
+        // to the absolute path of your root 'dist' folder when it rebuilds.
+        if (file.includes("/dist/") && file.includes("enketo-webform")) {
+          // 1. Send the hard-refresh command to the browser
           server.ws.send({ type: "full-reload" });
+
+          // 2. Return an empty array to completely halt Vite's default HMR logic
           return [];
         }
       },
@@ -26,16 +29,10 @@ export default defineConfig({
   resolve: {
     alias: {
       "@picsa/enketo-webform/types": resolve(__dirname, "../types"),
-      "@picsa/enketo-webform": resolve(__dirname, "../src/index.ts"),
+      "@picsa/enketo-webform": resolve(__dirname, "../dist/enketo-webform.js"),
     },
   },
   optimizeDeps: {
     exclude: ["@picsa/enketo-webform"],
-  },
-  server: {
-    fs: {
-      // Required so Vite can serve the raw .ts file from the parent workspace
-      allow: [".."],
-    },
   },
 });

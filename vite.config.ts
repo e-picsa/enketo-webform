@@ -3,6 +3,7 @@ import dts from "vite-plugin-dts";
 import { resolve } from "path";
 
 export default defineConfig({
+  clearScreen: false,
   plugins: [
     dts({
       include: [
@@ -23,6 +24,8 @@ export default defineConfig({
   },
   build: {
     target: "esnext",
+    // avoid emptying as could be served by demo
+    emptyOutDir: false,
     lib: {
       entry: resolve(__dirname, "src/enketo-webform.ts"),
       name: "EnketoWebform",
@@ -31,22 +34,29 @@ export default defineConfig({
         `enketo-webform.${format === "es" ? "js" : "umd.cjs"}`,
     },
     rollupOptions: {
-      external(id) {
-        if (id === "jquery" || id === "jquery-touchswipe") return false;
-        if (id.includes("node_modules")) return true;
-        return false;
-      },
       output: {
         assetFileNames: "enketo-webform[extname]",
-        globals: {
-          jquery: "jQuery",
-        },
       },
     },
   },
+  optimizeDeps: {
+    include: ["jquery", "bootstrap-datepicker"],
+  },
   resolve: {
     alias: {
-      "@": "/src",
+      "@": resolve(__dirname, "src"),
+      html5sortable: resolve(
+        __dirname,
+        "node_modules/html5sortable/dist/html5sortable.es.js",
+      ),
+      "bootstrap-datepicker": resolve(
+        __dirname,
+        "node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
+      ),
+      signature_pad: resolve(
+        __dirname,
+        "node_modules/signature_pad/dist/signature_pad.js",
+      ),
     },
   },
 });
