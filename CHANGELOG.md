@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.3.1...enketo-webform-v1.3.2) (2026-04-30)
+
+
+### Bug Fixes
+
+* publish url ([2fe8b7e](https://github.com/e-picsa/enketo-webform/commit/2fe8b7e5bc52191cf52dcb65162a42d439b4ef4d))
+
 ## [1.3.1](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.3.0...enketo-webform-v1.3.1) (2026-04-30)
 
 
