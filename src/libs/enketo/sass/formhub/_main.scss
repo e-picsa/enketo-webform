@@ -1,5 +1,5 @@
-@import "form-controls";
-@import "widgets";
+@use "form-controls" as *;
+@use "widgets" as *;
 
 .or-group {
   border-top: none;

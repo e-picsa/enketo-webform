@@ -1,4 +1,4 @@
-@import "./libs/enketo/sass/grid/grid.scss";
+@use "./libs/enketo/sass/grid/grid.scss" as *;
 
 :host {
   max-width: 720px;

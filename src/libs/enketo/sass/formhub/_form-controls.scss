@@ -140,4 +140,4 @@ input[type="checkbox"] {
   }
 }
 
-@import "radiocheck";
+@use "radiocheck" as *;

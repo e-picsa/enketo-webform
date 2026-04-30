@@ -1,4 +1,4 @@
-@import "../core/mixins";
-@import "mixins";
-@import "../core/print";
-@import "print";
+@use "../core/mixins" as *;
+@use "mixins" as *;
+@use "../core/print" as *;
+@use "print" as *;

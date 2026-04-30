@@ -1,4 +1,4 @@
-@import "./jquery.relevant-dropdown";
+@use "./jquery.relevant-dropdown" as *;
 
 input[type="text"].autocomplete {
   // width of input same as width of regular select

@@ -1,5 +1,5 @@
-@import "widgets";
-@import "../formhub/form-controls";
+@use "widgets" as *;
+@use "../formhub/form-controls" as *;
 
 /** core/layout **/
 

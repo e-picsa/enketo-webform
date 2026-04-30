@@ -1,7 +1,7 @@
-@import "variables";
-@import "../core/mixins";
-@import "../formhub/mixins";
-@import "mixins";
-@import "../core/print";
-@import "../formhub/print";
-@import "print";
+@use "variables" as *;
+@use "../core/mixins" as *;
+@use "../formhub/mixins" as *;
+@use "mixins" as *;
+@use "../core/print" as *;
+@use "../formhub/print" as *;
+@use "print" as *;

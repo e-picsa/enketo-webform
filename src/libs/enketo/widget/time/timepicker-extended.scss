@@ -1,4 +1,4 @@
-@import "timepicker";
+@use "timepicker" as *;
 
 .timepicker {
   input[type="text"] {
