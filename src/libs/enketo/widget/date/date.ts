@@ -163,9 +163,9 @@ class DateWidget extends Widget {
             convertedValue = types.date.convert(value);
           }
         } else if (settings.inputType === "datetime-local") {
-          convertedValue = toISOLocalString(new Date(value));
+          convertedValue = types.datetime.convert(value);
         } else if (settings.inputType === "time") {
-          convertedValue = value; // OpenRosa time is just hh:mm:ss string
+          convertedValue = types.time.convert(value);
         }
       }
 
