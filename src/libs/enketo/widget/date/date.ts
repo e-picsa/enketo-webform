@@ -1,12 +1,8 @@
-import {
-  getTimezoneOffsetAsTime,
-  toISOLocalString,
-} from "../../../openrosa/date-extensions";
+import { toISOLocalString } from "../../../openrosa/date-extensions";
 import $ from "jquery";
 import Widget from "../../js/widget";
 import types from "../../js/types";
 import { isNumber, getPasteData } from "../../js/utils";
-import { os, browser } from "../../js/sniffer";
 
 interface DateWidgetSettings {
   format: string;
