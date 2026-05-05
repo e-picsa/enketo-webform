@@ -25,3 +25,10 @@ import '@picsa/enketo-webform';
 - [ ] Consider font managmenet (e.g. exposing way to set)
 - [ ] Consider removing leaflet or other external deps (?)
 - [ ] Document geopicker widget removed and node-forge/digest
+
+
+## Documentation Notes
+
+### Source Repo Compatibility
+- bootstrap-datepicker has been removed
+- date widgets unified (previous separate date, datetime, ios, extended etc.)
