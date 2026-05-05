@@ -129,11 +129,6 @@
             },
             {
               "kind": "method",
-              "name": "renderEnketoLogo",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
               "name": "renderFooter",
               "privacy": "private"
             },

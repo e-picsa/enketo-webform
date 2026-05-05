@@ -31,7 +31,6 @@
 | Name                       | Privacy | Description | Parameters                                         | Return   | Inherited From |
 | -------------------------- | ------- | ----------- | -------------------------------------------------- | -------- | -------------- |
 | `renderDebugStatus`        | private |             |                                                    |          |                |
-| `renderEnketoLogo`         | private |             |                                                    |          |                |
 | `renderFooter`             | private |             |                                                    |          |                |
 | `generateId`               | private |             | `prefix: string`                                   | `string` |                |
 | `save`                     | private |             | `opts`                                             |          |                |
