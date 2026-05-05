@@ -1,6 +1,6 @@
 {
   "name": "@picsa/enketo-webform",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "type": "module",
   "repository": {
     "url": "https://github.com/e-picsa/enketo-webform"
