@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.4.0...enketo-webform-v1.4.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* re-trigger release after failed deployment ([7507e80](https://github.com/e-picsa/enketo-webform/commit/7507e80816e4931a7ac8f59d7dbe438befa85305))
+
 ## [1.4.0](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.3.2...enketo-webform-v1.4.0) (2026-05-05)
 
 
