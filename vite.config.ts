@@ -25,6 +25,7 @@ export default defineConfig({
   },
   build: {
     target: "esnext",
+    sourcemap: true,
     // avoid emptying as could be served by demo
     emptyOutDir: false,
     lib: {

@@ -1,14 +1,10 @@
 import $ from "jquery";
 import Widget from "../../js/widget";
-import support from "../../js/support";
 import types from "../../js/types";
 import { isNumber, getPasteData } from "../../js/utils";
-import "bootstrap-datepicker";
-import "../../js/dropdown.jquery";
 
 /**
- * Extends eternicode's bootstrap-datepicker without changing the original.
- * https://github.com/eternicode/bootstrap-datepicker
+ * Extends native HTML5 date inputs for year and month-year appearances.
  *
  * @augments Widget
  */
@@ -24,29 +20,31 @@ class DatepickerExtended extends Widget {
    * @type {boolean}
    */
   static condition() {
-    return !support.touch || !support.inputTypes.date;
+    // We always instantiate this widget to handle 'year' and 'month-year' appearances
+    // and to provide the reset button.
+    return true;
   }
 
   _init() {
     this.settings = this.props.appearances.includes("year")
       ? {
           format: "yyyy",
-          startView: "decade",
-          minViewMode: "years",
+          type: "number",
+          placeholder: "yyyy",
         }
       : this.props.appearances.includes("month-year")
         ? {
             format: "yyyy-mm",
-            startView: "year",
-            minViewMode: "months",
+            type: "month",
+            placeholder: "yyyy-mm",
           }
         : {
             format: "yyyy-mm-dd",
-            startView: "month",
-            minViewMode: "days",
+            type: "date",
+            placeholder: "yyyy-mm-dd",
           };
 
-    this.$fakeDateI = this._createFakeDateInput(this.settings.format);
+    this.$fakeDateI = this._createFakeDateInput(this.settings);
 
     this._setChangeHandler(this.$fakeDateI);
     this._setFocusHandler(this.$fakeDateI);
@@ -55,7 +53,6 @@ class DatepickerExtended extends Widget {
     this.enable();
     this.value = this.element.value;
 
-    // It is much easier to first enable and disable, and not as bad it seems, since readonly will become dynamic eventually.
     if (this.props.readonly) {
       this.disable();
     }
@@ -64,15 +61,20 @@ class DatepickerExtended extends Widget {
   /**
    * Creates fake date input elements
    *
-   * @param {string} format - The date format
+   * @param {object} settings - The widget settings
    * @return {jQuery} The jQuery-wrapped fake date input element
    */
-  _createFakeDateInput(format) {
+  _createFakeDateInput(settings) {
     const $dateI = $(this.element);
     const $fakeDate = $(
-      `<div class="widget date"><input class="ignore input-small" type="text" placeholder="${format}" /></div>`,
+      `<div class="widget date"><input class="ignore input-small" type="${settings.type}" placeholder="${settings.placeholder}" /></div>`,
     ).append(this.resetButtonHtml);
     const $fakeDateI = $fakeDate.find("input");
+
+    if (settings.type === "number") {
+      $fakeDateI.attr("min", "1900");
+      $fakeDateI.attr("max", "2100");
+    }
 
     $dateI.hide().before($fakeDate);
 
@@ -80,7 +82,7 @@ class DatepickerExtended extends Widget {
   }
 
   /**
-   * Copy manual changes that were not detected by bootstrap-datepicker (one without pressing Enter) to original date input field
+   * Copy manual changes to original date input field
    *
    * @param {jQuery} $fakeDateI - Fake date input element
    */
@@ -90,12 +92,11 @@ class DatepickerExtended extends Widget {
     $fakeDateI.on("change paste", (e) => {
       let convertedValue = "";
       let value =
-        e.type === "paste" ? getPasteData(e.originalEvent ?? e) : this.value;
+        e.type === "paste"
+          ? getPasteData(e.originalEvent ?? e)
+          : $fakeDateI.val();
 
       if (value.length > 0) {
-        // Note: types.date.convert considers numbers to be a number of days since the epoch
-        // as this is what the XPath evaluator may return.
-        // For user-entered input, we want to consider a Number value to be incorrect, expect for year input.
         if (isNumber(value) && settings.format !== "yyyy") {
           convertedValue = "";
         } else {
@@ -104,16 +105,8 @@ class DatepickerExtended extends Widget {
         }
       }
 
-      $fakeDateI.val(this._toDisplayDate(convertedValue)).datepicker("update");
+      $fakeDateI.val(this._toDisplayDate(convertedValue));
 
-      // Here we have to do something unusual to prevent native inputs from automatically
-      // changing 2012-12-32 into 2013-01-01
-      // convertedValue is '' for invalid 2012-12-32
-      if (convertedValue === "" && e.type === "paste") {
-        e.stopImmediatePropagation();
-      }
-
-      // Avoid triggering unnecessary change events as they mess up sensitive custom applications (OC)
       if (this.originalInputValue !== convertedValue) {
         this.originalInputValue = convertedValue;
       }
@@ -137,12 +130,10 @@ class DatepickerExtended extends Widget {
 
   /**
    * Handler for focus events.
-   * These events on the original input are used to check whether to display the 'required' message
    *
    * @param {jQuery} $fakeDateI - Fake date input element
    */
   _setFocusHandler($fakeDateI) {
-    // Handle focus on original input (goTo functionality)
     $(this.element).on("applyfocus", () => {
       $fakeDateI[0].focus();
     });
@@ -177,20 +168,11 @@ class DatepickerExtended extends Widget {
   }
 
   disable() {
-    this.$fakeDateI.datepicker("destroy");
     this.$fakeDateI.prop("disabled", true);
     this.$fakeDateI.next(".btn-reset").prop("disabled", true);
   }
 
   enable() {
-    this.$fakeDateI.datepicker({
-      format: this.settings.format,
-      autoclose: true,
-      todayHighlight: true,
-      startView: this.settings.startView,
-      minViewMode: this.settings.minViewMode,
-      forceParse: false,
-    });
     this.$fakeDateI.prop("disabled", false);
     this.$fakeDateI.next(".btn-reset").prop("disabled", false);
   }
@@ -214,11 +196,7 @@ class DatepickerExtended extends Widget {
   }
 
   set value(date) {
-    if (this.$fakeDateI[0].disabled) {
-      this.$fakeDateI[0].value = this._toDisplayDate(date);
-    } else {
-      this.$fakeDateI.datepicker("setDate", this._toDisplayDate(date));
-    }
+    this.$fakeDateI.val(this._toDisplayDate(date));
   }
 }
 

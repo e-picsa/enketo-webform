@@ -42,7 +42,6 @@
     "test:run": "vitest run"
   },
   "dependencies": {
-    "bootstrap-datepicker": "^1.10.1",
     "fast-xml-parser": "^5.7.2",
     "form-data": "^4.0.5",
     "html5sortable": "^0.14.0",
