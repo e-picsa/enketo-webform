@@ -7,7 +7,6 @@ import Widget from "../../js/widget";
 import types from "../../js/types";
 import { isNumber, getPasteData } from "../../js/utils";
 import { os, browser } from "../../js/sniffer";
-import events from "../../js/event";
 
 interface DateWidgetSettings {
   format: string;
@@ -215,11 +214,6 @@ class DateWidget extends Widget {
       this.$fakeInput.val(this._toDisplayDate(date));
     } else if (this.settings.inputType === "datetime-local") {
       let val = date ? toISOLocalString(new Date(date)) : "";
-      if (os.macos && browser.safari && date) {
-        val = toISOLocalString(
-          new Date(date + getTimezoneOffsetAsTime(new Date())),
-        );
-      }
       this.$fakeInput.val(val ? val.substring(0, 16) : ""); // datetime-local expects yyyy-MM-ddThh:mm
     } else if (this.settings.inputType === "time") {
       this.$fakeInput.val(date ? date.substring(0, 5) : ""); // time expects hh:mm
