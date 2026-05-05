@@ -31,4 +31,4 @@ import '@picsa/enketo-webform';
 
 ### Source Repo Compatibility
 - bootstrap-datepicker has been removed
-- date widgets unified (previous separate date, datetime, ios, extended etc.)
+- date widgets unified (previous separate date, datetime, ios, extended etc.). Most custom styles dropped for timepicker etc.

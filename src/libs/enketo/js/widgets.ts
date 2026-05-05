@@ -13,7 +13,7 @@ import SelectAutocomplete from "../widget/select-autocomplete/autocomplete";
 import TextareaWidget from "../widget/textarea/textarea";
 import TableWidget from "../widget/table/tablewidget";
 import RadioPicker from "../widget/radio/radiopicker";
-import DateWidget from "../widget/date/date-widget";
+import DateWidget from "../widget/date/date";
 import SelectMedia from "../widget/select-media/select-media";
 import FilePicker from "../widget/file/filepicker";
 import DrawWidget from "../widget/draw/draw-widget";

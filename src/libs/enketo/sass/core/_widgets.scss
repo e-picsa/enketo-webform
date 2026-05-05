@@ -2,8 +2,7 @@
 @use "../../widget/big-image/image-viewer.scss";
 @use "../../widget/columns/columns.scss";
 @use "../../widget/comment/commentwidget.scss";
-@use "../../widget/date/datepicker-extended.scss";
-@use "../../widget/datetime/datetimepicker-extended.scss";
+@use "../../widget/date/date.scss";
 @use "../../widget/draw/draw-widget.scss";
 @use "../../widget/example/my-widget.scss";
 @use "../../widget/file/filepicker.scss";
@@ -22,5 +21,4 @@
 @use "../../widget/text-print/text-print.scss";
 @use "../../widget/textarea/textarea.scss";
 @use "../../widget/thousands-sep/thousands-sep.scss";
-@use "../../widget/time/timepicker-extended.scss";
 @use "../../widget/url/url-widget.scss";
