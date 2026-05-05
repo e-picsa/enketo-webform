@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.3.2...enketo-webform-v1.4.0) (2026-05-05)
+
+
+### Features
+
+* modern date picker ([#24](https://github.com/e-picsa/enketo-webform/issues/24)) ([5293b2a](https://github.com/e-picsa/enketo-webform/commit/5293b2a82f8aec034356f65264cc9ec42f8466af))
+
 ## [1.3.2](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.3.1...enketo-webform-v1.3.2) (2026-04-30)
 
 
