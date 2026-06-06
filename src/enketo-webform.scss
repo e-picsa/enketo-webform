@@ -1,4 +1,54 @@
-@use "libs/enketo/sass/grid/grid.scss";
+// Scope all style within the enketo-webform selector
+enketo-webform {
+  @import "libs/enketo/sass/grid/grid.scss";
+
+  #form-title {
+    margin: 0;
+  }
+
+  .enketo-logo-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: -25px;
+    font-size: 18px;
+  }
+  .enketo-logo {
+    height: 25px;
+  }
+  .pages.or .or-group-data {
+    display: block !important;
+  }
+  .icon {
+    color: transparent;
+    text-shadow: 0 0 0 white;
+    margin-left: -12px;
+    margin-right: 12px;
+  }
+
+  #form-footer {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+  }
+  #form-footer > button {
+    min-width: 180px;
+    min-height: 48px;
+    margin: 0 10px;
+  }
+
+  @keyframes appearDelayed {
+    0% {
+      opacity: 0;
+    }
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
 
 :host,
 enketo-webform {
@@ -8,57 +58,4 @@ enketo-webform {
   position: relative;
   font-family: "OpenSans", sans-serif;
   font-weight: 400;
-}
-#form-title {
-  margin: 0;
-}
-#form-unavailable {
-  animation: appearDelayed 2s;
-  -webkit-animation: appearDelayed 2s;
-  -moz-animation: appearDelayed 2s;
-  -o-animation: appearDelayed 2s;
-  -ms-animation: appearDelayed 2s;
-}
-
-.enketo-logo-container {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  margin-bottom: -25px;
-  font-size: 18px;
-}
-.enketo-logo {
-  height: 25px;
-}
-.pages.or .or-group-data {
-  display: block !important;
-}
-.icon {
-  color: transparent;
-  text-shadow: 0 0 0 white;
-  margin-left: -12px;
-  margin-right: 12px;
-}
-
-#form-footer {
-  display: flex;
-  padding: 20px;
-  justify-content: center;
-}
-#form-footer > button {
-  min-width: 180px;
-  min-height: 48px;
-  margin: 0 10px;
-}
-
-@keyframes appearDelayed {
-  0% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
