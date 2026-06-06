@@ -5,6 +5,13 @@ enketo-webform {
   #form-title {
     margin: 0;
   }
+  #form-unavailable {
+    animation: appearDelayed 2s;
+    -webkit-animation: appearDelayed 2s;
+    -moz-animation: appearDelayed 2s;
+    -o-animation: appearDelayed 2s;
+    -ms-animation: appearDelayed 2s;
+  }
 
   .enketo-logo-container {
     display: flex;
