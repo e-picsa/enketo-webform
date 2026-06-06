@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.4.1...enketo-webform-v1.4.2) (2026-06-06)
+
+
+### Bug Fixes
+
+* style scoping ([#28](https://github.com/e-picsa/enketo-webform/issues/28)) ([7c32aab](https://github.com/e-picsa/enketo-webform/commit/7c32aab6b43b95d5f05012dd91dd7bf3f34090a7))
+
 ## [1.4.1](https://github.com/e-picsa/enketo-webform/compare/enketo-webform-v1.4.0...enketo-webform-v1.4.1) (2026-05-05)
 
 
